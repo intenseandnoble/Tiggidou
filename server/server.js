@@ -7,8 +7,9 @@ var express = require('express');
 var app = express(); // cr�ation de l'app avec express
 var mysql = require('./../config/database');
 
+
 //configuration
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('./../public'));
 
 // load the routes
 require('./routes')(app);

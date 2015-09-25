@@ -3,7 +3,7 @@
  */
 
 //load the model
-var covoso = require('./../app/models/covosocialSearchDepartures');
+var covoso = require(__dirname + '/../app/models/covosocialSearchDepartures');
 var express = require('express');
 
 
@@ -15,14 +15,14 @@ module.exports = function (app) {
 
     // api ---------------------------------------------------------------------
     //single page application
-    app.get('*', function (req, res) {
+    app.get('/', function (req, res) {
         res.sendFile('/public/html/index.html', {root: './../'});
     });
 
     // rechercher
     app.get('/api/search', function (req, res) {
 
-        //faire une recherche et afficher son résultat
+        //faire une recherche et afficher son rï¿½sultat
 
     });
 
@@ -38,6 +38,6 @@ module.exports = function (app) {
 
     });
 
-    //... ajouter plus de fonctionalités
+    //... ajouter plus de fonctionalitï¿½s
 
 };

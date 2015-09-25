@@ -9,7 +9,7 @@ var mysql = require('./../config/database');
 
 
 //configuration
-app.use(express.static('./../public'));
+app.use(express.static(__dirname + './../public'));
 
 // load the routes
 require('./routes')(app);

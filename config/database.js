@@ -11,7 +11,5 @@ var connection = mysql.createConnection({
     database : 'test'
 });
 
-module.exports = {
-    dbConnection : connection
-};
 
+exports.dbConnection = connection;

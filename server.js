@@ -5,14 +5,14 @@
 // set up
 var express = require('express');
 var app = express(); // cr�ation de l'app avec express
-var mysql = require('./../config/database');
+var mysql = require('./config/database');
 
 
 //configuration
 app.use(express.static(__dirname + './../public'));
 
 // load the routes
-require('./routes')(app);
+require('./controllers/routes')(app);
 
 //listen (start app with node server.js)
 app.listen(8080);

@@ -1,0 +1,26 @@
+Salut les Myrmidons,
+voici une explication de la structure du projet, ce que chaque répertoire contient et le fonctionnement du serveur
+en gros.
+
+- On utilise le fameux patron d'architecture MVC.
+
+- La structure du projet (à part database (Boss), HTML (Cobra) et node_modules (librairie utilisée par le serveur)) contient:
+    config:
+        contient les configurations de la bd, pour potentiellement en utiliser d'autres
+    controllers:
+        contient la logique du site web page par page, autrement appellé routes
+    models:
+        le passage de l'application au serveur et vice versa se fait nécessairement par les fichiers dans ce dossier
+        les fichiers ici gèrent le I/O de la bd
+    public:
+        contient les fichiers utilisés par le site web, tel que css, images et librairies javascript
+    views:
+        html
+    explications.txt:
+        ceci
+    package.json:
+        informations sur l'application et ses dépendances
+    server.js:
+        démarreur de l'application avec ses configs
+
+Aiakòs

@@ -14,6 +14,10 @@ en gros.
         les fichiers ici gèrent le I/O de la bd
     public:
         contient les fichiers utilisés par le site web, tel que css, images et librairies javascript
+        le site web a accès à tout ce qui est dans /public comme si /public était le répertoire courant de la page web courante
+            (cela est fait dans server.js)
+    tests:
+        tests unitaires, etc
     views:
         html
     explications.txt:

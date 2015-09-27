@@ -8,8 +8,6 @@
     <orderEntry type="library" name="Node.js v0.12.7 Core Modules" level="application" />
     <orderEntry type="library" name="covosocial node_modules" level="project" />
     <orderEntry type="library" name="jquery" level="application" />
-    <orderEntry type="library" name="jquery-ui" level="application" />
-    <orderEntry type="library" name="jquery-1.11.3" level="application" />
     <orderEntry type="library" name="Covoiturage node_modules" level="project" />
   </component>
 </module>

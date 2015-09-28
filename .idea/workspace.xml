@@ -2,606 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3964c877-8009-4396-8918-f2e07227c86d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/fonts/FontAwesome.otf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/.sass-cache/5d78bc2f9bcb660d673545cac801696108c07ed1/_functions.scssc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/.sass-cache/5d78bc2f9bcb660d673545cac801696108c07ed1/_mixins.scssc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/.sass-cache/5d78bc2f9bcb660d673545cac801696108c07ed1/_skel.scssc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/.sass-cache/5d78bc2f9bcb660d673545cac801696108c07ed1/_vars.scssc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/css/images/bg01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/css/images/bg01.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/facebook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/facebook.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/facebook1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/facebook1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/fonts/fontawesome-webfont.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/fonts/fontawesome-webfont.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/fonts/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/fonts/fontawesome-webfont.woff2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/fonts/fontawesome-webfont.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/google+.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/google+.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/.sass-cache/1b4a6be16a6e35a023dcbff3df09a61afa5da4d1/main.scssc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/password-recovery.html.bak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/pic01.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/pic01.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/pic02.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/pic02.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/pic03.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/pic03.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/pic04.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/pic04.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/pic05.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/pic05.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/pic06.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/pic06.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/images/pic07.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/images/pic07.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_diagonals-thick_18_b81900_40x40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_diagonals-thick_18_b81900_40x40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_diagonals-thick_20_666666_40x40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_diagonals-thick_20_666666_40x40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_flat_10_000000_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_flat_10_000000_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_glass_100_f6f6f6_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_glass_100_f6f6f6_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_glass_100_fdf5ce_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_glass_100_fdf5ce_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_gloss-wave_35_f6a828_500x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_gloss-wave_35_f6a828_500x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-icons_222222_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-icons_222222_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-icons_228ef1_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-icons_228ef1_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-icons_ef8c08_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-icons_ef8c08_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-icons_ffd27a_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-icons_ffd27a_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/images/ui-icons_ffffff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/images/ui-icons_ffffff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/.sass-cache/8b12063c3c6a2b7fee2960ded9ebbb11093b53be/v8.scssc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/.eslintignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/.jshintrc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie-signature/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/node_modules/ms/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/parseurl/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/ms/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/.npmignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/utils-merge/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/.travis.yml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/utils/404.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/doc/API.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/Auth.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/CHANGELOG.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/CONTRIBUTING.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/Cakefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/ChangeUser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/Changes.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ClientAuthenticationPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ComChangeUserPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ComPingPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ComQueryPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ComQuitPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ComStatisticsPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/Connection.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/ConnectionConfig.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Address.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_CommunicationOptions.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Drivers.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Ecussons.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Educations.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Luggages.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_MusicStyles.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Passengers.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_SearchTravel.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Travel.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_TravelPassengers.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_UserEcussons.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/CovosocialSchema_Users.sql" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/EmptyPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/EofPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ErrorPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/Field.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/FieldPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-disposition/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-type/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/etag/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/node_modules/unpipe/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/fresh/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/methods/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/parseurl/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/forwarded/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/range-parser/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/serve-static/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/media-typer/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/vary/HISTORY.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Handshake.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/HandshakeInitializationPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/History.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie-signature/History.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/History.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/node_modules/ms/History.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/History.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/path-to-regexp/History.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/ms/History.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/LICENCE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/LICENSE.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/LICENSE.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/array-flatten/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-disposition/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-type/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/node_modules/ms/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/escape-html/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/etag/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/node_modules/unpipe/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/fresh/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/merge-descriptors/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/methods/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/node_modules/ee-first/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/parseurl/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/path-to-regexp/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/forwarded/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/range-parser/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/node_modules/inherits/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/ms/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/statuses/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/serve-static/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/media-typer/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/utils-merge/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/vary/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/License" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/LocalDataFilePacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/OkPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/OldPasswordPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/ie/PIE.htc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/ie/PIE.htc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/PacketHeader.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/PacketWriter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/Parser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Ping.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/Pool.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/PoolCluster.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/PoolConfig.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/PoolConnection.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/PoolNamespace.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/PoolSelector.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/Protocol.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Query.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Quit.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/array-flatten/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-disposition/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-type/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/node_modules/ms/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/etag/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/node_modules/unpipe/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/fresh/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/merge-descriptors/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/methods/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/node_modules/ee-first/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/parseurl/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/forwarded/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/range-parser/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/destroy/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/node_modules/inherits/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/ms/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/statuses/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/serve-static/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/media-typer/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/utils-merge/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/vary/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie-signature/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/escape-html/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/path-to-regexp/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/Readme.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/ResultSet.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/ResultSetHeaderPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/RowDataPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/SSLRequestPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Sequence.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/SqlString.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/Statistics.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/StatisticsPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/UseOldPasswordPacket.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/sass/libs/_functions.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/sass/libs/_functions.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/sass/libs/_mixins.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/sass/libs/_mixins.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/sass/libs/_skel.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/sass/libs/_skel.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/lib/_stream_duplex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/lib/_stream_passthrough.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/lib/_stream_readable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/lib/_stream_transform.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/lib/_stream_writable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/sass/libs/_vars.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/sass/libs/_vars.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/application.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/array-flatten/array-flatten.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/bignumber.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/bignumber.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/bignumber.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/browser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/lib/compat/buffer-concat.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/build/build.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/build/build.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/lib/compat/callsite-tostring.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/lib/charset.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/constants/charsets.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/cli.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/constants/client.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/statuses/codes.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/component.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/core.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/covosocial.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/covosocialSearchDepartures.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/database.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/db.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/db.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/debug.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/duplex.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/lib/encoding.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/constants/errors.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/express.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/constants/field_flags.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/float.patch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/float.patch" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/css/font-awesome.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/css/font-awesome.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/fonts/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/ie/html5shiv.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/ie/html5shiv.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/css/ie8.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/css/ie8.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/sass/ie8.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/sass/ie8.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/router/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-disposition/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-type/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie-signature/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/node_modules/ms/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/lib/compat/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/escape-html/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/etag/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/node_modules/unpipe/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/fresh/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/merge-descriptors/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/methods/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/node_modules/ee-first/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/parseurl/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/path-to-regexp/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/forwarded/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/lib/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/range-parser/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/destroy/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/ms/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/statuses/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/serve-static/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/media-typer/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/utils-merge/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/vary/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/packets/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/sequences/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/node_modules/inherits/inherits.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/inherits.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/node_modules/inherits/inherits_browser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/inherits_browser.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/middleware/init.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/src/ipaddr.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/lib/ipaddr.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/ipaddr.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/test/ipaddr.test.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.structure.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.structure.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.structure.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.structure.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.theme.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.theme.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/jquery-ui.theme.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/jquery-ui.theme.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery.dropotron.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery.dropotron.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery/external/jquery/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery/external/jquery/jquery.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/jquery.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/lib/language.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/router/layer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/left-sidebar.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/left-sidebar.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/login.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/css/main.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/main.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/sass/main.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/sass/main.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/lib/mediaType.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/.bin/mime.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/mime.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/.bin/mime" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/node.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/mime-types/node_modules/mime-db/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/accepts/node_modules/negotiator/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/array-flatten/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-disposition/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/content-type/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/cookie-signature/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/debug/node_modules/ms/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/depd/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/escape-html/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/etag/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/finalhandler/node_modules/unpipe/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/fresh/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/merge-descriptors/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/methods/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/on-finished/node_modules/ee-first/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/parseurl/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/path-to-regexp/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/forwarded/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/proxy-addr/node_modules/ipaddr.js/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/range-parser/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/destroy/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/node_modules/inherits/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/ms/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/statuses/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/serve-static/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/media-typer/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/type-is/node_modules/mime-types/node_modules/mime-db/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/utils-merge/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/vary/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/bignumber.js/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/isarray/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/string_decoder/package.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/lib/parse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/test/parse.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/passthrough.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/password-recovery.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/middleware/query.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/readable.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/request.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/ie/respond.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/ie/respond.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/response.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/results.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/router/route.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/routes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/script.js.bak" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/script.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/server.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/constants/server_status.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/sign-up.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/HTML/assets/js/skel.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/skel.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/constants/ssl_profiles.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/lib/stringify.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/test/stringify.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/http-errors/node_modules/inherits/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/build/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/inherits/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/transform.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/lib/protocol/constants/types.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/send/node_modules/mime/types.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/node_modules/core-util-is/lib/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/html/assets/js/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/utils/util.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/lib/utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/node_modules/qs/test/utils.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/express/lib/view.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/node_modules/mysql/node_modules/readable-stream/writable.js" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\README.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\.sass-cache\1b4a6be16a6e35a023dcbff3df09a61afa5da4d1\main.scssc" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\.sass-cache\5d78bc2f9bcb660d673545cac801696108c07ed1\_functions.scssc" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\.sass-cache\5d78bc2f9bcb660d673545cac801696108c07ed1\_mixins.scssc" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\.sass-cache\5d78bc2f9bcb660d673545cac801696108c07ed1\_skel.scssc" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\.sass-cache\5d78bc2f9bcb660d673545cac801696108c07ed1\_vars.scssc" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\.sass-cache\8b12063c3c6a2b7fee2960ded9ebbb11093b53be\v8.scssc" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\css\font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\css\ie8.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\css\images\bg01.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\fonts\FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\fonts\fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\fonts\fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\fonts\fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\fonts\fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\fonts\fontawesome-webfont.woff2" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\ie\PIE.htc" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\ie\html5shiv.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\ie\respond.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery.dropotron.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\external\jquery\jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_diagonals-thick_18_b81900_40x40.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_diagonals-thick_20_666666_40x40.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_flat_10_000000_40x100.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_glass_100_f6f6f6_1x400.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_glass_100_fdf5ce_1x400.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_glass_65_ffffff_1x400.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_gloss-wave_35_f6a828_500x100.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-icons_222222_256x240.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-icons_228ef1_256x240.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-icons_ef8c08_256x240.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-icons_ffd27a_256x240.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\images\ui-icons_ffffff_256x240.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\index.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.min.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.structure.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.structure.min.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.theme.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\jquery\jquery-ui.theme.min.css" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\main.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\js\skel.min.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\sass\ie8.scss" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\sass\libs\_functions.scss" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\sass\libs\_mixins.scss" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\sass\libs\_skel.scss" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\sass\libs\_vars.scss" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\assets\sass\main.scss" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\facebook.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\facebook1.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\google+.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\pic01.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\pic02.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\pic03.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\pic04.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\pic05.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\pic06.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\images\pic07.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\left-sidebar.html" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\HTML\Covoiturage\html5up-verti\password-recovery.html.bak" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\assets\css\jquery.timepicker.css" afterPath="$PROJECT_DIR$/HTML/assets/css/jquery.timepicker.css" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\assets\css\main.css" afterPath="$PROJECT_DIR$/HTML/assets/css/main.css" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\assets\js\jquery.timepicker.js" afterPath="$PROJECT_DIR$/HTML/assets/js/jquery.timepicker.js" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\assets\js\util.js" afterPath="$PROJECT_DIR$/HTML/assets/js/util.js" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\departure-creation.html" afterPath="$PROJECT_DIR$/HTML/departure-creation.html" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\index.html" afterPath="$PROJECT_DIR$/HTML/index.html" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\login.html" afterPath="$PROJECT_DIR$/HTML/login.html" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\no-results.html" afterPath="$PROJECT_DIR$/HTML/no-results.html" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\password-recovery.html" afterPath="$PROJECT_DIR$/HTML/password-recovery.html" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\profile-driver.html" afterPath="$PROJECT_DIR$/HTML/profile-driver.html" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\profile-passenger.html" afterPath="$PROJECT_DIR$/HTML/profile-passenger.html" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\results.html" afterPath="$PROJECT_DIR$/HTML/password-recovery.html.bak" />
-      <change type="MOVED" beforePath="C:\Users\Mythian\WebstormProjects\Covoiturage\html5up-verti\sign-up.html" afterPath="$PROJECT_DIR$/HTML/sign-up.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Covoiturage.iml" afterPath="$PROJECT_DIR$/.idea/Covoiturage.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/covosocial.iml" afterPath="$PROJECT_DIR$/.idea/covosocial.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Covoiturage.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -621,96 +23,78 @@
     <favorites_list name="Covoiturage" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6485662">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/HTML/login.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="53" column="123" selection-start-line="53" selection-start-column="123" selection-end-line="53" selection-end-column="123" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="password-recovery.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/HTML/password-recovery.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/HTML/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="55" selection-end-column="38" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/HTML/assets/js/util.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="596" column="16" selection-start-line="596" selection-start-column="16" selection-end-line="596" selection-end-column="16" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="no-results.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/HTML/no-results.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="61" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="163" selection-end-column="7" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="departure-creation.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/HTML/departure-creation.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="sign-up.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/HTML/sign-up.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="55" column="114" selection-start-line="55" selection-start-column="114" selection-end-line="55" selection-end-column="114" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/HTML/assets/css/main.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.89892805">
-                  <caret line="2704" column="1" selection-start-line="4" selection-start-column="0" selection-end-line="2704" selection-end-column="1" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HTML/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="123" selection-start-line="53" selection-start-column="123" selection-end-line="53" selection-end-column="123" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="password-recovery.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HTML/password-recovery.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HTML/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="28" selection-start-line="53" selection-start-column="28" selection-end-line="55" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="util.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HTML/assets/js/util.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="596" column="16" selection-start-line="596" selection-start-column="16" selection-end-line="596" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="no-results.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HTML/no-results.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="61" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="163" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sign-up.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/HTML/sign-up.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="55" column="114" selection-start-line="55" selection-start-column="114" selection-end-line="55" selection-end-column="114" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/HTML/assets/css/main.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.71281296">
+              <caret line="2706" column="0" selection-start-line="2706" selection-start-column="0" selection-end-line="2706" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -751,9 +135,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1855" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -782,9 +166,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files" />
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -793,33 +174,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Covoiturage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Covoiturage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Covoiturage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Covoiturage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HTML" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Project Files" />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -909,31 +269,38 @@
       <option name="project" value="LOCAL" />
       <updated>1443119012267</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge remote-tracking branch 'remotes/origin/HTML'&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;">
+      <created>1443462719408</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1443462719408</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13958333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.280887" sideWeight="0.50416666" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.280887" sideWeight="0.49583334" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13930348" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28020304" sideWeight="0.5063571" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28020304" sideWeight="0.4936429" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17100371" sideWeight="0.479375" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17100371" sideWeight="0.479375" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -949,13 +316,38 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="HTML" />
-    <option name="LAST_COMMIT_MESSAGE" value="HTML" />
+    <MESSAGE value="Merge remote-tracking branch 'remotes/origin/HTML'&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'remotes/origin/HTML'&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/HTML/no-results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="163" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HTML/sign-up.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="114" selection-start-line="55" selection-start-column="114" selection-end-line="55" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HTML/assets/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HTML/password-recovery.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1222,13 +614,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/Project Stuff/bootstrap-3.3.5-dist/bootstrap-3.3.5-dist/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-41.05058">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HTML/assets/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1250,13 +635,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/Project Stuff/Test/jquery-ui.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.125">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HTML/assets/js/util.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1269,14 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="61" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="163" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HTML/departure-creation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="34" selection-start-line="76" selection-start-column="34" selection-end-line="76" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1315,8 +685,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HTML/assets/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89892805">
-          <caret line="2704" column="1" selection-start-line="4" selection-start-column="0" selection-end-line="2704" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.71281296">
+          <caret line="2706" column="0" selection-start-line="2706" selection-start-column="0" selection-end-line="2706" selection-end-column="0" />
           <folding />
         </state>
       </provider>

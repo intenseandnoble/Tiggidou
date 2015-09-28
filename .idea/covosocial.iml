@@ -9,5 +9,6 @@
     <orderEntry type="library" name="covosocial node_modules" level="project" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="Covoiturage node_modules" level="project" />
+    <orderEntry type="library" name="CovoiturageSocial node_modules" level="project" />
   </component>
 </module>

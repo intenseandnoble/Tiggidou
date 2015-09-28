@@ -597,3 +597,7 @@ $(function() {
 		active: false
 	});
 });
+
+$(function() {
+	$( "#tabs" ).tabs();
+});

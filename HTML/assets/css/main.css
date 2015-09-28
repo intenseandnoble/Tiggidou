@@ -2645,6 +2645,7 @@ input[type=submit].sign-in{
 
 #comments-post-ride{
 	resize:none;
+	width: 700px;
 
 }
 
@@ -2702,4 +2703,12 @@ input[type=text].email-address-recovery {
 	width: 425px;
 	display: inline;
 	margin-right:4em
+}
+
+hr {
+	border: none;
+	height: 1px;
+	/* Set the hr color */
+	color: #333; /* old IE */
+	background-color: #333; /* Modern Browsers */
 }

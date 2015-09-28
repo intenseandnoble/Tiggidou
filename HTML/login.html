@@ -29,11 +29,11 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li><a href="index.html">Search</a></li>
+									<li><a href="index.html">Rechercher</a></li>
 
 
-									<li><a href="sign-up.html">Sign up</a></li>
-									<li class="current"><a href="login.html">Log in</a></li>
+									<li><a href="sign-up.html">S'inscrire</a></li>
+									<li class="current"><a href="login.html">Se connecter</a></li>
 								</ul>
 							</nav>
 
@@ -49,18 +49,20 @@
 
 
 
-                            <form action = "login-info">
-                                <input type="email" class="signin-email"  name = "username" placeholder ="Username"><br><br>
-                                <input type="password" class="enter-password" name = "password" placeholder="Password"><br>
-                                <a class="forgot-password" href="password-recovery.html">Forgot password?</a><br><br>
-                                <input type="submit" class="sign-in" value ="Sign in"><br>
+                            <form action = "profile.html">
+                                <input type="email" class="signin-email"  name = "username" placeholder ="Nom d'utilisateur"><br><br>
+                                <input type="password" class="enter-password" name = "password" placeholder="Mot de passe"><br>
+                                <a class="forgot-password" href="password-recovery.html">Mot de passe oublié?</a><br><br>
+                                <input type="submit" class="sign-in" value ="Se connecter"  onclick="window.location='profile.html';"><br>
+								<!--Script temporary; remove it-->
+
                                 <br>
 
 
                             </form>
 
                             <form class="sign-in-social-media">
-                            <input type="image" class="logo-social-media" src="images/facebook.png">
+                            <input type="image" class="logo-social-media" src="images/facebook-fr.png">
                             <input type="image" class="logo-social-media" src="images/google+.png">
                             </form>
 

@@ -31,8 +31,9 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li><a href="sign-up.html">Sign up</a></li>
-                    <li class ="current"><a href="login.html">Login</a></li>
+                    <li><a href="index.html">Rechercher</a></li>
+                    <li><a href="sign-up.html">S'inscrire</a></li>
+                    <li class ="current"><a href="login.html">Se connecter</a></li>
                 </ul>
             </nav>
 
@@ -42,16 +43,15 @@
     <!-- Banner -->
     <div id="banner-wrapper">
         <div id="banner" class="box container">
-            <h2 align="center">Demande de lift</h2><br>
             <div align="center" >
 
                 <div>
                     <form class="ride-posting">
-                         <input type="text" class="ride-form" name = "currentLocation" placeholder="From">
+                         <input type="text" class="ride-form" name = "currentLocation" placeholder="De">
 
-                        <input type="text"  class="ride-form" name = "destination" placeholder="To"><br><br>
+                        <input type="text"  class="ride-form" name = "destination" placeholder="À"><br><br>
 
-                        <input type=text  class="ride-form"  placeholder="Time" list=browsers>
+                        <input type=text  class="ride-form"  placeholder="Heure" list=browsers>
                         <datalist id=browsers>
                             <option value="1:00">
                             <option value="1:30">
@@ -81,7 +81,10 @@
 
                         </datalist>
 
+
+
                         <input type="text" class="ride-form"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
+
 
 
 
@@ -92,25 +95,29 @@
 
                         <div><br> Score du conducteur: ******<br><br>
 
-                            Fumeur? :<input type="radio" name="radio-time" value="AM">Yes
-                            <input type="radio" name="radio-time" value="PM" checked>No <br><br>
-                            Animaux accepté? :<input type="radio" name="radio-time" value="AM">Yes
-                            <input type="radio" name="radio-time" value="PM" checked>No <br><br>
+                            Fumeur? :<input type="radio" name="smoker-radio" value="Yes">Oui
+                            <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
+                            Animaux accepté? :<input type="radio" name="animal-radio" value="Yes">Oui
+                            <input type="radio" name="animal-radio" value="No" checked>Non <br><br>
 
-                            Valises acceptés? :<input type="radio" name="radio-time" value="AM">Yes
-                            <input type="radio" name="radio-time" value="PM" checked>No <br><br>
-                            Commentaires:<br> <textarea id="comments-post-ride"></textarea><br><br>
+                            Valises acceptés? :<input type="radio" name="bagagge-radio" value="Yes">Oui
+                            <input type="radio" name="bagagge-radio" value="PM" checked>Non <br><br>
+                            Commentaires:<br> <br><textarea id="comments-post-ride"></textarea><br><br>
 
                         </div>
 
                     </div>
+
+
+
+
                     </form>
 
 
                 </div>
 
                 <div class="post-ride">
-                    <br><a href="no-results.html" class="button small icon fa-arrow-circle-right">Ok let's go</a>
+                    <br><a href="no-results.html" class="button small icon fa-arrow-circle-right">Publier</a>
                 </div>
 
 

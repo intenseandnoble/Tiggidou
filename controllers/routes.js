@@ -28,8 +28,7 @@ module.exports = function (app) {
 
     // login
     app.get('/login', function (req, res) {
-
-
+        res.sendFile('/views/fr/login.html', {root: './'})
     });
 
     // signup

@@ -4,7 +4,7 @@
  */
 
 var mysql = require('mysql')
-var async = require('async')
+//var async = require('async')
 
 var PROD_DB = 'app_prod_database'
 var TEST_DB = 'app_test_database'
@@ -12,10 +12,10 @@ var TEST_DB = 'app_test_database'
 exports.MODE_PROD = 'mode_production'
 exports.MODE_TEST = 'mode_test'
 
-var state = {
+/*var state = {
     pool: null,
     mode: null,
-}
+}*/
  
  exports.connect = function(mode, done){
    state.pool = mysql.createPool({
@@ -28,7 +28,7 @@ var state = {
    done()
 }
 
-exports.get = function(){
+/*exports.get = function(){
  	return state.pool
 }
 //takes JSON object and loads datas into db, for test
@@ -52,7 +52,7 @@ exports.drop = function(tables, done) {
     async.each(tables, function(name, cb) {
         pool.query('DELETE * FROM ' + name, cb)
     }, done)
-}
+}*/
 /*
  var connection = mysql.createConnection({
      host : 'localhost',
@@ -62,3 +62,4 @@ exports.drop = function(tables, done) {
  });
  
 exports.dbConnection = connection;
+    */

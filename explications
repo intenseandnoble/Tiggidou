@@ -27,4 +27,17 @@ en gros.
     server.js:
         démarreur de l'application avec ses configs
 
+- méthodes HTTP: (utile pour comprendre routes.js)
+    get
+        pour obtenir une ressource. ceci est idempotent(peut importe le nombre d'appels, la réponse et le serveur ne changent pas)
+
+    post
+        pour insérer
+
+    put
+        pour mettre à jour
+
+    delete
+        pour supprimer
+
 Aiakòs

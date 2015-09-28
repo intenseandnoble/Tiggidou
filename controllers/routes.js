@@ -19,6 +19,8 @@ module.exports = function (app) {
         res.sendFile('/views/index.html', {root: './'});
     });
 
+    
+
     // rechercher
     app.get('/api/search', function (req, res) {
 

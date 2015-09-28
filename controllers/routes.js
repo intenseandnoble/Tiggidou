@@ -16,26 +16,24 @@ module.exports = function (app) {
     // api ---------------------------------------------------------------------
     //single page application
     app.get('/', function (req, res) {
-        res.sendFile('/views/index.html', {root: './'});
+        res.sendFile('/views/fr/index.html', {root: './'});
     });
 
-    
-
     // rechercher
-    app.get('/api/search', function (req, res) {
+    app.get('/search', function (req, res) {
 
         //faire une recherche et afficher son r�sultat
 
     });
 
     // login
-    app.get('/api/login', function (req, res) {
+    app.get('/login', function (req, res) {
 
 
     });
 
     // signup
-    app.get('/api/signup', function (req, res) {
+    app.get('/signup', function (req, res) {
 
 
     });

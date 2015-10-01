@@ -8,7 +8,7 @@ var express = require('express');
 
 
 // show routes to app
-module.exports = function (app) {
+module.exports = function (app, passport) {
 
 
 // routes ======================================================================
@@ -26,19 +26,26 @@ module.exports = function (app) {
 
     });
 
+    // profile
+    app.get('/profile', isLoggedIn, function (req, res) {
+        res.sendFile('/views/fr/profile.html', {root: './'})
+    });
+
     // login
     app.get('/login', function (req, res) {
         res.sendFile('/views/fr/login.html', {root: './'})
     });
 
-
-
     // signup
-    app.get('/signup', function (req, res) {
-
-
+    app.get('/sign-up', function (req, res) {
+        res.sendFile('/views/fr/sign-up.html', {root: './'})
     });
-
+    //processs the signup form
+    app.post('/sign-up', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/sign-up', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
     app.get('/results', function (req, res) {
         res.sendFile('/views/fr/results.html', {root: './'})
@@ -51,6 +58,22 @@ module.exports = function (app) {
     app.get('/ask-ride', function (req, res) {
         res.sendFile('/views/fr/ask-ride.html', {root: './'})
     });
+    app.get('/logout', function(req, res){
+        req.logout();
+        res.redirect('/');
+    })
+
     //... ajouter plus de fonctionalit�s
 
+};
+
+// route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    res.redirect('/');
 };

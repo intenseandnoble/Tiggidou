@@ -20,6 +20,8 @@ app.use(express.static(__dirname + '/public'));
 
 // load the routes
 require('./controllers/routes')(app, passport);
+//TODO à revoir
+require('./controllers/post')(app);
 
 require('./config/passport')(passport); // pass passport for configuration
 // set up our express application
@@ -34,6 +36,7 @@ app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secre
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 //listen (start app with node server.js)
 app.listen(port);

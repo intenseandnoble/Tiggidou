@@ -46,12 +46,12 @@
             <div align="center" >
 
                 <div>
-                    <form class="ride-posting">
+                    <form class="ride-posting" method="post" action ="/post-ride">
                          <input type="text" class="ride-form" name = "currentLocation" placeholder="De">
 
                         <input type="text"  class="ride-form" name = "destination" placeholder="À"><br><br>
 
-                        <input type=text  class="ride-form"  placeholder="Heure" list=browsers>
+                        <input type=text  class="ride-form"  name="timeDeparture" placeholder="Heure" list=browsers>
                         <datalist id=browsers>
                             <option value="1:00">
                             <option value="1:30">
@@ -81,6 +81,8 @@
 
                         </datalist>
 
+                        <input type="radio" name="periodDeparture" value="PM" checked>PM
+                        <input type="radio" name="periodDeparture" value="AM" >AM <br><br>
 
 
                         <input type="text" class="ride-form"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
@@ -95,30 +97,29 @@
 
                         <div><br> Score du conducteur: ******<br><br>
 
-                            Fumeur? :<input type="radio" name="smoker-radio" value="Yes">Oui
+                            Fumeur? :<input type="radio" name="smokerRadio" value="Yes">Oui
                             <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
-                            Animaux accepté? :<input type="radio" name="animal-radio" value="Yes">Oui
-                            <input type="radio" name="animal-radio" value="No" checked>Non <br><br>
+                            Animaux accepté? :<input type="radio" name="animalRadio" value="Yes">Oui
+                            <input type="radio" name="animalRadio" value="No" checked>Non <br><br>
 
-                            Valises acceptés? :<input type="radio" name="bagagge-radio" value="Yes">Oui
-                            <input type="radio" name="bagagge-radio" value="PM" checked>Non <br><br>
-                            Commentaires:<br> <br><textarea id="comments-post-ride"></textarea><br><br>
+                            Valises acceptés? :<input type="radio" name="bagaggeRadio" value="Yes">Oui
+                            <input type="radio" name="bagaggeRadio" value="No" checked>Non <br><br>
+                            Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide"></textarea><br><br>
 
                         </div>
 
-                    </div>
+                    </div><br>
 
 
-
-
+                        <div class="post-ride">
+                        <input type="submit" value="Publier">
+                        </div>
                     </form>
 
 
                 </div>
 
-                <div class="post-ride">
-                    <br><a href="no-results.html" class="button small icon fa-arrow-circle-right">Publier</a>
-                </div>
+
 
 
 
@@ -205,12 +206,12 @@
 </div>
 
 <!-- Scripts -->
-<script src=".js/jquery.dropotron.min.js"></script>
-<script src="js/skel.min.js"></script>
-<script src="js/util.js"></script>
+<script src="/js/jquery.dropotron.min.js"></script>
+<script src="/js/skel.min.js"></script>
+<script src="/js/util.js"></script>
 <!--[if lte IE 8]>
-<script src="js/ie/respond.min.js"></script><![endif]-->
-<script src="js/main.js"></script>
+<script src="/js/ie/respond.min.js"></script><![endif]-->
+<script src="/js/main.js"></script>
 
 </body>
 </html>

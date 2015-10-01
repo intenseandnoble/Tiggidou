@@ -36,13 +36,6 @@ module.exports = function (app, passport) {
         res.sendFile('/views/fr/login.html', {root: './'})
     });
 
-    // process the login form
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
-
     // signup
     app.get('/sign-up', function (req, res) {
         res.sendFile('/views/fr/sign-up.html', {root: './'})
@@ -58,6 +51,13 @@ module.exports = function (app, passport) {
         res.sendFile('/views/fr/results.html', {root: './'})
     });
 
+    app.get('/no-results', function (req, res) {
+        res.sendFile('/views/fr/no-results.html', {root: './'})
+    });
+
+    app.get('/ask-ride', function (req, res) {
+        res.sendFile('/views/fr/ask-ride.html', {root: './'})
+    });
     app.get('/logout', function(req, res){
         req.logout();
         res.redirect('/');
@@ -76,4 +76,4 @@ function isLoggedIn(req, res, next) {
 
     // if they aren't redirect them to the home page
     res.redirect('/');
-}
+};

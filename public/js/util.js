@@ -585,3 +585,21 @@
 	};
 
 })(jQuery);
+
+$(document).ready(function() {
+	$("#datepicker").datepicker({ minDate: 0 });
+	$("button").click(function() {
+		var selected = $("#downpicker option:selected").text();
+		var datepicker = $("#datepicker").val();
+
+	});
+});
+
+$(function() {
+	$( "#accordion" ).accordion({
+		collapsible: true,
+        active: false
+
+	});
+});
+

@@ -3,8 +3,7 @@
  */
 var covoso = require(__dirname + '/../models/covosocialSearchDepartures');
 var express = require('express');
-
-
+var database = require(__dirname + '/../config/database');
 
 module.exports = function (app) {
 
@@ -32,24 +31,11 @@ module.exports = function (app) {
 
 function insert_into_searchTravel (currentLocation, destination,time,period,date,smoker,animals,bagagge,comments)
 {
-
-    var mysql = require('mysql');
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'plokij123',
-        database: 'covosocialschema'
-    });
-
-    connection.connect(function (err) {
-        if (err) {
-            console.error('error connecting: ' + err.stack);
-            return;
-        }
-    });
-    connection.query('INSERT INTO searchtravel(startAddress,destinationAddress,comments,pets,departureTime,departureDate)' +
+    var request = 'INSERT INTO searchtravel(startAddress,destinationAddress,comments,pets,departureTime,departureDate)' +
         'VALUES (\'' + currentLocation +'\',\''+ destination+'\',\''+comments+'\',\''+animals
-        +'\',\''+time+period+'\',\''+ date+ '\')' , function (err, rows, fields) {
+        +'\',\''+time+period+'\',\''+ date+ '\')';
+
+    database.insertRequest(request, function (err, rows, fields) {
         if (!err)
             console.log('Added!');
         else

@@ -31,12 +31,26 @@ module.exports = function (app) {
         res.sendFile('/views/fr/login.html', {root: './'})
     });
 
+
+
     // signup
     app.get('/signup', function (req, res) {
 
 
     });
 
+
+    app.get('/results', function (req, res) {
+        res.sendFile('/views/fr/results.html', {root: './'})
+    });
+
+    app.get('/no-results', function (req, res) {
+        res.sendFile('/views/fr/no-results.html', {root: './'})
+    });
+
+    app.get('/ask-ride', function (req, res) {
+        res.sendFile('/views/fr/ask-ride.html', {root: './'})
+    });
     //... ajouter plus de fonctionalit�s
 
 };

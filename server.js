@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 
 // load the routes
 require('./controllers/routes')(app);
-
+require('./controllers/post')(app);
 //listen (start app with node server.js)
 app.listen(8080);
 console.log("App listening on port 8080");

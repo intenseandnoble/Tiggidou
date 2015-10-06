@@ -2,48 +2,18 @@
  * Created by dave on 28/09/15.
  */
 
-var mysql = require('mysql');
-var bcrypt = require('bcrypt-nodejs');
-/*
-//todo schma partiel, a changer, modele prit sur mongo
-var userSchema = mongoose.Schema({
+var DB = require('../config/database').DB;
 
-    local            : {
-        email        : String,
-        password     : String,
-    },
-    facebook         : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    },
-    twitter          : {
-        id           : String,
-        token        : String,
-        displayName  : String,
-        username     : String
-    },
-    google           : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String
-    }
-
+var Users = DB.Model.extend({
+    tableName: 'Users',
+    idAttribute: 'idUser'
 });
 
-// methods ======================
-// generating a hash
-userSchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
+var UsersFacebook = DB.Model.extend({
+    tableName: 'UsersFacebook',
+    idAttribute: 'idUserFacebook'
+})
 
-// checking if password is valid
-userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+module.exports = {
+    Users: Users
 };
-
-//todo à revoir
-// create the model for users and expose it to our app
-module.exports = mongoose.model('User', userSchema);*/

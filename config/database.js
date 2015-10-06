@@ -4,13 +4,17 @@
  */
 
 var mysql = require('mysql');
+var Bookshelf = require('bookshelf');
 
-var connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : '',
-    database : 'CovosocialSchema'
-});
+var configConnection = {
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'CovosocialTestSchema',
+    charset: 'UTF8_GENERAL_CI'
+};
+
+var connection = mysql.createConnection(configConnection);
 
 connection.connect(function (err) {
     if (err) {
@@ -19,9 +23,15 @@ connection.connect(function (err) {
     }
 });
 
+var DB = Bookshelf.initialize({
+    client: 'mysql',
+    connection: configConnection
+});
+
+module.exports.DB = DB;
+
 exports.dbConnection = connection;
 
 exports.insertRequest = function(req, res){
     connection.query(req, res);
-    connection.end();
-}
+};

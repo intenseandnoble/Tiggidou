@@ -32,10 +32,11 @@ module.exports = function (app, passport) {
     app.get('/profile', function(req, res){
 
         //Donnees statiques et momentanees avant d'avoir les data de bd
-        var scoreMoyen = 3;
-
+        var driverAvgScore = 3;
+        var passengerAvgScore = 4;
             res.render('pages/profile.ejs', {
-                scoreMoyen : scoreMoyen
+                driverAverageScore : driverAvgScore,
+                passengerAverageScore : passengerAvgScore
         });
     });
 

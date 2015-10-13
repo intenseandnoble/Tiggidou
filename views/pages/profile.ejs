@@ -78,11 +78,11 @@
                         </article>
 
                         <div>
-
+                            <!-- TODO rendre responsive les deux colonnes (left et right) -->
                             <div class="left">
                                 <h3>Conducteur</h3>
                                 Score moyen:
-                                <form id="ratingsForm">
+                                <form id="ratingsFormDriver">
                                     <div class="rating-star">
 
                                         <%
@@ -91,7 +91,7 @@
                                         var checker3 = "";
                                         var checker4 = "";
                                         var checker5 = "";
-                                        switch (scoreMoyen) {
+                                        switch (driverAverageScore) {
                                             case 1:
                                                 checker1 = "checked";
                                             break;
@@ -109,16 +109,16 @@
                                             break;
                                         }
                                         %>
-                                        <input type="radio" name="star" class="star-1" id="star-1" <%= checker1 %> />
-                                        <label class="star-1" for="star-1">1</label>
-                                        <input type="radio" name="star" class="star-2" id="star-2" <%= checker2 %> />
-                                        <label class="star-2" for="star-2">2</label>
-                                        <input type="radio" name="star" class="star-3" id="star-3" <%= checker3 %> />
-                                        <label class="star-3" for="star-3">3</label>
-                                        <input type="radio" name="star" class="star-4" id="star-4" <%= checker4 %> />
-                                        <label class="star-4" for="star-4">4</label>
-                                        <input type="radio" name="star" class="star-5" id="star-5" <%= checker5 %> />
-                                        <label class="star-5" for="star-5">5</label>
+                                        <input type="radio" name="star" class="star-1" id="dstar-1" <%= checker1 %> />
+                                        <label class="star-1" for="dstar-1">1</label>
+                                        <input type="radio" name="star" class="star-2" id="dstar-2" <%= checker2 %> />
+                                        <label class="star-2" for="dstar-2">2</label>
+                                        <input type="radio" name="star" class="star-3" id="dstar-3" <%= checker3 %> />
+                                        <label class="star-3" for="dstar-3">3</label>
+                                        <input type="radio" name="star" class="star-4" id="dstar-4" <%= checker4 %> />
+                                        <label class="star-4" for="dstar-4">4</label>
+                                        <input type="radio" name="star" class="star-5" id="dstar-5" <%= checker5 %> />
+                                        <label class="star-5" for="dstar-5">5</label>
                                         <span></span>
                                     </div>
                                 </form>
@@ -126,8 +126,47 @@
                             </div>
                             <div class="right">
                                 <h3>Passager</h3>
-                                <br>
-                                N/A
+                                Score moyen:
+                                <form id="ratingsFormPassenger">
+                                    <div class="rating-star">
+
+                                        <%
+                                        var checker1 = "";
+                                        var checker2 = "";
+                                        var checker3 = "";
+                                        var checker4 = "";
+                                        var checker5 = "";
+                                        switch (passengerAverageScore) {
+                                            case 1:
+                                                checker1 = "checked";
+                                                break;
+                                            case 2:
+                                                checker2 = "checked";
+                                                break;
+                                            case 3:
+                                                checker3 = "checked";
+                                                break;
+                                            case 4:
+                                                checker4 = "checked";
+                                                break;
+                                            case 5:
+                                                checker5 = "checked";
+                                                break;
+                                        }
+                                        %>
+                                        <input type="radio" name="star" class="star-1" id="pstar-1" <%= checker1 %> />
+                                        <label class="star-1" for="pstar-1">1</label>
+                                        <input type="radio" name="star" class="star-2" id="pstar-2" <%= checker2 %> />
+                                        <label class="star-2" for="pstar-2">2</label>
+                                        <input type="radio" name="star" class="star-3" id="pstar-3" <%= checker3 %> />
+                                        <label class="star-3" for="pstar-3">3</label>
+                                        <input type="radio" name="star" class="star-4" id="pstar-4" <%= checker4 %> />
+                                        <label class="star-4" for="pstar-4">4</label>
+                                        <input type="radio" name="star" class="star-5" id="pstar-5" <%= checker5 %> />
+                                        <label class="star-5" for="pstar-5">5</label>
+                                        <span></span>
+                                    </div>
+                                </form>
                             </div>
                         </div>
 

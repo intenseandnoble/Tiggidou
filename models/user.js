@@ -15,5 +15,6 @@ var UsersFacebook = DB.Model.extend({
 })
 
 module.exports = {
-    Users: Users
+    Users: Users,
+    UsersFacebook: UsersFacebook
 };

@@ -18,7 +18,7 @@ module.exports = function (app, passport) {
     // api ---------------------------------------------------------------------
     //single page application
     app.get('/', function (req, res) {
-        res.render('fr/index.html');
+        res.render('pages/index.ejs');
     });
 
     // rechercher
@@ -29,10 +29,14 @@ module.exports = function (app, passport) {
     });
 
     // profile
-    app.get('/profile', requireAuth, function(req, res){
-        res.render('fr/profile.html'/*, {
-            user : req.user //get the user out of session and pass to template
-        }*/)
+    app.get('/profile', function(req, res){
+
+        //Donnees statiques et momentanees avant d'avoir les data de bd
+        var scoreMoyen = 3;
+
+            res.render('pages/profile.ejs', {
+                scoreMoyen : scoreMoyen
+        });
     });
 
     // =====================================
@@ -54,14 +58,14 @@ module.exports = function (app, passport) {
             res.redirect('/');
         }
         else{
-            res.render('fr/login.html'/*, {message: req.flash('loginMessage')}*/);
+            res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
         }
     });
     app.post('/login', loginPost);
 
     // signup
     app.get('/sign-up', function (req, res) {
-        res.render('fr/sign-up.html'/*, {message: req.flash('signupMessage')}*/);
+        res.render('pages/sign-up.ejs'/*, {message: req.flash('signupMessage')}*/);
     });
 
     //processs the signup form
@@ -71,7 +75,7 @@ module.exports = function (app, passport) {
         usernamePromise = new Model.Users({email: user.email}).fetch();
         return usernamePromise.then(function(model) {
             if(model) {
-                res.render('fr/sign-up.html', {title: 'signup', errorMessage: 'username already exists'});
+                res.render('pages/sign-up.ejs', {title: 'signup', errorMessage: 'username already exists'});
             } else {
                 // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
                 var password = user.password;
@@ -86,15 +90,15 @@ module.exports = function (app, passport) {
         })});
 
     app.get('/results', function (req, res) {
-        res.render('fr/results.html')
+        res.render('pages/results.ejs')
     });
 
     app.get('/no-results', function (req, res) {
-        res.render('fr/no-results.html')
+        res.render('pages/no-results.ejs')
     });
 
     app.get('/ask-ride', requireAuth, function (req, res) {
-        res.render('fr/ask-ride.html')
+        res.render('pages/ask-ride.ejs')
     });
     app.get('/logout',requireAuth, function(req, res){
         req.logout();
@@ -110,15 +114,15 @@ module.exports = function (app, passport) {
             },
             function(err, user, info) {
                 if(err) {
-                    return res.render('fr/login.html', {title: 'Login', errorMessage: err.message});
+                    return res.render('pages/login.ejs', {title: 'Login', errorMessage: err.message});
                 }
 
                 if(!user) {
-                    return res.render('fr/login.html', {title: 'Login', errorMessage: info.message});
+                    return res.render('pages/login.ejs', {title: 'Login', errorMessage: info.message});
                 }
                 return req.logIn(user, function(err) {
                     if(err) {
-                        return res.render('fr/login.html', {title: 'Login', errorMessage: err.message});
+                        return res.render('pages/login.ejs', {title: 'Login', errorMessage: err.message});
                     } else {
                         return res.redirect('/profile');
                     }

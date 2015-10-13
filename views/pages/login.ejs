@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<!--
+	Verti by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="no-sidebar">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <% include ../partials/header %>
+
+    <!-- Main -->
+    <div id="main-wrapper">
+        <div class="container">
+            <div id="content" align="center" >
+
+                <!-- Content -->
+
+
+
+                <form action = "/login" method="post">
+                    <input type="email" class="signin-email"  name = "email" placeholder ="Email"><br><br>
+                    <input type="password" class="enter-password" name = "password" placeholder="Mot de passe"><br>
+                    <a class="forgot-password" href="password-recovery.html">Mot de passe oublié?</a><br><br>
+                    <button type="submit" class="sign-in">S'inscrire</button>
+                    <!--Script temporary; remove it-->
+
+                    <br>
+
+
+                </form>
+
+                <form class="sign-in-social-media">
+                    <input type="image" class="logo-social-media" src="images/facebook.png">
+                    <input type="image" class="logo-social-media" src="images/google+.png">
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <% include ../partials/footer %>
+
+</div>
+</body>
+</html>

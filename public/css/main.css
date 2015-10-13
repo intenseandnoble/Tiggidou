@@ -229,12 +229,21 @@ textarea.form-control{height:auto;}
 .left {
 	float: left;
 	width: 50%;
-	margin-bottom:20px
+	margin-bottom:20px;
 }
 
 .right {
 	margin-left: 50%;
-	margin-bottom:20px
+	margin-bottom:20px;
+}
+
+@media screen and (max-width: 400px) {
+	.left, .right {
+		float: none;
+		margin-left: 0;
+		width: 100%;
+		margin-bottom:20px;
+	}
 }
 
 form .rating-star {

@@ -5,9 +5,9 @@
 
                 <!-- Links -->
                 <section class="widget links">
-                    <h3>Stuff</h3>
+                    <h3><%= foot.colonne.num1.nom %></h3>
                     <ul class="style2">
-                        <li><a href="/profile">Profil</a></li>
+                        <li><a href=<%= foot.colonne.num1.lien1.link %>><%= foot.colonne.num1.lien1.name %></a></li>
 
                     </ul>
                 </section>
@@ -17,9 +17,9 @@
 
                 <!-- Links -->
                 <section class="widget links">
-                    <h3>Random Stuff</h3>
+                    <h3><%= foot.colonne.num2.nom %></h3>
                     <ul class="style2">
-                        <li><a href="#">Etiam feugiat condimentum</a></li>
+                        <li><a href=<%= foot.colonne.num2.lien1.link %>><%= foot.colonne.num2.lien1.name %></a></li>
 
                     </ul>
                 </section>
@@ -29,9 +29,9 @@
 
                 <!-- Links -->
                 <section class="widget links">
-                    <h3>Random Stuff</h3>
+                    <h3><%= foot.colonne.num3.nom %></h3>
                     <ul class="style2">
-                        <li><a href="#">Etiam feugiat condimentum</a></li>
+                        <li><a href=<%= foot.colonne.num3.lien1.link %>><%= foot.colonne.num3.lien1.name %></a></li>
 
                     </ul>
                 </section>
@@ -41,7 +41,7 @@
 
                 <!-- Contact -->
                 <section class="widget contact last">
-                    <h3>Contact Us</h3>
+                    <h3> <%= foot.contact %> </h3>
                     <ul>
                         <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
                         <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -49,9 +49,9 @@
                         <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
                         <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
                     </ul>
-                    <p>1234 Fictional Road<br />
-                        Nashville, TN 00000<br />
-                        (800) 555-0000</p>
+                    <p><%= foot.adresse.rue %><br />
+                        <%= foot.adresse.vpcp%><br />
+                        <%= foot.adresse.numTel%></p>
                 </section>
 
             </div>

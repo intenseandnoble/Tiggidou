@@ -27,6 +27,9 @@ module.exports = function (app) {
 
 
     });
+
+
+
 };
 
 function insert_into_searchTravel (currentLocation, destination,time,period,date,smoker,animals,bagagge,comments)

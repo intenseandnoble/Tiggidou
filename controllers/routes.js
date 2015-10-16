@@ -18,7 +18,15 @@ module.exports = function (app, passport) {
     // api ---------------------------------------------------------------------
     //single page application
     app.get('/', function (req, res) {
-        res.render('pages/index.ejs');
+        var foot;
+        var header;
+        foot = require('../views/fr/footer.js');
+        header = require('../views/fr/header.js');
+        res.render('pages/index.ejs',
+            {
+                header: header,
+                foot : foot
+            });
     });
 
     // rechercher
@@ -31,13 +39,57 @@ module.exports = function (app, passport) {
     // profile
     app.get('/profile', function(req, res){
 
-        //Donnees statiques et momentanees avant d'avoir les data de bd
-        var driverAvgScore = 3;
-        var passengerAvgScore = 4;
-            res.render('pages/profile.ejs', {
+        //Todo prendre les donnees de l'utilisateur connecte
+        //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
+        var driverAvgScore;
+        var passengerAvgScore;
+        var userName;
+        var pageName;
+        var foot;
+        var header;
+
+        new Model.Users({'email': 'eh@allo.com' }).fetch().then(function(user) {
+            //nom de la page
+            pageName = "Profil";
+
+            //nom d'utilisateur
+            userName = user.get('firstName') + " " + user.get('familyName');
+            //anecdotes personnelles
+
+            //photo de profil
+
+            //commentaires
+
+
+            //calcul du score
+            driverAvgScore = user.get('driverTotalScore')/user.get('driverNbVotes');
+            if (driverAvgScore%1 != 0 && driverAvgScore%1 >= 0.5) {
+                driverAvgScore = Math.ceil(driverAvgScore);
+
+            } else if (driverAvgScore%1 < 0.5) {
+                driverAvgScore = Math.floor(driverAvgScore);
+            }
+
+            passengerAvgScore = user.get('passengerTotalScore')/user.get('passengerNbVotes');
+            if (passengerAvgScore%1 != 0 && passengerAvgScore%1 >= 0.5) {
+                passengerAvgScore = Math.ceil(passengerAvgScore);
+            } else if (passengerAvgScore%1 < 0.5) {
+                passengerAvgScore = Math.floor(passengerAvgScore);
+            }
+
+            header = require('../views/fr/header.js');
+            foot = require('../views/fr/footer.js');
+
+        }).then(function (obj)   {
+            res.render('pages/profile.ejs',{
+                pageName : pageName,
+                userName : userName,
                 driverAverageScore : driverAvgScore,
-                passengerAverageScore : passengerAvgScore
-        });
+                passengerAverageScore : passengerAvgScore,
+                foot : foot,
+                header:header
+            })});
+
     });
 
     // =====================================
@@ -59,14 +111,32 @@ module.exports = function (app, passport) {
             res.redirect('/');
         }
         else{
-            res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
+            //res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
+            var foot;
+            var header;
+            foot = require('../views/fr/footer.js');
+            header = require('../views/fr/header.js');
+            res.render('pages/login.ejs',
+                {
+                    header: header,
+                    foot : foot
+                });
         }
     });
     app.post('/login', loginPost);
 
     // signup
     app.get('/sign-up', function (req, res) {
-        res.render('pages/sign-up.ejs'/*, {message: req.flash('signupMessage')}*/);
+        //res.render('pages/sign-up.ejs'/*, {message: req.flash('signupMessage')}*/);
+        var foot;
+        var header;
+        foot = require('../views/fr/footer.js');
+        header = require('../views/fr/header.js');
+        res.render('pages/sign-up.ejs',
+            {
+                header: header,
+                foot : foot
+            });
     });
 
     //processs the signup form
@@ -76,7 +146,15 @@ module.exports = function (app, passport) {
         usernamePromise = new Model.Users({email: user.email}).fetch();
         return usernamePromise.then(function(model) {
             if(model) {
-                res.render('pages/sign-up.ejs', {title: 'signup', errorMessage: 'username already exists'});
+                var foot;
+                var header;
+                foot = require('../views/fr/footer.js');
+                header = require('../views/fr/header.js');
+                res.render('pages/sign-up.ejs', {
+                    title: 'signup',
+                    errorMessage: 'username already exists',
+                    header: header,
+                    foot : foot});
             } else {
                 // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
                 var password = user.password;
@@ -91,21 +169,49 @@ module.exports = function (app, passport) {
         })});
 
     app.get('/results', function (req, res) {
-        res.render('pages/results.ejs')
+        //res.render('pages/results.ejs')
+        var foot;
+        var header;
+        foot = require('../views/fr/footer.js');
+        header = require('../views/fr/header.js');
+        res.render('pages/results.ejs',
+            {
+                header: header,
+                foot : foot
+            });
     });
 
     app.get('/no-results', function (req, res) {
-        res.render('pages/no-results.ejs')
+        //res.render('pages/no-results.ejs')
+        var foot;
+        var header;
+        foot = require('../views/fr/footer.js');
+        header = require('../views/fr/header.js');
+        res.render('pages/no-results.ejs',
+            {
+                header: header,
+                foot : foot
+            });
     });
 
     app.get('/ask-ride', requireAuth, function (req, res) {
-        res.render('pages/ask-ride.ejs')
+        //res.render('pages/ask-ride.ejs')
+        var foot;
+        var header;
+        foot = require('../views/fr/footer.js');
+        header = require('../views/fr/header.js');
+        res.render('pages/ask-ride.ejs',
+            {
+                header: header,
+                foot : foot
+            });
     });
     app.get('/logout',requireAuth, function(req, res){
         req.logout();
         res.redirect('/');
-    })
+    });
 
+    //TODO faire les liens de ceci
     //... ajouter plus de fonctionalit�s
     function loginPost(req, res, next) {
         passport.authenticate('local-login', {

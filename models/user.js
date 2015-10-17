@@ -12,8 +12,13 @@ var Users = DB.Model.extend({
 var UsersFacebook = DB.Model.extend({
     tableName: 'UsersFacebook',
     idAttribute: 'idUserFacebook'
-})
+});
+
+var Ratings = DB.Model.extend({
+    tableName: 'ratings'
+});
 
 module.exports = {
-    Users: Users
+    Users: Users,
+    ratings: Ratings
 };

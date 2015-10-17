@@ -83,42 +83,48 @@
                             <div class="left">
                                 <h3>Conducteur</h3>
                                 Score moyen:
-                                <form id="ratingsFormDriver">
+                                <form id="ratingsFormDriver" onclick="javascript: submit()" method="post" action ="/rate_driver">
                                     <div class="rating-star">
 
                                         <%
-                                        var checker1 = "";
-                                        var checker2 = "";
-                                        var checker3 = "";
-                                        var checker4 = "";
-                                        var checker5 = "";
+                                        var dchecker1 = "";
+                                        var dchecker2 = "";
+                                        var dchecker3 = "";
+                                        var dchecker4 = "";
+                                        var dchecker5 = "";
+                                        var dvote1, dvote2, dvote3, dvote4, dvote5;
                                         switch (driverAverageScore) {
                                             case 1:
-                                                checker1 = "checked";
+                                                dchecker1 = "checked";
+                                                dvote1 = "d";
                                             break;
                                             case 2:
-                                                checker2 = "checked";
+                                                dchecker2 = "checked";
+                                                dvote2 = "d";
                                             break;
                                             case 3:
-                                                checker3 = "checked";
+                                                dchecker3 = "checked";
+                                                dvote3 = "d";
                                             break;
                                             case 4:
-                                                checker4 = "checked";
+                                                dchecker4 = "checked";
+                                                dvote4 = "d";
                                             break;
                                             case 5:
-                                                checker5 = "checked";
+                                                dchecker5 = "checked";
+                                                dvote5 = "d";
                                             break;
                                         }
                                         %>
-                                        <input type="radio" name="star" class="star-1" id="dstar-1" <%= checker1 %> />
+                                        <input type="radio" value="1" name=dstar class="star-1" id="dstar-1" <%= dchecker1 %> />
                                         <label class="star-1" for="dstar-1">1</label>
-                                        <input type="radio" name="star" class="star-2" id="dstar-2" <%= checker2 %> />
+                                        <input type="radio" value="2" name=dstar class="star-2" id="dstar-2" <%= dchecker2 %> />
                                         <label class="star-2" for="dstar-2">2</label>
-                                        <input type="radio" name="star" class="star-3" id="dstar-3" <%= checker3 %> />
+                                        <input type="radio" value="3" name=dstar class="star-3" id="dstar-3" <%= dchecker3 %> />
                                         <label class="star-3" for="dstar-3">3</label>
-                                        <input type="radio" name="star" class="star-4" id="dstar-4" <%= checker4 %> />
+                                        <input type="radio" value="4" name=dstar class="star-4" id="dstar-4" <%= dchecker4 %> />
                                         <label class="star-4" for="dstar-4">4</label>
-                                        <input type="radio" name="star" class="star-5" id="dstar-5" <%= checker5 %> />
+                                        <input type="radio" value="5" name=dstar class="star-5" id="dstar-5" <%= dchecker5 %> />
                                         <label class="star-5" for="dstar-5">5</label>
                                         <span></span>
                                     </div>
@@ -132,38 +138,44 @@
                                     <div class="rating-star">
 
                                         <%
-                                        var checker1 = "";
-                                        var checker2 = "";
-                                        var checker3 = "";
-                                        var checker4 = "";
-                                        var checker5 = "";
+                                        var pchecker1 = "";
+                                        var pchecker2 = "";
+                                        var pchecker3 = "";
+                                        var pchecker4 = "";
+                                        var pchecker5 = "";
+                                        var pvote1, pvote2, pvote3, pvote4, pvote5;
                                         switch (passengerAverageScore) {
                                             case 1:
-                                                checker1 = "checked";
+                                                pchecker1 = "checked";
+                                                pvote1 = "p";
                                                 break;
                                             case 2:
-                                                checker2 = "checked";
+                                                pchecker2 = "checked";
+                                                pvote2 = "p";
                                                 break;
                                             case 3:
-                                                checker3 = "checked";
+                                                pchecker3 = "checked";
+                                                pvote3 = "p";
                                                 break;
                                             case 4:
-                                                checker4 = "checked";
+                                                pchecker4 = "checked";
+                                                pvote4 = "p";
                                                 break;
                                             case 5:
-                                                checker5 = "checked";
+                                                pchecker5 = "checked";
+                                                pvote5 = "p";
                                                 break;
                                         }
                                         %>
-                                        <input type="radio" name="star" class="star-1" id="pstar-1" <%= checker1 %> />
+                                        <input type="radio" value="1" name=pstar  class="star-1" id="pstar-1" <%= pchecker1 %> />
                                         <label class="star-1" for="pstar-1">1</label>
-                                        <input type="radio" name="star" class="star-2" id="pstar-2" <%= checker2 %> />
+                                        <input type="radio" value="2" name=pstar  class="star-2" id="pstar-2" <%= pchecker2 %> />
                                         <label class="star-2" for="pstar-2">2</label>
-                                        <input type="radio" name="star" class="star-3" id="pstar-3" <%= checker3 %> />
+                                        <input type="radio" value="3" name=pstar  class="star-3" id="pstar-3" <%= pchecker3 %> />
                                         <label class="star-3" for="pstar-3">3</label>
-                                        <input type="radio" name="star" class="star-4" id="pstar-4" <%= checker4 %> />
+                                        <input type="radio" value="4" name=pstar  class="star-4" id="pstar-4" <%= pchecker4 %> />
                                         <label class="star-4" for="pstar-4">4</label>
-                                        <input type="radio" name="star" class="star-5" id="pstar-5" <%= checker5 %> />
+                                        <input type="radio" value="5" name=pstar  class="star-5" id="pstar-5" <%= pchecker5 %> />
                                         <label class="star-5" for="pstar-5">5</label>
                                         <span></span>
                                     </div>

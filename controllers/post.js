@@ -4,6 +4,7 @@
 var covoso = require(__dirname + '/../models/covosocialSearchDepartures');
 var express = require('express');
 var database = require(__dirname + '/../config/database');
+var ratingsModel = require('../models/user').ratings;
 
 module.exports = function (app) {
 
@@ -24,11 +25,16 @@ module.exports = function (app) {
                              req.body.animalRadio,req.body.bagaggeRadio,
                              req.body.commentsRide
                             )
-
-
     });
 
+    // update authors set "bio" = 'Short user bio' where "id" = 1
+    app.post('/rate_driver', function (req, res) {
 
+        console.log(req.body.dstar);
+        var rate = req.body.dstar;
+        new ratingsModel({'votingUser': '1', 'judgedUser':'2' })
+            .save({rating:rate},{patch: true});
+    });
 
 };
 

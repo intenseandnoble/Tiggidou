@@ -48,7 +48,7 @@ module.exports = function (app, passport) {
         var foot;
         var header;
 
-        new Model.Users({'email': 'eh@allo.com' }).fetch().then(function(user) {
+        new Model.Users({'email': 'OALd@allo.com' }).fetch().then(function(user) {
             //nom de la page
             pageName = "Profil";
 

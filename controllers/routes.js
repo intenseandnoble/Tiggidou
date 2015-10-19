@@ -88,11 +88,19 @@ module.exports = function (app, passport) {
             if(model) {
                 res.render('fr/sign-up.html', {title: 'signup', errorMessage: 'username already exists'});
             } else {
-                // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
+                // TODO MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
                 var password = user.password;
                 var hash = bcrypt.hashSync(password);
-                var signUpUser = new Model.Users({email: user.email, password: hash});
-                //TODO ajouter le type local
+                var typeSign = "local";
+                var firstName = user.firstName;
+                var familyName = user.familyName;
+                var signUpUser = new Model.Users({
+                    email: user.email,
+                    password: hash,
+                    typeSignUp: typeSign,
+                    firstName: firstName,
+                    familyName: familyName
+                });
 
                 signUpUser.save().then(function(model) {
                     // sign in the newly registered user
@@ -115,7 +123,7 @@ module.exports = function (app, passport) {
     app.get('/logout',requireAuth, function(req, res){
         req.logout();
         res.redirect('/');
-    })
+    });
 
     //... ajouter plus de fonctionalit�s
     function loginPost(req, res, next) {
@@ -140,8 +148,7 @@ module.exports = function (app, passport) {
                     }
                 });
             })(req, res, next);
-    };
-
+    }
     function loginSignFacebook(req, res, next) {
         passport.authenticate('facebook', {
                 successRedirect : '/profile',
@@ -163,8 +170,7 @@ module.exports = function (app, passport) {
                     }
                 });
             })(req, res, next);
-    };
-
+    }
 };
 
 // route middleware to make sure a user is logged in
@@ -175,7 +181,7 @@ function requireAuth(req, res, next) {
     }
 
     res.redirect('/login');
-};
+}
 
 
 

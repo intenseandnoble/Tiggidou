@@ -2,6 +2,7 @@
  * Created by dave on 28/09/15.
  * configuring the strategies for passport
  * http://passportjs.org/docs
+ * https://scotch.io/tutorials/easy-node-authentication-setup-and-local
  */
 
 // load all the things we need
@@ -19,13 +20,11 @@ var configAuth = require('./authentification');
 module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        console.log("serializePassport");
-        done(null, user.id); //saved to session req.session.passport.user = {id:'..'}
+        done(null, user.idUser); //saved to session req.session.passport.user = {id:'..'}
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        console.log("deserializePassport");
         new UserModel.Users({idUser:id}).fetch().then(function(user){ //user object ataches to the request as req.user
             done(null, user);
         })
@@ -107,15 +106,15 @@ module.exports = function(passport) {
             clientID: configAuth.facebookAuth.clientID,
             clientSecret: configAuth.facebookAuth.clientSecret,
             callbackURL: configAuth.facebookAuth.callbackURL,
-            profileFields: ['id', 'displayName', 'emails']
+            profileFields: ['id', 'displayName', 'emails', 'name']
         },
         // facebook will send back the token and profile
         function(token, refreshToken, profile, done) {
-
-            // asynchronous
-            new UserModel.Users({email: profile.emails[0].value}).fetch().then(function(data) {
+            var email = profile.emails[0].value;
+            new UserModel.Users({email: email}).fetch().then(function(data) {
                 var user = data;
                 if(user) {
+                    user = data.toJSON();
                     return done(null, user);
                 } else {
                     var signUpUser = new UserModel.Users(
@@ -123,13 +122,14 @@ module.exports = function(passport) {
                             idusertemp: profile.id,
                             email: profile.emails[0].value,
                             token: token,
-                            name: profile.displayName
-                            //TODO ajouter le type Facebook
+                            familyName: profile.name.familyName,
+                            firstName: profile.name.givenName,
+                            typeSignUp: "facebook"
                         });
 
                     signUpUser.save().then(function(model) {
                         // sign in the newly registered user
-                        return done(null, signUpUser);
+                        return done(null, model);
                     });
                 }
             });
@@ -145,7 +145,7 @@ module.exports = function(passport) {
             clientID        : configAuth.googleAuth.clientID,
             clientSecret    : configAuth.googleAuth.clientSecret,
             callbackURL     : configAuth.googleAuth.callbackURL,
-            profileFields: ['id', 'displayName', 'emails']
+            profileFields: ['id', 'displayName', 'emails', 'name']
 
         },
         function(token, refreshToken, profile, done) {
@@ -154,6 +154,7 @@ module.exports = function(passport) {
             new UserModel.Users({email: profile.emails[0].value}).fetch().then(function(data) {
                 var user = data;
                 if(user) {
+                    user = data.toJSON();
                     return done(null, user);
                 } else {
                     var signUpUser = new UserModel.Users(
@@ -161,8 +162,9 @@ module.exports = function(passport) {
                             idusertemp: profile.id,
                             email: profile.emails[0].value,
                             token: token,
-                            name: profile.displayName
-                            //TODO ajouter le type Google
+                            familyName: profile.name.familyName,
+                            firstName: profile.name.givenName,
+                            typeSignUp: "google"
                         });
 
                     signUpUser.save().then(function(model) {

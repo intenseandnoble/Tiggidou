@@ -3,9 +3,6 @@
  * Hold database connection settings
  */
 
-var mysql = require('mysql');
-var Bookshelf = require('bookshelf');
-
 var configConnection = {
     host: 'localhost',
     user: 'root',
@@ -14,6 +11,16 @@ var configConnection = {
     charset: 'UTF8_GENERAL_CI'
 };
 
+var mysql = require('mysql');
+var Knex = require('knex')({
+    client: 'mysql',
+    connection: configConnection
+});
+var Bookshelf = require('bookshelf')(Knex);
+
+module.exports = Bookshelf;
+
+/*
 var connection = mysql.createConnection(configConnection);
 
 connection.connect(function (err) {
@@ -35,3 +42,4 @@ exports.dbConnection = connection;
 exports.insertRequest = function(req, res){
     connection.query(req, res);
 };
+*/

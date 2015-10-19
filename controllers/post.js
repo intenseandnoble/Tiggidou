@@ -7,12 +7,6 @@ var database = require(__dirname + '/../config/database');
 var ratingsModel = require('../models/user').ratings;
 
 module.exports = function (app) {
-
-    var bodyParser = require('body-parser');
-
-    app.use( bodyParser.json() ); // to support JSON-encoded bodies
-    app.use(bodyParser.urlencoded({ extended: true }));
-
     app.post('/post-ride', function (req, res) {
 
         res.send('Data: ' + req.body.currentLocation);
@@ -30,10 +24,15 @@ module.exports = function (app) {
     // update authors set "bio" = 'Short user bio' where "id" = 1
     app.post('/rate_driver', function (req, res) {
 
-        console.log(req.body.dstar);
-        var rate = req.body.dstar;
-        new ratingsModel({'votingUser': '1', 'judgedUser':'2' })
-            .save({rating:rate},{patch: true});
+        console.log(req.body);
+        var rate = req.body.dstarVote;
+        console.log(req.body.dstarVote);
+        var vote = new ratingsModel();
+        console.log(vote.idAttribute);
+        vote.save({'votingUser': '1', 'judgedUser':'2', rating:rate}, {method: 'insert'});
+        console.log(vote);
+        res.redirect('/profile');
+
     });
 
 };

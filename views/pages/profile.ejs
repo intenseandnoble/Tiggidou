@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <% include ../partials/head %>
+
+</head>
+
+<body class="homepage">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <% include ../partials/header %>
+
+    <!-- Main -->
+    <div id="main-wrapper">
+        <div class="container">
+            <div class="row 200%">
+                <div class="4u 12u$(medium)">
+                    <div id="sidebar">
+
+                        <!-- Sidebar -->
+                        <section>
+                            <h3>Profil</h3>
+                            <div class="image">
+                                <img src="images/pic01.jpg"/>
+                            </div>
+                            <p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus.
+                                Praesent semper mod quis eget mi. Etiam eu ante risus. Aliquam erat volutpat.
+                                Aliquam luctus et mattis lectus sit amet pulvinar. Nam turpis nisi
+                                consequat etiam.</p>
+                            <footer>
+                                <a href="#" class="button icon fa-info-circle">Find out more</a>
+                            </footer>
+                        </section>
+
+                        <section>
+                            <h3>Subheading</h3>
+                            <ul class="style2">
+                                <li><a href="#tabs-1">Tableau de bord</a></li>
+                                <li><a href="#tabs-2">Annonces</a></li>
+                                <li><a href="#tabs-3">Réservation</a></li>
+                                <li><a href="#tabs-4">Messages</a></li>
+                                <li><a href="#tabs-5">...</a></li>
+                            </ul>
+                        </section>
+
+                    </div>
+                </div>
+                <div class="8u 12u$(medium) important(medium)">
+                    <div id="content">
+
+                        <!-- Content -->
+                        <article>
+
+                            <h2><%= userName %></h2>
+
+                            <p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus.
+                                Praesent semper mod quis eget mi. Etiam eu ante risus. Aliquam erat volutpat.
+                                Aliquam luctus et mattis lectus sit amet pulvinar. Nam turpis nisi
+                                consequat etiam lorem ipsum dolor sit amet nullam.</p>
+
+                            <h3>More intriguing information</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac quam risus, at tempus
+                                justo. Sed dictum rutrum massa eu volutpat. Quisque vitae hendrerit sem. Pellentesque lorem felis,
+                                ultricies a bibendum id, bibendum sit amet nisl. Mauris et lorem quam. Maecenas rutrum imperdiet
+                                vulputate. Nulla quis nibh ipsum, sed egestas justo. Morbi ut ante mattis orci convallis tempor.
+                                Etiam a lacus a lacus pharetra porttitor quis accumsan odio. Sed vel euismod nisi. Etiam convallis
+                                rhoncus dui quis euismod. Maecenas lorem tellus, congue et condimentum ac, ullamcorper non sapien.
+                                Donec sagittis massa et leo semper a scelerisque metus faucibus. Morbi congue mattis mi.
+                                Phasellus sed nisl vitae risus tristique volutpat. Cras rutrum commodo luctus.</p>
+
+                            <p>Phasellus odio risus, faucibus et viverra vitae, eleifend ac purus. Praesent mattis, enim
+                                quis hendrerit porttitor, sapien tortor viverra magna, sit amet rhoncus nisl lacus nec arcu.
+                                Suspendisse laoreet metus ut metus imperdiet interdum aliquam justo tincidunt. Mauris dolor urna,
+                                fringilla vel malesuada ac, dignissim eu mi. Praesent mollis massa ac nulla pretium pretium.
+                                Maecenas tortor mauris, consectetur pellentesque dapibus eget, tincidunt vitae arcu.
+                                Vestibulum purus augue, tincidunt sit amet iaculis id, porta eu purus.</p>
+
+                        </article>
+
+                        <div>
+                            <div class="left">
+                                <h3>Conducteur</h3>
+                                Score moyen:
+                                <form>
+                                    <div class="rating-star">
+
+                                        <%
+                                        var dchecker1 = "";
+                                        var dchecker2 = "";
+                                        var dchecker3 = "";
+                                        var dchecker4 = "";
+                                        var dchecker5 = "";
+                                        switch (driverAverageScore) {
+                                            case 1:
+                                                dchecker1 = "checked";
+                                                dchecker2 = "disabled";
+                                                dchecker3 = "disabled";
+                                                dchecker4 = "disabled";
+                                                dchecker5 = "disabled";
+                                                break;
+                                            case 2:
+                                                dchecker2 = "checked";
+                                                dchecker1 = "disabled";
+                                                dchecker3 = "disabled";
+                                                dchecker4 = "disabled";
+                                                dchecker5 = "disabled";
+                                                break;
+                                            case 3:
+                                                dchecker3 = "checked";
+                                                dchecker1 = "disabled";
+                                                dchecker2 = "disabled";
+                                                dchecker4 = "disabled";
+                                                dchecker5 = "disabled";
+                                                break;
+                                            case 4:
+                                                dchecker4 = "checked";
+                                                dchecker1 = "disabled";
+                                                dchecker2 = "disabled";
+                                                dchecker3 = "disabled";
+                                                dchecker5 = "disabled";
+                                                break;
+                                            case 5:
+                                                dchecker5 = "checked";
+                                                dchecker1 = "disabled";
+                                                dchecker2 = "disabled";
+                                                dchecker3 = "disabled";
+                                                dchecker4 = "disabled";
+                                                break;
+                                        }
+                                        %>
+                                        <input type="radio" value="1" name="dstar" class="star-1" id="dstar-1" <%= dchecker1 %> />
+                                        <label class="star-1" for="dstar-1">1</label>
+                                        <input type="radio" value="2" name="dstar" class="star-2" id="dstar-2" <%= dchecker2 %> />
+                                        <label class="star-2" for="dstar-2">2</label>
+                                        <input type="radio" value="3" name="dstar" class="star-3" id="dstar-3" <%= dchecker3 %> />
+                                        <label class="star-3" for="dstar-3">3</label>
+                                        <input type="radio" value="4" name="dstar" class="star-4" id="dstar-4" <%= dchecker4 %> />
+                                        <label class="star-4" for="dstar-4">4</label>
+                                        <input type="radio" value="5" name="dstar" class="star-5" id="dstar-5" <%= dchecker5 %> />
+                                        <label class="star-5" for="dstar-5">5</label>
+                                        <span></span>
+                                    </div>
+                                </form>
+
+                                <br>
+                                Votre avis:
+                                <form id="ratingsFormDriver" method="post" action ="/rate_driver"
+                                      enctype="application/x-www-form-urlencoded">
+                                    <div class="rating-star">
+                                        <input type="radio" value="1" name="dstarVote" class="star-1" id="dstar-12"  />
+                                        <label class="star-1" for="dstar-1">1</label>
+                                        <input type="radio" value="2" name="dstarVote" class="star-2" id="dstar-22"  />
+                                        <label class="star-2" for="dstar-2">2</label>
+                                        <input type="radio" value="3" name="dstarVote" class="star-3" id="dstar-32"  />
+                                        <label class="star-3" for="dstar-3">3</label>
+                                        <input type="radio" value="4" name="dstarVote" class="star-4" id="dstar-42" />
+                                        <label class="star-4" for="dstar-4">4</label>
+                                        <input type="radio" value="5" name="dstarVote" class="star-5" id="dstar-52"  />
+                                        <label class="star-5" for="dstar-5">5</label>
+                                        <span></span>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="right">
+                                <h3>Passager</h3>
+                                Score moyen:
+                                <form>
+                                    <div class="rating-star">
+
+                                        <%
+                                        var pchecker1 = "";
+                                        var pchecker2 = "";
+                                        var pchecker3 = "";
+                                        var pchecker4 = "";
+                                        var pchecker5 = "";
+                                        switch (passengerAverageScore) {
+                                            case 1:
+                                                pchecker1 = "checked";
+                                                pchecker5 = "disabled";
+                                                pchecker2 = "disabled";
+                                                pchecker3 = "disabled";
+                                                pchecker4 = "disabled";
+                                                break;
+                                            case 2:
+                                                pchecker2 = "checked";
+                                                pchecker1 = "disabled";
+                                                pchecker5 = "disabled";
+                                                pchecker3 = "disabled";
+                                                pchecker4 = "disabled";
+                                                break;
+                                            case 3:
+                                                pchecker3 = "checked";
+                                                pchecker1 = "disabled";
+                                                pchecker2 = "disabled";
+                                                pchecker5 = "disabled";
+                                                pchecker4 = "disabled";
+                                                break;
+                                            case 4:
+                                                pchecker4 = "checked";
+                                                pchecker1 = "disabled";
+                                                pchecker2 = "disabled";
+                                                pchecker3 = "disabled";
+                                                pchecker5 = "disabled";
+                                                break;
+                                            case 5:
+                                                pchecker5 = "checked";
+                                                pchecker1 = "disabled";
+                                                pchecker2 = "disabled";
+                                                pchecker3 = "disabled";
+                                                pchecker4 = "disabled";
+                                                break;
+                                        }
+                                        %>
+                                        <input type="radio" value="1" name="pstar" class="star-1" id="pstar-1" <%= pchecker1 %> />
+                                        <label class="star-1" for="pstar-1">1</label>
+                                        <input type="radio" value="2" name="pstar" class="star-2" id="pstar-2" <%= pchecker2 %> />
+                                        <label class="star-2" for="pstar-2">2</label>
+                                        <input type="radio" value="3" name="pstar"  class="star-3" id="pstar-3" <%= pchecker3 %> />
+                                        <label class="star-3" for="pstar-3">3</label>
+                                        <input type="radio" value="4" name="pstar"  class="star-4" id="pstar-4" <%= pchecker4 %> />
+                                        <label class="star-4" for="pstar-4">4</label>
+                                        <input type="radio" value="5" name="pstar"  class="star-5" id="pstar-5" <%= pchecker5 %> />
+                                        <label class="star-5" for="pstar-5">5</label>
+                                        <span></span>
+                                    </div>
+                                </form>
+                                <br>
+                                Votre avis:
+                                <form id="ratingsFormPassenger">
+                                    <div class="rating-star">
+                                        <input type="radio" value="1" name="pstarVote"  class="star-1" id="pstar-12"  />
+                                        <label class="star-1" for="pstar-1">1</label>
+                                        <input type="radio" value="2" name="pstarVote"  class="star-2" id="pstar-22"  />
+                                        <label class="star-2" for="pstar-2">2</label>
+                                        <input type="radio" value="3" name="pstarVote"  class="star-3" id="pstar-32"  />
+                                        <label class="star-3" for="pstar-3">3</label>
+                                        <input type="radio" value="4" name="pstarVote"  class="star-4" id="pstar-42"  />
+                                        <label class="star-4" for="pstar-4">4</label>
+                                        <input type="radio" value="5" name="pstarVote"  class="star-5" id="pstar-52"  />
+                                        <label class="star-5" for="pstar-5">5</label>
+                                        <span></span>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <div class="row-comments">
+                            <div class="column-comments">
+                                <div class="panel">
+                                    <div class="panel-heading">Comments</div>
+                                    <div class="panel-body">
+                                        <form id="write_comment" class="form-horizontal">
+                                            <div class="form-group">
+                                                <div class="col-md-6">
+                                                    <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                                                </div><!--col-md-6-->
+                                                <div class="col-md-6">
+                                                    <input type="email" name="mail" id="mail" class="form-control" placeholder="E-mail">
+                                                </div><!--col-md-6-->
+                                            </div><!--form-group-->
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <textarea name="comment" rows="3" class="form-control input-md" placeholder="Add a comment"></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <!--col-md-5-->
+                                                <div class="col-md-5">
+                                                    <input type="submit" class="button" value="Submit"/>
+                                                </div><!--col-md-5-->
+
+                                            </div>
+
+                                        </form>
+                                    </div><!--panel-body class="meta clearfix"  -->
+                                    <ul class="list-group">
+                                        <li class="list-group-item ">
+                                            <p >
+                                                <a href="#"  title="NAME" class="user">someGuy</a>
+                                                <span class="time">3 Hours, 34 Minutes ago</span>
+                                            </p>
+
+                                            <p class="comment">
+                                            <p>Super cool driver</p>                                </p>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <% include ../partials/footer %>
+
+</div>
+</body>
+</html>

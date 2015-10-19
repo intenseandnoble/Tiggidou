@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body class="homepage">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <% include ../partials/header %>
+
+    <!-- Banner -->
+    <div id="banner-wrapper">
+        <div id="banner" class="box container">
+            <div align="center" >
+
+                <div>
+                    <form class="ride-posting" method="post" action ="/post-ride">
+                        <input type="text" class="ride-form" name = "currentLocation" placeholder="De">
+
+                        <input type="text"  class="ride-form" name = "destination" placeholder="À"><br><br>
+
+                        <input type=text  class="ride-form"  name="timeDeparture" placeholder="Heure" list=browsers>
+                        <datalist id=browsers>
+                            <option value="1:00">
+                            <option value="1:30">
+                            <option value="2:00">
+                            <option value="2:30">
+                            <option value="3:00">
+                            <option value="3:30">
+                            <option value="4:00">
+                            <option value="4:30">
+                            <option value="5:00">
+                            <option value="5:30">
+                            <option value="6:00">
+                            <option value="6:30">
+                            <option value="7:00">
+                            <option value="7:30">
+                            <option value="8:00">
+                            <option value="8:30">
+                            <option value="9:00">
+                            <option value="9:30">
+                            <option value="10:00">
+                            <option value="10:30">
+                            <option value="11:00">
+                            <option value="11:30">
+                            <option value="12:00">
+                            <option value="12:30">
+
+
+                        </datalist>
+
+                        <input type="radio" name="periodDeparture" value="PM" checked>PM
+                        <input type="radio" name="periodDeparture" value="AM" >AM <br><br>
+
+
+                        <input type="text" class="ride-form"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
+
+
+
+
+
+
+                        <div id="accordion" class="more-options">
+                            <h3>More options</h3>
+
+                            <div><br> Score du conducteur: ******<br><br>
+
+                                Fumeur? :<input type="radio" name="smokerRadio" value="Yes">Oui
+                                <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
+                                Animaux accepté? :<input type="radio" name="animalRadio" value="Yes">Oui
+                                <input type="radio" name="animalRadio" value="No" checked>Non <br><br>
+
+                                Valises acceptés? :<input type="radio" name="bagaggeRadio" value="Yes">Oui
+                                <input type="radio" name="bagaggeRadio" value="No" checked>Non <br><br>
+                                Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide"></textarea><br><br>
+
+                            </div>
+
+                        </div><br>
+
+
+                        <div class="post-ride">
+                            <input type="submit" value="Publier">
+                        </div>
+                    </form>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <% include ../partials/footer %>
+
+</div>
+
+</body>
+</html>

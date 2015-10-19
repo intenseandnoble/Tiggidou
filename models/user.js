@@ -9,7 +9,12 @@ var Users = DB.Model.extend({
     idAttribute: 'idUser'
 });
 
+var Ratings = DB.Model.extend({
+    tableName: 'ratings',
+    idAttribute: 'idRating'
+});
 
 module.exports = {
-    Users: Users
+    Users: Users,
+    ratings: Ratings
 };

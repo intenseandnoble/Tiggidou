@@ -15,17 +15,14 @@ var session      = require('express-session');
 var app = module.exports = express(); // cr�ation de l'app avec express
 var port = 8080;
 
-//configuration (public have precedence over the others)
-app.use(express.static(__dirname + '/public'));
-
 // set up our express application
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json() ); // to support JSON-encoded bodies
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
 
-//used to render html file
-app.engine('html', require('ejs').renderFile); // set up ejs for templating
-app.set('view engine', 'ejs'); // set up ejs for templating
+//configuration (public have precedence over the others)
+app.use(express.static(__dirname + '/public'));
 
 // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
@@ -33,11 +30,16 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
+
+//used to render html file
+app.engine('html', require('ejs').renderFile); // set up ejs for templating
+app.set('view engine', 'ejs'); // set up ejs for templating
+
+
 // load the routes
-require('./controllers/routes')(app, passport);
-//TODO à revoir
-require('./controllers/post')(app);
 require('./config/passport')(passport); // pass passport for configuration
+require('./controllers/post')(app);
+require('./controllers/routes')(app, passport);
 
 //listen (start app with node server.js)
 app.listen(port);

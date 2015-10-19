@@ -7,6 +7,7 @@
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // load up the user model
 var connection            = require('./database').dbConnection;
@@ -135,5 +136,43 @@ module.exports = function(passport) {
 
 
         }));
+
+    // =========================================================================
+    // GOOGLE ==================================================================
+    // =========================================================================
+    passport.use(new GoogleStrategy({
+
+            clientID        : configAuth.googleAuth.clientID,
+            clientSecret    : configAuth.googleAuth.clientSecret,
+            callbackURL     : configAuth.googleAuth.callbackURL,
+            profileFields: ['id', 'displayName', 'emails']
+
+        },
+        function(token, refreshToken, profile, done) {
+
+            // asynchronous
+            new UserModel.Users({email: profile.emails[0].value}).fetch().then(function(data) {
+                var user = data;
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var signUpUser = new UserModel.Users(
+                        {
+                            idusertemp: profile.id,
+                            email: profile.emails[0].value,
+                            token: token,
+                            name: profile.displayName
+                            //TODO ajouter le type Google
+                        });
+
+                    signUpUser.save().then(function(model) {
+                        // sign in the newly registered user
+                        return done(null, signUpUser);
+                    });
+                }
+            });
+
+        }));
+
 
 };

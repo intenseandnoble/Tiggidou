@@ -2,7 +2,7 @@
  * Created by dave on 28/09/15.
  */
 
-var DB = require('../config/database').DB;
+var DB = require('../config/database');
 
 var Users = DB.Model.extend({
     tableName: 'Users',

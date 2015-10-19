@@ -66,16 +66,42 @@
                     <div id="content">
 
                         <%for ( i= 0;i<drivers.length;i++) { %>
+                        <a href="/results" >
+                        <article class="row">
+                            <div>
                         <h2><%= drivers[i] %></h2>
+                        <span><h2><%= cost[i] %>$</h2></span>
+                                <!--logos here and goodies. -->
 
-                        <%=currentLocation%><span> → <span><%=destination%>
+                            </div>
+                       <div>
+
+                        <%=departureTime[i]%><br>
+                        <%=currentLocation%> → <%=destination%><br>
+                        Seats Taken: <%=seatsTaken[i]%><br>
+                        Seats Available: <%seatsAvailable[i]%><br>
+                           <% if (petsAllowed[i] == 0){ %>
+                           Pets Allowed: No<br>
+                           <%}else{ %>
+                           Pets Allowed: Yes <br>
+                           <% } %>
 
 
+                       </div>
+
+                        </article>
+                        </a>
+
+                         <hr>
 
                         <%}%>
 
 
                     </div>
+
+                    
+
+
                 </div>
             </div>
         </div>

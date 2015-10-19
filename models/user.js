@@ -9,10 +9,6 @@ var Users = DB.Model.extend({
     idAttribute: 'idUser'
 });
 
-var UsersFacebook = DB.Model.extend({
-    tableName: 'UsersFacebook',
-    idAttribute: 'idUserFacebook'
-})
 
 module.exports = {
     Users: Users

@@ -19,13 +19,13 @@ module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
         console.log("serializePassport");
-        done(null, user.email);
+        done(null, user.id); //saved to session req.session.passport.user = {id:'..'}
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(email, done) {
+    passport.deserializeUser(function(id, done) {
         console.log("deserializePassport");
-        new UserModel.Users({email:email}).fetch().then(function(user){
+        new UserModel.Users({idUser:id}).fetch().then(function(user){ //user object ataches to the request as req.user
             done(null, user);
         })
     });
@@ -82,7 +82,6 @@ module.exports = function(passport) {
         },
         function(email, password, done) {
             new UserModel.Users({email: email}).fetch().then(function(data) {
-                console.log("strategie login");
                 var user = data;
                 if(user === null) {
                     return done(null, false, {message: 'Invalid email or password'});
@@ -113,32 +112,27 @@ module.exports = function(passport) {
         function(token, refreshToken, profile, done) {
 
             // asynchronous
-            process.nextTick(function() {
-                new UserModel.UsersFacebook({email: profile.emails[0].value}).fetch().then(function(data) {
-                    console.log("data: " + data + "; id: " + profile.id);
-                    var user = data;
-                    if(user) {
-                        return done(null, user);
-                    } else {
-                        var signUpUser = new UserModel.UsersFacebook(
-                            {
-                                idUserFacebook: profile.id,
-                                email: profile.emails[0].value,
-                                token: token,
-                                name: profile.displayName
-                            });
-                        console.log("name:" + profile.name.givenName + ' ' + profile.name.familyName);
-
-                        signUpUser.save().then(function(model) {
-                            // sign in the newly registered user
-                            return done(null, signUpUser);
+            new UserModel.Users({email: profile.emails[0].value}).fetch().then(function(data) {
+                var user = data;
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var signUpUser = new UserModel.Users(
+                        {
+                            idusertemp: profile.id,
+                            email: profile.emails[0].value,
+                            token: token,
+                            name: profile.displayName
+                            //TODO ajouter le type Facebook
                         });
 
-
-
-                    }
-                });
+                    signUpUser.save().then(function(model) {
+                        // sign in the newly registered user
+                        return done(null, signUpUser);
+                    });
+                }
             });
+
 
         }));
 

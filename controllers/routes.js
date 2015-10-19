@@ -77,6 +77,7 @@ module.exports = function (app, passport) {
                 var password = user.password;
                 var hash = bcrypt.hashSync(password);
                 var signUpUser = new Model.Users({email: user.email, password: hash});
+                //TODO ajouter le type local
 
                 signUpUser.save().then(function(model) {
                     // sign in the newly registered user
@@ -107,6 +108,29 @@ module.exports = function (app, passport) {
                 successRedirect : '/profile',
                 failureRedirect : '/login',
                 failureFlash : true //allow flash message
+            },
+            function(err, user, info) {
+                if(err) {
+                    return res.render('fr/login.html', {title: 'Login', errorMessage: err.message});
+                }
+
+                if(!user) {
+                    return res.render('fr/login.html', {title: 'Login', errorMessage: info.message});
+                }
+                return req.logIn(user, function(err) {
+                    if(err) {
+                        return res.render('fr/login.html', {title: 'Login', errorMessage: err.message});
+                    } else {
+                        return res.redirect('/profile');
+                    }
+                });
+            })(req, res, next);
+    };
+
+    function loginSignFacebook(req, res, next) {
+        passport.authenticate('facebook', {
+                successRedirect : '/profile',
+                failureRedirect : '/sign-up'
             },
             function(err, user, info) {
                 if(err) {

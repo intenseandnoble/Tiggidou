@@ -20,18 +20,22 @@
                 <h2>S'inscrire</h2>
                 <div>
                     <form action = "/sign-up" method="post">
-                        <!--<input type="text" class="login-textbox"  name = "name" placeholder ="Nom"><br>-->
+                        <input type="text" class="login-textbox"  name = "firstName" placeholder ="Prénom"><br>
+                        <input type="text" class="login-textbox"  name = "familyName" placeholder ="Nom de famille"><br>
                         <input type="email" class="signup-email" name = "email" placeholder="Courriel"><br>
                         <input type="password" class="signup-pass" name = "password" placeholder="Mot de passe"><br>
-                        <!--<<input type="password" class="signup-pass" name = "confirm-password" placeholder="Confirmer mot de passe"><br>
+                        <input type="password" class="signup-pass" name = "confirm-password" placeholder="Confirmer mot de passe"><br>
                         <input type="text" class="login-textbox" name = "birth-date" placeholder="Date de naissance"><br>-->
                         <br>
                         <button type="submit" class="button small icon fa-arrow-circle-right">S'inscrire</button>
                     </form>
                     <div>
-                        <a href="/auth/facebook" class="logo-social-media"><span class="fa fa-facebook"></span> Facebook</a>
-                        <input href="/auth/facebook" type="image" class="logo-social-media" src="images/facebook.png">
-                        <input type="image" class="logo-social-media" src="images/google+.png">
+                        <a href="/auth/facebook" >
+                            <img class="logo-social-media" src="images/facebook.png">
+                        </a>
+                        <a href="/auth/google" >
+                            <img class="logo-social-media" src="images/google+.png">
+                        </a>
                     </div>
                 </div>
 

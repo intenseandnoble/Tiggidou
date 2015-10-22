@@ -14,7 +14,15 @@ var Ratings = DB.Model.extend({
     idAttribute: 'idRating'
 });
 
+
+var Travel = DB.Model.extend({
+   tableName: 'travel',
+   idAttribute: 'idAddTravel'
+
+});
+
 module.exports = {
     Users: Users,
-    ratings: Ratings
+    ratings: Ratings,
+    travel : Travel
 };

@@ -10,7 +10,6 @@ var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 
-
 // show routes to app
 module.exports = function (app, passport) {
 
@@ -33,7 +32,7 @@ module.exports = function (app, passport) {
         //faire une recherche et afficher son r�sultat
 
     });
-
+    
     // profile
     app.get('/profile', function(req, res){
 
@@ -87,6 +86,86 @@ module.exports = function (app, passport) {
             })});
 
     });
+
+    //Searching rides
+
+    app.get('/search-ride', function (req, res) {
+
+        var driver_arr = [];
+        var comment_arr = [];
+        var seatsTaken_arr = [];
+        var seatsAvailable_arr = [];
+        var travelTime_arr = [];
+        var departureTime_arr = [];
+        var luggageSize_arr = [];
+        var petsAllowed_arr = [];
+        var cost_arr = [];
+        var dest = req.query.destination;
+        var currLocation = req.query.currentLocation;
+
+
+        var finishRequest = function () {
+            res.render('pages/results.ejs', {
+                drivers: driver_arr,
+                comment: comment_arr,
+                seatsTaken: seatsTaken_arr,
+                seatsAvailable: seatsAvailable_arr,
+                travelTime: travelTime_arr,
+                departureTime: departureTime_arr,
+                luggageSize: luggageSize_arr,
+                petsAllowed: petsAllowed_arr,
+                cost: cost_arr,
+                destination: dest,
+                currentLocation: currLocation,
+                header: header,
+                foot: foot
+            });
+        };
+
+        new Model.travel().where({
+            destinationAddress: dest,
+            startAddress: currLocation
+        }).fetchAll().then(function (user) {
+
+            var resultJSON = user.toJSON();
+
+            if (resultJSON.length == 0) {
+                res.render('pages/no-results.ejs', {
+                    header: header,
+                    foot: foot
+                });
+            }
+            else {
+
+                for (i = 0; i < resultJSON.length; i++) {
+
+                    driver_arr.push(resultJSON[i]['driver']);
+                    comment_arr.push(resultJSON[i]['comments']);
+                    seatsTaken_arr.push(resultJSON[i]['takenSeat']);
+                    seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
+                    travelTime_arr.push(resultJSON[i]['travelTimes']);
+                    departureTime_arr.push(resultJSON[i]['departureTime']);
+                    luggageSize_arr.push(resultJSON[i]['luggagesSize']);
+                    petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
+                    cost_arr.push(resultJSON[i]['cost']);
+                }
+
+                finishRequest();
+            }
+
+
+        }).catch(function (err) {
+
+            res.render('pages/no-results.ejs', {
+                header: header,
+                foot: foot //In case of error
+
+            });
+
+
+        });
+    });
+
 
     // =====================================
     // FACEBOOK ROUTES =====================
@@ -202,6 +281,8 @@ module.exports = function (app, passport) {
                 foot : foot
             });
     });
+
+
     app.get('/logout',requireAuth, function(req, res){
         req.logout();
         res.redirect('/');

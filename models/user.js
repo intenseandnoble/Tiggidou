@@ -21,8 +21,15 @@ var Travel = DB.Model.extend({
 
 });
 
+var TravelRequest = DB.Model.extend({
+   tableName: 'searchTravel',
+   idAttribute: 'idSearchTravel'
+
+});
+
 module.exports = {
     Users: Users,
     ratings: Ratings,
-    travel : Travel
+    travel : Travel,
+    TravelRequest : TravelRequest
 };

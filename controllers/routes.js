@@ -32,7 +32,7 @@ module.exports = function (app, passport) {
         //faire une recherche et afficher son r�sultat
 
     });
-    
+
     // profile
     app.get('/profile', function(req, res){
 
@@ -86,6 +86,45 @@ module.exports = function (app, passport) {
             })});
 
     });
+
+
+    app.post('/rate_driver', function (req, res) {
+
+        console.log(req.body);
+        var rate = req.body.dstarVote;
+        console.log(req.body.dstarVote);
+        var vote = new Model.ratings();
+        console.log(vote.idAttribute);
+        vote.save({'votingUser': '1', 'judgedUser':'2', rating:rate}, {method: 'insert'});
+        console.log(vote);
+        res.redirect('/profile');
+
+    });
+
+
+    app.post('/post-ride', function (req, res) {
+
+        var time = req.body.timeDeparture;
+
+        if(req.body.periodDeparture == 'PM') req.body.timeDeparture+=12;
+
+        new Model.TravelRequest().save({ //todo: I had to remove foreign key constraints to make this work...speak with the others about this
+                startAddress :req.body.currentLocation,
+                destinationAddress:req.body.destination,
+                travelTimes:time,
+                 // req.body.datepicker, req.body.smokerRadio,//todo: Add Date in Database on searchTravel
+                pets: 0, //todo change the html so it fits an int
+                luggageSize :0, //todo change html so luggagesize is int instead of radio button
+                comments: req.body.commentsRide},
+            {method: 'insert'}
+        ).catch(function (err) {
+                console.log(err);
+                res.redirect('/');
+
+            });
+        res.redirect('/');
+    });
+
 
     //Searching rides
 
@@ -273,7 +312,7 @@ module.exports = function (app, passport) {
             });
     });
 
-    app.get('/ask-ride', requireAuth, function (req, res) {
+    app.get('/ask-ride',requireAuth, function (req, res) {
         //res.render('pages/ask-ride.ejs')
         res.render('pages/ask-ride.ejs',
             {

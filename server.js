@@ -38,7 +38,6 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 
 // load the routes
 require('./config/passport')(passport); // pass passport for configuration
-require('./controllers/post')(app);
 require('./controllers/routes')(app, passport);
 
 //listen (start app with node server.js)

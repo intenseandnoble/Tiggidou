@@ -6,28 +6,29 @@
 
 </head>
 
-<body class="homepage">
+<body class="homepage" onload="initialize()">
 <div id="page-wrapper">
 
     <!-- Header -->
     <% include ../partials/header %>
 
     <!-- Banner -->
-    <div id="banner-wrapper">
-        <div id="banner" class="box container">
-            <div class="row">
 
-                <div >
-                    <form class = "Destination textBox" method="get" action="/search-ride">
-                        <input type="text" class="search-panel" name = "currentLocation" placeholder="De">
-                        <input type="text" class="search-panel" name = "destination" placeholder="À">
-                        <input type="text" class="search-panel" id="datepicker" name="datepicker" placeholder="Date"/>
-                        <div class="indexpage">
-                            <button class="button small icon fa-arrow-circle-right">Go!</input>
-                        </div>
+
+            <div class="box container">
+
+                    <form method="get" action="/search-ride">
+                    <div class = "row" >
+                        <p>  <input type="text"  id="currentLocation" class = "indexElement" onFocus="geolocate()" name = "currentLocation" placeholder="De"></p>
+                        <p> <input type="text" id="destination" class="indexElement" onFocus="geolocate()" name = "destination" placeholder="À"></p>
+                        <p>   <input type="text" class="indexElement" id="datepicker" name="datepicker"  placeholder="Date"/></p><br>
+
+
+                    </div><br>
+                       <button class="button icon fa-arrow-circle-right indexBtn">Go!</button>
+
                     </form><br><br>
 
-                </div>
 
 
 
@@ -35,10 +36,8 @@
 
 
 
-            </div>
-        </div>
-    </div>
 
+</div>
 
     <!-- Footer -->
     <% include ../partials/footer %>

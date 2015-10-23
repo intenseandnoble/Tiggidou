@@ -587,7 +587,7 @@
 })(jQuery);
 
 $(document).ready(function() {
-	$("#datepicker").datepicker({ minDate: 0 });
+	$("#datepicker").datepicker({ minDate: 0, dateFormat: 'dd/mm/yy'  });
 	$("button").click(function() {
 		var selected = $("#downpicker option:selected").text();
 		var datepicker = $("#datepicker").val();
@@ -603,3 +603,31 @@ $(function() {
 	});
 });
 
+
+$('input[type="checkbox"]').on('change', function() {
+	$(this).siblings('input[type="checkbox"]').prop('checked', false);
+});
+
+
+function initialize() {
+
+	var options = {
+		types: ['(cities)'],
+		componentRestrictions: {country: "can"}
+	};
+
+	var curr_input = document.getElementById('currentLocation');
+	var dest_input = document.getElementById('destination');
+	var autocomplete = new google.maps.places.Autocomplete(curr_input, options);
+	var autocomplete = new google.maps.places.Autocomplete(dest_input, options);
+
+}
+
+function isNumberKey(evt)
+{
+	var charCode = (evt.which) ? evt.which : event.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+
+	return true;
+}

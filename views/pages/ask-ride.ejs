@@ -3,11 +3,11 @@
 <html>
 <head>
     <% include ../partials/head %>
-
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 
-<body class="homepage" onload="initialize()">
-<div id="page-wrapper">
+<body onload="initialize()">
+
 
     <!-- Header -->
     <% include ../partials/header %>
@@ -22,43 +22,43 @@
 
 
 
-                            <input type="radio" name="typeUser"  value="passenger" checked="true"> Je suis passager<br>
-                        <input type="radio" name="typeUser" value="driver"> Je suis conducteur<br><br>
+                    <!-- <input type="radio" name="typeUser"  value="passenger" checked="true"> Je suis passager<br>
+                        <input type="radio" name="typeUser" value="driver"> Je suis conducteur<br><br> -->
 
 
-                        <input type="text" id="currentLocation" class="ride-form" onFocus="geolocate()" name = "currentLocation" placeholder="De">
+                        <input type="text" id="currentLocation" class=" input-group" onFocus="geolocate()" name = "currentLocation" placeholder="De">
 
-                        <input type="text" id="destination" class="ride-form" onFocus="geolocate()" name = "destination" placeholder="À"><br><br>
+                        <input type="text" id="destination" class="input-group" onFocus="geolocate()" name = "destination" placeholder="À"><br>
 
 
                         <div class="clearfix">
-                            <div class="input-group clockpicker pull-center" data-placement="left" data-align="top" data-autoclose="true">
-                                <input type="text" class="form-control" value="13:14">
-				                <span class="input-group-addon">
-					            <span class="glyphicon glyphicon-time"></span>
+                            <div class="input-group clockpicker"   data-align="top" data-autoclose="true">
+                                <input type="text" class="form-control" id="withBootStrap" value="12:00">
+				                <span class="input-group-addon widerGlyph">
+					            <span class="glyphicon glyphicon-time widerGlyph"></span>
 				                </span>
                             </div>
                         </div>
 
 
-                        <input type="text" class="ride-form"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
+                        <input type="text" class=" input-group"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
 
 
 
 
 
 
-                        <div id="accordion" class="more-options">
+                        <div id="accordion"  style="width:580px;">
                             <h3>More options</h3>
 
                             <div><br> Score du conducteur: ******<br><br>
 
-                                Fumeur? :<input type="radio" name="smokerRadio" value="Yes">Oui
+                                Fumeur? <br><input type="radio" name="smokerRadio" value="Yes">Oui
                                 <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
-                                Animaux accepté? :<input type="radio" name="animalRadio" value="Yes">Oui
+                                Animaux accepté? <br><input type="radio" name="animalRadio" value="Yes">Oui
                                 <input type="radio" name="animalRadio" value="No" checked>Non <br><br>
 
-                                Valises acceptés? :<input type="radio" name="bagaggeRadio" value="Yes">Oui
+                                Valises acceptés?<br><input type="radio" name="bagaggeRadio" value="Yes">Oui
                                 <input type="radio" name="bagaggeRadio" value="No" checked>Non <br><br>
                                 Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide"></textarea><br><br>
 

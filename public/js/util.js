@@ -595,6 +595,19 @@ $(document).ready(function() {
 	});
 });
 
+$(window).on('resize orientationchange', function (e) {
+	if ($.datepicker._datepickerShowing) {
+		var datepicker = $.datepicker._curInst;
+		dpInput = datepicker.input;
+		dpElem = datepicker.dpDiv;
+		dpElem.position({
+			my: 'left top',
+			of: dpInput,
+			at: 'left bottom'
+		});
+	}
+});
+
 $(document).ready(function() {
 	$( "#accordion" ).accordion({
 		collapsible: true,

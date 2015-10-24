@@ -2805,10 +2805,40 @@ button.indexBtn {
 
 
 .input-group {
+	display: inline-block;
+	margin:auto;
+	position:relative;
     width: 340px;
     margin-bottom: 10px;
 }
 .pull-center {
     margin-left: auto;
     margin-right: auto;
+}
+
+#withBootStrap {
+	font-family: "Helvetica Neue",
+	Helvetica,
+	Arial,
+	sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+	background-color: #fff;
+
+
+}
+
+input[type=text].input-group {
+	display: inline-block;
+	margin:auto;
+	position:relative;
+	width: 340px;
+	margin-bottom: 10px;
+}
+.ui-datepicker {
+	width: 17em;
+	padding: .2em .2em 0;
+	display: none;
+	z-index: 2000 !important;
 }

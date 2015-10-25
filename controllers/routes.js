@@ -40,17 +40,30 @@ module.exports = function (app, passport) {
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
         var driverAvgScore;
+        var driverPScore;
+        var driverCScore;
+        var driverRScore;
+        var driverSScore;
+        var driverOScore;
+
         var passengerAvgScore;
+        var passengerPScore;
+        var passengerCScore;
+        var passengerLScore;
+
         var userName;
         var pageName;
 
-        new Model.Users({'email': 'OALd@allo.com' }).fetch().then(function(user) {
-            if(user){
+        var userId;
+        var commentariesTexts = [];
+
+        new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
+            if(user) {
                 //nom de la page
                 pageName = "Profil";
 
                 //nom d'utilisateur
-                userName = user.firstName + " " + user.familyName;
+                userName = user.get("firstName") + " " + user.get("familyName");
                 //anecdotes personnelles
 
                 //photo de profil
@@ -59,49 +72,139 @@ module.exports = function (app, passport) {
 
 
                 //calcul du score
-                driverAvgScore = user.get('driverTotalScore')/user.get('driverNbVotes');
-                if (driverAvgScore%1 != 0 && driverAvgScore%1 >= 0.5) {
-                    driverAvgScore = Math.ceil(driverAvgScore);
+                /* driver scores */
+                driverAvgScore = roundingCeilOrFloor(user.get('driverTotalScore') / (user.get('driverNbVotes') * 5));
+                driverPScore = roundingCeilOrFloor(user.get('dPunctualityScore') / user.get('driverNbVotes'));
+                driverCScore = roundingCeilOrFloor(user.get('dCourtesyScore') / user.get('driverNbVotes'));
+                driverRScore = roundingCeilOrFloor(user.get('dReliabilityScore') / user.get('driverNbVotes'));
+                driverSScore = roundingCeilOrFloor(user.get('dSecurityScore') / user.get('driverNbVotes'));
+                driverOScore = roundingCeilOrFloor(user.get('dComfortScore') / user.get('driverNbVotes'));
 
-                } else if (driverAvgScore%1 < 0.5) {
-                    driverAvgScore = Math.floor(driverAvgScore);
-                }
+                /* passenger scores */
+                passengerAvgScore = roundingCeilOrFloor(user.get('passengerTotalScore') / (user.get('passengerNbVotes') * 3));
+                passengerPScore = roundingCeilOrFloor(user.get('pPunctualityScore') / user.get('passengerNbVotes'));
+                passengerCScore = roundingCeilOrFloor(user.get('pCourtesyScore') / user.get('passengerNbVotes'));
+                passengerLScore = roundingCeilOrFloor(user.get('pPolitenessScore') / user.get('passengerNbVotes'));
 
-                passengerAvgScore = user.get('passengerTotalScore')/user.get('passengerNbVotes');
-                if (passengerAvgScore%1 != 0 && passengerAvgScore%1 >= 0.5) {
-                    passengerAvgScore = Math.ceil(passengerAvgScore);
-                } else if (passengerAvgScore%1 < 0.5) {
-                    passengerAvgScore = Math.floor(passengerAvgScore);
-                }
+                //commentaires
+                userId = user.get('idUser');
+                new Model.comments().where({
+                    commentType: 0,
+                    commentProfileId: userId
+                }).fetchAll()
+                    .then(function (comm) {
+
+                        var resultJSON = comm.toJSON();
+
+                        if (resultJSON.length == 0) {
+                            //TODO if no comments
+                        }
+                        else {
+                            var i;
+                            for(i=0; i<resultJSON.length; ++i) {
+                                commentariesTexts.push(resultJSON[i]['comment']);
+                            }
+                        }
+                    }).then(function (obj)   {
+                        res.render('pages/profile.ejs',{
+                            pageName : pageName,
+                            userName : userName,
+
+                            driverAverageScore : driverAvgScore,
+                            dPunctualityScore: driverPScore,
+                            dCourtesyScore: driverCScore,
+                            dReliabilityScore: driverRScore,
+                            dSecurityScore: driverSScore,
+                            dComfortScore: driverOScore,
+
+                            passengerAverageScore : passengerAvgScore,
+                            pPunctualityScore: passengerPScore,
+                            pCourtesyScore: passengerCScore,
+                            pPolitenessScore: passengerLScore,
+
+                            comments:commentariesTexts,
+
+                            foot : foot,
+                            header:header
+                        })});
             }
+            //TODO page issue de l'else si l'utilisateur est inexistant
 
-
-        }).then(function (obj)   {
-            res.render('pages/profile.ejs',{
-                pageName : pageName,
-                userName : userName,
-                driverAverageScore : driverAvgScore,
-                passengerAverageScore : passengerAvgScore,
-                foot : foot,
-                header:header
-            })});
+        });
 
     });
 
-
     app.post('/rate_driver', function (req, res) {
 
-        console.log(req.body);
-        var rate = req.body.dstarVote;
-        console.log(req.body.dstarVote);
-        var vote = new Model.ratings();
-        console.log(vote.idAttribute);
-        vote.save({'votingUser': '1', 'judgedUser':'2', rating:rate}, {method: 'insert'});
-        console.log(vote);
+
+        var ratePunctuality = req.body.dPunctualityVote;
+        var rateCourtesy = req.body.dCourtesyVote;
+        var rateReliability = req.body.dReliabilityVote;
+        var rateSecurity = req.body.dSecurityVote;
+        var rateComfort = req.body.dComfortVote;
+        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'0'});
+
+        vote.fetch().then(function (m) {
+            if (m == null) {
+                vote.save(
+                    {dratingPunctuality: ratePunctuality,
+                    dratingCourtesy:rateCourtesy,
+                    dratingReliability:rateReliability,
+                    dratingSecurity:rateSecurity,
+                    dratingComfort:rateComfort}, {method: 'insert'});
+            } else {
+                vote.save(
+                    {dratingPunctuality: ratePunctuality,
+                    dratingCourtesy:rateCourtesy,
+                    dratingReliability:rateReliability,
+                    dratingSecurity:rateSecurity,
+                    dratingComfort:rateComfort}, {method: 'update'});
+        }});
         res.redirect('/profile');
 
     });
 
+    app.post('/rate_passenger', function (req, res) {
+
+
+        var ratePunctuality = req.body.pPunctualityVote;
+        var rateCourtesy = req.body.pCourtesyVote;
+        var ratePoliteness = req.body.pPolitenessVote;
+
+        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'1'});
+
+        vote.fetch().then(function (m) {
+            if (m == null) {
+                vote.save(
+                    {pratingPunctuality: ratePunctuality,
+                        pratingCourtesy:rateCourtesy,
+                        pratingPoliteness:ratePoliteness}, {method: 'insert'});
+            } else {
+                vote.save(
+                    {pratingPunctuality: ratePunctuality,
+                        pratingCourtesy:rateCourtesy,
+                        pratingPoliteness:ratePoliteness}, {method: 'update'});
+            }});
+        res.redirect('/profile');
+
+    });
+
+    //commentType: 0 => profil; 1 => travel; 2 => requestTravel/searchtravel
+
+    app.post('/post_profile_comment', function(req, res) {
+
+
+        var c = req.body.comment;
+        var commentaire = new Model.comments({
+            'commentIssuer':'1',
+            'commentProfileId':'2',
+            'commentType': '0',
+            'comment': c});
+
+        commentaire.save();
+
+        res.redirect('/profile');
+    });
 
     app.post('/post-ride', function (req, res) {
 
@@ -496,10 +599,15 @@ function verifyRecaptcha(key, callback){
     });
 }
 
+function roundingCeilOrFloor (score) {
 
+    if (score % 1 != 0 && score % 1 >= 0.5) {
+        score = Math.ceil(score);
+    } else if (score % 1 < 0.5) {
+        score = Math.floor(score);
+    }
 
-
-
-
+    return score;
+}
 
 

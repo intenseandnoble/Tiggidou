@@ -39,7 +39,7 @@
                             <ul class="style2">
                                 <li><a href="#tabs-1">Tableau de bord</a></li>
                                 <li><a href="#tabs-2">Annonces</a></li>
-                                <li><a href="#tabs-3">RÃ©servation</a></li>
+                                <li><a href="#tabs-3">Réservation</a></li>
                                 <li><a href="#tabs-4">Messages</a></li>
                                 <li><a href="#tabs-5">...</a></li>
                             </ul>
@@ -79,17 +79,14 @@
 
                         </article>
 
-                        <% include ../partials/userScores %>
+                        <% include ../partials/myScore %>
 
-                        <br>
                         <div class="row-comments">
                             <div class="column-comments">
                                 <div class="panel">
                                     <div class="panel-heading">Comments</div>
                                     <div class="panel-body">
-
-
-                                        <form id="write_comment" class="form-horizontal" method="post" action ="/post_profile_comment">
+                                        <form id="write_comment" class="form-horizontal">
                                             <div class="form-group">
                                                 <div class="col-md-6">
                                                     <input type="text" name="name" id="name" class="form-control" placeholder="Name">
@@ -98,7 +95,6 @@
                                                     <input type="email" name="mail" id="mail" class="form-control" placeholder="E-mail">
                                                 </div><!--col-md-6-->
                                             </div><!--form-group-->
-
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <textarea name="comment" rows="3" class="form-control input-md" placeholder="Add a comment"></textarea>
@@ -112,12 +108,9 @@
                                                 </div><!--col-md-5-->
 
                                             </div>
+
                                         </form>
-
-
                                     </div><!--panel-body class="meta clearfix"  -->
-
-
                                     <ul class="list-group">
                                         <li class="list-group-item ">
                                             <p >
@@ -126,19 +119,9 @@
                                             </p>
 
                                             <p class="comment">
-                                                <p>Super cool driver</p>
-                                            </p>
+                                            <p>Super cool driver</p>                                </p>
 
                                         </li>
-
-                                        <% for (var i =0; i<comments.length;++i) { %>
-                                        <li class="list-group-item">
-                                            <p class="comment">
-                                                <p> <%= comments[i] %> </p>
-                                            </p>
-                                        </li>
-                                        <% } %>
-
                                     </ul>
                                 </div>
                             </div>

@@ -27,9 +27,16 @@ var TravelRequest = DB.Model.extend({
 
 });
 
+var Comments = DB.Model.extend({
+    tableName: 'comments',
+    idAttribute: 'commentId'
+
+});
+
 module.exports = {
     Users: Users,
     ratings: Ratings,
-    Travel : Travel,
-    TravelRequest : TravelRequest
+    travel : Travel,
+    TravelRequest : TravelRequest,
+    comments: Comments
 };

@@ -1,0 +1,115 @@
+<br>
+
+<p>
+    <a href = "#" onclick = "document.getElementById('lightDriver').style.display='block';document.getElementById('fade').style.display='block';document.getElementById('lightDriver').focus()">
+        Donnez votre avis
+    </a>
+</p>
+
+
+<div id="lightDriver" class="white_content">
+
+    <form id="ratingsFormDriver" method="post" action ="/rate_driver"
+          enctype="application/x-www-form-urlencoded" >
+        <h3>[x]Ponctualité</h3>
+        <div class="rating-star">
+            <input type="radio" value="1" name="dPunctualityVote" class="star-1" id="dstar-12p"  />
+            <label class="star-1" for="dstar-12p">1</label>
+
+            <input type="radio" value="2" name="dPunctualityVote" class="star-2" id="dstar-22p"  />
+            <label class="star-2" for="dstar-22p">2</label>
+
+            <input type="radio" value="3" name="dPunctualityVote" class="star-3" id="dstar-32p"  />
+            <label class="star-3" for="dstar-32p">3</label>
+
+            <input type="radio" value="4" name="dPunctualityVote" class="star-4" id="dstar-42p" />
+            <label class="star-4" for="dstar-42p">4</label>
+
+            <input type="radio" value="5" name="dPunctualityVote" class="star-5" id="dstar-52p"  />
+            <label class="star-5" for="dstar-52p">5</label>
+            <span></span>
+        </div>
+        <br>
+        <h3>[x]Courtoisie</h3>
+        <div class="rating-star">
+            <input type="radio" value="1" name="dCourtesyVote" class="star-1" id="dstar-12c"  />
+            <label class="star-1" for="dstar-12c">1</label>
+
+            <input type="radio" value="2" name="dCourtesyVote" class="star-2" id="dstar-22c"  />
+            <label class="star-2" for="dstar-22c">2</label>
+
+            <input type="radio" value="3" name="dCourtesyVote" class="star-3" id="dstar-32c"  />
+            <label class="star-3" for="dstar-32c">3</label>
+
+            <input type="radio" value="4" name="dCourtesyVote" class="star-4" id="dstar-42c" />
+            <label class="star-4" for="dstar-42c">4</label>
+
+            <input type="radio" value="5" name="dCourtesyVote" class="star-5" id="dstar-52c"  />
+            <label class="star-5" for="dstar-52c">5</label>
+            <span></span>
+        </div>
+        <br>
+        <h3>[x]Fiabilité</h3>
+        <div class="rating-star">
+            <input type="radio" value="1" name="dReliabilityVote" class="star-1" id="dstar-12f"  />
+            <label class="star-1" for="dstar-12f">1</label>
+
+            <input type="radio" value="2" name="dReliabilityVote" class="star-2" id="dstar-22f"  />
+            <label class="star-2" for="dstar-22f">2</label>
+
+            <input type="radio" value="3" name="dReliabilityVote" class="star-3" id="dstar-32f"  />
+            <label class="star-3" for="dstar-32f">3</label>
+
+            <input type="radio" value="4" name="dReliabilityVote" class="star-4" id="dstar-42f" />
+            <label class="star-4" for="dstar-42f">4</label>
+
+            <input type="radio" value="5" name="dReliabilityVote" class="star-5" id="dstar-52f"  />
+            <label class="star-5" for="dstar-52f">5</label>
+            <span></span>
+        </div>
+        <br>
+        <h3>[x]Prudence et sécurité</h3>
+        <div class="rating-star">
+            <input type="radio" value="1" name="dSecurityVote" class="star-1" id="dstar-12s"  />
+            <label class="star-1" for="dstar-12s">1</label>
+
+            <input type="radio" value="2" name="dSecurityVote" class="star-2" id="dstar-22s"  />
+            <label class="star-2" for="dstar-22s">2</label>
+
+            <input type="radio" value="3" name="dSecurityVote" class="star-3" id="dstar-32s"  />
+            <label class="star-3" for="dstar-32s">3</label>
+
+            <input type="radio" value="4" name="dSecurityVote" class="star-4" id="dstar-42s" />
+            <label class="star-4" for="dstar-42s">4</label>
+
+            <input type="radio" value="5" name="dSecurityVote" class="star-5" id="dstar-52s"  />
+            <label class="star-5" for="dstar-52s">5</label>
+            <span></span>
+        </div>
+        <br>
+        <h3>[x]Comfort</h3>
+        <div class="rating-star">
+            <input type="radio" value="1" name="dComfortVote" class="star-1" id="dstar-12o"  />
+            <label class="star-1" for="dstar-12o">1</label>
+
+            <input type="radio" value="2" name="dComfortVote" class="star-2" id="dstar-22o"  />
+            <label class="star-2" for="dstar-22o">2</label>
+
+            <input type="radio" value="3" name="dComfortVote" class="star-3" id="dstar-32o"  />
+            <label class="star-3" for="dstar-32o">3</label>
+
+            <input type="radio" value="4" name="dComfortVote" class="star-4" id="dstar-42o" />
+            <label class="star-4" for="dstar-42o">4</label>
+
+            <input type="radio" value="5" name="dComfortVote" class="star-5" id="dstar-52o"  />
+            <label class="star-5" for="dstar-52o">5</label>
+            <span></span>
+        </div>
+        <br>
+        <input type="submit" value="Soumettre"/>
+        <input type="button" value="Fermer" onclick="document.getElementById('lightDriver').style.display='none';document.getElementById('fade').style.display='none'"/>
+    </form>
+
+</div>
+
+<div id="fade" class="black_overlay"></div>

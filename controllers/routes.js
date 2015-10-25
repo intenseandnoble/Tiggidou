@@ -39,17 +39,27 @@ module.exports = function (app, passport) {
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
         var driverAvgScore;
+        var driverPScore;
+        var driverCScore;
+        var driverRScore;
+        var driverSScore;
+        var driverOScore;
+
         var passengerAvgScore;
+        var passengerPScore;
+        var passengerCScore;
+        var passengerLScore;
+
         var userName;
         var pageName;
 
-        new Model.Users({'email': 'OALd@allo.com' }).fetch().then(function(user) {
+        new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
             if(user){
                 //nom de la page
                 pageName = "Profil";
 
                 //nom d'utilisateur
-                userName = user.firstName + " " + user.familyName;
+                userName = user.get("firstName") + " " + user.get("familyName");
                 //anecdotes personnelles
 
                 //photo de profil
@@ -57,21 +67,76 @@ module.exports = function (app, passport) {
                 //commentaires
 
 
-                //calcul du score
-                driverAvgScore = user.get('driverTotalScore')/user.get('driverNbVotes');
-                if (driverAvgScore%1 != 0 && driverAvgScore%1 >= 0.5) {
-                    driverAvgScore = Math.ceil(driverAvgScore);
 
-                } else if (driverAvgScore%1 < 0.5) {
+
+                //calcul du score
+                /* driver scores */
+                driverAvgScore = user.get('driverTotalScore') / (user.get('driverNbVotes') * 5);
+                if (driverAvgScore % 1 != 0 && driverAvgScore % 1 >= 0.5) {
+                    driverAvgScore = Math.ceil(driverAvgScore);
+                } else if (driverAvgScore % 1 < 0.5) {
                     driverAvgScore = Math.floor(driverAvgScore);
                 }
 
-                passengerAvgScore = user.get('passengerTotalScore')/user.get('passengerNbVotes');
-                if (passengerAvgScore%1 != 0 && passengerAvgScore%1 >= 0.5) {
+
+                driverPScore = user.get('dPunctualityScore') / user.get('driverNbVotes');
+                if (driverPScore % 1 != 0 && driverPScore % 1 >= 0.5) {
+                    driverPScore = Math.ceil(driverPScore);
+                } else if (driverPScore % 1 < 0.5) {
+                    driverPScore = Math.floor(driverPScore);
+                }
+                driverCScore = user.get('dCourtesyScore') / user.get('driverNbVotes');
+                if (driverCScore % 1 != 0 && driverCScore % 1 >= 0.5) {
+                    driverCScore = Math.ceil(driverCScore);
+                } else if (driverCScore % 1 < 0.5) {
+                    driverCScore = Math.floor(driverCScore);
+                }
+                driverRScore = user.get('dReliabilityScore') / user.get('driverNbVotes');
+                if (driverRScore % 1 != 0 && driverRScore % 1 >= 0.5) {
+                    driverRScore = Math.ceil(driverRScore);
+                } else if (driverRScore % 1 < 0.5) {
+                    driverRScore = Math.floor(driverRScore);
+                }
+                driverSScore = user.get('dSecurityScore') / user.get('driverNbVotes');
+                if (driverSScore % 1 != 0 && driverSScore % 1 >= 0.5) {
+                    driverSScore = Math.ceil(driverSScore);
+                } else if (driverSScore % 1 < 0.5) {
+                    driverSScore = Math.floor(driverSScore);
+                }
+                driverOScore = user.get('dComfortScore') / user.get('driverNbVotes');
+                if (driverOScore % 1 != 0 && driverOScore % 1 >= 0.5) {
+                    driverOScore = Math.ceil(driverOScore);
+                } else if (driverOScore % 1 < 0.5) {
+                    driverOScore = Math.floor(driverOScore);
+                }
+
+
+                /* passenger scores */
+                passengerAvgScore = user.get('passengerTotalScore') / (user.get('passengerNbVotes') * 3);
+                if (passengerAvgScore % 1 != 0 && passengerAvgScore % 1 >= 0.5) {
                     passengerAvgScore = Math.ceil(passengerAvgScore);
-                } else if (passengerAvgScore%1 < 0.5) {
+                } else if (passengerAvgScore % 1 < 0.5) {
                     passengerAvgScore = Math.floor(passengerAvgScore);
                 }
+
+                passengerPScore = user.get('pPunctualityScore') / user.get('passengerNbVotes');
+                if (passengerPScore % 1 != 0 && passengerPScore % 1 >= 0.5) {
+                    passengerPScore = Math.ceil(passengerPScore);
+                } else if (passengerPScore % 1 < 0.5) {
+                    passengerPScore = Math.floor(passengerPScore);
+                }
+                passengerCScore = user.get('pCourtesyScore') / user.get('passengerNbVotes');
+                if (passengerCScore % 1 != 0 && passengerCScore % 1 >= 0.5) {
+                    passengerCScore = Math.ceil(passengerCScore);
+                } else if (passengerCScore % 1 < 0.5) {
+                    passengerCScore = Math.floor(passengerCScore);
+                }
+                passengerLScore = roundingCeilOrFloor(user.get('pPolitenessScore') / user.get('passengerNbVotes'));
+                /*if (passengerLScore % 1 != 0 && passengerLScore % 1 >= 0.5) {
+                    passengerLScore = Math.ceil(passengerLScore);
+                } else if (passengerLScore % 1 < 0.5) {
+                    passengerLScore = Math.floor(passengerLScore);
+                }*/
             }
 
 
@@ -79,28 +144,79 @@ module.exports = function (app, passport) {
             res.render('pages/profile.ejs',{
                 pageName : pageName,
                 userName : userName,
+
                 driverAverageScore : driverAvgScore,
+                dPunctualityScore: driverPScore,
+                dCourtesyScore: driverCScore,
+                dReliabilityScore: driverRScore,
+                dSecurityScore: driverSScore,
+                dComfortScore: driverOScore,
+
                 passengerAverageScore : passengerAvgScore,
+                pPunctualityScore: passengerPScore,
+                pCourtesyScore: passengerCScore,
+                pPolitenessScore: passengerLScore,
+
                 foot : foot,
                 header:header
             })});
 
     });
 
-
     app.post('/rate_driver', function (req, res) {
 
-        console.log(req.body);
-        var rate = req.body.dstarVote;
-        console.log(req.body.dstarVote);
-        var vote = new Model.ratings();
-        console.log(vote.idAttribute);
-        vote.save({'votingUser': '1', 'judgedUser':'2', rating:rate}, {method: 'insert'});
-        console.log(vote);
+
+        var ratePunctuality = req.body.dPunctualityVote;
+        var rateCourtesy = req.body.dCourtesyVote;
+        var rateReliability = req.body.dReliabilityVote;
+        var rateSecurity = req.body.dSecurityVote;
+        var rateComfort = req.body.dPunctualityVote;
+        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'0'});
+
+        vote.fetch().then(function (m) {
+            if (m == null) {
+                vote.save(
+                    {dratingPunctuality: ratePunctuality,
+                    dratingCourtesy:rateCourtesy,
+                    dratingReliability:rateReliability,
+                    dratingSecurity:rateSecurity,
+                    dratingComfort:rateComfort}, {method: 'insert'});
+            } else {
+                vote.save(
+                    {dratingPunctuality: ratePunctuality,
+                    dratingCourtesy:rateCourtesy,
+                    dratingReliability:rateReliability,
+                    dratingSecurity:rateSecurity,
+                    dratingComfort:rateComfort}, {method: 'update'});
+        }});
         res.redirect('/profile');
 
     });
 
+    app.post('/rate_passenger', function (req, res) {
+
+
+        var ratePunctuality = req.body.pPunctualityVote;
+        var rateCourtesy = req.body.pCourtesyVote;
+        var ratePoliteness = req.body.pPolitenessVote;
+
+        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'1'});
+
+        vote.fetch().then(function (m) {
+            if (m == null) {
+                vote.save(
+                    {pratingPunctuality: ratePunctuality,
+                        pratingCourtesy:rateCourtesy,
+                        pratingPoliteness:ratePoliteness}, {method: 'insert'});
+            } else {
+                vote.save(
+                    {pratingPunctuality: ratePunctuality,
+                        pratingCourtesy:rateCourtesy,
+                        pratingPoliteness:ratePoliteness}, {method: 'update'});
+            }});
+        res.redirect('/profile');
+
+    });
 
     app.post('/post-ride', function (req, res) {
 
@@ -422,10 +538,15 @@ function requireAuth(req, res, next) {
     res.redirect('/login');
 }
 
+function roundingCeilOrFloor (score) {
 
+    if (score % 1 != 0 && score % 1 >= 0.5) {
+        score = Math.ceil(score);
+    } else if (score % 1 < 0.5) {
+        score = Math.floor(score);
+    }
 
-
-
-
+    return score;
+}
 
 

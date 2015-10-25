@@ -32,4 +32,4 @@ module.exports =
         }
     },
     "contact": "Nous contacter"
-}
+};

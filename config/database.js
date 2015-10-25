@@ -7,7 +7,7 @@ var configConnection = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'CovosocialTestSchema',
+    database: 'CovosocialSchema',
     charset: 'UTF8_GENERAL_CI'
 };
 

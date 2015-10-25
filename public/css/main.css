@@ -231,6 +231,8 @@ textarea.form-control{height:auto;}
 	width: 400px;
 }
 
+.clear {clear:both;}
+
 .black_overlay {
 	display: none;
 	position: absolute;

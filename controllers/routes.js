@@ -9,6 +9,7 @@ var Model = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
+var https = require('https');
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -252,47 +253,67 @@ module.exports = function (app, passport) {
 
     // signup
     app.get('/sign-up', function (req, res) {
-        //res.render('pages/sign-up.ejs'/*, {message: req.flash('signupMessage')}*/);
         res.render('pages/sign-up.ejs',
             {
                 header: header,
-                foot : foot
+                foot : foot/*,
+                message: req.flash('signupMessage')*/
             });
     });
 
     //processs the signup form
     app.post('/sign-up', function(req, res, next) {
-        var user = req.body;
-        var usernamePromise = null;
-        usernamePromise = new Model.Users({email: user.email}).fetch();
-        return usernamePromise.then(function(model) {
-            if(model) {
+        verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
+            if(success){
+                var user = req.body;
+                var usernamePromise = null;
+                usernamePromise = new Model.Users({email: user.email}).fetch();
+                return usernamePromise.then(function(model) {
+                    if(model) {
+                        res.render('pages/sign-up.ejs', {
+                            title: 'signup',
+                            message: 'username already exists',
+                            header: header,
+                            foot : foot
+                        });
+                    } else {
+                        //TODO MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
+                        //TODO comparer le password et la confirmation du mdp
+                        //TODO ajouter la date de naissance
+                        var password = user.password;
+                        var hash = bcrypt.hashSync(password);
+                        var typeSign = "local";
+                        var firstName = user.firstName;
+                        var familyName = user.familyName;
+                        var signUpUser = new Model.Users({
+                            email: user.email,
+                            password: hash,
+                            typeSignUp: typeSign,
+                            firstName: firstName,
+                            familyName: familyName
+                        });
+
+                        signUpUser.save().then(function(model) {
+                            // sign in the newly registered user
+                            loginPost(req, res, next);
+                        });
+                    }
+                })
+            } else {
+                var user = req.body;
                 res.render('pages/sign-up.ejs', {
                     title: 'signup',
-                    errorMessage: 'username already exists',
+                    message: 'captcha échoué',
                     header: header,
-                    foot : foot});
-            } else {
-                // TODO MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
-                var password = user.password;
-                var hash = bcrypt.hashSync(password);
-                var typeSign = "local";
-                var firstName = user.firstName;
-                var familyName = user.familyName;
-                var signUpUser = new Model.Users({
+                    foot: foot,
+                    firstName: user.firstName,
+                    familyName: user.familyName,
                     email: user.email,
-                    password: hash,
-                    typeSignUp: typeSign,
-                    firstName: firstName,
-                    familyName: familyName
-                });
-
-                signUpUser.save().then(function(model) {
-                    // sign in the newly registered user
-                    loginPost(req, res, next);
-                });
+                    birthDate: user.birthDate
+                })
             }
-        })});
+        })
+        });
 
     app.get('/results', function (req, res) {
         //res.render('pages/results.ejs')
@@ -420,6 +441,26 @@ function requireAuth(req, res, next) {
     }
 
     res.redirect('/login');
+}
+
+var SECRET =  "6LdJfA8TAAAAAGndnIbSyPNBm-X2BphdUHBb-fRT"; //TODO met le secret ici...
+//helper function to make API call to recatpcha and check response
+function verifyRecaptcha(key, callback){
+    https.get("https://www.google.com/recaptcha/api/siteverify?secret=" + SECRET + "&response=" + key, function(res){
+        var data = "";
+        res.on('data', function(chunk){
+            data += chunk.toString();
+        });
+        res.on('end', function(){
+            try{
+                var parsedData = JSON.parse(data);
+                callback(parsedData.success);
+            } catch(e){
+                callback(false);
+            }
+
+        });
+    });
 }
 
 

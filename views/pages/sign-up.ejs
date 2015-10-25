@@ -3,6 +3,7 @@
 <html>
 <head>
     <% include ../partials/head %>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body class="no-sidebar">
 <div id="page-wrapper">
@@ -25,8 +26,9 @@
                         <input type="email" class="signup-email" name = "email" placeholder="Courriel"><br>
                         <input type="password" class="signup-pass" name = "password" placeholder="Mot de passe"><br>
                         <input type="password" class="signup-pass" name = "confirm-password" placeholder="Confirmer mot de passe"><br>
-                        <input type="text" class="login-textbox" name = "birth-date" placeholder="Date de naissance"><br>-->
+                        <input type="text" class="login-textbox" name = "birthDate" placeholder="Date de naissance"><br>
                         <br>
+                        <div class="g-recaptcha" data-sitekey="6LdJfA8TAAAAAI-nVvUXaNsEMhVDuCtVSySWuiwA"></div>
                         <button type="submit" class="button small icon fa-arrow-circle-right">S'inscrire</button>
                     </form>
                     <div>

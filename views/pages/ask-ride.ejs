@@ -3,10 +3,11 @@
 <html>
 <head>
     <% include ../partials/head %>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 
-<body class="homepage">
-<div id="page-wrapper">
+<body onload="initialize()">
+
 
     <!-- Header -->
     <% include ../partials/header %>
@@ -18,62 +19,46 @@
 
                 <div>
                     <form class="ride-posting" method="post" action ="/post-ride">
-                        <input type="text" class="ride-form" name = "currentLocation" placeholder="De">
-
-                        <input type="text"  class="ride-form" name = "destination" placeholder="À"><br><br>
-
-                        <input type=text  class="ride-form"  name="timeDeparture" placeholder="Heure" list=browsers>
-                        <datalist id=browsers>
-                            <option value="1:00">
-                            <option value="1:30">
-                            <option value="2:00">
-                            <option value="2:30">
-                            <option value="3:00">
-                            <option value="3:30">
-                            <option value="4:00">
-                            <option value="4:30">
-                            <option value="5:00">
-                            <option value="5:30">
-                            <option value="6:00">
-                            <option value="6:30">
-                            <option value="7:00">
-                            <option value="7:30">
-                            <option value="8:00">
-                            <option value="8:30">
-                            <option value="9:00">
-                            <option value="9:30">
-                            <option value="10:00">
-                            <option value="10:30">
-                            <option value="11:00">
-                            <option value="11:30">
-                            <option value="12:00">
-                            <option value="12:30">
 
 
-                        </datalist>
 
-                        <input type="radio" name="periodDeparture" value="PM" checked>PM
-                        <input type="radio" name="periodDeparture" value="AM" >AM <br><br>
+                    <!-- <input type="radio" name="typeUser"  value="passenger" checked="true"> Je suis passager<br>
+                        <input type="radio" name="typeUser" value="driver"> Je suis conducteur<br><br> -->
 
 
-                        <input type="text" class="ride-form"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
+                        <input type="text" id="currentLocation" class=" input-group" onFocus="geolocate()" name = "currentLocation" placeholder="De">
+
+                        <input type="text" id="destination" class="input-group" onFocus="geolocate()" name = "destination" placeholder="À"><br>
+
+
+                        <div class="clearfix">
+                            <div class="input-group clockpicker"   data-align="top" data-autoclose="true">
+                                <input type="text" class="form-control" id="withBootStrap" value="12:00">
+				                <span class="input-group-addon widerGlyph">
+					            <span class="glyphicon glyphicon-time widerGlyph"></span>
+				                </span>
+                            </div>
+                        </div>
+
+
+                        <input type="text" class=" input-group"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
 
 
 
 
 
 
-                        <div id="accordion" class="more-options">
+                        <div id="accordion"  style="width:580px;">
                             <h3>More options</h3>
 
                             <div><br> Score du conducteur: ******<br><br>
 
-                                Fumeur? :<input type="radio" name="smokerRadio" value="Yes">Oui
+                                Fumeur? <br><input type="radio" name="smokerRadio" value="Yes">Oui
                                 <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
-                                Animaux accepté? :<input type="radio" name="animalRadio" value="Yes">Oui
+                                Animaux accepté? <br><input type="radio" name="animalRadio" value="Yes">Oui
                                 <input type="radio" name="animalRadio" value="No" checked>Non <br><br>
 
-                                Valises acceptés? :<input type="radio" name="bagaggeRadio" value="Yes">Oui
+                                Valises acceptés?<br><input type="radio" name="bagaggeRadio" value="Yes">Oui
                                 <input type="radio" name="bagaggeRadio" value="No" checked>Non <br><br>
                                 Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide"></textarea><br><br>
 
@@ -107,6 +92,12 @@
     <% include ../partials/footer %>
 
 </div>
+<script type="text/javascript">
+    $('.clockpicker').clockpicker()
+            .find('input').change(function(){
+                console.log(this.value);
+            });
 
+</script>
 </body>
 </html>

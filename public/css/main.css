@@ -10,6 +10,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -55,6 +56,7 @@ body {
 .container {
 	margin-left: auto;
 	margin-right: auto;
+
 }
 
 .container.\31 25\25 {
@@ -179,6 +181,7 @@ body {
 
 	.container {
 		width: 100% !important;
+
 	}
 
 }
@@ -1455,6 +1458,7 @@ body {
 	color: #696969;
 	font-weight: 300;
 	line-height: 2.25em;
+
 }
 
 body.is-loading * {
@@ -2372,6 +2376,7 @@ ol.default li {
 		-ms-transition: -ms-transform 0.5s ease;
 		transition: transform 0.5s ease;
 		padding-bottom: 1px;
+
 	}
 
 	#navToggle {
@@ -2775,4 +2780,65 @@ input[type=submit].sign-in{
 	width: 215px;
 	height : 50px;
 
+}
+
+input[type=text].indexElement{
+
+
+	display: inline-block;
+	margin:auto;
+	position:relative;
+	width: 340px;
+	height : 50px;
+	font-weight: 600;
+
+}
+
+button.indexBtn {
+
+    margin: auto;
+
+	width: 340px;
+	height : 50px;
+	font-weight: 600;
+}
+
+
+.input-group {
+	display: inline-block;
+	margin:auto;
+	position:relative;
+    width: 340px;
+    margin-bottom: 10px;
+}
+.pull-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#withBootStrap {
+	font-family: "Helvetica Neue",
+	Helvetica,
+	Arial,
+	sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+	background-color: #fff;
+
+
+}
+
+input[type=text].input-group {
+	display: inline-block;
+	margin:auto;
+	position:relative;
+	width: 340px;
+	margin-bottom: 10px;
+}
+.ui-datepicker {
+	width: 17em;
+	padding: .2em .2em 0;
+	display: none;
+	z-index: 2000 !important;
 }

@@ -587,7 +587,7 @@
 })(jQuery);
 
 $(document).ready(function() {
-	$("#datepicker").datepicker({ minDate: 0 });
+	$("#datepicker").datepicker({ minDate: 0, dateFormat: 'dd/mm/yy'  });
 	$("button").click(function() {
 		var selected = $("#downpicker option:selected").text();
 		var datepicker = $("#datepicker").val();
@@ -595,7 +595,20 @@ $(document).ready(function() {
 	});
 });
 
-$(function() {
+$(window).on('resize orientationchange', function (e) {
+	if ($.datepicker._datepickerShowing) {
+		var datepicker = $.datepicker._curInst;
+		dpInput = datepicker.input;
+		dpElem = datepicker.dpDiv;
+		dpElem.position({
+			my: 'left top',
+			of: dpInput,
+			at: 'left bottom'
+		});
+	}
+});
+
+$(document).ready(function() {
 	$( "#accordion" ).accordion({
 		collapsible: true,
         active: false
@@ -603,3 +616,31 @@ $(function() {
 	});
 });
 
+
+$('input[type="checkbox"]').on('change', function() {
+	$(this).siblings('input[type="checkbox"]').prop('checked', false);
+});
+
+
+function initialize() {
+
+	var options = {
+		types: ['(cities)'],
+		componentRestrictions: {country: "can"}
+	};
+
+	var curr_input = document.getElementById('currentLocation');
+	var dest_input = document.getElementById('destination');
+	var autocomplete = new google.maps.places.Autocomplete(curr_input, options);
+	var autocomplete = new google.maps.places.Autocomplete(dest_input, options);
+
+}
+
+function isNumberKey(evt)
+{
+	var charCode = (evt.which) ? evt.which : event.keyCode
+	if (charCode > 31 && (charCode < 48 || charCode > 57))
+		return false;
+
+	return true;
+}

@@ -30,6 +30,6 @@ var TravelRequest = DB.Model.extend({
 module.exports = {
     Users: Users,
     ratings: Ratings,
-    travel : Travel,
+    Travel : Travel,
     TravelRequest : TravelRequest
 };

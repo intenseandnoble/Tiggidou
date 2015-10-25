@@ -109,20 +109,48 @@ module.exports = function (app, passport) {
 
         if(req.body.periodDeparture == 'PM') req.body.timeDeparture+=12;
 
-        new Model.TravelRequest().save({ //todo: I had to remove foreign key constraints to make this work...speak with the others about this
-                startAddress :req.body.currentLocation,
-                destinationAddress:req.body.destination,
-                travelTimes:time,
-                 // req.body.datepicker, req.body.smokerRadio,//todo: Add Date in Database on searchTravel
-                pets: 0, //todo change the html so it fits an int
-                luggageSize :0, //todo change html so luggagesize is int instead of radio button
-                comments: req.body.commentsRide},
-            {method: 'insert'}
-        ).catch(function (err) {
-                console.log(err);
-                res.redirect('/');
+        date=req.body.datepicker;
+        var newdate = date.split("/").reverse().join("/");
 
-            });
+        if(req.body.typeUser == 'driver') //insert into Travel
+        {
+            new Model.Travel().save({
+                    startAddress :req.body.currentLocation,
+                    destinationAddress:req.body.destination,
+                    departureTime:time,
+                    departureDate: newdate, //req.body.smokerRadio,
+                    petsAllowed: 0,
+                    // luggageSize :0,
+                    comments: req.body.commentsRide,
+                    cost:45},
+
+                {method: 'insert'}
+            ).catch(function (err) {
+                    console.log(err);
+
+
+                });
+        }
+
+
+        else //insert into searchTravel
+        {
+            new Model.TravelRequest().save({ //todo: I had to remove foreign key constraints to make this work...speak with the others about this
+                    startAddress :req.body.currentLocation,
+                    destinationAddress:req.body.destination,
+                    departureTime:time,
+                    departureDate: newdate, //req.body.smokerRadio,
+                    pets: 0, //todo change the html so it fits an int
+                    // luggageSize :0, //todo change html so luggagesize is int instead of radio button
+                    comments: req.body.commentsRide},
+                {method: 'insert'}
+            ).catch(function (err) {
+                    console.log(err);
+
+
+                });
+        }
+
         res.redirect('/');
     });
 
@@ -137,6 +165,7 @@ module.exports = function (app, passport) {
         var seatsAvailable_arr = [];
         var travelTime_arr = [];
         var departureTime_arr = [];
+        var departureDate_arr = [];
         var luggageSize_arr = [];
         var petsAllowed_arr = [];
         var cost_arr = [];
@@ -152,6 +181,7 @@ module.exports = function (app, passport) {
                 seatsAvailable: seatsAvailable_arr,
                 travelTime: travelTime_arr,
                 departureTime: departureTime_arr,
+                departureDate: departureDate_arr,
                 luggageSize: luggageSize_arr,
                 petsAllowed: petsAllowed_arr,
                 cost: cost_arr,
@@ -162,10 +192,12 @@ module.exports = function (app, passport) {
             });
         };
 
-        new Model.travel().where({
+        new Model.Travel().where({
             destinationAddress: dest,
             startAddress: currLocation
-        }).fetchAll().then(function (user) {
+        }).query(function(qb){
+                qb.orderBy('departureDate','ASC');
+            }).fetchAll().then(function (user) {
 
             var resultJSON = user.toJSON();
 
@@ -185,6 +217,7 @@ module.exports = function (app, passport) {
                     seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
                     travelTime_arr.push(resultJSON[i]['travelTimes']);
                     departureTime_arr.push(resultJSON[i]['departureTime']);
+                    departureDate_arr.push(resultJSON[i]['departureDate']);
                     luggageSize_arr.push(resultJSON[i]['luggagesSize']);
                     petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
                     cost_arr.push(resultJSON[i]['cost']);

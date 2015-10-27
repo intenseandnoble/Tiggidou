@@ -124,6 +124,8 @@ module.exports = function (app, passport) {
 
                             comments:commentariesTexts,
 
+                            profile: require('../views/fr/profile.js'),
+                            ratingPnD: require('../views/fr/ratingPnD.js'),
                             foot : foot,
                             header:header
                         })});

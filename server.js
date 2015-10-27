@@ -16,7 +16,7 @@ var app = module.exports = express(); // cr�ation de l'app avec express
 var port = 8080;
 
 // set up our express application
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json() ); // to support JSON-encoded bodies
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)

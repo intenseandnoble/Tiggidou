@@ -1,78 +1,90 @@
 <br>
 
-<p>
-    <a href = "#" onclick = "document.getElementById('lightPassenger').style.display='block';document.getElementById('fade').style.display='block';document.getElementById('lightPassenger').focus()">
-        Donnez votre avis
-    </a>
-</p>
+    <div>
+
+        <a href="#lightPassenger" class="button"><%= ratingPnD.give_opinion %></a>
+    </div>
 
 
-<div id="lightPassenger" class="white_content">
 
-    <form id="ratingsFormDriver" method="post" action ="/rate_passenger"
-          enctype="application/x-www-form-urlencoded" >
-        <h3>[x]Ponctualité</h3>
-        <div class="rating-star">
-            <input type="radio" value="1" name="pPunctualityVote" class="star-1" id="pstar-12p"  />
-            <label class="star-1" for="pstar-12p">1</label>
+<a href="#" class="modal" id="lightPassenger" aria-hidden="true">
+</a>
+<div class="modal-dialog">
 
-            <input type="radio" value="2" name="pPunctualityVote" class="star-2" id="pstar-22p"  />
-            <label class="star-2" for="pstar-22p">2</label>
+    <div class="modal-header">
+        <a href="#" class="btn-close" aria-hidden="true">×</a>
+    </div>
+        <div class="modal-body">
+        <form  id="ratingsFormDriver" method="post" action ="/rate_passenger"
+              enctype="application/x-www-form-urlencoded" >
+            <h3><%= ratingPnD.punctuality %></h3>
+            <div class="rating-star">
+                <input type="hidden" name="pPunctualityVote" value="0" />
 
-            <input type="radio" value="3" name="pPunctualityVote" class="star-3" id="pstar-32p"  />
-            <label class="star-3" for="pstar-32p">3</label>
+                <input type="radio" value="1" name="pPunctualityVote" class="star-1" id="pstar-12p"  />
+                <label class="star-1" for="pstar-12p">1</label>
 
-            <input type="radio" value="4" name="pPunctualityVote" class="star-4" id="pstar-42p" />
-            <label class="star-4" for="pstar-42p">4</label>
+                <input type="radio" value="2" name="pPunctualityVote" class="star-2" id="pstar-22p"  />
+                <label class="star-2" for="pstar-22p">2</label>
 
-            <input type="radio" value="5" name="pPunctualityVote" class="star-5" id="pstar-52p"  />
-            <label class="star-5" for="pstar-52p">5</label>
-            <span></span>
-        </div>
-        <br>
-        <h3>[x]Courtoisie</h3>
-        <div class="rating-star">
-            <input type="radio" value="1" name="pCourtesyVote" class="star-1" id="pstar-12c"  />
-            <label class="star-1" for="pstar-12c">1</label>
+                <input type="radio" value="3" name="pPunctualityVote" class="star-3" id="pstar-32p"  />
+                <label class="star-3" for="pstar-32p">3</label>
 
-            <input type="radio" value="2" name="pCourtesyVote" class="star-2" id="pstar-22c"  />
-            <label class="star-2" for="pstar-22c">2</label>
+                <input type="radio" value="4" name="pPunctualityVote" class="star-4" id="pstar-42p" />
+                <label class="star-4" for="pstar-42p">4</label>
 
-            <input type="radio" value="3" name="pCourtesyVote" class="star-3" id="pstar-32c"  />
-            <label class="star-3" for="pstar-32c">3</label>
+                <input type="radio" value="5" name="pPunctualityVote" class="star-5" id="pstar-52p"  />
+                <label class="star-5" for="pstar-52p">5</label>
+                <span></span>
+            </div>
+            <br>
+            <h3><%= ratingPnD.courtesy %></h3>
+            <div class="rating-star">
+                <input type="hidden" name="pCourtesyVote" value="0" />
 
-            <input type="radio" value="4" name="pCourtesyVote" class="star-4" id="pstar-42c" />
-            <label class="star-4" for="pstar-42c">4</label>
+                <input type="radio" value="1" name="pCourtesyVote" class="star-1" id="pstar-12c"  />
+                <label class="star-1" for="pstar-12c">1</label>
 
-            <input type="radio" value="5" name="pCourtesyVote" class="star-5" id="pstar-52c"  />
-            <label class="star-5" for="pstar-52c">5</label>
-            <span></span>
-        </div>
-        <br>
-        <h3>[x]Politesse</h3>
-        <div class="rating-star">
-            <input type="radio" value="1" name="pPolitenessVote" class="star-1" id="pstar-12f"  />
-            <label class="star-1" for="pstar-12f">1</label>
+                <input type="radio" value="2" name="pCourtesyVote" class="star-2" id="pstar-22c"  />
+                <label class="star-2" for="pstar-22c">2</label>
 
-            <input type="radio" value="2" name="pPolitenessVote" class="star-2" id="pstar-22f"  />
-            <label class="star-2" for="pstar-22f">2</label>
+                <input type="radio" value="3" name="pCourtesyVote" class="star-3" id="pstar-32c"  />
+                <label class="star-3" for="pstar-32c">3</label>
 
-            <input type="radio" value="3" name="pPolitenessVote" class="star-3" id="pstar-32f"  />
-            <label class="star-3" for="pstar-32f">3</label>
+                <input type="radio" value="4" name="pCourtesyVote" class="star-4" id="pstar-42c" />
+                <label class="star-4" for="pstar-42c">4</label>
 
-            <input type="radio" value="4" name="pPolitenessVote" class="star-4" id="pstar-42f" />
-            <label class="star-4" for="pstar-42f">4</label>
+                <input type="radio" value="5" name="pCourtesyVote" class="star-5" id="pstar-52c"  />
+                <label class="star-5" for="pstar-52c">5</label>
+                <span></span>
+            </div>
+            <br>
+            <h3><%= ratingPnD.politeness%></h3>
+            <div class="rating-star">
+                <input type="hidden" name="pPolitenessVote" value="0" />
 
-            <input type="radio" value="5" name="pPolitenessVote" class="star-5" id="pstar-52f"  />
-            <label class="star-5" for="pstar-52f">5</label>
-            <span></span>
-        </div>
+                <input type="radio" value="1" name="pPolitenessVote" class="star-1" id="pstar-12f"  />
+                <label class="star-1" for="pstar-12f">1</label>
 
-        <br>
-        <input type="submit" value="Soumettre"/>
-        <input type="button" value="Fermer" onclick="document.getElementById('lightPassenger').style.display='none';document.getElementById('fade').style.display='none'"/>
-    </form>
+                <input type="radio" value="2" name="pPolitenessVote" class="star-2" id="pstar-22f"  />
+                <label class="star-2" for="pstar-22f">2</label>
 
+                <input type="radio" value="3" name="pPolitenessVote" class="star-3" id="pstar-32f"  />
+                <label class="star-3" for="pstar-32f">3</label>
+
+                <input type="radio" value="4" name="pPolitenessVote" class="star-4" id="pstar-42f" />
+                <label class="star-4" for="pstar-42f">4</label>
+
+                <input type="radio" value="5" name="pPolitenessVote" class="star-5" id="pstar-52f"  />
+                <label class="star-5" for="pstar-52f">5</label>
+                <span></span>
+            </div>
+
+            <br>
+            <div class="btn-submit modal-footer">
+                <input type="submit" value="<%= ratingPnD.submit %>"/>
+            </div>
+        </form>
+    </div>
 </div>
 
-<div id="fade" class="black_overlay"></div>

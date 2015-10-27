@@ -1,8 +1,8 @@
 <div class="content-wrapper-2-columns">
 
     <div class="left">
-        <h3>Conducteur</h3>
-        Score moyen:
+        <h3><%= ratingPnD.driver %></h3>
+        <%= ratingPnD.avgScore %>
         <form>
             <div class="rating-star">
 
@@ -39,7 +39,7 @@
             </div>
         </form>
         <br>
-        Ponctualité
+        <%= ratingPnD.punctuality %>
         <form>
             <div class="rating-star">
 
@@ -76,7 +76,7 @@
             </div>
         </form>
         <br>
-        Courtoisie
+        <%= ratingPnD.courtesy %>
         <form>
             <div class="rating-star">
 
@@ -113,7 +113,7 @@
             </div>
         </form>
         <br>
-        Fiabilité
+        <%= ratingPnD.reliability %>
         <form>
             <div class="rating-star">
 
@@ -150,7 +150,7 @@
             </div>
         </form>
         <br>
-        Securité
+        <%= ratingPnD.security %>
         <form>
             <div class="rating-star">
 
@@ -187,7 +187,7 @@
             </div>
         </form>
         <br>
-        Comfort
+        <%= ratingPnD.comfort %>
         <form>
             <div class="rating-star">
 
@@ -230,8 +230,8 @@
 
     </div>
     <div class="right">
-        <h3>Passager</h3>
-        Score moyen:
+        <h3><%= ratingPnD.passenger %></h3>
+        <%= ratingPnD.avgScore %>
         <form>
             <div class="rating-star">
 
@@ -268,7 +268,7 @@
             </div>
         </form>
         <br>
-        Ponctualité
+        <%= ratingPnD.punctuality %>
         <form>
             <div class="rating-star">
 
@@ -305,7 +305,7 @@
             </div>
         </form>
         <br>
-        Courtesy
+        <%= ratingPnD.courtesy %>
         <form>
             <div class="rating-star">
 
@@ -342,7 +342,7 @@
             </div>
         </form>
         <br>
-        Politesse
+        <%= ratingPnD.politeness %>
         <form>
             <div class="rating-star">
 

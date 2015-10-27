@@ -105,7 +105,7 @@ module.exports = function (app, passport) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
                             }
                         }
-                    }).then(function (obj)   {
+                    }).then(function ()   {
                         res.render('pages/profile.ejs',{
                             pageName : pageName,
                             userName : userName,
@@ -139,11 +139,11 @@ module.exports = function (app, passport) {
     app.post('/rate_driver', function (req, res) {
 
 
-        var ratePunctuality = req.body.dPunctualityVote;
-        var rateCourtesy = req.body.dCourtesyVote;
-        var rateReliability = req.body.dReliabilityVote;
-        var rateSecurity = req.body.dSecurityVote;
-        var rateComfort = req.body.dComfortVote;
+        var ratePunctuality = arrayOrNot(req.body.dPunctualityVote);
+        var rateCourtesy = arrayOrNot(req.body.dCourtesyVote);
+        var rateReliability = arrayOrNot(req.body.dReliabilityVote);
+        var rateSecurity = arrayOrNot(req.body.dSecurityVote);
+        var rateComfort = arrayOrNot(req.body.dComfortVote);
         var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'0'});
 
         vote.fetch().then(function (m) {
@@ -169,9 +169,11 @@ module.exports = function (app, passport) {
     app.post('/rate_passenger', function (req, res) {
 
 
-        var ratePunctuality = req.body.pPunctualityVote;
-        var rateCourtesy = req.body.pCourtesyVote;
-        var ratePoliteness = req.body.pPolitenessVote;
+
+        var ratePunctuality = arrayOrNot(req.body.pPunctualityVote);
+        var rateCourtesy = arrayOrNot(req.body.pCourtesyVote);
+        var ratePoliteness = arrayOrNot(req.body.pPolitenessVote);
+
 
         var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'1'});
 
@@ -612,4 +614,11 @@ function roundingCeilOrFloor (score) {
     return score;
 }
 
+function arrayOrNot (avar) {
+    if(avar.constructor == Array) {
+        return avar[1];
+    } else {
+        return avar;
+    }
 
+}

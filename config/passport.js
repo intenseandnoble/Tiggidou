@@ -15,6 +15,7 @@ var connection            = require('./database').dbConnection;
 var UserModel = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var configAuth = require('./authentification');
+var log = require('./logger').log;
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -43,7 +44,6 @@ module.exports = function(passport) {
         },
         function(email, password, done) {
             new UserModel.Users({email: email}).fetch().then(function(data) {
-                console.log("strategie login");
                 var user = data;
                 if(user) {
                     return done(null, false, {title: 'signup', errorMessage: 'username already exists'});

@@ -4,12 +4,13 @@
 
 //load the model
 var covoso = require(__dirname + '/../models/covosocialSearchDepartures');
-var express = require('express');
 var Model = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var https = require('https');
+var mailling = require('../config/mailer.js');
+var log = require('../config/logger').log;
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -39,6 +40,7 @@ module.exports = function (app, passport) {
 
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
+        var user = req.session.req.user;
         var driverAvgScore;
         var driverPScore;
         var driverCScore;
@@ -55,7 +57,6 @@ module.exports = function (app, passport) {
         var pageName;
 
         var userId;
-        var commentariesTexts = [];
 
         new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
             if(user) {
@@ -148,18 +149,18 @@ module.exports = function (app, passport) {
             if (m == null) {
                 vote.save(
                     {dratingPunctuality: ratePunctuality,
-                    dratingCourtesy:rateCourtesy,
-                    dratingReliability:rateReliability,
-                    dratingSecurity:rateSecurity,
-                    dratingComfort:rateComfort}, {method: 'insert'});
+                        dratingCourtesy:rateCourtesy,
+                        dratingReliability:rateReliability,
+                        dratingSecurity:rateSecurity,
+                        dratingComfort:rateComfort}, {method: 'insert'});
             } else {
                 vote.save(
                     {dratingPunctuality: ratePunctuality,
-                    dratingCourtesy:rateCourtesy,
-                    dratingReliability:rateReliability,
-                    dratingSecurity:rateSecurity,
-                    dratingComfort:rateComfort}, {method: 'update'});
-        }});
+                        dratingCourtesy:rateCourtesy,
+                        dratingReliability:rateReliability,
+                        dratingSecurity:rateSecurity,
+                        dratingComfort:rateComfort}, {method: 'update'});
+            }});
         res.redirect('/profile');
 
     });
@@ -229,9 +230,7 @@ module.exports = function (app, passport) {
 
                 {method: 'insert'}
             ).catch(function (err) {
-                    console.log(err);
-
-
+                    log.error(err);
                 });
         }
 
@@ -248,9 +247,7 @@ module.exports = function (app, passport) {
                     comments: req.body.commentsRide},
                 {method: 'insert'}
             ).catch(function (err) {
-                    console.log(err);
-
-
+                    log.error(err);
                 });
         }
 
@@ -299,8 +296,8 @@ module.exports = function (app, passport) {
             destinationAddress: dest,
             startAddress: currLocation
         }).query(function(qb){
-                qb.orderBy('departureDate','ASC');
-            }).fetchAll().then(function (user) {
+            qb.orderBy('departureDate','ASC');
+        }).fetchAll().then(function (user) {
 
             var resultJSON = user.toJSON();
 
@@ -393,7 +390,7 @@ module.exports = function (app, passport) {
             {
                 header: header,
                 foot : foot/*,
-                message: req.flash('signupMessage')*/
+             message: req.flash('signupMessage')*/
             });
     });
 
@@ -449,7 +446,7 @@ module.exports = function (app, passport) {
                 })
             }
         })
-        });
+    });
 
     app.get('/results', function (req, res) {
         //res.render('pages/results.ejs')
@@ -579,6 +576,8 @@ function requireAuth(req, res, next) {
     res.redirect('/login');
 }
 
+/*https://www.google.com/recaptcha/admin#list*/
+        var commentariesTexts = [];
 var SECRET =  "6LdJfA8TAAAAAGndnIbSyPNBm-X2BphdUHBb-fRT"; //TODO met le secret ici...
 //helper function to make API call to recatpcha and check response
 function verifyRecaptcha(key, callback){

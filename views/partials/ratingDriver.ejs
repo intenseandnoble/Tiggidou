@@ -12,7 +12,7 @@
 <div class="modal-dialog">
 
     <div class="modal-header">
-        <a href="#" class="btn-close" aria-hidden="true">×</a>
+        <a href="#" class="btn-close" aria-hidden="true">&#215;</a>
     </div>
     <div class="modal-header">
         <form id="ratingsFormDriver" method="post" action ="/rate_driver"
@@ -123,7 +123,7 @@
             </div>
             <br>
             <div class="btn-submit modal-footer">
-                <input type="submit" value="<%= ratingPnD.submit %>"/>
+                <input type="submit" value="<%= ratingPnD.submit %>" onclick="history.go(0)" />
             </div>
         </form>
     </div>

@@ -104,24 +104,32 @@ module.exports = function (app, passport) {
 
     app.post('/post-ride', function (req, res) {
 
-        var time = req.body.timeDeparture;
-
-        if(req.body.periodDeparture == 'PM') req.body.timeDeparture+=12;
+        var pets = 0;
+        var luggage =0;
 
         date=req.body.datepicker;
         var newdate = date.split("/").reverse().join("/");
 
-        if(req.body.typeUser == 'driver') //insert into Travel
+
+        if(req.body.hiddenUser == 'driver') //insert into Travel
         {
+            if(req.body.petsRadio_d == 'Yes') pets= 0;
+            else pets = 1;
+
+            if(req.body.luggageRadio_d == 'Yes') luggage= 0;
+            else luggage = 1;
+
             new Model.Travel().save({
                     startAddress :req.body.currentLocation,
                     destinationAddress:req.body.destination,
-                    departureTime:time,
-                    departureDate: newdate, //req.body.smokerRadio,
-                    petsAllowed: 0,
-                    // luggageSize :0,
-                    comments: req.body.commentsRide,
-                    cost:45},
+                    departureTime:req.body.clockpicker,
+                    departureDate: newdate,
+                    petsAllowed : pets,
+                    driver:req.session.req.user.id,
+                    availableSeat:req.body.spinner_d,
+                    luggagesSize :luggage,
+                    //comments: req.body.commentsRide_d,
+                    cost:req.body.cost_d},
 
                 {method: 'insert'}
             ).catch(function (err) {
@@ -134,14 +142,23 @@ module.exports = function (app, passport) {
 
         else //insert into searchTravel
         {
-            new Model.TravelRequest().save({ //todo: I had to remove foreign key constraints to make this work...speak with the others about this
+            if(req.body.petsRadio_p == 'Yes') pets= 0;
+            else pets = 1;
+
+            if(req.body.luggageRadio_d == 'Yes') luggage= 0;
+            else luggage = 1;
+
+            new Model.TravelRequest().save({
                     startAddress :req.body.currentLocation,
                     destinationAddress:req.body.destination,
-                    departureTime:time,
-                    departureDate: newdate, //req.body.smokerRadio,
-                    pets: 0, //todo change the html so it fits an int
-                    // luggageSize :0, //todo change html so luggagesize is int instead of radio button
-                    comments: req.body.commentsRide},
+                    departureTime:req.body.clockpicker,
+                    departureDate: newdate,
+                    pets: pets,
+                    passenger:req.session.req.user.id,
+                    luggageSize :luggage//,
+                    //comments: req.body.commentsRide_p
+                },
+
                 {method: 'insert'}
             ).catch(function (err) {
                     console.log(err);

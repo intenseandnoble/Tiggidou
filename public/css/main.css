@@ -2836,9 +2836,74 @@ input[type=text].input-group {
 	width: 340px;
 	margin-bottom: 10px;
 }
+
 .ui-datepicker {
 	width: 17em;
 	padding: .2em .2em 0;
 	display: none;
 	z-index: 2000 !important;
+}
+
+.hideDisplay{
+	display: none;
+}
+
+.generalSpinner{
+	display: inline-block;
+	width: 35px;
+	margin:auto;
+	position:relative;
+
+}
+
+input[type="radio"].typeUser{
+	visibility:hidden;
+
+}
+
+
+
+.form-group input[type="checkbox"] {
+	display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+	width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+	display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+	display: inline-block;
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+	display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+	display: none;
+}
+
+
+.checkboxUserlbl {
+	display: inline-block;
+	position:relative;
+	width: 180px;
+	margin-bottom: 10px;
+
+}
+
+.passCheckboxDiv {
+	text-align: center;
+	float: left;
+	margin-left: 31px;
+
+}
+
+.driverCheckboxDiv {
+	text-align: center;
+	float: right;
+
+
 }

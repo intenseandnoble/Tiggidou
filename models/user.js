@@ -5,7 +5,7 @@
 var DB = require('../config/database');
 
 var Users = DB.Model.extend({
-    tableName: 'Users',
+    tableName: 'users',
     idAttribute: 'idUser'
 });
 

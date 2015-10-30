@@ -711,11 +711,13 @@ $("input:checkbox").on('click', function() {
 	if ($box.is(":checked")) {
 		// the name of the box is retrieved using the .attr() method
 		// as it is assumed and expected to be immutable
-		var group = "input:checkbox[name='" + $box.attr("name") + "']";
+		var group = "input:checkbox[class='" + $box.attr("class") + "']";
 		// the checked state of the group/box on the other hand will change
 		// and the current value is retrieved using .prop() method
 		$(group).prop("checked", false);
 		$box.prop("checked", true);
+
+
 	} else {
 		$box.prop("checked", false);
 	}

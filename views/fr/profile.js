@@ -4,5 +4,6 @@ module.exports =
     "age":"Age: ",
     "education":"\u00C9ducation: ",
     "music":"Style de musique: ",
-    "dCars":"Le(s) v\u00E9hicule(s)"
+    "goalInLIfe":"But(s) dans la vie",
+    "contacts":"Contacts"
 };

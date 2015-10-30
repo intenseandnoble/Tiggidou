@@ -91,7 +91,8 @@ module.exports = function (app, passport) {
                 new Model.comments().where({
                     commentType: 0,
                     commentProfileId: userId
-                }).fetchAll()
+                }).fetchAll({withRelated:['user']})
+                    //TODO limit the number of results
                     .then(function (comm) {
 
                         var resultJSON = comm.toJSON();
@@ -103,6 +104,7 @@ module.exports = function (app, passport) {
                             var i;
                             for(i=0; i<resultJSON.length; ++i) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
+                                commentariesTexts.push(comm.related('user').toJSON());
                             }
                         }
                     }).then(function ()   {
@@ -123,6 +125,12 @@ module.exports = function (app, passport) {
                             pPolitenessScore: passengerLScore,
 
                             comments:commentariesTexts,
+
+                            age:user.get('age'),
+                            education:user.get('education'),
+                            music:user.get('music'),
+                            anecdote:user.get('anecdote'),
+                            goalInLife:user.get('goalInLife'),
 
                             profile: require('../views/fr/profile.js'),
                             ratingPnD: require('../views/fr/ratingPnD.js'),

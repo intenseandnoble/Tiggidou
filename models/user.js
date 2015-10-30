@@ -6,7 +6,10 @@ var DB = require('../config/database');
 
 var Users = DB.Model.extend({
     tableName: 'users',
-    idAttribute: 'idUser'
+    idAttribute: 'idUser',
+    comments: function() {
+        return this.hasMany(Comments, 'commentIssuer');
+    }
 });
 
 var Ratings = DB.Model.extend({
@@ -29,8 +32,10 @@ var TravelRequest = DB.Model.extend({
 
 var Comments = DB.Model.extend({
     tableName: 'comments',
-    idAttribute: 'commentId'
-
+    idAttribute: 'commentId',
+    user: function () {
+        return this.belongsTo(Users, 'idUser');
+    }
 });
 
 module.exports = {

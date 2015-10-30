@@ -8,6 +8,7 @@ module.exports =
         "signup": "Sign Up",
         "login": "Log In",
         "search": "Search",
-        "publish": "Publish"
+        "publish": "Publish",
+        "logout": "Logout"
     }
 }

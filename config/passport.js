@@ -11,7 +11,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // load up the user model
-var connection            = require('./database').dbConnection;
 var UserModel = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var configAuth = require('./authentification');
@@ -21,7 +20,13 @@ var log = require('./logger').log;
 module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user.idUser); //saved to session req.session.passport.user = {id:'..'}
+        var id;
+        if(user.id){
+            id = user.id;
+        }else{
+            id = user.idUser;
+        }
+        done(null, id); //saved to session req.session.passport.user = {id:'..'}
     });
 
     // used to deserialize the user

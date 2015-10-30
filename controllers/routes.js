@@ -405,7 +405,7 @@ module.exports = function (app, passport) {
                     if(model) {
                         res.render('pages/sign-up.ejs', {
                             title: 'signup',
-                            message: 'username already exists',
+                            //message: 'username already exists',
                             header: header,
                             foot : foot
                         });
@@ -476,8 +476,11 @@ module.exports = function (app, passport) {
     });
 
 
-    app.get('/logout',requireAuth, function(req, res){
-        req.logout();
+    app.get('/logout', function(req, res){
+        if (req.isAuthenticated()){
+            req.logout();
+        }
+
         res.redirect('/');
     });
 
@@ -487,7 +490,7 @@ module.exports = function (app, passport) {
         passport.authenticate('local-login', {
                 successRedirect : '/profile',
                 failureRedirect : '/login',
-                failureFlash : true //allow flash message
+                //failureFlash : true //allow flash message
             },
             function(err, user, info) {
                 if(err) {
@@ -534,7 +537,7 @@ module.exports = function (app, passport) {
                     return res.render('pages/login.ejs',
                         {
                             title: 'Login',
-                            errorMessage: err.message,
+                            //errorMessage: err.message,
                             header: header,
                             foot : foot
                         });
@@ -544,7 +547,7 @@ module.exports = function (app, passport) {
                     return res.render('pages/login.ejs',
                         {
                             title: 'Login',
-                            errorMessage: info.message,
+                            //errorMessage: info.message,
                             header: header,
                             foot : foot
                         });
@@ -554,7 +557,7 @@ module.exports = function (app, passport) {
                         return res.render('pages/login.ejs',
                             {
                                 title: 'Login',
-                                errorMessage: err.message,
+                                //errorMessage: err.message,
                                 header: header,
                                 foot : foot
                             });

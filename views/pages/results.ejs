@@ -3,8 +3,9 @@
 <html>
 <head>
     <% include ../partials/head %>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
-<body class="left-sidebar">
+<body class="left-sidebar" onload="initialize()">
 <div id="page-wrapper">
 
     <!-- Header -->
@@ -20,14 +21,49 @@
                         <div class="row">
 
                             <div >
-                                <form action = "Destination textBox">
-                                    <input type="text" class="search-panel" name = "currentLocation" placeholder="De"><br>
-                                    <input type="text" class="search-panel" name = "destination" placeholder="À"><br>
+                                <form method="get" action="/search">
+                                    <input type="text" class="search-panel" id="currentLocation" name = "currentLocation" onFocus="geolocate()" placeholder="De"><br>
+                                    <input type="text" class="search-panel" id="destination" name = "destination" onFocus="geolocate()" placeholder="À"><br>
                                     <input type="text" class="search-panel" id="datepicker" name="datepicker" placeholder="Date"/><br>
 
+                                    <div class="[ form-group ] ">
+                                        <input  class="radio" type="checkbox" name="searchDriver" id="searchTravelId" checked />
+
+
+                                        <div class="[ btn-group ]">
+                                            <label for="searchTravelId" class="[ btn btn-primary ]">
+                                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                                <span> </span>
+                                            </label>
+                                            <label for="searchTravelId" class="[ btn btn-default active ] checkboxUserlbl">
+                                                Trouvez un conducteur!
+                                            </label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="[ form-group ] ">
+                                        <input class="radio" type="checkbox" name="searchPassenger" id="searchOffersId"  />
+
+
+                                        <div class="[ btn-group ] ">
+                                            <label for="searchOffersId" class="[ btn btn-primary ] ">
+                                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                                <span> </span>
+                                            </label>
+                                            <label for="searchOffersId" class="[ btn btn-default active ] checkboxUserlbl ">
+                                                Trouvez un passager!
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <br><button class="button small icon fa-arrow-circle-right">Go!</button>
                                 </form>
 
-                                <br><a href="no-results.html" class="button small icon fa-arrow-circle-right">Go!</a>
+
 
                             </div>
 
@@ -62,9 +98,12 @@
 
                     </div>
                 </div>
+
+
                 <div class="8u 12u$(medium) important(medium)">
                     <div id="content">
 
+                        <!--- PASSENGERS LOOKING FOR DRIVERS-->
                         <%for ( i= 0;i<drivers.length;i++) { %>
                         <a href="/results" >
                         <article class="row">
@@ -76,14 +115,15 @@
                             </div>
                        <div>
 
+                        <%=departureDate[i]%><br>
                         <%=departureTime[i]%><br>
                         <%=currentLocation%> → <%=destination%><br>
-                        Seats Taken: <%=seatsTaken[i]%><br>
-                        Seats Available: <%seatsAvailable[i]%><br>
+                        Sièges pris: <%=seatsTaken[i]%><br>
+                        Sièges disponible: <%=seatsAvailable[i]%><br>
                            <% if (petsAllowed[i] == 0){ %>
-                           Pets Allowed: No<br>
+                           Animaux permis? : Non<br>
                            <%}else{ %>
-                           Pets Allowed: Yes <br>
+                           Animaux permis? : Oui <br>
                            <% } %>
 
 
@@ -95,6 +135,47 @@
                          <hr>
 
                         <%}%>
+
+
+                    <!--- DRIVERS LOOKING FOR PASSENGERS-->
+                        <%for ( i= 0;i<passengers.length;i++) { %>
+                        <a href="/results" >
+                            <article class="row">
+                                <div>
+                                    <h2><%= passengers[i] %></h2>
+                                    <!--logos here and goodies. -->
+
+                                </div>
+                                <div>
+
+                                    <%=departureDate[i]%><br>
+                                    <%=departureTime[i]%><br>
+                                    <%=currentLocation%> → <%=destination%><br>
+
+                                    Nb de Valise : <%=luggageSize[i]%><br>
+
+
+
+                                    <% if (petsAllowed[i] == 0){ %>
+                                    Animaux? : Non<br>
+                                    <%}else{ %>
+                                    Animaux? : Oui <br>
+                                    <% } %>
+
+
+                                </div>
+
+                            </article>
+                        </a>
+
+                        <hr>
+
+                        <%}%>
+
+
+
+
+
 
 
                     </div>

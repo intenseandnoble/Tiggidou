@@ -3,6 +3,7 @@
 <html>
 <head>
     <% include ../partials/head %>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
 </head>
 
@@ -12,12 +13,13 @@
     <!-- Header -->
     <% include ../partials/header %>
 
+
     <!-- Banner -->
 
 
             <div class="box container">
 
-                    <form method="get" action="/search-ride">
+                    <form method="get" action="/search">
                     <div class = "row" >
                         <p>  <input type="text"  id="currentLocation" class = "indexElement" onFocus="geolocate()" name = "currentLocation" placeholder="De"></p>
                         <p> <input type="text" id="destination" class="indexElement" onFocus="geolocate()" name = "destination" placeholder="À"></p>
@@ -25,7 +27,43 @@
 
 
                     </div><br>
+
+                        <div align="center">
+
+                            <div class="[ form-group ] ">
+                                <input  class="radio" type="checkbox" name="searchDriver" id="searchTravelId" checked />
+
+
+                                <div class="[ btn-group ]">
+                                    <label for="searchTravelId" class="[ btn btn-primary ]">
+                                        <span class="[ glyphicon glyphicon-ok ]"></span>
+                                        <span> </span>
+                                    </label>
+                                    <label for="searchTravelId" class="[ btn btn-default active ] checkboxUserlbl">
+                                        Trouvez un conducteur!
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="[ form-group ] ">
+                                <input class="radio" type="checkbox" name="searchPassenger" id="searchOffersId"  />
+
+
+                                <div class="[ btn-group ] ">
+                                    <label for="searchOffersId" class="[ btn btn-primary ] ">
+                                        <span class="[ glyphicon glyphicon-ok ]"></span>
+                                        <span> </span>
+                                    </label>
+                                    <label for="searchOffersId" class="[ btn btn-default active ] checkboxUserlbl ">
+                                       Trouvez un passager!
+                                    </label>
+                                </div>
+
+                        </div>
+
                        <button class="button icon fa-arrow-circle-right indexBtn">Go!</button>
+                        </div>
+
 
                     </form><br><br>
 

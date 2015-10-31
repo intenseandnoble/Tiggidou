@@ -28,13 +28,6 @@ module.exports = function (app, passport) {
             });
     });
 
-    // rechercher
-    app.get('/search', function (req, res) {
-
-        //faire une recherche et afficher son r�sultat
-
-    });
-
     // profile
     app.get('/profile', function(req, res){
 
@@ -221,24 +214,32 @@ module.exports = function (app, passport) {
 
     app.post('/post-ride', function (req, res) {
 
-        var time = req.body.timeDeparture;
-
-        if(req.body.periodDeparture == 'PM') req.body.timeDeparture+=12;
+        var pets = 0;
+        var luggage =0;
 
         date=req.body.datepicker;
         var newdate = date.split("/").reverse().join("/");
 
-        if(req.body.typeUser == 'driver') //insert into Travel
+
+        if(req.body.hiddenUser == 'driver') //insert into Travel
         {
+            if(req.body.petsRadio_d == 'Yes') pets= 0;
+            else pets = 1;
+
+            if(req.body.luggageRadio_d == 'Yes') luggage= 0;
+            else luggage = 1;
+
             new Model.Travel().save({
                     startAddress :req.body.currentLocation,
                     destinationAddress:req.body.destination,
-                    departureTime:time,
-                    departureDate: newdate, //req.body.smokerRadio,
-                    petsAllowed: 0,
-                    // luggageSize :0,
-                    comments: req.body.commentsRide,
-                    cost:45},
+                    departureTime:req.body.clockpicker,
+                    departureDate: newdate,
+                    petsAllowed : pets,
+                    driver:req.session.req.user.id,
+                    availableSeat:req.body.spinner_d,
+                    luggagesSize :luggage,
+                    //comments: req.body.commentsRide_d,
+                    cost:req.body.cost_d},
 
                 {method: 'insert'}
             ).catch(function (err) {
@@ -249,14 +250,23 @@ module.exports = function (app, passport) {
 
         else //insert into searchTravel
         {
-            new Model.TravelRequest().save({ //todo: I had to remove foreign key constraints to make this work...speak with the others about this
+            if(req.body.petsRadio_p == 'Yes') pets= 1;
+            else pets = 0;
+
+            if(req.body.luggageRadio_d == 'Yes') luggage= 1;
+            else luggage = 0;
+
+            new Model.TravelRequest().save({
                     startAddress :req.body.currentLocation,
                     destinationAddress:req.body.destination,
-                    departureTime:time,
-                    departureDate: newdate, //req.body.smokerRadio,
-                    pets: 0, //todo change the html so it fits an int
-                    // luggageSize :0, //todo change html so luggagesize is int instead of radio button
-                    comments: req.body.commentsRide},
+                    departureTime:req.body.clockpicker,
+                    departureDate: newdate,
+                    pets: pets,
+                    passenger:req.session.req.user.id,
+                    luggageSize :luggage//,
+                    //comments: req.body.commentsRide_p
+                },
+
                 {method: 'insert'}
             ).catch(function (err) {
                     log.error(err);
@@ -269,9 +279,11 @@ module.exports = function (app, passport) {
 
     //Searching rides
 
-    app.get('/search-ride', function (req, res) {
+    app.get('/search', function (req, res) {
+
 
         var driver_arr = [];
+        var passenger_arr=[];
         var comment_arr = [];
         var seatsTaken_arr = [];
         var seatsAvailable_arr = [];
@@ -281,13 +293,15 @@ module.exports = function (app, passport) {
         var luggageSize_arr = [];
         var petsAllowed_arr = [];
         var cost_arr = [];
+
         var dest = req.query.destination;
         var currLocation = req.query.currentLocation;
 
-
         var finishRequest = function () {
             res.render('pages/results.ejs', {
+
                 drivers: driver_arr,
+                passengers: passenger_arr,
                 comment: comment_arr,
                 seatsTaken: seatsTaken_arr,
                 seatsAvailable: seatsAvailable_arr,
@@ -304,51 +318,97 @@ module.exports = function (app, passport) {
             });
         };
 
-        new Model.Travel().where({
-            destinationAddress: dest,
-            startAddress: currLocation
-        }).query(function(qb){
-            qb.orderBy('departureDate','ASC');
-        }).fetchAll().then(function (user) {
+        if(req.query.searchDriver == "on") {
 
-            var resultJSON = user.toJSON();
+            new Model.Travel().where({
+                destinationAddress: dest,
+                startAddress: currLocation
+            }).query(function (qb) {
+                qb.orderBy('departureDate', 'ASC');
+            }).fetchAll().then(function (user) {
 
-            if (resultJSON.length == 0) {
-                res.render('pages/no-results.ejs', {
-                    header: header,
-                    foot: foot
-                });
-            }
-            else {
+                var resultJSON = user.toJSON();
 
-                for (i = 0; i < resultJSON.length; i++) {
+                if (resultJSON.length == 0) {
+                    res.render('pages/no-results.ejs', {
+                        header: header,
+                        foot: foot
+                    });
+                }
+                else {
 
-                    driver_arr.push(resultJSON[i]['driver']);
-                    comment_arr.push(resultJSON[i]['comments']);
-                    seatsTaken_arr.push(resultJSON[i]['takenSeat']);
-                    seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
-                    travelTime_arr.push(resultJSON[i]['travelTimes']);
-                    departureTime_arr.push(resultJSON[i]['departureTime']);
-                    departureDate_arr.push(resultJSON[i]['departureDate']);
-                    luggageSize_arr.push(resultJSON[i]['luggagesSize']);
-                    petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
-                    cost_arr.push(resultJSON[i]['cost']);
+                    for (i = 0; i < resultJSON.length; i++) {
+
+                        driver_arr.push(resultJSON[i]['driver']);
+                        luggageSize_arr.push(resultJSON[i]['luggagesSize']);
+                        departureTime_arr.push(resultJSON[i]['departureTime']);
+                        comment_arr.push(resultJSON[i]['comments']);
+                        petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
+                        departureDate_arr.push(resultJSON[i]['departureDate']);
+                        seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
+                        seatsTaken_arr.push(resultJSON[i]['takenSeat']);
+                        cost_arr.push(resultJSON[i]['cost']);
+                    }
+
+                    finishRequest();
                 }
 
-                finishRequest();
-            }
+            }).catch(function (err) {
 
+                res.render('pages/no-results.ejs', {
+                    header: header,
+                    foot: foot //In case of error
 
-        }).catch(function (err) {
-
-            res.render('pages/no-results.ejs', {
-                header: header,
-                foot: foot //In case of error
+                });
 
             });
 
+        }
 
-        });
+        else {
+
+            new Model.TravelRequest().where({
+                destinationAddress: dest,
+                startAddress: currLocation
+            }).query(function (qb) {
+                qb.orderBy('departureDate', 'ASC');
+            }).fetchAll().then(function (user) {
+
+                var resultJSON = user.toJSON();
+
+                if (resultJSON.length == 0) {
+                    res.render('pages/no-results.ejs', {
+                        header: header,
+                        foot: foot
+                    });
+                }
+                else {
+
+                    for (i = 0; i < resultJSON.length; i++) {
+
+                        passenger_arr.push(resultJSON[i]['passenger']);
+                        luggageSize_arr.push(resultJSON[i]['luggageSize']);
+                        departureTime_arr.push(resultJSON[i]['departureTime']);
+                        comment_arr.push(resultJSON[i]['comments']);
+                        petsAllowed_arr.push(resultJSON[i]['pets']);
+                        departureDate_arr.push(resultJSON[i]['departureDate']);
+                    }
+
+                    finishRequest();
+                }
+
+
+            }).catch(function (err) {
+
+                res.render('pages/no-results.ejs', {
+                    header: header,
+                    foot: foot //In case of error
+
+                });
+
+            });
+        }
+
     });
 
 
@@ -590,6 +650,22 @@ function requireAuth(req, res, next) {
 
     res.redirect('/login');
 }
+
+function getUserName(id){
+
+   var firstName = "Unknown";
+
+    var finishRequest = function () {return firstName;};
+
+    new Model.Users({idUser: id}).fetch().then(function (model) {
+        firstName = model.get('firstName');
+        console.log(id + " : " + firstName);
+        finishRequest();
+    });
+
+
+}
+
 
 /*https://www.google.com/recaptcha/admin#list*/
         var commentariesTexts = [];

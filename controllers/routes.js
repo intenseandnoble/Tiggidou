@@ -4,11 +4,13 @@
 
 //load the model
 var covoso = require(__dirname + '/../models/covosocialSearchDepartures');
-var express = require('express');
 var Model = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
+var https = require('https');
+var mailling = require('../config/mailer.js');
+var log = require('../config/logger').log;
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -31,18 +33,31 @@ module.exports = function (app, passport) {
 
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
+        var user = req.session.req.user;
         var driverAvgScore;
+        var driverPScore;
+        var driverCScore;
+        var driverRScore;
+        var driverSScore;
+        var driverOScore;
+
         var passengerAvgScore;
+        var passengerPScore;
+        var passengerCScore;
+        var passengerLScore;
+
         var userName;
         var pageName;
 
-        new Model.Users({'email': 'OALd@allo.com' }).fetch().then(function(user) {
-            if(user){
+        var userId;
+
+        new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
+            if(user) {
                 //nom de la page
                 pageName = "Profil";
 
                 //nom d'utilisateur
-                userName = user.firstName + " " + user.familyName;
+                userName = user.get("firstName") + " " + user.get("familyName");
                 //anecdotes personnelles
 
                 //photo de profil
@@ -51,49 +66,151 @@ module.exports = function (app, passport) {
 
 
                 //calcul du score
-                driverAvgScore = user.get('driverTotalScore')/user.get('driverNbVotes');
-                if (driverAvgScore%1 != 0 && driverAvgScore%1 >= 0.5) {
-                    driverAvgScore = Math.ceil(driverAvgScore);
+                /* driver scores */
+                driverAvgScore = roundingCeilOrFloor(user.get('driverTotalScore') / (user.get('driverNbVotes') * 5));
+                driverPScore = roundingCeilOrFloor(user.get('dPunctualityScore') / user.get('driverNbVotes'));
+                driverCScore = roundingCeilOrFloor(user.get('dCourtesyScore') / user.get('driverNbVotes'));
+                driverRScore = roundingCeilOrFloor(user.get('dReliabilityScore') / user.get('driverNbVotes'));
+                driverSScore = roundingCeilOrFloor(user.get('dSecurityScore') / user.get('driverNbVotes'));
+                driverOScore = roundingCeilOrFloor(user.get('dComfortScore') / user.get('driverNbVotes'));
 
-                } else if (driverAvgScore%1 < 0.5) {
-                    driverAvgScore = Math.floor(driverAvgScore);
-                }
+                /* passenger scores */
+                passengerAvgScore = roundingCeilOrFloor(user.get('passengerTotalScore') / (user.get('passengerNbVotes') * 3));
+                passengerPScore = roundingCeilOrFloor(user.get('pPunctualityScore') / user.get('passengerNbVotes'));
+                passengerCScore = roundingCeilOrFloor(user.get('pCourtesyScore') / user.get('passengerNbVotes'));
+                passengerLScore = roundingCeilOrFloor(user.get('pPolitenessScore') / user.get('passengerNbVotes'));
 
-                passengerAvgScore = user.get('passengerTotalScore')/user.get('passengerNbVotes');
-                if (passengerAvgScore%1 != 0 && passengerAvgScore%1 >= 0.5) {
-                    passengerAvgScore = Math.ceil(passengerAvgScore);
-                } else if (passengerAvgScore%1 < 0.5) {
-                    passengerAvgScore = Math.floor(passengerAvgScore);
-                }
+                //commentaires
+                userId = user.get('idUser');
+                new Model.comments().where({
+                    commentType: 0,
+                    commentProfileId: userId
+                }).fetchAll({withRelated:['user']})
+                    //TODO limit the number of results
+                    .then(function (comm) {
+
+                        var resultJSON = comm.toJSON();
+
+                        if (resultJSON.length == 0) {
+                            //TODO if no comments
+                        }
+                        else {
+                            var i;
+                            for(i=0; i<resultJSON.length; ++i) {
+                                commentariesTexts.push(resultJSON[i]['comment']);
+                                commentariesTexts.push(comm.related('user').toJSON());
+                            }
+                        }
+                    }).then(function ()   {
+                        res.render('pages/profile.ejs',{
+                            pageName : pageName,
+                            userName : userName,
+
+                            driverAverageScore : driverAvgScore,
+                            dPunctualityScore: driverPScore,
+                            dCourtesyScore: driverCScore,
+                            dReliabilityScore: driverRScore,
+                            dSecurityScore: driverSScore,
+                            dComfortScore: driverOScore,
+
+                            passengerAverageScore : passengerAvgScore,
+                            pPunctualityScore: passengerPScore,
+                            pCourtesyScore: passengerCScore,
+                            pPolitenessScore: passengerLScore,
+
+                            comments:commentariesTexts,
+
+                            age:user.get('age'),
+                            education:user.get('education'),
+                            music:user.get('music'),
+                            anecdote:user.get('anecdote'),
+                            goalInLife:user.get('goalInLife'),
+
+                            profile: require('../views/fr/profile.js'),
+                            ratingPnD: require('../views/fr/ratingPnD.js'),
+                            foot : foot,
+                            header:header
+                        })});
             }
+            //TODO page issue de l'else si l'utilisateur est inexistant
 
-
-        }).then(function (obj)   {
-            res.render('pages/profile.ejs',{
-                pageName : pageName,
-                userName : userName,
-                driverAverageScore : driverAvgScore,
-                passengerAverageScore : passengerAvgScore,
-                foot : foot,
-                header:header
-            })});
+        });
 
     });
 
-
     app.post('/rate_driver', function (req, res) {
 
-        console.log(req.body);
-        var rate = req.body.dstarVote;
-        console.log(req.body.dstarVote);
-        var vote = new Model.ratings();
-        console.log(vote.idAttribute);
-        vote.save({'votingUser': '1', 'judgedUser':'2', rating:rate}, {method: 'insert'});
-        console.log(vote);
+
+        var ratePunctuality = arrayOrNot(req.body.dPunctualityVote);
+        var rateCourtesy = arrayOrNot(req.body.dCourtesyVote);
+        var rateReliability = arrayOrNot(req.body.dReliabilityVote);
+        var rateSecurity = arrayOrNot(req.body.dSecurityVote);
+        var rateComfort = arrayOrNot(req.body.dComfortVote);
+        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'0'});
+
+        vote.fetch().then(function (m) {
+            if (m == null) {
+                vote.save(
+                    {dratingPunctuality: ratePunctuality,
+                        dratingCourtesy:rateCourtesy,
+                        dratingReliability:rateReliability,
+                        dratingSecurity:rateSecurity,
+                        dratingComfort:rateComfort}, {method: 'insert'});
+            } else {
+                vote.save(
+                    {dratingPunctuality: ratePunctuality,
+                        dratingCourtesy:rateCourtesy,
+                        dratingReliability:rateReliability,
+                        dratingSecurity:rateSecurity,
+                        dratingComfort:rateComfort}, {method: 'update'});
+            }});
         res.redirect('/profile');
 
     });
 
+    app.post('/rate_passenger', function (req, res) {
+
+
+
+        var ratePunctuality = arrayOrNot(req.body.pPunctualityVote);
+        var rateCourtesy = arrayOrNot(req.body.pCourtesyVote);
+        var ratePoliteness = arrayOrNot(req.body.pPolitenessVote);
+
+
+        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'1'});
+
+        vote.fetch().then(function (m) {
+            if (m == null) {
+                vote.save(
+                    {pratingPunctuality: ratePunctuality,
+                        pratingCourtesy:rateCourtesy,
+                        pratingPoliteness:ratePoliteness}, {method: 'insert'});
+            } else {
+                vote.save(
+                    {pratingPunctuality: ratePunctuality,
+                        pratingCourtesy:rateCourtesy,
+                        pratingPoliteness:ratePoliteness}, {method: 'update'});
+            }});
+        res.redirect('/profile');
+
+    });
+
+    //commentType: 0 => profil; 1 => travel; 2 => requestTravel/searchtravel
+
+    app.post('/post_profile_comment', function(req, res) {
+
+
+        var c = req.body.comment;
+        var commentaire = new Model.comments({
+            'commentIssuer':'1',
+            'commentProfileId':'2',
+            'commentType': '0',
+            'comment': c});
+
+        commentaire.save();
+
+        res.redirect('/profile');
+    });
 
     app.post('/post-ride', function (req, res) {
 
@@ -126,9 +243,7 @@ module.exports = function (app, passport) {
 
                 {method: 'insert'}
             ).catch(function (err) {
-                    console.log(err);
-
-
+                    log.error(err);
                 });
         }
 
@@ -154,9 +269,7 @@ module.exports = function (app, passport) {
 
                 {method: 'insert'}
             ).catch(function (err) {
-                    console.log(err);
-
-
+                    log.error(err);
                 });
         }
 
@@ -345,47 +458,67 @@ module.exports = function (app, passport) {
 
     // signup
     app.get('/sign-up', function (req, res) {
-        //res.render('pages/sign-up.ejs'/*, {message: req.flash('signupMessage')}*/);
         res.render('pages/sign-up.ejs',
             {
                 header: header,
-                foot : foot
+                foot : foot/*,
+             message: req.flash('signupMessage')*/
             });
     });
 
     //processs the signup form
     app.post('/sign-up', function(req, res, next) {
-        var user = req.body;
-        var usernamePromise = null;
-        usernamePromise = new Model.Users({email: user.email}).fetch();
-        return usernamePromise.then(function(model) {
-            if(model) {
+        verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
+            if(success){
+                var user = req.body;
+                var usernamePromise = null;
+                usernamePromise = new Model.Users({email: user.email}).fetch();
+                return usernamePromise.then(function(model) {
+                    if(model) {
+                        res.render('pages/sign-up.ejs', {
+                            title: 'signup',
+                            //message: 'username already exists',
+                            header: header,
+                            foot : foot
+                        });
+                    } else {
+                        //TODO MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
+                        //TODO comparer le password et la confirmation du mdp
+                        //TODO ajouter la date de naissance
+                        var password = user.password;
+                        var hash = bcrypt.hashSync(password);
+                        var typeSign = "local";
+                        var firstName = user.firstName;
+                        var familyName = user.familyName;
+                        var signUpUser = new Model.Users({
+                            email: user.email,
+                            password: hash,
+                            typeSignUp: typeSign,
+                            firstName: firstName,
+                            familyName: familyName
+                        });
+
+                        signUpUser.save().then(function(model) {
+                            // sign in the newly registered user
+                            loginPost(req, res, next);
+                        });
+                    }
+                })
+            } else {
+                var user = req.body;
                 res.render('pages/sign-up.ejs', {
                     title: 'signup',
-                    errorMessage: 'username already exists',
+                    message: 'captcha échoué',
                     header: header,
-                    foot : foot});
-            } else {
-                // TODO MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
-                var password = user.password;
-                var hash = bcrypt.hashSync(password);
-                var typeSign = "local";
-                var firstName = user.firstName;
-                var familyName = user.familyName;
-                var signUpUser = new Model.Users({
+                    foot: foot,
+                    firstName: user.firstName,
+                    familyName: user.familyName,
                     email: user.email,
-                    password: hash,
-                    typeSignUp: typeSign,
-                    firstName: firstName,
-                    familyName: familyName
-                });
-
-                signUpUser.save().then(function(model) {
-                    // sign in the newly registered user
-                    loginPost(req, res, next);
-                });
+                    birthDate: user.birthDate
+                })
             }
-        })});
+        })
+    });
 
     app.get('/results', function (req, res) {
         //res.render('pages/results.ejs')
@@ -415,8 +548,11 @@ module.exports = function (app, passport) {
     });
 
 
-    app.get('/logout',requireAuth, function(req, res){
-        req.logout();
+    app.get('/logout', function(req, res){
+        if (req.isAuthenticated()){
+            req.logout();
+        }
+
         res.redirect('/');
     });
 
@@ -426,7 +562,7 @@ module.exports = function (app, passport) {
         passport.authenticate('local-login', {
                 successRedirect : '/profile',
                 failureRedirect : '/login',
-                failureFlash : true //allow flash message
+                //failureFlash : true //allow flash message
             },
             function(err, user, info) {
                 if(err) {
@@ -473,7 +609,7 @@ module.exports = function (app, passport) {
                     return res.render('pages/login.ejs',
                         {
                             title: 'Login',
-                            errorMessage: err.message,
+                            //errorMessage: err.message,
                             header: header,
                             foot : foot
                         });
@@ -483,7 +619,7 @@ module.exports = function (app, passport) {
                     return res.render('pages/login.ejs',
                         {
                             title: 'Login',
-                            errorMessage: info.message,
+                            //errorMessage: info.message,
                             header: header,
                             foot : foot
                         });
@@ -493,7 +629,7 @@ module.exports = function (app, passport) {
                         return res.render('pages/login.ejs',
                             {
                                 title: 'Login',
-                                errorMessage: err.message,
+                                //errorMessage: err.message,
                                 header: header,
                                 foot : foot
                             });
@@ -531,10 +667,44 @@ function getUserName(id){
 }
 
 
+/*https://www.google.com/recaptcha/admin#list*/
+        var commentariesTexts = [];
+var SECRET =  "6LdJfA8TAAAAAGndnIbSyPNBm-X2BphdUHBb-fRT"; //TODO met le secret ici...
+//helper function to make API call to recatpcha and check response
+function verifyRecaptcha(key, callback){
+    https.get("https://www.google.com/recaptcha/api/siteverify?secret=" + SECRET + "&response=" + key, function(res){
+        var data = "";
+        res.on('data', function(chunk){
+            data += chunk.toString();
+        });
+        res.on('end', function(){
+            try{
+                var parsedData = JSON.parse(data);
+                callback(parsedData.success);
+            } catch(e){
+                callback(false);
+            }
 
+        });
+    });
+}
 
+function roundingCeilOrFloor (score) {
 
+    if (score % 1 != 0 && score % 1 >= 0.5) {
+        score = Math.ceil(score);
+    } else if (score % 1 < 0.5) {
+        score = Math.floor(score);
+    }
 
+    return score;
+}
 
+function arrayOrNot (avar) {
+    if(avar.constructor == Array) {
+        return avar[1];
+    } else {
+        return avar;
+    }
 
-
+}

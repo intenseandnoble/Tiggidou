@@ -6,8 +6,9 @@ module.exports =
     "nameCompany": "Covoitu-Go!",
     "links": {
         "signup": "Sign Up",
-        "login": "Log In",
+        "login": "Login",
         "search": "Search",
-        "publish": "Publish"
+        "publish": "Publish",
+        "logout": "Logout"
     }
 }

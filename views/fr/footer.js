@@ -26,10 +26,10 @@ module.exports =
         "num3": {
             "nom":"Entreprise",
             "lien1":{
-                "name":"Emplois",
+                "name":"Vision",
                 "link":"#"
             }
         }
     },
     "contact": "Nous contacter"
-}
+};

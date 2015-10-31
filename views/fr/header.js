@@ -3,11 +3,12 @@
  */
 module.exports =
 {
-    "nameCompany": "Covoitu-Go!",
+    "nameCompany": "Tiggidou",
     "links": {
         "signup": "S'enregistrer",
         "login": "Connexion",
         "search": "Rechercher",
-        "publish": "Publier"
+        "publish": "Publier",
+        "logout": "Deconnexion"
     }
-}
+};

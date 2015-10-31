@@ -19,7 +19,7 @@ module.exports = function (app, passport) {
 // routes ======================================================================
 
     // api ---------------------------------------------------------------------
-    //single page application
+    //INDEX
     app.get('/', function (req, res) {
         res.render('pages/index.ejs',
             {
@@ -30,7 +30,6 @@ module.exports = function (app, passport) {
 
     // profile
     app.get('/profile', function(req, res){
-
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
         var user = req.session.req.user;
@@ -139,8 +138,6 @@ module.exports = function (app, passport) {
     });
 
     app.post('/rate_driver', function (req, res) {
-
-
         var ratePunctuality = arrayOrNot(req.body.dPunctualityVote);
         var rateCourtesy = arrayOrNot(req.body.dCourtesyVote);
         var rateReliability = arrayOrNot(req.body.dReliabilityVote);
@@ -684,13 +681,11 @@ function verifyRecaptcha(key, callback){
             } catch(e){
                 callback(false);
             }
-
         });
     });
 }
 
 function roundingCeilOrFloor (score) {
-
     if (score % 1 != 0 && score % 1 >= 0.5) {
         score = Math.ceil(score);
     } else if (score % 1 < 0.5) {

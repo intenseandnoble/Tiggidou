@@ -92,7 +92,8 @@ module.exports = function (app, passport) {
                 new Model.comments().where({
                     commentType: 0,
                     commentProfileId: userId
-                }).fetchAll()
+                }).fetchAll({withRelated:['user']})
+                    //TODO limit the number of results
                     .then(function (comm) {
 
                         var resultJSON = comm.toJSON();
@@ -104,9 +105,10 @@ module.exports = function (app, passport) {
                             var i;
                             for(i=0; i<resultJSON.length; ++i) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
+                                commentariesTexts.push(comm.related('user').toJSON());
                             }
                         }
-                    }).then(function (obj)   {
+                    }).then(function ()   {
                         res.render('pages/profile.ejs',{
                             pageName : pageName,
                             userName : userName,
@@ -125,6 +127,14 @@ module.exports = function (app, passport) {
 
                             comments:commentariesTexts,
 
+                            age:user.get('age'),
+                            education:user.get('education'),
+                            music:user.get('music'),
+                            anecdote:user.get('anecdote'),
+                            goalInLife:user.get('goalInLife'),
+
+                            profile: require('../views/fr/profile.js'),
+                            ratingPnD: require('../views/fr/ratingPnD.js'),
                             foot : foot,
                             header:header
                         })});
@@ -138,11 +148,11 @@ module.exports = function (app, passport) {
     app.post('/rate_driver', function (req, res) {
 
 
-        var ratePunctuality = req.body.dPunctualityVote;
-        var rateCourtesy = req.body.dCourtesyVote;
-        var rateReliability = req.body.dReliabilityVote;
-        var rateSecurity = req.body.dSecurityVote;
-        var rateComfort = req.body.dComfortVote;
+        var ratePunctuality = arrayOrNot(req.body.dPunctualityVote);
+        var rateCourtesy = arrayOrNot(req.body.dCourtesyVote);
+        var rateReliability = arrayOrNot(req.body.dReliabilityVote);
+        var rateSecurity = arrayOrNot(req.body.dSecurityVote);
+        var rateComfort = arrayOrNot(req.body.dComfortVote);
         var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'0'});
 
         vote.fetch().then(function (m) {
@@ -168,9 +178,11 @@ module.exports = function (app, passport) {
     app.post('/rate_passenger', function (req, res) {
 
 
-        var ratePunctuality = req.body.pPunctualityVote;
-        var rateCourtesy = req.body.pCourtesyVote;
-        var ratePoliteness = req.body.pPolitenessVote;
+
+        var ratePunctuality = arrayOrNot(req.body.pPunctualityVote);
+        var rateCourtesy = arrayOrNot(req.body.pCourtesyVote);
+        var ratePoliteness = arrayOrNot(req.body.pPolitenessVote);
+
 
         var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'1'});
 
@@ -612,4 +624,11 @@ function roundingCeilOrFloor (score) {
     return score;
 }
 
+function arrayOrNot (avar) {
+    if(avar.constructor == Array) {
+        return avar[1];
+    } else {
+        return avar;
+    }
 
+}

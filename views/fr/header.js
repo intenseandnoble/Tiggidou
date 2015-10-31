@@ -3,7 +3,7 @@
  */
 module.exports =
 {
-    "nameCompany": "Covoitu-Go!",
+    "nameCompany": "Tiggidou",
     "links": {
         "signup": "S'enregistrer",
         "login": "Connexion",

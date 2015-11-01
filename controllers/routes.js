@@ -56,6 +56,7 @@ module.exports = function (app, passport) {
 
         var userId;
         var commentariesTexts = [];
+        var commentsIssuers = [];
 
         new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
             if(user) {
@@ -64,12 +65,6 @@ module.exports = function (app, passport) {
 
                 //nom d'utilisateur
                 userName = user.get("firstName") + " " + user.get("familyName");
-                //anecdotes personnelles
-
-                //photo de profil
-
-                //commentaires
-
 
                 //calcul du score
                 /* driver scores */
@@ -101,10 +96,10 @@ module.exports = function (app, passport) {
                             //TODO if no comments
                         }
                         else {
-                            var i;
-                            for(i=0; i<resultJSON.length; ++i) {
+
+                            for(i= 0; i<resultJSON.length; ++i) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
-                                commentariesTexts.push(comm.related('user').toJSON());
+                                commentsIssuers.push(getUsernameFromDB(resultJSON[i]['commentIssuer']));
                             }
                         }
                     }).then(function ()   {
@@ -125,6 +120,7 @@ module.exports = function (app, passport) {
                             pPolitenessScore: passengerLScore,
 
                             comments:commentariesTexts,
+                            commentsIssuers:commentsIssuers,
 
                             age:user.get('age'),
                             education:user.get('education'),
@@ -618,7 +614,6 @@ function roundingCeilOrFloor (score) {
     } else if (score % 1 < 0.5) {
         score = Math.floor(score);
     }
-
     return score;
 }
 
@@ -628,5 +623,23 @@ function arrayOrNot (avar) {
     } else {
         return avar;
     }
+}
+
+function getUsernameFromDB (userId) {
+
+    var s = "moo";
+
+    new Model.Users({idUser:userId})
+        .fetch()
+        .then(function (u){
+            var prenom = u.get('firstName');
+            var nom = u.get('familyName');
+            s = prenom + " " + nom;
+            console.log(s);
+            return prenom + " " + nom;
+        });
+
+
+    return s;
 
 }

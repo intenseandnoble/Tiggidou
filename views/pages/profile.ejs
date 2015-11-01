@@ -114,12 +114,12 @@
 
                                     <ul class="list-group">
 
-                                        <% if (comments.length > 1 ) {
-                                        for (var i =0; i<comments.length; i+=2) { %>
+                                        <% if (comments.length > 0 ) {
+                                        for (var i =0; i<comments.length; i+=1) { %>
                                         <li class="list-group-item">
                                             <hr>
                                             <p >
-                                                <a href="#"  title="NAME" class="user"><%= comments[i+1] %></a>
+                                                <a href="#"  title="NAME" class="user"><%= commentsIssuers[i] %></a>
                                             </p>
                                             <p class="comment">
                                             <p> <%= comments[i] %> </p>

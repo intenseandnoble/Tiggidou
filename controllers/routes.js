@@ -31,10 +31,10 @@ module.exports = function (app, passport) {
 
     // profile
 
-    app.get('/profile', function(req, res){
+    app.get('/profile',requireAuth,function(req, res){
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
-        var user = req.session.req.user;
+        var Juser = req.session.req.user;
         var driverAvgScore;
         var driverPScore;
         var driverCScore;
@@ -48,17 +48,13 @@ module.exports = function (app, passport) {
         var passengerLScore;
 
         var userName;
-        var pageName;
 
         var userId;
         var commentariesTexts = [];
         var promiseArr = [];
-        var commentsIssuers = [];
 
-        new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
+        new Model.Users({'email': Juser.attributes.email }).fetch().then(function(user) {
             if(user) {
-                //nom de la page
-                pageName = "Profil";
 
                 //nom d'utilisateur
                 userName = user.get("firstName") + " " + user.get("familyName");
@@ -101,8 +97,7 @@ module.exports = function (app, passport) {
 
                         Promise.all(promiseArr).then(function(ps){
 
-                            res.render('pages/profile.ejs',{
-                            pageName : pageName,
+                            res.render('pages/my-profile.ejs',{
                             userName : userName,
 
                             driverAverageScore : driverAvgScore,
@@ -164,8 +159,10 @@ module.exports = function (app, passport) {
                     dratingReliability:rateReliability,
                     dratingSecurity:rateSecurity,
                     dratingComfort:rateComfort}, {method: 'update'});
-        }});
-        res.redirect('/profile');
+        }})
+            .then(function(){
+                res.redirect('/profile');
+            });
 
     });
 
@@ -191,9 +188,10 @@ module.exports = function (app, passport) {
                     {pratingPunctuality: ratePunctuality,
                         pratingCourtesy:rateCourtesy,
                         pratingPoliteness:ratePoliteness}, {method: 'update'});
-            }});
-        res.redirect('/profile');
-
+            }})
+            .then(function () {
+                res.redirect('/profile');
+            });
     });
 
     //commentType: 0 => profil; 1 => travel; 2 => requestTravel/searchtravel

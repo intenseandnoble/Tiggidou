@@ -19,7 +19,7 @@ module.exports =
         "num2": {
             "nom":"Navigation",
             "lien1":{
-                "name":"Profil",
+                "name":"Mon Profil",
                 "link":"/profile"
             }
         },

@@ -1,0 +1,380 @@
+<div class="content-wrapper-2-columns clearfix">
+
+    <div class="left">
+        <h3><%= ratingPnD.driver %></h3>
+        <%= ratingPnD.avgScore %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var dchecker01 = "";
+                var dchecker02 = "";
+                var dchecker03 = "";
+                var dchecker04 = "";
+                var dchecker05 = "";
+                switch (driverAverageScore) {
+                    case 1:
+                        dchecker01 = "checked";
+                        break;
+                    case 2:
+                        dchecker02 = "checked";
+                        break;
+                    case 3:
+                        dchecker03 = "checked";
+                        break;
+                    case 4:
+                        dchecker04 = "checked";
+                        break;
+                    case 5:
+                        dchecker05 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="dstar" class="star-1" id="dstar-1" <%= dchecker01 %> />
+                <input type="radio" value="2" name="dstar" class="star-2" id="dstar-2" <%= dchecker02 %> />
+                <input type="radio" value="3" name="dstar" class="star-3" id="dstar-3" <%= dchecker03 %> />
+                <input type="radio" value="4" name="dstar" class="star-4" id="dstar-4" <%= dchecker04 %> />
+                <input type="radio" value="5" name="dstar" class="star-5" id="dstar-5" <%= dchecker05 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.punctuality %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var dchecker11 = "";
+                var dchecker12 = "";
+                var dchecker13 = "";
+                var dchecker14 = "";
+                var dchecker15 = "";
+                switch (dPunctualityScore) {
+                    case 1:
+                        dchecker11 = "checked";
+                        break;
+                    case 2:
+                        dchecker12 = "checked";
+                        break;
+                    case 3:
+                        dchecker13 = "checked";
+                        break;
+                    case 4:
+                        dchecker14 = "checked";
+                        break;
+                    case 5:
+                        dchecker15 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="dstar" class="star-1" id="dstar-1" <%= dchecker11 %> />
+                <input type="radio" value="2" name="dstar" class="star-2" id="dstar-2" <%= dchecker12 %> />
+                <input type="radio" value="3" name="dstar" class="star-3" id="dstar-3" <%= dchecker13 %> />
+                <input type="radio" value="4" name="dstar" class="star-4" id="dstar-4" <%= dchecker14 %> />
+                <input type="radio" value="5" name="dstar" class="star-5" id="dstar-5" <%= dchecker15 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.courtesy %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var dchecker21 = "";
+                var dchecker22 = "";
+                var dchecker23 = "";
+                var dchecker24 = "";
+                var dchecker25 = "";
+                switch (dCourtesyScore) {
+                    case 1:
+                        dchecker21 = "checked";
+                        break;
+                    case 2:
+                        dchecker22 = "checked";
+                        break;
+                    case 3:
+                        dchecker23 = "checked";
+                        break;
+                    case 4:
+                        dchecker24 = "checked";
+                        break;
+                    case 5:
+                        dchecker25 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="dstar" class="star-1" id="dstar-1" <%= dchecker21 %> />
+                <input type="radio" value="2" name="dstar" class="star-2" id="dstar-2" <%= dchecker22 %> />
+                <input type="radio" value="3" name="dstar" class="star-3" id="dstar-3" <%= dchecker23 %> />
+                <input type="radio" value="4" name="dstar" class="star-4" id="dstar-4" <%= dchecker24 %> />
+                <input type="radio" value="5" name="dstar" class="star-5" id="dstar-5" <%= dchecker25 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.reliability %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var dchecker31 = "";
+                var dchecker32 = "";
+                var dchecker33 = "";
+                var dchecker34 = "";
+                var dchecker35 = "";
+                switch (dReliabilityScore) {
+                    case 1:
+                        dchecker31 = "checked";
+                        break;
+                    case 2:
+                        dchecker32 = "checked";
+                        break;
+                    case 3:
+                        dchecker33 = "checked";
+                        break;
+                    case 4:
+                        dchecker34 = "checked";
+                        break;
+                    case 5:
+                        dchecker35 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="dstar" class="star-1" id="dstar-1" <%= dchecker31 %> />
+                <input type="radio" value="2" name="dstar" class="star-2" id="dstar-2" <%= dchecker32 %> />
+                <input type="radio" value="3" name="dstar" class="star-3" id="dstar-3" <%= dchecker33 %> />
+                <input type="radio" value="4" name="dstar" class="star-4" id="dstar-4" <%= dchecker34 %> />
+                <input type="radio" value="5" name="dstar" class="star-5" id="dstar-5" <%= dchecker35 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.security %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var dchecker41 = "";
+                var dchecker42 = "";
+                var dchecker43 = "";
+                var dchecker44 = "";
+                var dchecker45 = "";
+                switch (dSecurityScore) {
+                    case 1:
+                        dchecker41 = "checked";
+                        break;
+                    case 2:
+                        dchecker42 = "checked";
+                        break;
+                    case 3:
+                        dchecker43 = "checked";
+                        break;
+                    case 4:
+                        dchecker44 = "checked";
+                        break;
+                    case 5:
+                        dchecker45 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="dstar" class="star-1" id="dstar-1" <%= dchecker41 %> />
+                <input type="radio" value="2" name="dstar" class="star-2" id="dstar-2" <%= dchecker42 %> />
+                <input type="radio" value="3" name="dstar" class="star-3" id="dstar-3" <%= dchecker43 %> />
+                <input type="radio" value="4" name="dstar" class="star-4" id="dstar-4" <%= dchecker44 %> />
+                <input type="radio" value="5" name="dstar" class="star-5" id="dstar-5" <%= dchecker45 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.comfort %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var dchecker51 = "";
+                var dchecker52 = "";
+                var dchecker53 = "";
+                var dchecker54 = "";
+                var dchecker55 = "";
+                switch (dComfortScore) {
+                    case 1:
+                        dchecker51 = "checked";
+                        break;
+                    case 2:
+                        dchecker52 = "checked";
+                        break;
+                    case 3:
+                        dchecker53 = "checked";
+                        break;
+                    case 4:
+                        dchecker54 = "checked";
+                        break;
+                    case 5:
+                        dchecker55 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="dstar" class="star-1" id="dstar-1" <%= dchecker51 %> />
+                <input type="radio" value="2" name="dstar" class="star-2" id="dstar-2" <%= dchecker52 %> />
+                <input type="radio" value="3" name="dstar" class="star-3" id="dstar-3" <%= dchecker53 %> />
+                <input type="radio" value="4" name="dstar" class="star-4" id="dstar-4" <%= dchecker54 %> />
+                <input type="radio" value="5" name="dstar" class="star-5" id="dstar-5" <%= dchecker55 %> />
+                <span></span>
+            </div>
+        </form>
+
+    </div>
+    <div class="right">
+        <h3><%= ratingPnD.passenger %></h3>
+        <%= ratingPnD.avgScore %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var pchecker01 = "";
+                var pchecker02 = "";
+                var pchecker03 = "";
+                var pchecker04 = "";
+                var pchecker05 = "";
+                switch (passengerAverageScore) {
+                    case 1:
+                        pchecker01 = "checked";
+                        break;
+                    case 2:
+                        pchecker02 = "checked";
+                        break;
+                    case 3:
+                        pchecker03 = "checked";
+                        break;
+                    case 4:
+                        pchecker04 = "checked";
+                        break;
+                    case 5:
+                        pchecker05 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="pstar" class="star-1" id="pstar-1" <%= pchecker01 %> />
+                <input type="radio" value="2" name="pstar" class="star-2" id="pstar-2" <%= pchecker02 %> />
+                <input type="radio" value="3" name="pstar"  class="star-3" id="pstar-3" <%= pchecker03 %> />
+                <input type="radio" value="4" name="pstar"  class="star-4" id="pstar-4" <%= pchecker04 %> />
+                <input type="radio" value="5" name="pstar"  class="star-5" id="pstar-5" <%= pchecker05 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.punctuality %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var pchecker11 = "";
+                var pchecker12 = "";
+                var pchecker13 = "";
+                var pchecker14 = "";
+                var pchecker15 = "";
+                switch (pPunctualityScore) {
+                    case 1:
+                        pchecker11 = "checked";
+                        break;
+                    case 2:
+                        pchecker12 = "checked";
+                        break;
+                    case 3:
+                        pchecker13 = "checked";
+                        break;
+                    case 4:
+                        pchecker14 = "checked";
+                        break;
+                    case 5:
+                        pchecker15 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="pstar" class="star-1" id="pstar-1" <%= pchecker11 %> />
+                <input type="radio" value="2" name="pstar" class="star-2" id="pstar-2" <%= pchecker12 %> />
+                <input type="radio" value="3" name="pstar"  class="star-3" id="pstar-3" <%= pchecker13 %> />
+                <input type="radio" value="4" name="pstar"  class="star-4" id="pstar-4" <%= pchecker14 %> />
+                <input type="radio" value="5" name="pstar"  class="star-5" id="pstar-5" <%= pchecker15 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.courtesy %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var pchecker21 = "";
+                var pchecker22 = "";
+                var pchecker23 = "";
+                var pchecker24 = "";
+                var pchecker25 = "";
+                switch (pCourtesyScore) {
+                    case 1:
+                        pchecker21 = "checked";
+                        break;
+                    case 2:
+                        pchecker22 = "checked";
+                        break;
+                    case 3:
+                        pchecker23 = "checked";
+                        break;
+                    case 4:
+                        pchecker24 = "checked";
+                        break;
+                    case 5:
+                        pchecker25 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="pstar" class="star-1" id="pstar-1" <%= pchecker21 %> />
+                <input type="radio" value="2" name="pstar" class="star-2" id="pstar-2" <%= pchecker22 %> />
+                <input type="radio" value="3" name="pstar"  class="star-3" id="pstar-3" <%= pchecker23 %> />
+                <input type="radio" value="4" name="pstar"  class="star-4" id="pstar-4" <%= pchecker24 %> />
+                <input type="radio" value="5" name="pstar"  class="star-5" id="pstar-5" <%= pchecker25 %> />
+                <span></span>
+            </div>
+        </form>
+        <br>
+        <%= ratingPnD.politeness %>
+        <form>
+            <div class="rating-star">
+
+                <%
+                var pchecker31 = "";
+                var pchecker32 = "";
+                var pchecker33 = "";
+                var pchecker34 = "";
+                var pchecker35 = "";
+                switch (pPolitenessScore) {
+                    case 1:
+                        pchecker31 = "checked";
+                        break;
+                    case 2:
+                        pchecker32 = "checked";
+                        break;
+                    case 3:
+                        pchecker33 = "checked";
+                        break;
+                    case 4:
+                        pchecker34 = "checked";
+                        break;
+                    case 5:
+                        pchecker35 = "checked";
+                        break;
+                }
+                %>
+                <input type="radio" value="1" name="pstar" class="star-1" id="pstar-1" <%= pchecker31 %> />
+                <input type="radio" value="2" name="pstar" class="star-2" id="pstar-2" <%= pchecker32 %> />
+                <input type="radio" value="3" name="pstar"  class="star-3" id="pstar-3" <%= pchecker33 %> />
+                <input type="radio" value="4" name="pstar"  class="star-4" id="pstar-4" <%= pchecker34 %> />
+                <input type="radio" value="5" name="pstar"  class="star-5" id="pstar-5" <%= pchecker35 %> />
+                <span></span>
+            </div>
+        </form>
+
+    </div>
+
+</div>

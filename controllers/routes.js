@@ -10,6 +10,7 @@ var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var https = require('https');
+var Promise = require('bluebird');
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -35,6 +36,7 @@ module.exports = function (app, passport) {
     });
 
     // profile
+
     app.get('/profile', function(req, res){
 
         //Todo prendre les donnees de l'utilisateur connecte
@@ -56,6 +58,7 @@ module.exports = function (app, passport) {
 
         var userId;
         var commentariesTexts = [];
+        var promiseArr = [];
         var commentsIssuers = [];
 
         new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
@@ -94,16 +97,17 @@ module.exports = function (app, passport) {
 
                         if (resultJSON.length == 0) {
                             //TODO if no comments
-                        }
-                        else {
+                        } else {
 
                             for(i= 0; i<resultJSON.length; ++i) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
-                                commentsIssuers.push(getUsernameFromDB(resultJSON[i]['commentIssuer']));
+                                promiseArr.push(getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                             }
                         }
-                    }).then(function ()   {
-                        res.render('pages/profile.ejs',{
+
+                        Promise.all(promiseArr).then(function(ps){
+
+                            res.render('pages/profile.ejs',{
                             pageName : pageName,
                             userName : userName,
 
@@ -120,7 +124,7 @@ module.exports = function (app, passport) {
                             pPolitenessScore: passengerLScore,
 
                             comments:commentariesTexts,
-                            commentsIssuers:commentsIssuers,
+                            commentsIssuers:ps,
 
                             age:user.get('age'),
                             education:user.get('education'),
@@ -132,7 +136,10 @@ module.exports = function (app, passport) {
                             ratingPnD: require('../views/fr/ratingPnD.js'),
                             foot : foot,
                             header:header
-                        })});
+                            });
+                        });
+
+                    })
             }
             //TODO page issue de l'else si l'utilisateur est inexistant
 
@@ -625,21 +632,16 @@ function arrayOrNot (avar) {
     }
 }
 
-function getUsernameFromDB (userId) {
+function getUsernameFromDBAsync(userId) {
 
-    var s = "moo";
-
-    new Model.Users({idUser:userId})
+    return new Model.Users({
+        idUser: userId
+    })
         .fetch()
-        .then(function (u){
+        .then(function(u){
             var prenom = u.get('firstName');
             var nom = u.get('familyName');
-            s = prenom + " " + nom;
-            console.log(s);
-            return prenom + " " + nom;
+            var s = prenom + " " + nom;
+            return s;
         });
-
-
-    return s;
-
 }

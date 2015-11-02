@@ -105,39 +105,46 @@
 
                         <!--- PASSENGERS LOOKING FOR DRIVERS-->
                         <%for ( i= 0;i<drivers.length;i++) { %>
-                        <a href="/results" >
-                        <article class="row">
-                            <div>
-                        <h2><%= drivers[i] %></h2>
-                        <span><h2><%= cost[i] %>$</h2></span>
-                                <!--logos here and goodies. -->
+                        <form method="post" action="/add-passenger">
+                            <a href="javascript:;" onclick="parentNode.submit();">
+                                <article class="row">
+                                    <div>
+                                        <p name="idTravel" hidden><%= idTravel[i] %> </p>
 
-                            </div>
-                       <div>
+                                        <input type="hidden" name="idTravel" value =<%= idTravel[i]%>>
 
-                        <%=departureDate[i]%><br>
-                        <%=departureTime[i]%><br>
-                        <%=currentLocation%> → <%=destination%><br>
-                        Sièges pris: <%=seatsTaken[i]%><br>
-                        Sièges disponible: <%=seatsAvailable[i]%><br>
-                           <% if (petsAllowed[i] == 0){ %>
-                           Animaux permis? : Non<br>
-                           <%}else{ %>
-                           Animaux permis? : Oui <br>
-                           <% } %>
+                                        <h2><%= drivers[i] %></h2>
+                                        <span><h2><%= cost[i] %>$</h2></span>
+                                        <!--logos here and goodies. -->
+
+                                    </div>
+                                    <div>
+
+                                        <%=departureDate[i]%><br>
+                                        <%=departureTime[i]%><br>
+                                        <%=currentLocation%> → <%=destination%><br>
+                                        Sièges pris: <%=seatsTaken[i]%><br>
+                                        Sièges disponible: <%=seatsAvailable[i]%><br>
+                                        <% if (petsAllowed[i] == 0){ %>
+                                        Animaux permis? : Non<br>
+                                        <%}else{ %>
+                                        Animaux permis? : Oui <br>
+                                        <% } %>
 
 
-                       </div>
+                                    </div>
 
-                        </article>
-                        </a>
+                                </article>
+                            </a>
+                        </form>
 
-                         <hr>
+
+                        <hr>
 
                         <%}%>
 
 
-                    <!--- DRIVERS LOOKING FOR PASSENGERS-->
+                        <!--- DRIVERS LOOKING FOR PASSENGERS-->
                         <%for ( i= 0;i<passengers.length;i++) { %>
                         <a href="/results" >
                             <article class="row">
@@ -180,7 +187,7 @@
 
                     </div>
 
-                    
+
 
 
                 </div>

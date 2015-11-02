@@ -19,16 +19,26 @@ var Ratings = DB.Model.extend({
 
 
 var Travel = DB.Model.extend({
-   tableName: 'travel',
-   idAttribute: 'idAddTravel'
+    tableName: 'travel',
+    idAttribute: 'idAddTravel',
+
 
 });
 
 var TravelRequest = DB.Model.extend({
-   tableName: 'searchTravel',
-   idAttribute: 'idSearchTravel'
+    tableName: 'searchTravel',
+    idAttribute: 'idSearchTravel'
 
 });
+
+var TravelPassengers = DB.Model.extend({
+    tableName: 'travelpassengers'
+
+
+});
+
+
+
 
 var Comments = DB.Model.extend({
     tableName: 'comments',
@@ -41,7 +51,10 @@ var Comments = DB.Model.extend({
 module.exports = {
     Users: Users,
     ratings: Ratings,
-    travel : Travel,
+    Travel : Travel,
     TravelRequest : TravelRequest,
+    TravelPassengers : TravelPassengers,
     comments: Comments
+
+
 };

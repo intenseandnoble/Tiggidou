@@ -9,95 +9,167 @@
 <body onload="initialize()">
 
 
-    <!-- Header -->
-    <% include ../partials/header %>
+<!-- Header -->
+<% include ../partials/header %>
 
-    <!-- Banner -->
-    <div id="banner-wrapper">
-        <div id="banner" class="box container">
-            <div align="center" >
+<!-- Banner -->
+<div id="banner-wrapper">
+    <div id="banner" class="box container">
+        <div align="center" >
 
-                <div>
-                    <form class="ride-posting" method="post" action ="/post-ride">
+                <form class="ride-posting" method="post" action ="/post-ride">
 
-
-
-                    <!-- <input type="radio" name="typeUser"  value="passenger" checked="true"> Je suis passager<br>
-                        <input type="radio" name="typeUser" value="driver"> Je suis conducteur<br><br> -->
+                    <button type = "button" id="btnTypePassenger" class="passengerOpt button icon fa-arrow-circle-right">Je suis un passager!</button>
+                    <button type = "button" id="btnTypeDriver" class="driversOpt button icon fa-arrow-circle-right ">Je suis conducteur!</button>
 
 
-                        <input type="text" id="currentLocation" class=" input-group" onFocus="geolocate()" name = "currentLocation" placeholder="De">
+                    <div class="fadeinAction hideDisplay" >
+                        <input type="radio" class ="typeUser" name="hiddenUser" id="typeUser_p" value="passenger">
+                        <input type="radio" class ="typeUser" name="hiddenUser" id="typeUser_d" value="driver">
 
-                        <input type="text" id="destination" class="input-group" onFocus="geolocate()" name = "destination" placeholder="À"><br>
+                        <div class="[ form-group ] passCheckboxDiv">
+                            <input  class="passengerCheckbox radio" type="checkbox" name="checkboxUser" id="checkboxPassenger" autocomplete="off" />
 
 
-                        <div class="clearfix">
-                            <div class="input-group clockpicker"   data-align="top" data-autoclose="true">
-                                <input type="text" class="form-control" id="withBootStrap" value="12:00">
-				                <span class="input-group-addon widerGlyph">
-					            <span class="glyphicon glyphicon-time widerGlyph"></span>
-				                </span>
+
+
+                            <div class="[ btn-group ]">
+                                <label for="checkboxPassenger" class="[ btn btn-primary ]">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="checkboxPassenger" class="[ btn btn-default active ] checkboxUserlbl">
+                                    Passager
+                                </label>
                             </div>
                         </div>
 
-
-                        <input type="text" class=" input-group"  id="datepicker" name="datepicker"  placeholder="Date" /> <br><br>
-
-
+                        <div class="[ form-group ] driverCheckboxDiv">
+                            <input class="driverCheckbox radio" type="checkbox" name="checkboxUser" id="checkboxDriver" autocomplete="off"  />
 
 
+                            <div class="[ btn-group ] ">
+                                <label for="checkboxDriver" class="[ btn btn-primary ] ">
+                                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="checkboxDriver" class="[ btn btn-default active ] checkboxUserlbl ">
+                                    Conducteur
+                                </label>
+                            </div>
+                        </div><br><br>
 
+
+
+                    <input type="text" id="currentLocation" class=" input-group" onFocus="geolocate()" name = "currentLocation" placeholder="De">
+
+                    <input type="text" id="destination" class="input-group" onFocus="geolocate()" name = "destination" placeholder="À"><br>
+
+
+                    <div class="clearfix">
+                        <div class="input-group clockpicker"   data-align="top" data-autoclose="true">
+                            <input type="text" class="form-control" name="clockpicker" id="withBootStrap" value="12:00">
+				                <span class="input-group-addon widerGlyph">
+					            <span class="glyphicon glyphicon-time widerGlyph"></span>
+				                </span>
+                        </div>
+                    </div>
+
+
+                    <input type="text" class=" input-group"  id="datepicker" name="datepicker"  placeholder="Date" />
+
+
+
+<!--Passengers -->                    <div class="passengerOptions hideDisplay">
+                        <br>
 
                         <div id="accordion"  style="width:580px;">
                             <h3>More options</h3>
 
                             <div><br> Score du conducteur: ******<br><br>
 
-                                Fumeur? <br><input type="radio" name="smokerRadio" value="Yes">Oui
-                                <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
-                                Animaux accepté? <br><input type="radio" name="animalRadio" value="Yes">Oui
-                                <input type="radio" name="animalRadio" value="No" checked>Non <br><br>
+                                Animaux accepté? <br><input type="radio" name="petsRadio_p" value="Yes">Oui
+                                <input type="radio" name="petsRadio_p" value="No" checked>Non <br><br>
 
-                                Valises acceptés?<br><input type="radio" name="bagaggeRadio" value="Yes">Oui
-                                <input type="radio" name="bagaggeRadio" value="No" checked>Non <br><br>
-                                Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide"></textarea><br><br>
+                                Valises acceptés?<br><input type="radio" name="luggageRadio_p" value="Yes">Oui
+                                <input type="radio" name="luggageRadio_p" value="No" checked>Non <br><br>
+                                Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_p"></textarea><br><br>
 
                             </div>
 
-                        </div><br>
 
-
-                        <div class="post-ride">
-                            <input type="submit" value="Publier">
                         </div>
-                    </form>
-
-
-                </div>
 
 
 
 
+                    </div>
 
+
+<!--Drivers -->        <div class="driverOptions hideDisplay">
+
+                         <input class="input-group" id="costInput" type="text" name="cost_d"  placeholder="Coût"><br><br>
+
+                        <div id="accordion2"  style="width:580px;">
+
+
+
+                            <h3>More options</h3>
+
+                            <div><br> Score moyen du passager: ******<br><br>
+
+
+                                Sièges disponibles: <input class="generalSpinner" id="spinner" name="spinner_d" value="0"><br><br>
+
+
+
+
+                                Animaux acceptés?  <br><input type="radio" name="petsRadio_d" value="Yes">Oui
+                                <input type="radio" name="petsRadio_d" value="No" checked>Non <br><br>
+
+                                Valises acceptés?<br><input type="radio" name="luggageRadio_d" value="Yes">Oui
+                                <input type="radio" name="luggageRadio_d" value="No" checked>Non <br><br>
+
+
+
+                                Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_d"></textarea><br><br>
+
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="post-ride">
+                        <br><br>  <input type="submit" value="Publier">
+                    </div>
+                </form>
 
 
 
 
             </div>
+
+
+
+
+
+
+
         </div>
     </div>
+</div>
 
-
-    <!-- Footer -->
-    <% include ../partials/footer %>
+<!-- Footer -->
+<% include ../partials/footer %>
 
 </div>
-<script type="text/javascript">
-    $('.clockpicker').clockpicker()
-            .find('input').change(function(){
-                console.log(this.value);
-            });
-
-</script>
 </body>
 </html>

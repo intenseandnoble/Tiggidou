@@ -1,12 +1,13 @@
 {
   "name": "CovoiturageSocial",
   "main": "server.js",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "bluebird": "^3.0.5",
     "body-parser": "~1.14.1",
     "bookshelf": "0.8.2",
+    "bunyan":"*",
     "connect-flash": "~0.1.1",
     "consolidate": "~0.10.0",
     "cookie-parser": "~1.0.0",
@@ -15,11 +16,13 @@
     "express-session": "~1.0.0",
     "knex": "0.8.6",
     "method-override": "~1.0.0",
-    "morgan": "~1.0.0",
+    "mocha": "*",
+    "nodemailer":"~1.8.0",
     "passport": "~0.1.17",
     "passport-facebook": "~1.0.2",
     "passport-google-oauth": "~0.1.5",
     "passport-local": "~0.1.6",
-    "passport-twitter": "~1.0.2"
+    "passport-twitter": "~1.0.2",
+    "consolidate": "~0.10.0"
   }
 }

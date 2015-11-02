@@ -586,6 +586,8 @@
 
 })(jQuery);
 
+//Date picker for every date picking event
+
 $(document).ready(function() {
 	$("#datepicker").datepicker({ minDate: 0, dateFormat: 'dd/mm/yy'  });
 	$("button").click(function() {
@@ -594,6 +596,8 @@ $(document).ready(function() {
 
 	});
 });
+
+//Fix of a zoom-in/zoom-out of datepicker
 
 $(window).on('resize orientationchange', function (e) {
 	if ($.datepicker._datepickerShowing) {
@@ -608,19 +612,28 @@ $(window).on('resize orientationchange', function (e) {
 	}
 });
 
+
+// More options on ask-ride page.
+
 $(document).ready(function() {
 	$( "#accordion" ).accordion({
+		heightStyle: "content",
 		collapsible: true,
-        active: false
+		active: false
+
+	});
+
+	$( "#accordion2" ).accordion({
+		heightStyle: "content",
+		collapsible: true,
+		active: false
 
 	});
 });
 
 
-$('input[type="checkbox"]').on('change', function() {
-	$(this).siblings('input[type="checkbox"]').prop('checked', false);
-});
 
+// Google autocomplete for places
 
 function initialize() {
 
@@ -636,11 +649,115 @@ function initialize() {
 
 }
 
-function isNumberKey(evt)
-{
-	var charCode = (evt.which) ? evt.which : event.keyCode
-	if (charCode > 31 && (charCode < 48 || charCode > 57))
-		return false;
+//Makes sure that no letters are entered in the cost text box
+$("#costInput").keyup(function() {
+	$("#costInput").val(this.value.match(/[0-9]*/));
+});
 
-	return true;
-}
+//The clockpicker for time picking events
+
+$('.clockpicker').clockpicker()
+	.find('input').change(function(){
+		console.log(this.value);
+	});
+
+
+//Fade-in/Fade out of the nessage "I am a driver/passenger" when posting a travel
+
+$(document).ready(function(){
+	$(".passengerOpt").click(function(){
+		$(".fadeinAction").fadeIn("slow");
+		$(".passengerOptions").fadeIn("slow");
+		$(".passengerOpt").fadeOut();
+		$(".driversOpt").fadeOut();
+		$(".passengerCheckbox").prop("checked", true);
+		$(".driverCheckbox").prop("checked", false);
+		$('#checkboxPassenger').attr('disabled', true); //disable input
+		$('#typeUser_p').attr('checked',true);
+
+
+
+	});
+	$(".driversOpt").click(function(){
+		$(".fadeinAction").fadeIn("slow");
+		$(".driverOptions").fadeIn("slow");;
+		$(".passengerOpt").fadeOut();
+		$(".driversOpt").fadeOut();
+		$(".passengerCheckbox").prop("checked", false);
+		$(".driverCheckbox").prop("checked", true);
+		$('#checkboxDriver').attr('disabled', true); //disable input
+		$('#typeUser_d').attr('checked',true);
+	});
+
+
+});
+
+
+//Spinner button for seats available etc...
+
+$(function() {
+	var spinner = $( "#spinner" ).spinner({min: 1, max: 10});
+	$( "button" ).button();
+});
+
+
+
+// This is to prevent 2 checkboxes to be checked at the same time.
+
+
+$("input:checkbox").on('click', function() {
+	// in the handler, 'this' refers to the box clicked on
+	var $box = $(this);
+	if ($box.is(":checked")) {
+		// the name of the box is retrieved using the .attr() method
+		// as it is assumed and expected to be immutable
+		var group = "input:checkbox[class='" + $box.attr("class") + "']";
+		// the checked state of the group/box on the other hand will change
+		// and the current value is retrieved using .prop() method
+		$(group).prop("checked", false);
+		$box.prop("checked", true);
+
+
+	} else {
+		$box.prop("checked", false);
+	}
+});
+
+//Disable the Passenger button so it won't be unselected
+
+$('#checkboxPassenger').click(function () {
+	//check if checkbox is checked
+
+	if ($(this).is(':checked')) {
+		$('#checkboxPassenger').attr('disabled', true); //disable input
+		$('#checkboxDriver').removeAttr('disabled'); //enable input
+		$(".driverOptions").hide();
+		$(".passengerOptions").fadeIn("slow");
+		$('#typeUser_d').removeAttr('checked',true);
+		$('#typeUser_p').removeAttr('disabled');
+		$('#typeUser_p').click();
+
+
+	}
+});
+
+//Disable the driver button so it won't be unselected, and fades out passenger options and
+//fades in the driver options
+
+$('#checkboxDriver').click(function () {
+	//check if checkbox is checked
+
+	if ($(this).is(':checked')) {
+		$('#checkboxDriver').attr('disabled', true); //disable input
+		$('#checkboxPassenger').removeAttr('disabled'); //enable input
+		$(".passengerOptions").hide();
+		$(".driverOptions").fadeIn("slow");
+
+		$('#typeUser_p').removeAttr('checked',true);
+		$('#typeUser_d').removeAttr('disabled');
+		$('#typeUser_d').click();
+
+	}
+
+
+});

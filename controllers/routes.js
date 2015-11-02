@@ -4,13 +4,14 @@
 
 //load the model
 var covoso = require(__dirname + '/../models/covosocialSearchDepartures');
-var express = require('express');
 var Model = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var https = require('https');
 var Promise = require('bluebird');
+var mailling = require('../config/mailer.js');
+var log = require('../config/logger').log;
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -19,7 +20,7 @@ module.exports = function (app, passport) {
 // routes ======================================================================
 
     // api ---------------------------------------------------------------------
-    //single page application
+    //INDEX
     app.get('/', function (req, res) {
         res.render('pages/index.ejs',
             {
@@ -28,19 +29,12 @@ module.exports = function (app, passport) {
             });
     });
 
-    // rechercher
-    app.get('/search', function (req, res) {
-
-        //faire une recherche et afficher son r�sultat
-
-    });
-
     // profile
 
     app.get('/profile', function(req, res){
-
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
+        var user = req.session.req.user;
         var driverAvgScore;
         var driverPScore;
         var driverCScore;
@@ -148,8 +142,6 @@ module.exports = function (app, passport) {
     });
 
     app.post('/rate_driver', function (req, res) {
-
-
         var ratePunctuality = arrayOrNot(req.body.dPunctualityVote);
         var rateCourtesy = arrayOrNot(req.body.dCourtesyVote);
         var rateReliability = arrayOrNot(req.body.dReliabilityVote);
@@ -223,49 +215,62 @@ module.exports = function (app, passport) {
 
     app.post('/post-ride', function (req, res) {
 
-        var time = req.body.timeDeparture;
-
-        if(req.body.periodDeparture == 'PM') req.body.timeDeparture+=12;
+        var pets = 0;
+        var luggage =0;
 
         date=req.body.datepicker;
         var newdate = date.split("/").reverse().join("/");
 
-        if(req.body.typeUser == 'driver') //insert into Travel
+
+        if(req.body.hiddenUser == 'driver') //insert into Travel
         {
+            if(req.body.petsRadio_d == 'Yes') pets= 0;
+            else pets = 1;
+
+            if(req.body.luggageRadio_d == 'Yes') luggage= 0;
+            else luggage = 1;
+
             new Model.Travel().save({
                     startAddress :req.body.currentLocation,
                     destinationAddress:req.body.destination,
-                    departureTime:time,
-                    departureDate: newdate, //req.body.smokerRadio,
-                    petsAllowed: 0,
-                    // luggageSize :0,
-                    comments: req.body.commentsRide,
-                    cost:45},
+                    departureTime:req.body.clockpicker,
+                    departureDate: newdate,
+                    petsAllowed : pets,
+                    driver:req.session.req.user.id,
+                    availableSeat:req.body.spinner_d,
+                    luggagesSize :luggage,
+                    //comments: req.body.commentsRide_d,
+                    cost:req.body.cost_d},
 
                 {method: 'insert'}
             ).catch(function (err) {
-                    console.log(err);
-
-
+                    log.error(err);
                 });
         }
 
 
         else //insert into searchTravel
         {
-            new Model.TravelRequest().save({ //todo: I had to remove foreign key constraints to make this work...speak with the others about this
+            if(req.body.petsRadio_p == 'Yes') pets= 1;
+            else pets = 0;
+
+            if(req.body.luggageRadio_d == 'Yes') luggage= 1;
+            else luggage = 0;
+
+            new Model.TravelRequest().save({
                     startAddress :req.body.currentLocation,
                     destinationAddress:req.body.destination,
-                    departureTime:time,
-                    departureDate: newdate, //req.body.smokerRadio,
-                    pets: 0, //todo change the html so it fits an int
-                    // luggageSize :0, //todo change html so luggagesize is int instead of radio button
-                    comments: req.body.commentsRide},
+                    departureTime:req.body.clockpicker,
+                    departureDate: newdate,
+                    pets: pets,
+                    passenger:req.session.req.user.id,
+                    luggageSize :luggage//,
+                    //comments: req.body.commentsRide_p
+                },
+
                 {method: 'insert'}
             ).catch(function (err) {
-                    console.log(err);
-
-
+                    log.error(err);
                 });
         }
 
@@ -275,9 +280,11 @@ module.exports = function (app, passport) {
 
     //Searching rides
 
-    app.get('/search-ride', function (req, res) {
+    app.get('/search', function (req, res) {
+
 
         var driver_arr = [];
+        var passenger_arr=[];
         var comment_arr = [];
         var seatsTaken_arr = [];
         var seatsAvailable_arr = [];
@@ -287,13 +294,15 @@ module.exports = function (app, passport) {
         var luggageSize_arr = [];
         var petsAllowed_arr = [];
         var cost_arr = [];
+
         var dest = req.query.destination;
         var currLocation = req.query.currentLocation;
 
-
         var finishRequest = function () {
             res.render('pages/results.ejs', {
+
                 drivers: driver_arr,
+                passengers: passenger_arr,
                 comment: comment_arr,
                 seatsTaken: seatsTaken_arr,
                 seatsAvailable: seatsAvailable_arr,
@@ -310,51 +319,97 @@ module.exports = function (app, passport) {
             });
         };
 
-        new Model.Travel().where({
-            destinationAddress: dest,
-            startAddress: currLocation
-        }).query(function(qb){
-                qb.orderBy('departureDate','ASC');
+        if(req.query.searchDriver == "on") {
+
+            new Model.Travel().where({
+                destinationAddress: dest,
+                startAddress: currLocation
+            }).query(function (qb) {
+                qb.orderBy('departureDate', 'ASC');
             }).fetchAll().then(function (user) {
 
-            var resultJSON = user.toJSON();
+                var resultJSON = user.toJSON();
 
-            if (resultJSON.length == 0) {
-                res.render('pages/no-results.ejs', {
-                    header: header,
-                    foot: foot
-                });
-            }
-            else {
+                if (resultJSON.length == 0) {
+                    res.render('pages/no-results.ejs', {
+                        header: header,
+                        foot: foot
+                    });
+                }
+                else {
 
-                for (i = 0; i < resultJSON.length; i++) {
+                    for (i = 0; i < resultJSON.length; i++) {
 
-                    driver_arr.push(resultJSON[i]['driver']);
-                    comment_arr.push(resultJSON[i]['comments']);
-                    seatsTaken_arr.push(resultJSON[i]['takenSeat']);
-                    seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
-                    travelTime_arr.push(resultJSON[i]['travelTimes']);
-                    departureTime_arr.push(resultJSON[i]['departureTime']);
-                    departureDate_arr.push(resultJSON[i]['departureDate']);
-                    luggageSize_arr.push(resultJSON[i]['luggagesSize']);
-                    petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
-                    cost_arr.push(resultJSON[i]['cost']);
+                        driver_arr.push(resultJSON[i]['driver']);
+                        luggageSize_arr.push(resultJSON[i]['luggagesSize']);
+                        departureTime_arr.push(resultJSON[i]['departureTime']);
+                        comment_arr.push(resultJSON[i]['comments']);
+                        petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
+                        departureDate_arr.push(resultJSON[i]['departureDate']);
+                        seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
+                        seatsTaken_arr.push(resultJSON[i]['takenSeat']);
+                        cost_arr.push(resultJSON[i]['cost']);
+                    }
+
+                    finishRequest();
                 }
 
-                finishRequest();
-            }
+            }).catch(function (err) {
 
+                res.render('pages/no-results.ejs', {
+                    header: header,
+                    foot: foot //In case of error
 
-        }).catch(function (err) {
-
-            res.render('pages/no-results.ejs', {
-                header: header,
-                foot: foot //In case of error
+                });
 
             });
 
+        }
 
-        });
+        else {
+
+            new Model.TravelRequest().where({
+                destinationAddress: dest,
+                startAddress: currLocation
+            }).query(function (qb) {
+                qb.orderBy('departureDate', 'ASC');
+            }).fetchAll().then(function (user) {
+
+                var resultJSON = user.toJSON();
+
+                if (resultJSON.length == 0) {
+                    res.render('pages/no-results.ejs', {
+                        header: header,
+                        foot: foot
+                    });
+                }
+                else {
+
+                    for (i = 0; i < resultJSON.length; i++) {
+
+                        passenger_arr.push(resultJSON[i]['passenger']);
+                        luggageSize_arr.push(resultJSON[i]['luggageSize']);
+                        departureTime_arr.push(resultJSON[i]['departureTime']);
+                        comment_arr.push(resultJSON[i]['comments']);
+                        petsAllowed_arr.push(resultJSON[i]['pets']);
+                        departureDate_arr.push(resultJSON[i]['departureDate']);
+                    }
+
+                    finishRequest();
+                }
+
+
+            }).catch(function (err) {
+
+                res.render('pages/no-results.ejs', {
+                    header: header,
+                    foot: foot //In case of error
+
+                });
+
+            });
+        }
+
     });
 
 
@@ -408,7 +463,7 @@ module.exports = function (app, passport) {
             {
                 header: header,
                 foot : foot/*,
-                message: req.flash('signupMessage')*/
+             message: req.flash('signupMessage')*/
             });
     });
 
@@ -423,7 +478,7 @@ module.exports = function (app, passport) {
                     if(model) {
                         res.render('pages/sign-up.ejs', {
                             title: 'signup',
-                            message: 'username already exists',
+                            //message: 'username already exists',
                             header: header,
                             foot : foot
                         });
@@ -464,7 +519,7 @@ module.exports = function (app, passport) {
                 })
             }
         })
-        });
+    });
 
     app.get('/results', function (req, res) {
         //res.render('pages/results.ejs')
@@ -494,8 +549,11 @@ module.exports = function (app, passport) {
     });
 
 
-    app.get('/logout',requireAuth, function(req, res){
-        req.logout();
+    app.get('/logout', function(req, res){
+        if (req.isAuthenticated()){
+            req.logout();
+        }
+
         res.redirect('/');
     });
 
@@ -505,7 +563,7 @@ module.exports = function (app, passport) {
         passport.authenticate('local-login', {
                 successRedirect : '/profile',
                 failureRedirect : '/login',
-                failureFlash : true //allow flash message
+                //failureFlash : true //allow flash message
             },
             function(err, user, info) {
                 if(err) {
@@ -552,7 +610,7 @@ module.exports = function (app, passport) {
                     return res.render('pages/login.ejs',
                         {
                             title: 'Login',
-                            errorMessage: err.message,
+                            //errorMessage: err.message,
                             header: header,
                             foot : foot
                         });
@@ -562,7 +620,7 @@ module.exports = function (app, passport) {
                     return res.render('pages/login.ejs',
                         {
                             title: 'Login',
-                            errorMessage: info.message,
+                            //errorMessage: info.message,
                             header: header,
                             foot : foot
                         });
@@ -572,7 +630,7 @@ module.exports = function (app, passport) {
                         return res.render('pages/login.ejs',
                             {
                                 title: 'Login',
-                                errorMessage: err.message,
+                                //errorMessage: err.message,
                                 header: header,
                                 foot : foot
                             });
@@ -594,6 +652,24 @@ function requireAuth(req, res, next) {
     res.redirect('/login');
 }
 
+function getUserName(id){
+
+   var firstName = "Unknown";
+
+    var finishRequest = function () {return firstName;};
+
+    new Model.Users({idUser: id}).fetch().then(function (model) {
+        firstName = model.get('firstName');
+        console.log(id + " : " + firstName);
+        finishRequest();
+    });
+
+
+}
+
+
+/*https://www.google.com/recaptcha/admin#list*/
+        var commentariesTexts = [];
 var SECRET =  "6LdJfA8TAAAAAGndnIbSyPNBm-X2BphdUHBb-fRT"; //TODO met le secret ici...
 //helper function to make API call to recatpcha and check response
 function verifyRecaptcha(key, callback){
@@ -609,13 +685,11 @@ function verifyRecaptcha(key, callback){
             } catch(e){
                 callback(false);
             }
-
         });
     });
 }
 
 function roundingCeilOrFloor (score) {
-
     if (score % 1 != 0 && score % 1 >= 0.5) {
         score = Math.ceil(score);
     } else if (score % 1 < 0.5) {

@@ -11,6 +11,7 @@ var foot = require('../views/fr/footer.js');
 var https = require('https');
 var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
+var loginString = require('../views/fr/sign.js');
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -446,6 +447,7 @@ module.exports = function (app, passport) {
             //res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
             res.render('pages/login.ejs',
                 {
+                    login: loginString,
                     header: header,
                     foot : foot
                 });
@@ -457,6 +459,7 @@ module.exports = function (app, passport) {
     app.get('/sign-up', function (req, res) {
         res.render('pages/sign-up.ejs',
             {
+                login: loginString,
                 header: header,
                 foot : foot/*,
              message: req.flash('signupMessage')*/

@@ -12,43 +12,38 @@
     <% include ../partials/header %>
 
     <!-- Main -->
-    <div id="main-wrapper">
-        <div class="container">
-            <div id="content" align="center" >
+        <div class="box container">
+            <div class="content-wrapper-2-columns-login clearfix">
 
                 <!-- Content -->
-
-                <h2>S'inscrire</h2>
-                <div>
+                <div class="left">
+                    <h2><%= login.signupLabel %></h2>
                     <form action = "/sign-up" method="post">
-                        <input type="text" class="login-textbox"  name = "firstName" placeholder ="Prénom"><br>
-                        <input type="text" class="login-textbox"  name = "familyName" placeholder ="Nom de famille"><br>
-                        <input type="email" class="signup-email" name = "email" placeholder="Courriel"><br>
-                        <input type="password" class="signup-pass" name = "password" placeholder="Mot de passe"><br>
-                        <input type="password" class="signup-pass" name = "confirm-password" placeholder="Confirmer mot de passe"><br>
-                        <input type="text" class="login-textbox" name = "birthDate" placeholder="Date de naissance"><br>
+                        <input type="text" class="login-textbox"  name = "firstName" placeholder ="<%= login.firstName %>"><br>
+                        <input type="text" class="login-textbox"  name = "familyName" placeholder ="<%= login.familyName %>"><br>
+                        <input type="email" class="signup-email" name = "email" placeholder="<%= login.email %>"><br>
+                        <input type="password" class="signup-pass" name = "password" placeholder="<%= login.pwd %>"><br>
+                        <input type="password" class="signup-pass" name = "confirm-password" placeholder="<%= login.pwdConfirm %>"><br>
+                        <input type="text" class="login-textbox" name = "birthDate" placeholder="<%= login.birthDate %>"><br>
                         <br>
                         <div class="g-recaptcha" data-sitekey="6LdJfA8TAAAAAI-nVvUXaNsEMhVDuCtVSySWuiwA"></div><br>
-                        <button type="submit" class="button small icon fa-arrow-circle-right">S'inscrire</button><br>
+                        <button type="submit" class="button small icon fa-arrow-circle-right"><%= login.inscription %></button><br>
                     </form><br>
-                    <div>
-                        <a href="/auth/facebook" >
-                            <img class="logo-social-media" src="images/facebook.png">
-                        </a>
-                        <a href="/auth/google" >
-                            <img class="logo-social-media" src="images/google+.png">
-                        </a>
-                    </div>
                 </div>
-
-
-
-
-
-
+                <div class="right">
+                    <form class="sign-in-social-media">
+                        <a href="/auth/facebook" >
+                            <img class="logo-social-media" src="<%= login.facebookSignin%>">
+                        </a>
+                    </form>
+                    <form class="sign-in-social-media">
+                        <a href="/auth/google" >
+                            <img class="logo-social-media" src="<%= login.googleSignin%>">
+                        </a>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
     <!-- Footer -->
     <% include ../partials/footer %>

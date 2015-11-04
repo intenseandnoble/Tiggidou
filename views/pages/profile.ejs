@@ -24,7 +24,7 @@
                             <h3><%= profile.profile %></h3>
                             <% { %>
                             <div class="image">
-                                <img src="images/pic01.jpg"/>
+                                <img src="images/user_icon.svg"/>
                             </div>
                             <% }
                             if (age != null) { %>
@@ -44,13 +44,12 @@
                         </section>
 
                         <section>
-                            <h3>Subheading</h3>
+                            <h3><%= profile.submenu %></h3>
                             <ul class="style2">
-                                <li><a href="#tabs-1">Tableau de bord</a></li>
-                                <li><a href="#tabs-2">Annonces</a></li>
-                                <li><a href="#tabs-3">Réservation</a></li>
-                                <li><a href="#tabs-4">Messages</a></li>
-                                <li><a href="#tabs-5">...</a></li>
+                                <li><a href="#tabs-1"><%= profile.dashboard %></a></li>
+                                <li><a href="#tabs-2"><%= profile.ads %></a></li>
+                                <li><a href="#tabs-3"><%= profile.reservation %></a></li>
+                                <li><a href="#tabs-4"><%= profile.messages %></a></li>
                             </ul>
                         </section>
 
@@ -79,18 +78,13 @@
                         <div class="row-comments">
                             <div class="column-comments">
                                 <div class="panel">
-                                    <div class="panel-heading">Comments</div>
+                                    <div class="panel-heading"><%= profile.comments %></div>
                                     <div class="panel-body">
 
 
                                         <form id="write_comment" class="form-horizontal" method="post" action ="/post_profile_comment">
                                             <div class="form-group">
-                                                <div class="col-md-6">
-                                                    <input type="text" name="name" id="name" class="form-control" placeholder="Name">
-                                                </div><!--col-md-6-->
-                                                <div class="col-md-6">
-                                                    <input type="email" name="mail" id="mail" class="form-control" placeholder="E-mail">
-                                                </div><!--col-md-6-->
+                                                <input type="hidden" name="UID" value="1">
                                             </div><!--form-group-->
 
                                             <div class="form-group">

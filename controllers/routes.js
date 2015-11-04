@@ -30,7 +30,6 @@ module.exports = function (app, passport) {
     });
 
     // profile
-
     app.get('/profile',requireAuth,function(req, res){
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
@@ -114,6 +113,7 @@ module.exports = function (app, passport) {
 
                             comments:commentariesTexts,
                             commentsIssuers:ps,
+                            idPageUser:user.get('userId'),
 
                             age:user.get('age'),
                             education:user.get('education'),
@@ -201,7 +201,7 @@ module.exports = function (app, passport) {
 
         var c = req.body.comment;
         var commentaire = new Model.comments({
-            'commentIssuer':'1',
+            'commentIssuer':req.session.req.user.attributes.userId,
             'commentProfileId':'2',
             'commentType': '0',
             'comment': c});

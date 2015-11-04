@@ -517,8 +517,14 @@ module.exports = function (app, passport) {
     app.post('/sign-up', function(req, res, next) {
         verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
             if(success){
+                var moment = require('moment');
                 var user = req.body;
                 var usernamePromise = null;
+
+                var birthday = req.body.birthday_year+req.body.birthday_month+req.body.birthday_day;
+
+                var age =  moment().diff(moment(birthday, "YYYYMMDD"), 'years');
+
                 usernamePromise = new Model.Users({email: user.email}).fetch();
                 return usernamePromise.then(function(model) {
                     if(model) {
@@ -532,6 +538,9 @@ module.exports = function (app, passport) {
                         //TODO MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
                         //TODO comparer le password et la confirmation du mdp
                         //TODO ajouter la date de naissance
+
+
+
                         var password = user.password;
                         var hash = bcrypt.hashSync(password);
                         var typeSign = "local";

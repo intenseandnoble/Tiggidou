@@ -309,6 +309,13 @@ textarea.form-control{height:auto;}
 	text-align: right;
 }
 
+/* Login */
+.content-wrapper-2-columns-login {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 
 .content-wrapper-2-columns {
@@ -3017,4 +3024,22 @@ input[type="radio"].typeUser{
 	float: right;
 
 
+}
+
+select.birthday{
+	position: relative;
+	width:100px;
+	display: inline-block;
+
+}
+
+input[type=text].birthday{
+	position: relative;
+	width:100px;
+	display: inline-block;
+}
+
+.birthday-title{
+	margin-right: 180px;
+	align:center;
 }

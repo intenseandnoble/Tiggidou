@@ -89,11 +89,11 @@ module.exports = function(passport) {
             new UserModel.Users({email: email}).fetch().then(function(data) {
                 var user = data;
                 if(user === null) {
-                    return done(null, false, {message: 'Invalid email or password'});
-                } else {
+                    return done(null, false, {message: 'Courriel ou mot de passe invalide'});
+                }  else {
                     user = data.toJSON();
                     if(!bcrypt.compareSync(password, user.password)) {
-                        return done(null, false, {message: 'Invalid email or password'});
+                        return done(null, false, {message: 'Courriel ou mot de passe invalide'});
                     } else {
                         return done(null, user);
                     }

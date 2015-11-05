@@ -12,6 +12,7 @@ var https = require('https');
 var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
 var loginString = require('../views/fr/sign.js');
+var moment = require("moment");
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -98,7 +99,7 @@ module.exports = function (app, passport) {
                             var i;
                             for(i=0; i<resultJSON.length; ++i) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
-                                commentariesTexts.push(comm.related('user').toJSON());
+                                //commentariesTexts.push(comm.related('user').toJSON());
                             }
                         }
                     }).then(function ()   {
@@ -444,12 +445,12 @@ module.exports = function (app, passport) {
             res.redirect('/');
         }
         else{
-            //res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
             res.render('pages/login.ejs',
                 {
                     login: loginString,
                     header: header,
-                    foot : foot
+                    foot : foot,
+                    message: req.flash('loginMessage')
                 });
         }
     });
@@ -457,12 +458,15 @@ module.exports = function (app, passport) {
 
     // signup
     app.get('/sign-up', function (req, res) {
+        if(req.user){
+            res.redirect("/");
+        }
         res.render('pages/sign-up.ejs',
             {
                 login: loginString,
                 header: header,
-                foot : foot/*,
-             message: req.flash('signupMessage')*/
+                foot : foot,
+                message: req.flash('signupMessage')
             });
     });
 
@@ -475,27 +479,39 @@ module.exports = function (app, passport) {
                 usernamePromise = new Model.Users({email: user.email}).fetch();
                 return usernamePromise.then(function(model) {
                     if(model) {
-                        res.render('pages/sign-up.ejs', {
-                            title: 'signup',
-                            //message: 'username already exists',
-                            header: header,
-                            foot : foot
-                        });
+                        req.flash("signupMessage", "username already exists");
+                        res.redirect('/sign-up');
+
                     } else {
-                        //TODO MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
-                        //TODO comparer le password et la confirmation du mdp
-                        //TODO ajouter la date de naissance
+                        //TODO erreur mot de passe pas pareil
                         var password = user.password;
+                        var passwordConfirm = user.confirm_password;
+                        if(!(password == passwordConfirm)){
+                            req.flash("signupMessage", "Les mot de passe ne sont pas pareil");
+                            res.redirect('/sign-up');
+                        }
+                        //TODO ajouter la date de naissance
+                        //https://stackoverflow.com/questions/2587345/javascript-date-parse (pour les dates)
+                        var birthday = moment(req.body.birthday_year+"-"+req.body.birthday_month+"-"+req.body.birthday_day, "YYYY-MM-DD");
+                        var age =  moment().diff(birthday, 'years');
+                        var dateBirthday = birthday.toDate();
+                        if(age < 17){
+                            req.flash("signupMessage", "Vous devez être âgé de 17 ans et plus");
+                            res.redirect('/sign-up');
+                        }
+
                         var hash = bcrypt.hashSync(password);
                         var typeSign = "local";
                         var firstName = user.firstName;
                         var familyName = user.familyName;
+
                         var signUpUser = new Model.Users({
                             email: user.email,
                             password: hash,
                             typeSignUp: typeSign,
                             firstName: firstName,
-                            familyName: familyName
+                            familyName: familyName,
+                            birthday: dateBirthday
                         });
 
                         signUpUser.save().then(function(model) {
@@ -506,16 +522,8 @@ module.exports = function (app, passport) {
                 })
             } else {
                 var user = req.body;
-                res.render('pages/sign-up.ejs', {
-                    title: 'signup',
-                    message: 'captcha échoué',
-                    header: header,
-                    foot: foot,
-                    firstName: user.firstName,
-                    familyName: user.familyName,
-                    email: user.email,
-                    birthDate: user.birthDate
-                })
+                req.flash("signupMessage", "captcha échoué");
+                res.redirect('/sign-up');
             }
         })
     });
@@ -562,43 +570,31 @@ module.exports = function (app, passport) {
         passport.authenticate('local-login', {
                 successRedirect : '/profile',
                 failureRedirect : '/login',
-                //failureFlash : true //allow flash message
+                failureFlash : true //allow flash message
             },
             function(err, user, info) {
+                //error
                 if(err) {
-                    return res.render('pages/login.ejs',
-                        {
-                            title: 'Login',
-                            errorMessage: err.message,
-                            header: header,
-                            foot : foot
-                        });
+                    req.flash("loginMessage", err);
+                    return res.redirect('/login');
                 }
-
+                //user don't exist
                 if(!user) {
-                    return res.render('pages/login.ejs',
-                        {
-                            title: 'Login',
-                            errorMessage: info.message,
-                            header: header,
-                            foot : foot
-                        });
+                    req.flash("loginMessage", info);
+                    return res.redirect('/login');
                 }
                 return req.logIn(user, function(err) {
+                    //error when trying to login with session
                     if(err) {
-                        return res.render('pages/login.ejs',
-                            {
-                                title: 'Login',
-                                errorMessage: err.message,
-                                header: header,
-                                foot : foot
-                            });
+                        req.flash("loginMessage", err);
+                        return res.redirect('/login');
                     } else {
                         return res.redirect('/profile');
                     }
                 });
             })(req, res, next);
-    }
+    };
+
     function loginSignFacebook(req, res, next) {
         passport.authenticate('facebook', {
                 successRedirect : '/profile',

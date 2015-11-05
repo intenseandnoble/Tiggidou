@@ -3025,3 +3025,21 @@ input[type="radio"].typeUser{
 
 
 }
+
+select.birthday{
+	position: relative;
+	width:100px;
+	display: inline-block;
+
+}
+
+input[type=text].birthday{
+	position: relative;
+	width:100px;
+	display: inline-block;
+}
+
+.birthday-title{
+	margin-right: 180px;
+	align:center;
+}

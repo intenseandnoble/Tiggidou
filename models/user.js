@@ -9,6 +9,17 @@ var Users = DB.Model.extend({
     idAttribute: 'idUser',
     comments: function() {
         return this.hasMany(Comments, 'commentIssuer');
+    },
+    getCountName: function(firstName, familyName){
+        return DB.knex('users')
+            .where({
+                "firstName":firstName,
+                "familyName": familyName
+            })
+            .count("idUser")
+            .then(function(count){
+                return count;
+            })
     }
 });
 

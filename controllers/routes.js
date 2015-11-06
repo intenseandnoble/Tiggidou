@@ -9,6 +9,7 @@ var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var https = require('https');
+var Promise = require('bluebird');
 var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
 var loginString = require('../views/fr/sign.js');
@@ -484,11 +485,10 @@ module.exports = function (app, passport) {
                 usernamePromise = new Model.Users({email: user.email}).fetch();
                 return usernamePromise.then(function(model) {
                     if(model) {
-                        req.flash("signupMessage", "username already exists");
+                        req.flash("signupMessage", "Le courriel existe déjà");
                         res.redirect('/sign-up');
 
                     } else {
-                        //TODO erreur mot de passe pas pareil
                         var password = user.password;
                         var passwordConfirm = user.confirm_password;
                         if(!(password == passwordConfirm)){
@@ -510,18 +510,33 @@ module.exports = function (app, passport) {
                         var firstName = user.firstName;
                         var familyName = user.familyName;
 
-                        var signUpUser = new Model.Users({
-                            email: user.email,
-                            password: hash,
-                            typeSignUp: typeSign,
-                            firstName: firstName,
-                            familyName: familyName,
-                            birthday: dateBirthday
-                        });
 
-                        signUpUser.save().then(function(model) {
-                            // sign in the newly registered user
-                            loginPost(req, res, next);
+
+                        var promiseArr = [];
+
+                        promiseArr.push(new Model.Users().getCountName(firstName, familyName));
+                        var countUser;
+
+                        Promise.all(promiseArr).then(function(ps){
+                            var countTest = ps[0][0];
+                            for(var key in countTest){
+                                countUser = countTest[key];
+                            }
+
+                            var signUpUser = new Model.Users({
+                                email: user.email,
+                                password: hash,
+                                typeSignUp: typeSign,
+                                firstName: firstName,
+                                familyName: familyName,
+                                birthday: dateBirthday,
+                                username: firstName + "." + familyName + "." + countUser
+                            });
+
+                            signUpUser.save().then(function(model) {
+                                // sign in the newly registered user
+                                loginPost(req, res, next);
+                            });
                         });
                     }
                 })

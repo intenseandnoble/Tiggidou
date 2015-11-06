@@ -22,9 +22,11 @@ module.exports = function (app, passport) {
 
     // api ---------------------------------------------------------------------
     //INDEX
+    //TODO ajouter dans les renders: logged: authentificated(req),
     app.get('/', function (req, res) {
         res.render('pages/index.ejs',
             {
+                logged: authentificated(req),
                 header: header,
                 foot : foot
             });
@@ -104,6 +106,7 @@ module.exports = function (app, passport) {
                         }
                     }).then(function ()   {
                         res.render('pages/profile.ejs',{
+                            logged: authentificated(req),
                             pageName : pageName,
                             userName : userName,
 
@@ -447,6 +450,7 @@ module.exports = function (app, passport) {
         else{
             res.render('pages/login.ejs',
                 {
+                    logged: authentificated(req),
                     login: loginString,
                     header: header,
                     foot : foot,
@@ -463,6 +467,7 @@ module.exports = function (app, passport) {
         }
         res.render('pages/sign-up.ejs',
             {
+                logged: authentificated(req),
                 login: loginString,
                 header: header,
                 foot : foot,
@@ -645,6 +650,13 @@ function requireAuth(req, res, next) {
     }
 
     res.redirect('/login');
+}
+
+function authentificated(req){
+    if(req.isAuthenticated()){
+        return true;
+    }
+    return false;
 }
 
 function getUserName(id){

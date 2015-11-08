@@ -114,8 +114,7 @@ module.exports = function (app, passport) {
                         Promise.all(promiseArr).then(function(ps){
 
                             res.render(page,{
-
-                                logged: authentificated(req),
+                            logged: authentificated(req),
                             userName : userName,
 
                             driverAverageScore : driverAvgScore,
@@ -382,7 +381,6 @@ module.exports = function (app, passport) {
 
         var finishRequest = function () {
             res.render('pages/results.ejs', {
-
                 idTravel:idTravel_arr,
                 drivers: driver_arr,
                 passengers: passenger_arr,
@@ -397,6 +395,7 @@ module.exports = function (app, passport) {
                 cost: cost_arr,
                 destination: dest,
                 currentLocation: currLocation,
+                logged: authentificated(req),
                 header: header,
                 foot: foot
             });
@@ -415,6 +414,7 @@ module.exports = function (app, passport) {
 
                 if (resultJSON.length == 0) {
                     res.render('pages/no-results.ejs', {
+                        logged: authentificated(req),
                         header: header,
                         foot: foot
                     });
@@ -445,6 +445,7 @@ module.exports = function (app, passport) {
             }).catch(function (err) {
 
                 res.render('pages/no-results.ejs', {
+                    logged: authentificated(req),
                     header: header,
                     foot: foot //In case of error
 
@@ -467,6 +468,7 @@ module.exports = function (app, passport) {
 
                 if (resultJSON.length == 0) {
                     res.render('pages/no-results.ejs', {
+                        logged: authentificated(req),
                         header: header,
                         foot: foot
                     });
@@ -494,6 +496,7 @@ module.exports = function (app, passport) {
 
             }).catch(function (err) {
                 res.render('pages/no-results.ejs', {
+                    logged: authentificated(req),
                     header: header,
                     foot: foot //In case of error
 
@@ -527,6 +530,7 @@ module.exports = function (app, passport) {
             //res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
             res.render('pages/login.ejs',
                 {
+                    logged: authentificated(req),
                     header: header,
                     foot : foot
                 });
@@ -680,6 +684,7 @@ module.exports = function (app, passport) {
         //res.render('pages/results.ejs')
         res.render('pages/results.ejs',
             {
+                logged: authentificated(req),
                 header: header,
                 foot : foot
             });
@@ -689,6 +694,7 @@ module.exports = function (app, passport) {
         //res.render('pages/no-results.ejs')
         res.render('pages/no-results.ejs',
             {
+                logged: authentificated(req),
                 header: header,
                 foot : foot
             });
@@ -698,6 +704,7 @@ module.exports = function (app, passport) {
         //res.render('pages/ask-ride.ejs')
         res.render('pages/ask-ride.ejs',
             {
+                logged: authentificated(req),
                 header: header,
                 foot : foot
             });
@@ -753,6 +760,7 @@ module.exports = function (app, passport) {
                         {
                             title: 'Login',
                             //errorMessage: err.message,
+                            logged: authentificated(req),
                             header: header,
                             foot : foot
                         });
@@ -763,6 +771,7 @@ module.exports = function (app, passport) {
                         {
                             title: 'Login',
                             //errorMessage: info.message,
+                            logged: authentificated(req),
                             header: header,
                             foot : foot
                         });
@@ -773,6 +782,7 @@ module.exports = function (app, passport) {
                             {
                                 title: 'Login',
                                 //errorMessage: err.message,
+                                logged: authentificated(req),
                                 header: header,
                                 foot : foot
                             });

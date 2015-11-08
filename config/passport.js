@@ -15,6 +15,7 @@ var UserModel = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var configAuth = require('./authentification');
 var log = require('./logger').log;
+var Promise = require('bluebird');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -111,7 +112,7 @@ module.exports = function(passport) {
             clientID: configAuth.facebookAuth.clientID,
             clientSecret: configAuth.facebookAuth.clientSecret,
             callbackURL: configAuth.facebookAuth.callbackURL,
-            profileFields: ['id', 'displayName', 'emails', 'name']
+            profileFields: ['id', 'displayName', 'emails', 'name', "photos"]
         },
         // facebook will send back the token and profile
         function(token, refreshToken, profile, done) {
@@ -122,20 +123,33 @@ module.exports = function(passport) {
                     user = data.toJSON();
                     return done(null, user);
                 } else {
-                    var signUpUser = new UserModel.Users(
-                        {
-                            idusertemp: profile.id,
-                            email: profile.emails[0].value,
-                            token: token,
-                            familyName: profile.name.familyName,
-                            firstName: profile.name.givenName,
-                            typeSignUp: "facebook"
-                        });
+                    var promiseArr = [];
+                    promiseArr.push(new UserModel.Users().getCountName(profile.name.givenName, profile.name.familyName));
+                    var countUser;
 
-                    signUpUser.save().then(function(model) {
-                        // sign in the newly registered user
-                        return done(null, model);
+                    Promise.all(promiseArr).then(function(ps) {
+                        var countTest = ps[0][0];
+                        for (var key in countTest) {
+                            countUser = countTest[key];
+                        }
+
+                        var signUpUser = new UserModel.Users(
+                            {
+                                idusertemp: profile.id,
+                                email: profile.emails[0].value,
+                                token: token,
+                                familyName: profile.name.familyName,
+                                firstName: profile.name.givenName,
+                                typeSignUp: "facebook",
+                                username: profile.name.givenName + "." + profile.name.familyName + "." + countUser
+                            });
+
+                        signUpUser.save().then(function(model) {
+                            return done(null, model);
+                        });
                     });
+
+
                 }
             });
 
@@ -150,7 +164,7 @@ module.exports = function(passport) {
             clientID        : configAuth.googleAuth.clientID,
             clientSecret    : configAuth.googleAuth.clientSecret,
             callbackURL     : configAuth.googleAuth.callbackURL,
-            profileFields: ['id', 'displayName', 'emails', 'name']
+            profileFields: ['id', 'displayName', 'emails', 'name', 'picture']
 
         },
         function(token, refreshToken, profile, done) {
@@ -162,19 +176,30 @@ module.exports = function(passport) {
                     user = data.toJSON();
                     return done(null, user);
                 } else {
-                    var signUpUser = new UserModel.Users(
-                        {
-                            idusertemp: profile.id,
-                            email: profile.emails[0].value,
-                            token: token,
-                            familyName: profile.name.familyName,
-                            firstName: profile.name.givenName,
-                            typeSignUp: "google"
-                        });
+                    var promiseArr = [];
+                    promiseArr.push(new UserModel.Users().getCountName(profile.name.givenName, profile.name.familyName));
+                    var countUser;
 
-                    signUpUser.save().then(function(model) {
-                        // sign in the newly registered user
-                        return done(null, signUpUser);
+                    Promise.all(promiseArr).then(function(ps) {
+                        var countTest = ps[0][0];
+                        for (var key in countTest) {
+                            countUser = countTest[key];
+                        }
+
+                        var signUpUser = new UserModel.Users(
+                            {
+                                idusertemp: profile.id,
+                                email: profile.emails[0].value,
+                                token: token,
+                                familyName: profile.name.familyName,
+                                firstName: profile.name.givenName,
+                                typeSignUp: "google",
+                                username: profile.name.givenName + "." + profile.name.familyName + "." + countUser
+                            });
+
+                        signUpUser.save().then(function(model) {
+                            return done(null, model);
+                        });
                     });
                 }
             });

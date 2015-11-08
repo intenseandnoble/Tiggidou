@@ -10,11 +10,17 @@
         <!-- Nav -->
         <nav id="nav">
             <ul>
+                <%if(!logged) {%>
                 <li><a href="/sign-up"> <%= header.links.signup %></a></li>
+                <% }%>
+                <%if(!logged) {%>
                 <li><a href="/login"> <%= header.links.login %></a></li>
+                <% }%>
                 <li><a href="/"> <%= header.links.search %> </a></li>
                 <li><a href="/ask-ride"> <%= header.links.publish %> </a></li>
+                <%if(logged) {%>
                 <li><a href="/logout"> <%= header.links.logout %> </a></li>
+                <% }%>
             </ul>
         </nav>
     </header>

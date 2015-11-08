@@ -10,5 +10,10 @@ module.exports =
         "search": "Rechercher",
         "publish": "Publier",
         "logout": "Deconnexion"
-    }
+    },
+    "logged": logged
 };
+
+function logged(){
+    return true;
+}

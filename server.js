@@ -29,8 +29,6 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-
-
 //used to render html file
 app.engine('html', require('ejs').renderFile); // set up ejs for templating
 app.set('view engine', 'ejs'); // set up ejs for templating

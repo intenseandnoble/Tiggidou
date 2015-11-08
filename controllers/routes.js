@@ -9,10 +9,13 @@ var bcrypt = require('bcrypt-nodejs');
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var https = require('https');
+var Promise = require('bluebird');
 var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
 var loginString = require('../views/fr/sign.js');
 var moment = require("moment");
+var multer = require('multer');
+var pathAvatar = '../avatar';
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -22,9 +25,11 @@ module.exports = function (app, passport) {
 
     // api ---------------------------------------------------------------------
     //INDEX
+    //TODO ajouter dans les renders: logged: authentificated(req),
     app.get('/', function (req, res) {
         res.render('pages/index.ejs',
             {
+                logged: authentificated(req),
                 header: header,
                 foot : foot
             });
@@ -104,6 +109,7 @@ module.exports = function (app, passport) {
                         }
                     }).then(function ()   {
                         res.render('pages/profile.ejs',{
+                            logged: authentificated(req),
                             pageName : pageName,
                             userName : userName,
 
@@ -137,6 +143,34 @@ module.exports = function (app, passport) {
 
         });
 
+    });
+
+    app.post('/profile/upload', function(req, res){
+        //TODO récupérer le choix
+        //TODO stocker dans la dabase
+        upload(req,res,function(err) {
+            if(err) {
+                //TODO ajouter les messages d'erreurs dans req.flash("profileMessage", err);
+                return res.redirect('/profile');
+            }
+
+            var userSession = req.session.req.user;
+
+            new Model.Users({'email': userSession.attributes.email }).fetch().then(function(user){
+                if(user){
+                    var filename = req.files.userPhoto.name;
+                    user.save({
+                        avatar:  filename
+                    }, {method: 'update'});
+
+                    res.redirect('/profile');
+                }
+                else{
+                    //TODO ajouter les messages d'erreurs dans req.flash("profileMessage", utilisateur non existant);
+                    return res.redirect('/profile');
+                }
+            });
+        });
     });
 
     app.post('/rate_driver', function (req, res) {
@@ -415,7 +449,7 @@ module.exports = function (app, passport) {
     // FACEBOOK ROUTES =====================
     // =====================================
     // route for facebook authentication and login
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email', "user_birthday"] }));
 
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
@@ -447,6 +481,7 @@ module.exports = function (app, passport) {
         else{
             res.render('pages/login.ejs',
                 {
+                    logged: authentificated(req),
                     login: loginString,
                     header: header,
                     foot : foot,
@@ -463,6 +498,7 @@ module.exports = function (app, passport) {
         }
         res.render('pages/sign-up.ejs',
             {
+                logged: authentificated(req),
                 login: loginString,
                 header: header,
                 foot : foot,
@@ -479,11 +515,10 @@ module.exports = function (app, passport) {
                 usernamePromise = new Model.Users({email: user.email}).fetch();
                 return usernamePromise.then(function(model) {
                     if(model) {
-                        req.flash("signupMessage", "username already exists");
+                        req.flash("signupMessage", "Le courriel existe déjà");
                         res.redirect('/sign-up');
 
                     } else {
-                        //TODO erreur mot de passe pas pareil
                         var password = user.password;
                         var passwordConfirm = user.confirm_password;
                         if(!(password == passwordConfirm)){
@@ -505,18 +540,33 @@ module.exports = function (app, passport) {
                         var firstName = user.firstName;
                         var familyName = user.familyName;
 
-                        var signUpUser = new Model.Users({
-                            email: user.email,
-                            password: hash,
-                            typeSignUp: typeSign,
-                            firstName: firstName,
-                            familyName: familyName,
-                            birthday: dateBirthday
-                        });
 
-                        signUpUser.save().then(function(model) {
-                            // sign in the newly registered user
-                            loginPost(req, res, next);
+
+                        var promiseArr = [];
+
+                        promiseArr.push(new Model.Users().getCountName(firstName, familyName));
+                        var countUser;
+
+                        Promise.all(promiseArr).then(function(ps){
+                            var countTest = ps[0][0];
+                            for(var key in countTest){
+                                countUser = countTest[key];
+                            }
+
+                            var signUpUser = new Model.Users({
+                                email: user.email,
+                                password: hash,
+                                typeSignUp: typeSign,
+                                firstName: firstName,
+                                familyName: familyName,
+                                birthday: dateBirthday,
+                                username: firstName + "." + familyName + "." + countUser
+                            });
+
+                            signUpUser.save().then(function(model) {
+                                // sign in the newly registered user
+                                loginPost(req, res, next);
+                            });
                         });
                     }
                 })
@@ -554,7 +604,6 @@ module.exports = function (app, passport) {
                 foot : foot
             });
     });
-
 
     app.get('/logout', function(req, res){
         if (req.isAuthenticated()){
@@ -647,6 +696,13 @@ function requireAuth(req, res, next) {
     res.redirect('/login');
 }
 
+function authentificated(req){
+    if(req.isAuthenticated()){
+        return true;
+    }
+    return false;
+}
+
 function getUserName(id){
 
    var firstName = "Unknown";
@@ -700,5 +756,25 @@ function arrayOrNot (avar) {
     } else {
         return avar;
     }
-
 }
+
+//uploading
+// https://github.com/expressjs/multer
+var upload = multer({
+    dest: pathAvatar,
+    /*limits: {
+        fieldNameSize: 100,
+        files: 2,
+        fields: 5
+    },*/
+    rename: function(fieldname, filename){
+        return Math.random() + Date.now();
+    },
+    onFileUploadStart: function (file){
+        log.info(file.originalname + ' is starting ...');
+    },
+    onFileUploadComplete: function (file){
+        log.info(file.fieldname + ' uploaded to ' + file.path);
+    }
+});
+

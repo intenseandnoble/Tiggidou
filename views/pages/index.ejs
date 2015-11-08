@@ -7,7 +7,7 @@
 
 </head>
 
-<body class="homepage" onload="initialize()">
+<body class="homepage" onload="google_maps()">
 <div id="page-wrapper">
 
     <!-- Header -->
@@ -19,7 +19,7 @@
 
             <div class="box container">
 
-                    <form method="get" action="/search">
+                    <form method="get" action="/search" class="preventEnter">
                     <div class = "row" >
                         <p>  <input type="text"  id="currentLocation" class = "indexElement" onFocus="geolocate()" name = "currentLocation" placeholder="De"></p>
                         <p> <input type="text" id="destination" class="indexElement" onFocus="geolocate()" name = "destination" placeholder="À"></p>

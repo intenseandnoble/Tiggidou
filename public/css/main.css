@@ -2854,26 +2854,26 @@ ol.default li {
 /*Classes*/
 
 input[type=email].signin-email{
-	posistion: relative;
+	position: relative;
 	width:300px;
 }
 input[type=password].enter-password{
-	posistion: relative;
+	position: relative;
 	width: 300px;
 }
 
 
 input[type=email].signup-email{
-	posistion: relative;
+	position: relative;
 	width:300px;
 }
 input[type=text].login-textbox{
-	posistion: relative;
+	position: relative;
 	width: 300px;
 }
 
 input[type=password].signup-pass{
-	posistion: relative;
+	position: relative;
 	width: 300px;
 }
 
@@ -2883,7 +2883,7 @@ input[type=password].signup-pass{
 }
 
 input[type=submit].sign-in{
-	posistion: relative;
+	position: relative;
 	width: 300px;
 	height : 50px;
 	top: 4px;
@@ -3034,12 +3034,54 @@ select.birthday{
 }
 
 input[type=text].birthday{
+
+
 	position: relative;
 	width:100px;
 	display: inline-block;
+
 }
 
 .birthday-title{
 	margin-right: 180px;
 	align:center;
+
+}
+
+.googleMap{
+	width:680px;
+	height:480px;
+
+}
+
+input[type=button].reset-markers{
+
+	white-space: normal;
+	font-size: 15px;
+	margin-left: 15px;
+	text-align: center;
+	position: relative;
+	width:150px;
+	height: 50px;
+	display: inline-block;
+
+}
+
+input[type=number].radius{
+
+	width:150px;
+
+}
+
+input[type=button].choose-arrival-point{
+
+
+	font-size: 15px;
+	margin-left: 10px;
+	text-align: center;
+	position: relative;
+	width:200px;
+	height: 50px;
+	display: inline-block;
+
 }

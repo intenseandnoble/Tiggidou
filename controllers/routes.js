@@ -296,7 +296,7 @@ module.exports = function (app, passport) {
         var newdate = date.split("/").reverse().join("/");
 
 
-        if(req.body.hiddenUser == 'driver') //insert into Travel
+        if(req.body.driverCheckbox == 'on') //insert into Travel
         {
             if(req.body.petsRadio_d == 'Yes') pets= 0;
             else pets = 1;
@@ -357,6 +357,7 @@ module.exports = function (app, passport) {
     app.get('/search', function (req, res) {
 
 
+        var idTravel_arr = [];
         var driver_arr = [];
         var passenger_arr=[];
         var comment_arr = [];
@@ -372,9 +373,17 @@ module.exports = function (app, passport) {
         var dest = req.query.destination;
         var currLocation = req.query.currentLocation;
 
+
+        //var date= new Date(req.query.datepicker);
+        var date=req.query.datepicker;
+        var newdate = date.split("/").reverse().join("/");
+        newdate = new Date(newdate);
+
+
         var finishRequest = function () {
             res.render('pages/results.ejs', {
 
+                idTravel:idTravel_arr,
                 drivers: driver_arr,
                 passengers: passenger_arr,
                 comment: comment_arr,
@@ -414,15 +423,20 @@ module.exports = function (app, passport) {
 
                     for (i = 0; i < resultJSON.length; i++) {
 
-                        driver_arr.push(resultJSON[i]['driver']);
-                        luggageSize_arr.push(resultJSON[i]['luggagesSize']);
-                        departureTime_arr.push(resultJSON[i]['departureTime']);
-                        comment_arr.push(resultJSON[i]['comments']);
-                        petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
-                        departureDate_arr.push(resultJSON[i]['departureDate']);
-                        seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
-                        seatsTaken_arr.push(resultJSON[i]['takenSeat']);
-                        cost_arr.push(resultJSON[i]['cost']);
+                        if(newdate <= resultJSON[i]['departureDate'])
+                        {
+                            idTravel_arr.push(resultJSON[i]['idAddTravel']);
+                            driver_arr.push(resultJSON[i]['driver']);
+                            luggageSize_arr.push(resultJSON[i]['luggagesSize']);
+                            departureTime_arr.push(resultJSON[i]['departureTime']);
+                            comment_arr.push(resultJSON[i]['comments']);
+                            petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
+                            departureDate_arr.push(resultJSON[i]['departureDate']);
+                            seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
+                            seatsTaken_arr.push(resultJSON[i]['takenSeat']);
+                            cost_arr.push(resultJSON[i]['cost']);
+                        }
+
                     }
 
                     finishRequest();
@@ -461,12 +475,17 @@ module.exports = function (app, passport) {
 
                     for (i = 0; i < resultJSON.length; i++) {
 
-                        passenger_arr.push(resultJSON[i]['passenger']);
-                        luggageSize_arr.push(resultJSON[i]['luggageSize']);
-                        departureTime_arr.push(resultJSON[i]['departureTime']);
-                        comment_arr.push(resultJSON[i]['comments']);
-                        petsAllowed_arr.push(resultJSON[i]['pets']);
-                        departureDate_arr.push(resultJSON[i]['departureDate']);
+                        if(newdate <= resultJSON[i]['departureDate'])
+                        {
+                            idTravel_arr.push(resultJSON[i]['idAddTravel']);
+                            passenger_arr.push(resultJSON[i]['passenger']);
+                            luggageSize_arr.push(resultJSON[i]['luggageSize']);
+                            departureTime_arr.push(resultJSON[i]['departureTime']);
+                            comment_arr.push(resultJSON[i]['comments']);
+                            petsAllowed_arr.push(resultJSON[i]['pets']);
+                            departureDate_arr.push(resultJSON[i]['departureDate']);
+                        }
+
                     }
 
                     finishRequest();
@@ -474,7 +493,6 @@ module.exports = function (app, passport) {
 
 
             }).catch(function (err) {
-
                 res.render('pages/no-results.ejs', {
                     header: header,
                     foot: foot //In case of error
@@ -483,6 +501,38 @@ module.exports = function (app, passport) {
 
             });
         }
+
+    });
+
+    app.post('/add-passenger', function(req, res) {
+        //What if 2 users add it at the same time? With only 1 place left? Revisit this
+        if(req.user){
+
+            new Model.Travel().where({
+                idAddTravel: req.body.idTravel
+            }).fetch().then(function (user) {
+
+                if( 0 <user.get('availableSeat')){
+
+                    updateSeats(req.body.idTravel, user.get('takenSeat'),  user.get('availableSeat') );
+                    addTravelPassenger(req.body.idTravel,req.session.req.user.id);
+                    res.redirect('/');
+                }
+                else{
+                    //Not available anymore
+                }
+            });
+        }
+        else{
+            //res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
+            res.render('pages/login.ejs',
+                {
+                    header: header,
+                    foot : foot
+                });
+        }
+
+        // res.redirect('/');
 
     });
 
@@ -552,8 +602,14 @@ module.exports = function (app, passport) {
     app.post('/sign-up', function(req, res, next) {
         verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
             if(success){
+                var moment = require('moment');
                 var user = req.body;
                 var usernamePromise = null;
+
+                var birthday = req.body.birthday_year+req.body.birthday_month+req.body.birthday_day;
+
+                var age =  moment().diff(moment(birthday, "YYYYMMDD"), 'years');
+
                 usernamePromise = new Model.Users({email: user.email}).fetch();
                 return usernamePromise.then(function(model) {
                     if(model) {
@@ -747,7 +803,7 @@ function authentificated(req){
 
 function getUserName(id){
 
-   var firstName = "Unknown";
+    var firstName = "Unknown";
 
     var finishRequest = function () {return firstName;};
 
@@ -762,7 +818,7 @@ function getUserName(id){
 
 
 /*https://www.google.com/recaptcha/admin#list*/
-        var commentariesTexts = [];
+var commentariesTexts = [];
 var SECRET =  "6LdJfA8TAAAAAGndnIbSyPNBm-X2BphdUHBb-fRT"; //TODO met le secret ici...
 //helper function to make API call to recatpcha and check response
 function verifyRecaptcha(key, callback){
@@ -812,6 +868,36 @@ function getUsernameFromDBAsync(userId) {
             return s;
         });
 }
+
+function updateSeats(travelId, takenSeats, availableSeats){
+
+    new Model.Travel().where({
+        idAddTravel: travelId
+    }).save({
+
+        takenSeat :takenSeats+1,
+        availableSeat : availableSeats-1
+
+    }, {method: 'update'}).catch(function (err) {
+        log.error(err);
+    });
+
+}
+
+function addTravelPassenger(travelId, userId){
+
+    new Model.TravelPassengers().save({
+            passenger:userId,
+            travel : travelId
+
+        },
+        {method: 'insert'}
+    ).catch(function (err) {
+            log.error(err);
+        });
+
+}
+
 
 //uploading
 // https://github.com/expressjs/multer

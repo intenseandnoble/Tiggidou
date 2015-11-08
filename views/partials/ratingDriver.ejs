@@ -17,6 +17,7 @@
     <div class="modal-header">
         <form id="ratingsFormDriver" method="post" action ="/rate_driver"
               enctype="application/x-www-form-urlencoded" >
+            <input type="hidden" name="usernameOfProfile" value="<%= userOfProfile %>">
             <h3><%= ratingPnD.punctuality %></h3>
             <div class="rating-star">
                 <input type="hidden" name="dPunctualityVote" value="0" />

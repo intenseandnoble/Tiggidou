@@ -21,27 +21,35 @@
 
                         <!-- Sidebar -->
                         <section>
-                            <h3>Profil</h3>
+                            <h3><%= profile.profile %></h3>
+                            <% { %>
                             <div class="image">
-                                <img src="images/pic01.jpg"/>
+                                <img src="/images/user_icon.svg"/>
                             </div>
-                            <p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus.
-                                Praesent semper mod quis eget mi. Etiam eu ante risus. Aliquam erat volutpat.
-                                Aliquam luctus et mattis lectus sit amet pulvinar. Nam turpis nisi
-                                consequat etiam.</p>
+                            <% }
+                            if (age != null) { %>
+                            <h3><%= profile.age %>  </h3>
+                            <% }
+                            if (education != null ) { %>
+                            <h3><%= profile.education %>  </h3>
+                            <% }
+                            if (music != null) { %>
+                            <h3><%= profile.music %>  </h3>
+                            <% }
+                            { %>
                             <footer>
-                                <a href="#" class="button icon fa-info-circle">Find out more</a>
+                                <a href="#" class="button icon fa-info-circle"><%= profile.contacts %></a>
                             </footer>
+                            <% } %>
                         </section>
 
                         <section>
-                            <h3>Subheading</h3>
+                            <h3><%= profile.submenu %></h3>
                             <ul class="style2">
-                                <li><a href="#tabs-1">Tableau de bord</a></li>
-                                <li><a href="#tabs-2">Annonces</a></li>
-                                <li><a href="#tabs-3">Réservation</a></li>
-                                <li><a href="#tabs-4">Messages</a></li>
-                                <li><a href="#tabs-5">...</a></li>
+                                <li><a href="#tabs-1"><%= profile.dashboard %></a></li>
+                                <li><a href="#tabs-2"><%= profile.ads %></a></li>
+                                <li><a href="#tabs-3"><%= profile.reservation %></a></li>
+                                <li><a href="#tabs-4"><%= profile.messages %></a></li>
                             </ul>
                         </section>
 
@@ -54,47 +62,31 @@
                         <article>
 
                             <h2><%= userName %></h2>
-
-                            <p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus.
-                                Praesent semper mod quis eget mi. Etiam eu ante risus. Aliquam erat volutpat.
-                                Aliquam luctus et mattis lectus sit amet pulvinar. Nam turpis nisi
-                                consequat etiam lorem ipsum dolor sit amet nullam.</p>
-
-                            <h3>More intriguing information</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac quam risus, at tempus
-                                justo. Sed dictum rutrum massa eu volutpat. Quisque vitae hendrerit sem. Pellentesque lorem felis,
-                                ultricies a bibendum id, bibendum sit amet nisl. Mauris et lorem quam. Maecenas rutrum imperdiet
-                                vulputate. Nulla quis nibh ipsum, sed egestas justo. Morbi ut ante mattis orci convallis tempor.
-                                Etiam a lacus a lacus pharetra porttitor quis accumsan odio. Sed vel euismod nisi. Etiam convallis
-                                rhoncus dui quis euismod. Maecenas lorem tellus, congue et condimentum ac, ullamcorper non sapien.
-                                Donec sagittis massa et leo semper a scelerisque metus faucibus. Morbi congue mattis mi.
-                                Phasellus sed nisl vitae risus tristique volutpat. Cras rutrum commodo luctus.</p>
-
-                            <p>Phasellus odio risus, faucibus et viverra vitae, eleifend ac purus. Praesent mattis, enim
-                                quis hendrerit porttitor, sapien tortor viverra magna, sit amet rhoncus nisl lacus nec arcu.
-                                Suspendisse laoreet metus ut metus imperdiet interdum aliquam justo tincidunt. Mauris dolor urna,
-                                fringilla vel malesuada ac, dignissim eu mi. Praesent mollis massa ac nulla pretium pretium.
-                                Maecenas tortor mauris, consectetur pellentesque dapibus eget, tincidunt vitae arcu.
-                                Vestibulum purus augue, tincidunt sit amet iaculis id, porta eu purus.</p>
+                            <% if (anecdote != null) { %>
+                            <p><%= anecdote %></p>
+                            <% }
+                            if (goalInLife != null) { %>
+                            <h3><%= goalInLife %></h3>
+                            <p><%= goalInLife %></p>
+                            <% } %>
 
                         </article>
 
                         <% include ../partials/myScore %>
 
+                        <br>
                         <div class="row-comments">
                             <div class="column-comments">
                                 <div class="panel">
-                                    <div class="panel-heading">Comments</div>
+                                    <div class="panel-heading"><%= profile.comments %></div>
                                     <div class="panel-body">
-                                        <form id="write_comment" class="form-horizontal">
+
+
+                                        <form id="write_comment" class="form-horizontal" method="post" action ="/post_profile_comment">
                                             <div class="form-group">
-                                                <div class="col-md-6">
-                                                    <input type="text" name="name" id="name" class="form-control" placeholder="Name">
-                                                </div><!--col-md-6-->
-                                                <div class="col-md-6">
-                                                    <input type="email" name="mail" id="mail" class="form-control" placeholder="E-mail">
-                                                </div><!--col-md-6-->
+                                                <input type="hidden" name="usernameOfProfile" value="<%= userOfProfile %>">
                                             </div><!--form-group-->
+
                                             <div class="form-group">
                                                 <div class="col-md-12">
                                                     <textarea name="comment" rows="3" class="form-control input-md" placeholder="Add a comment"></textarea>
@@ -104,24 +96,33 @@
                                             <div class="form-group">
                                                 <!--col-md-5-->
                                                 <div class="col-md-5">
-                                                    <input type="submit" class="button" value="Submit"/>
+                                                    <input type="submit" class="button" value="<%= profile.submitbtn %>"/>
                                                 </div><!--col-md-5-->
 
                                             </div>
-
                                         </form>
+
+
                                     </div><!--panel-body class="meta clearfix"  -->
+
+
                                     <ul class="list-group">
-                                        <li class="list-group-item ">
+
+                                        <% if (comments.length > 0 ) {
+                                        for (var i =0; i<comments.length; i+=1) { %>
+                                        <li class="list-group-item">
+                                            <hr>
                                             <p >
-                                                <a href="#"  title="NAME" class="user">someGuy</a>
-                                                <span class="time">3 Hours, 34 Minutes ago</span>
+                                                <a href="#"  title="NAME" class="user"><%= commentsIssuers[i] %></a>
                                             </p>
-
                                             <p class="comment">
-                                            <p>Super cool driver</p>                                </p>
-
+                                            <p> <%= comments[i] %> </p>
+                                            </p>
                                         </li>
+
+                                        <% }
+                                        } %>
+
                                     </ul>
                                 </div>
                             </div>

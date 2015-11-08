@@ -36,10 +36,10 @@ module.exports = function (app, passport) {
     });
 
     // profile
-    app.get('/profile', function(req, res){
+    app.get(['/profile', '/profile/:username'],requireAuth,function(req, res){
         //Todo prendre les donnees de l'utilisateur connecte
         //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
-        var user = req.session.req.user;
+        var Juser = req.session.req.user;
         var driverAvgScore;
         var driverPScore;
         var driverCScore;
@@ -53,23 +53,27 @@ module.exports = function (app, passport) {
         var passengerLScore;
 
         var userName;
-        var pageName;
+        var un = req.params.username;
+        var page;
 
         var userId;
+        var commentariesTexts = [];
+        var promiseArr = [];
 
-        new Model.Users({'email': 'alcol@colo.com' }).fetch().then(function(user) {
+        if (un == Juser.attributes.username) {
+            page = 'pages/my-profile.ejs';
+        } else {
+            page = 'pages/profile.ejs'
+        }
+
+        new Model.Users()
+            .query({where:{'username': un}, orWhere:{'idUser': Juser.attributes.idUser}})
+            .fetch()
+            .then(function(user) {
             if(user) {
-                //nom de la page
-                pageName = "Profil";
 
                 //nom d'utilisateur
                 userName = user.get("firstName") + " " + user.get("familyName");
-                //anecdotes personnelles
-
-                //photo de profil
-
-                //commentaires
-
 
                 //calcul du score
                 /* driver scores */
@@ -99,18 +103,19 @@ module.exports = function (app, passport) {
 
                         if (resultJSON.length == 0) {
                             //TODO if no comments
-                        }
-                        else {
-                            var i;
-                            for(i=0; i<resultJSON.length; ++i) {
+                        } else {
+
+                            for(i= 0; i<resultJSON.length; ++i) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
-                                //commentariesTexts.push(comm.related('user').toJSON());
+                                promiseArr.push(getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                             }
                         }
-                    }).then(function ()   {
-                        res.render('pages/profile.ejs',{
-                            logged: authentificated(req),
-                            pageName : pageName,
+
+                        Promise.all(promiseArr).then(function(ps){
+
+                            res.render(page,{
+
+                                logged: authentificated(req),
                             userName : userName,
 
                             driverAverageScore : driverAvgScore,
@@ -126,6 +131,8 @@ module.exports = function (app, passport) {
                             pPolitenessScore: passengerLScore,
 
                             comments:commentariesTexts,
+                            commentsIssuers:ps,
+                            userOfProfile:user.get('username'),
 
                             age:user.get('age'),
                             education:user.get('education'),
@@ -135,9 +142,15 @@ module.exports = function (app, passport) {
 
                             profile: require('../views/fr/profile.js'),
                             ratingPnD: require('../views/fr/ratingPnD.js'),
+
                             foot : foot,
                             header:header
-                        })});
+
+
+                            });
+                        });
+
+                    })
             }
             //TODO page issue de l'else si l'utilisateur est inexistant
 
@@ -179,25 +192,36 @@ module.exports = function (app, passport) {
         var rateReliability = arrayOrNot(req.body.dReliabilityVote);
         var rateSecurity = arrayOrNot(req.body.dSecurityVote);
         var rateComfort = arrayOrNot(req.body.dComfortVote);
-        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'0'});
 
-        vote.fetch().then(function (m) {
-            if (m == null) {
-                vote.save(
-                    {dratingPunctuality: ratePunctuality,
-                        dratingCourtesy:rateCourtesy,
-                        dratingReliability:rateReliability,
-                        dratingSecurity:rateSecurity,
-                        dratingComfort:rateComfort}, {method: 'insert'});
-            } else {
-                vote.save(
-                    {dratingPunctuality: ratePunctuality,
-                        dratingCourtesy:rateCourtesy,
-                        dratingReliability:rateReliability,
-                        dratingSecurity:rateSecurity,
-                        dratingComfort:rateComfort}, {method: 'update'});
-            }});
-        res.redirect('/profile');
+        var judgedun = req.body.usernameOfProfile;
+        var votingu = req.session.req.user.attributes.idUser;
+
+        new Model.Users({'username':judgedun})
+            .fetch()
+            .then(function (u) {
+
+                var vote = new Model.ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'0'});
+                vote.fetch().then(function (m) {
+                    if (m == null) {
+                        vote.save(
+                            {dratingPunctuality: ratePunctuality,
+                            dratingCourtesy:rateCourtesy,
+                            dratingReliability:rateReliability,
+                            dratingSecurity:rateSecurity,
+                            dratingComfort:rateComfort}, {method: 'insert'});
+                    } else {
+                        vote.save(
+                            {dratingPunctuality: ratePunctuality,
+                            dratingCourtesy:rateCourtesy,
+                            dratingReliability:rateReliability,
+                            dratingSecurity:rateSecurity,
+                            dratingComfort:rateComfort}, {method: 'update'});
+                }})
+                    .then(function(){
+                        res.redirect('/profile/'+judgedun);
+                    });
+
+            });
 
     });
 
@@ -209,40 +233,58 @@ module.exports = function (app, passport) {
         var rateCourtesy = arrayOrNot(req.body.pCourtesyVote);
         var ratePoliteness = arrayOrNot(req.body.pPolitenessVote);
 
+        //jun: judged username, vu:voting user
+        var judgedun = req.body.usernameOfProfile;
+        var votingu = req.session.req.user.attributes.idUser;
 
-        var vote = new Model.ratings({'votingUser': '1', 'judgedUser':'2', 'ratingType':'1'});
+        new Model.Users({'username':judgedun})
+            .fetch()
+            .then(function (u) {
 
-        vote.fetch().then(function (m) {
-            if (m == null) {
-                vote.save(
-                    {pratingPunctuality: ratePunctuality,
-                        pratingCourtesy:rateCourtesy,
-                        pratingPoliteness:ratePoliteness}, {method: 'insert'});
-            } else {
-                vote.save(
-                    {pratingPunctuality: ratePunctuality,
-                        pratingCourtesy:rateCourtesy,
-                        pratingPoliteness:ratePoliteness}, {method: 'update'});
-            }});
-        res.redirect('/profile');
+            var vote = new Model.ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
 
+            vote.fetch().then(function (m) {
+                if (m == null) {
+                    vote.save(
+                        {pratingPunctuality: ratePunctuality,
+                            pratingCourtesy:rateCourtesy,
+                            pratingPoliteness:ratePoliteness}, {method: 'insert'});
+                } else {
+                    vote.save(
+                        {pratingPunctuality: ratePunctuality,
+                            pratingCourtesy:rateCourtesy,
+                            pratingPoliteness:ratePoliteness}, {method: 'update'});
+                }})
+                .then(function () {
+                    res.redirect('/profile/'+judgedun);
+                });
+            });
     });
 
     //commentType: 0 => profil; 1 => travel; 2 => requestTravel/searchtravel
 
     app.post('/post_profile_comment', function(req, res) {
 
-
         var c = req.body.comment;
-        var commentaire = new Model.comments({
-            'commentIssuer':'1',
-            'commentProfileId':'2',
-            'commentType': '0',
-            'comment': c});
+        var ci = req.session.req.user.attributes.idUser;
+        var un = req.body.usernameOfProfile;
 
-        commentaire.save();
+        new Model.Users({'username':un})
+            .fetch()
+            .then( function (u) {
 
-        res.redirect('/profile');
+                var commentaire = new Model.comments({
+                    'commentIssuer': ci,
+                    'commentProfileId': u.get('idUser'),
+                    'commentType': '0',
+                    'comment': c
+                });
+
+                commentaire.save();
+                res.redirect('/profile/' + un);
+
+            });
+
     });
 
     app.post('/post-ride', function (req, res) {
@@ -746,7 +788,6 @@ function roundingCeilOrFloor (score) {
     } else if (score % 1 < 0.5) {
         score = Math.floor(score);
     }
-
     return score;
 }
 
@@ -756,6 +797,20 @@ function arrayOrNot (avar) {
     } else {
         return avar;
     }
+}
+
+function getUsernameFromDBAsync(userId) {
+
+    return new Model.Users({
+        idUser: userId
+    })
+        .fetch()
+        .then(function(u){
+            var prenom = u.get('firstName');
+            var nom = u.get('familyName');
+            var s = prenom + " " + nom;
+            return s;
+        });
 }
 
 //uploading

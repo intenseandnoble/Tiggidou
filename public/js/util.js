@@ -1,3 +1,13 @@
+var map;
+var place_curr;
+var place_dest;
+
+var markers_currLoc= [];
+var markers_destLoc= [];
+var circle_currLoc =[];
+var circle_destLoc =[];
+
+
 (function($) {
 
 	/**
@@ -633,9 +643,8 @@ $(document).ready(function() {
 
 
 
-// Google autocomplete for places
-
-function initialize() {
+// Google autocomplete for places and Map
+function google_maps() {
 
 	var options = {
 		types: ['(cities)'],
@@ -644,10 +653,263 @@ function initialize() {
 
 	var curr_input = document.getElementById('currentLocation');
 	var dest_input = document.getElementById('destination');
-	var autocomplete = new google.maps.places.Autocomplete(curr_input, options);
-	var autocomplete = new google.maps.places.Autocomplete(dest_input, options);
+	var autocompleteCurr = new google.maps.places.Autocomplete(curr_input, options);
+	var autocompleteDest = new google.maps.places.Autocomplete(dest_input, options);
+
+
+
+	var mapProp = {
+
+		center:new google.maps.LatLng( 46, -73),
+		zoom:8,
+		mapTypeId:google.maps.MapTypeId.ROADMAP
+	};
+
+	map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+	google.maps.event.trigger(map, 'resize');
+
+	autocompleteCurr.bindTo('bounds', map);
+
+	var infowindow = new google.maps.InfoWindow();
+	var marker = new google.maps.Marker({
+		map: map,
+		anchorPoint: new google.maps.Point(0, -29)
+	});
+
+	google.maps.event.addListener(autocompleteCurr, 'place_changed', function() {
+
+		place_curr =  autocompleteCurr.getPlace();
+		infowindow.close();
+		marker.setVisible(false);
+		var place = autocompleteCurr.getPlace();
+
+		if (!place.geometry) {
+			return;
+		}
+
+
+		if (place.geometry.viewport) {
+
+			map.setCenter(place.geometry.location);
+			map.setZoom(15);
+		}
+
+
+		marker.setIcon(/** @type {google.maps.Icon} */({
+			url: place.icon,
+			size: new google.maps.Size(71, 71),
+			origin: new google.maps.Point(0, 0),
+			anchor: new google.maps.Point(17, 34),
+			scaledSize: new google.maps.Size(35, 35)
+		}));
+		marker.setPosition(place.geometry.location);
+		marker.setVisible(true);
+
+		/*var address = '';
+		if (place.address_components) {
+			address = [
+				(place.address_components[0] && place.address_components[0].short_name || ''),
+				(place.address_components[1] && place.address_components[1].short_name || ''),
+				(place.address_components[2] && place.address_components[2].short_name || '')
+			].join(' ');
+		}
+
+		infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+		infowindow.open(map, marker);*/
+	});
+
+
+	google.maps.event.addListener(map, 'click', function(event) {
+		placeMarker(event.latLng, map);
+
+
+	});
+
+	google.maps.event.addListener(autocompleteDest, 'place_changed', function() {
+		place_dest =  autocompleteDest.getPlace();
+	});
+
+
+
 
 }
+
+function placeMarker(location,map) {
+
+	var marker_arr = markers_currLoc;
+	var icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+
+
+	if(document.getElementById('radio-map-destination').checked) {
+		marker_arr = markers_destLoc;
+		icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+	}
+
+
+	if (marker_arr.length > 0)deleteMarkers();
+	var marker = new google.maps.Marker({
+		position: location,
+		map: map,
+		draggable: true,
+		icon: icon
+	});
+
+	marker_arr.push(marker);
+	map.panTo(position);
+
+
+}
+
+function deleteMarkers() {
+
+
+	var marker_arr = markers_currLoc;
+	var circle_arr = circle_currLoc;
+
+	if(document.getElementById('radio-map-destination').checked) {
+		marker_arr = markers_destLoc;
+		circle_arr = circle_destLoc;
+	}
+
+
+	if (marker_arr) {
+		for (i in marker_arr) {
+			marker_arr[i].setMap(null);
+		}
+		marker_arr.length = 0;
+
+		for (i in circle_arr) {
+			circle_arr[i].setMap(null);
+		}
+		circle_arr.length = 0;
+	}
+
+
+
+}
+
+//Draws a radius on Google Map.
+
+function drawRadius(){
+
+	var marker_arr = markers_currLoc;
+	var circle_arr = circle_currLoc;
+	var color = "#00FF00";
+
+	if(document.getElementById('radio-map-destination').checked) {
+		marker_arr = markers_destLoc;
+		circle_arr = circle_destLoc;
+		color = "#FF0000";
+	}
+
+	var km =  document.getElementById('radius').value;
+
+	if(km > 1000)km=1000;
+	if(circle_arr.length>0){
+		for (i in circle_arr) {
+			circle_arr[i].setMap(null);
+		}
+		circle_arr.length = 0;
+
+	}
+
+	//for (marker in markers_currLoc) {
+	for(i=0; i < marker_arr.length;i++){
+		// Add the circle for this city to the map.
+		var circle = new google.maps.Circle({
+			map: map,
+			radius: km*1,    // 10 miles in metres
+			fillColor: color
+		});
+
+		circle_arr.push(circle);
+		circle.bindTo('center', marker_arr[i], 'position');
+
+	}
+
+}
+
+//Draws radius when clicking on the map
+$(".googleMap").click(function() {
+	drawRadius();
+});
+
+//Resets the markers when the button is clicked.
+$(".reset-markers").click(function() {
+	deleteMarkers();
+});
+
+
+//Changes the radius when pressing enter on the meters input box.
+$('.radius').bind('keypress', function(e) {
+	if(e.keyCode==13){
+		drawRadius();
+	}
+});
+
+
+//Draws radius on change
+$( ".radius" ).change(function() {
+	drawRadius();
+});
+
+//Prevents submitting the form by pressing on enter.
+$('.preventEnter').on('keyup keypress', function(e) {
+	var code = e.keyCode || e.which;
+	if (code == 13) {
+		e.preventDefault();
+		return false;
+	}
+});
+
+$('#currentLocationMap').click(function() {
+
+	var curr_input = document.getElementById('currentLocation');
+	if(curr_input.value.length == 0)return;
+
+	if(markers_currLoc.length>0){
+		map.setCenter(markers_currLoc[0].getPosition());
+
+	}
+
+	else{
+
+		var place = place_curr;
+		if (!place.geometry)return;
+		if (place.geometry.viewport) {
+			map.setCenter(place.geometry.location);
+			map.setZoom(15);
+		}
+	}
+
+
+
+});
+
+
+$('#destinationMap').click(function() {
+
+	var dest_input = document.getElementById('destination');
+
+	if(dest_input.value.length == 0)return;
+
+	if(markers_destLoc.length>0){
+		map.setCenter(markers_destLoc[0].getPosition());
+	}
+
+	else{
+
+		var place = place_dest;
+		if (!place.geometry)return;
+		if (place.geometry.viewport) {
+			map.setCenter(place.geometry.location);
+			map.setZoom(15);
+		}
+	}
+
+});
+
+
 
 //Makes sure that no letters are entered in the cost text box
 $("#costInput").keyup(function() {
@@ -665,32 +927,35 @@ $('.clockpicker').clockpicker()
 //Fade-in/Fade out of the nessage "I am a driver/passenger" when posting a travel
 
 $(document).ready(function(){
+
 	$(".passengerOpt").click(function(){
 		$(".fadeinAction").fadeIn("slow");
 		$(".passengerOptions").fadeIn("slow");
+		//$( '.googleMap' ).delay( 1000 ).fadeIn( 'slow' );
 		$(".passengerOpt").fadeOut();
 		$(".driversOpt").fadeOut();
-		$(".passengerCheckbox").prop("checked", true);
-		$(".driverCheckbox").prop("checked", false);
-		$('#checkboxPassenger').attr('disabled', true); //disable input
-		$('#typeUser_p').attr('checked',true);
+		$("#passengerCheckbox").prop("checked", true);
+		$("#driverCheckbox").prop("checked", false);
 
+		google_maps();
 
 
 	});
 	$(".driversOpt").click(function(){
 		$(".fadeinAction").fadeIn("slow");
-		$(".driverOptions").fadeIn("slow");;
+		$(".driverOptions").fadeIn("slow");
+		//$( '.googleMap' ).delay( 1000 ).fadeIn( 'slow' );
 		$(".passengerOpt").fadeOut();
 		$(".driversOpt").fadeOut();
-		$(".passengerCheckbox").prop("checked", false);
-		$(".driverCheckbox").prop("checked", true);
-		$('#checkboxDriver').attr('disabled', true); //disable input
-		$('#typeUser_d').attr('checked',true);
+		$("#driverCheckbox").prop("checked", true);
+		$("#passengerCheckbox").prop("checked", false);
+		google_maps();
+
 	});
 
 
 });
+
 
 
 //Spinner button for seats available etc...
@@ -705,10 +970,11 @@ $(function() {
 // This is to prevent 2 checkboxes to be checked at the same time.
 
 
-$("input:checkbox").on('click', function() {
+$("input:checkbox").on('click', function(e) {
 	// in the handler, 'this' refers to the box clicked on
 	var $box = $(this);
 	if ($box.is(":checked")) {
+
 		// the name of the box is retrieved using the .attr() method
 		// as it is assumed and expected to be immutable
 		var group = "input:checkbox[class='" + $box.attr("class") + "']";
@@ -719,45 +985,39 @@ $("input:checkbox").on('click', function() {
 
 
 	} else {
-		$box.prop("checked", false);
+		e.preventDefault();
+		return false;
+
 	}
 });
 
 //Disable the Passenger button so it won't be unselected
 
-$('#checkboxPassenger').click(function () {
+$('#passengerCheckbox').click(function() {
 	//check if checkbox is checked
 
 	if ($(this).is(':checked')) {
-		$('#checkboxPassenger').attr('disabled', true); //disable input
-		$('#checkboxDriver').removeAttr('disabled'); //enable input
 		$(".driverOptions").hide();
 		$(".passengerOptions").fadeIn("slow");
-		$('#typeUser_d').removeAttr('checked',true);
-		$('#typeUser_p').removeAttr('disabled');
-		$('#typeUser_p').click();
-
 
 	}
+
+
 });
 
 //Disable the driver button so it won't be unselected, and fades out passenger options and
 //fades in the driver options
 
-$('#checkboxDriver').click(function () {
+$('#driverCheckbox').click(function() {
 	//check if checkbox is checked
 
 	if ($(this).is(':checked')) {
-		$('#checkboxDriver').attr('disabled', true); //disable input
-		$('#checkboxPassenger').removeAttr('disabled'); //enable input
 		$(".passengerOptions").hide();
 		$(".driverOptions").fadeIn("slow");
-
-		$('#typeUser_p').removeAttr('checked',true);
-		$('#typeUser_d').removeAttr('disabled');
-		$('#typeUser_d').click();
 
 	}
 
 
+
 });
+

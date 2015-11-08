@@ -218,7 +218,7 @@ module.exports = function (app, passport) {
         var newdate = date.split("/").reverse().join("/");
 
 
-        if(req.body.hiddenUser == 'driver') //insert into Travel
+        if(req.body.driverCheckbox == 'on') //insert into Travel
         {
             if(req.body.petsRadio_d == 'Yes') pets= 0;
             else pets = 1;

@@ -3030,7 +3030,6 @@ input[type=text].birthday{
 
 
 	position: relative;
-
 	width:100px;
 	display: inline-block;
 
@@ -3040,6 +3039,42 @@ input[type=text].birthday{
 	margin-right: 180px;
 	align:center;
 
+}
 
-	
+.googleMap{
+	width:680px;
+	height:480px;
+
+}
+
+input[type=button].reset-markers{
+
+	white-space: normal;
+	font-size: 15px;
+	margin-left: 15px;
+	text-align: center;
+	position: relative;
+	width:150px;
+	height: 50px;
+	display: inline-block;
+
+}
+
+input[type=number].radius{
+
+	width:150px;
+
+}
+
+input[type=button].choose-arrival-point{
+
+
+	font-size: 15px;
+	margin-left: 10px;
+	text-align: center;
+	position: relative;
+	width:200px;
+	height: 50px;
+	display: inline-block;
+
 }

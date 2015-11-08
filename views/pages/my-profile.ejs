@@ -24,7 +24,7 @@
                             <h3><%= profile.profile %></h3>
                             <% { %>
                             <div class="image">
-                                <img src="images/user_icon.svg"/>
+                                <img src="/images/user_icon.svg"/>
                             </div>
                             <% }
                             if (age != null) { %>
@@ -84,7 +84,7 @@
 
                                         <form id="write_comment" class="form-horizontal" method="post" action ="/post_profile_comment">
                                             <div class="form-group">
-                                                <input type="hidden" name="UID" value="<%=  %>">
+                                                <input type="hidden" name="usernameOfProfile" value="<%= userOfProfile %>">
                                             </div><!--form-group-->
 
                                             <div class="form-group">

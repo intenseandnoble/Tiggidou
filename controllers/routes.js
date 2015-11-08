@@ -14,6 +14,8 @@ var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
 var loginString = require('../views/fr/sign.js');
 var moment = require("moment");
+var multer = require('multer');
+var pathAvatar = '../avatar';
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -141,6 +143,34 @@ module.exports = function (app, passport) {
 
         });
 
+    });
+
+    app.post('/profile/upload', function(req, res){
+        //TODO récupérer le choix
+        //TODO stocker dans la dabase
+        upload(req,res,function(err) {
+            if(err) {
+                //TODO ajouter les messages d'erreurs dans req.flash("profileMessage", err);
+                return res.redirect('/profile');
+            }
+
+            var userSession = req.session.req.user;
+
+            new Model.Users({'email': userSession.attributes.email }).fetch().then(function(user){
+                if(user){
+                    var filename = req.files.userPhoto.name;
+                    user.save({
+                        avatar:  filename
+                    }, {method: 'update'});
+
+                    res.redirect('/profile');
+                }
+                else{
+                    //TODO ajouter les messages d'erreurs dans req.flash("profileMessage", utilisateur non existant);
+                    return res.redirect('/profile');
+                }
+            });
+        });
     });
 
     app.post('/rate_driver', function (req, res) {
@@ -419,7 +449,7 @@ module.exports = function (app, passport) {
     // FACEBOOK ROUTES =====================
     // =====================================
     // route for facebook authentication and login
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email', "user_birthday"] }));
 
     // handle the callback after facebook has authenticated the user
     app.get('/auth/facebook/callback',
@@ -575,7 +605,6 @@ module.exports = function (app, passport) {
             });
     });
 
-
     app.get('/logout', function(req, res){
         if (req.isAuthenticated()){
             req.logout();
@@ -727,5 +756,25 @@ function arrayOrNot (avar) {
     } else {
         return avar;
     }
-
 }
+
+//uploading
+// https://github.com/expressjs/multer
+var upload = multer({
+    dest: pathAvatar,
+    /*limits: {
+        fieldNameSize: 100,
+        files: 2,
+        fields: 5
+    },*/
+    rename: function(fieldname, filename){
+        return Math.random() + Date.now();
+    },
+    onFileUploadStart: function (file){
+        log.info(file.originalname + ' is starting ...');
+    },
+    onFileUploadComplete: function (file){
+        log.info(file.fieldname + ' uploaded to ' + file.path);
+    }
+});
+

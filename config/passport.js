@@ -112,7 +112,7 @@ module.exports = function(passport) {
             clientID: configAuth.facebookAuth.clientID,
             clientSecret: configAuth.facebookAuth.clientSecret,
             callbackURL: configAuth.facebookAuth.callbackURL,
-            profileFields: ['id', 'displayName', 'emails', 'name']
+            profileFields: ['id', 'displayName', 'emails', 'name', "photos"]
         },
         // facebook will send back the token and profile
         function(token, refreshToken, profile, done) {
@@ -164,7 +164,7 @@ module.exports = function(passport) {
             clientID        : configAuth.googleAuth.clientID,
             clientSecret    : configAuth.googleAuth.clientSecret,
             callbackURL     : configAuth.googleAuth.callbackURL,
-            profileFields: ['id', 'displayName', 'emails', 'name']
+            profileFields: ['id', 'displayName', 'emails', 'name', 'picture']
 
         },
         function(token, refreshToken, profile, done) {

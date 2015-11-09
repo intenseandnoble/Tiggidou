@@ -56,7 +56,7 @@ module.exports = function (app, passport) {
         var commentariesTexts = [];
         var promiseArr = [];
 
-        if (un == Juser.attributes.username) {
+        if (un == Juser.attributes.username || un== undefined) {
             page = 'pages/my-profile.ejs';
         } else {
             page = 'pages/profile.ejs'

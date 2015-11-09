@@ -16,6 +16,9 @@ var bcrypt = require('bcrypt-nodejs');
 var configAuth = require('./authentification');
 var log = require('./logger').log;
 var Promise = require('bluebird');
+var https = require('https');
+var fs = require('fs');
+var path = require('path');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -126,6 +129,36 @@ module.exports = function(passport) {
                     var promiseArr = [];
                     promiseArr.push(new UserModel.Users().getCountName(profile.name.givenName, profile.name.familyName));
                     var countUser;
+
+                   /* var picture = profile.photos[0].value;
+                    https.get(picture, function(res){
+                        log.info("statusCode: " + res.statusCode);
+                        log.info("header: " + res.headers);
+
+                        res.on('data', function(data){
+                            var filePath = path.join(__dirname, "/tmptest/test.jpg");
+                            fs.open("./tmptest/test.jpg", 'w', function(err, fd){
+                                if(err){
+                                    log.info(err);
+                                    return;
+                                }
+
+                                fs.write(fd, data, 0, data.length, null, function(err){
+                                    if(err){
+                                        log.info(err);
+                                        return;
+                                    }
+                                    fs.close(fd, function(){
+                                        log.info("le fichier a été écrit avec succès");
+                                    });
+                                });
+                            });
+
+
+                        })
+                    }).on('error', function(err){
+                        log.error(err);
+                    });*/
 
                     Promise.all(promiseArr).then(function(ps) {
                         var countTest = ps[0][0];

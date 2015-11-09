@@ -24,7 +24,7 @@
                             <h3><%= profile.profile %></h3>
                             <% { %>
                             <div class="image">
-                                <img src="/images/user_icon.svg"/>
+                                <img src="images/avatar/<%= avatarImage %>" alt="avatar"/>
                             </div>
                             <% }
                             if (age != null) { %>
@@ -50,6 +50,7 @@
                                 <li><a href="#tabs-2"><%= profile.ads %></a></li>
                                 <li><a href="#tabs-3"><%= profile.reservation %></a></li>
                                 <li><a href="#tabs-4"><%= profile.messages %></a></li>
+                                <li><% include ../partials/profileAvatar %></li>
                             </ul>
                         </section>
 

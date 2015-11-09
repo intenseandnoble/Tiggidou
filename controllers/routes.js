@@ -15,7 +15,7 @@ var log = require('../config/logger').log;
 var loginString = require('../views/fr/sign.js');
 var moment = require("moment");
 var multer = require('multer');
-var pathAvatar = '../avatar';
+var pathAvatar = './public/images/avatar';
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -53,6 +53,7 @@ module.exports = function (app, passport) {
         var passengerLScore;
 
         var userName;
+        var userAvatar;
         var un = req.params.username;
         var page;
 
@@ -74,6 +75,7 @@ module.exports = function (app, passport) {
 
                 //nom d'utilisateur
                 userName = user.get("firstName") + " " + user.get("familyName");
+                userAvatar = user.get("avatar");
 
                 //calcul du score
                 /* driver scores */
@@ -116,6 +118,7 @@ module.exports = function (app, passport) {
                             res.render(page,{
                             logged: authentificated(req),
                             userName : userName,
+                            avatarImage: userAvatar,
 
                             driverAverageScore : driverAvgScore,
                             dPunctualityScore: driverPScore,

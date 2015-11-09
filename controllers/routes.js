@@ -15,6 +15,7 @@ var log = require('../config/logger').log;
 var loginString = require('../views/fr/sign.js');
 var moment = require("moment");
 var multer = require('multer');
+var moment = require('moment');
 var pathAvatar = '../avatar';
 
 // show routes to app
@@ -70,90 +71,90 @@ module.exports = function (app, passport) {
             .query({where:{'username': un}, orWhere:{'idUser': Juser.attributes.idUser}})
             .fetch()
             .then(function(user) {
-            if(user) {
+                if(user) {
 
-                //nom d'utilisateur
-                userName = user.get("firstName") + " " + user.get("familyName");
+                    //nom d'utilisateur
+                    userName = user.get("firstName") + " " + user.get("familyName");
 
-                //calcul du score
-                /* driver scores */
-                driverAvgScore = roundingCeilOrFloor(user.get('driverTotalScore') / (user.get('driverNbVotes') * 5));
-                driverPScore = roundingCeilOrFloor(user.get('dPunctualityScore') / user.get('driverNbVotes'));
-                driverCScore = roundingCeilOrFloor(user.get('dCourtesyScore') / user.get('driverNbVotes'));
-                driverRScore = roundingCeilOrFloor(user.get('dReliabilityScore') / user.get('driverNbVotes'));
-                driverSScore = roundingCeilOrFloor(user.get('dSecurityScore') / user.get('driverNbVotes'));
-                driverOScore = roundingCeilOrFloor(user.get('dComfortScore') / user.get('driverNbVotes'));
+                    //calcul du score
+                    /* driver scores */
+                    driverAvgScore = roundingCeilOrFloor(user.get('driverTotalScore') / (user.get('driverNbVotes') * 5));
+                    driverPScore = roundingCeilOrFloor(user.get('dPunctualityScore') / user.get('driverNbVotes'));
+                    driverCScore = roundingCeilOrFloor(user.get('dCourtesyScore') / user.get('driverNbVotes'));
+                    driverRScore = roundingCeilOrFloor(user.get('dReliabilityScore') / user.get('driverNbVotes'));
+                    driverSScore = roundingCeilOrFloor(user.get('dSecurityScore') / user.get('driverNbVotes'));
+                    driverOScore = roundingCeilOrFloor(user.get('dComfortScore') / user.get('driverNbVotes'));
 
-                /* passenger scores */
-                passengerAvgScore = roundingCeilOrFloor(user.get('passengerTotalScore') / (user.get('passengerNbVotes') * 3));
-                passengerPScore = roundingCeilOrFloor(user.get('pPunctualityScore') / user.get('passengerNbVotes'));
-                passengerCScore = roundingCeilOrFloor(user.get('pCourtesyScore') / user.get('passengerNbVotes'));
-                passengerLScore = roundingCeilOrFloor(user.get('pPolitenessScore') / user.get('passengerNbVotes'));
+                    /* passenger scores */
+                    passengerAvgScore = roundingCeilOrFloor(user.get('passengerTotalScore') / (user.get('passengerNbVotes') * 3));
+                    passengerPScore = roundingCeilOrFloor(user.get('pPunctualityScore') / user.get('passengerNbVotes'));
+                    passengerCScore = roundingCeilOrFloor(user.get('pCourtesyScore') / user.get('passengerNbVotes'));
+                    passengerLScore = roundingCeilOrFloor(user.get('pPolitenessScore') / user.get('passengerNbVotes'));
 
-                //commentaires
-                userId = user.get('idUser');
-                new Model.comments().where({
-                    commentType: 0,
-                    commentProfileId: userId
-                }).fetchAll({withRelated:['user']})
-                    //TODO limit the number of results
-                    .then(function (comm) {
+                    //commentaires
+                    userId = user.get('idUser');
+                    new Model.comments().where({
+                        commentType: 0,
+                        commentProfileId: userId
+                    }).fetchAll({withRelated:['user']})
+                        //TODO limit the number of results
+                        .then(function (comm) {
 
-                        var resultJSON = comm.toJSON();
+                            var resultJSON = comm.toJSON();
 
-                        if (resultJSON.length == 0) {
-                            //TODO if no comments
-                        } else {
+                            if (resultJSON.length == 0) {
+                                //TODO if no comments
+                            } else {
 
-                            for(i= 0; i<resultJSON.length; ++i) {
-                                commentariesTexts.push(resultJSON[i]['comment']);
-                                promiseArr.push(getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
+                                for(i= 0; i<resultJSON.length; ++i) {
+                                    commentariesTexts.push(resultJSON[i]['comment']);
+                                    promiseArr.push(getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
+                                }
                             }
-                        }
 
-                        Promise.all(promiseArr).then(function(ps){
+                            Promise.all(promiseArr).then(function(ps){
 
-                            res.render(page,{
-                            logged: authentificated(req),
-                            userName : userName,
+                                res.render(page,{
+                                    logged: authentificated(req),
+                                    userName : userName,
 
-                            driverAverageScore : driverAvgScore,
-                            dPunctualityScore: driverPScore,
-                            dCourtesyScore: driverCScore,
-                            dReliabilityScore: driverRScore,
-                            dSecurityScore: driverSScore,
-                            dComfortScore: driverOScore,
+                                    driverAverageScore : driverAvgScore,
+                                    dPunctualityScore: driverPScore,
+                                    dCourtesyScore: driverCScore,
+                                    dReliabilityScore: driverRScore,
+                                    dSecurityScore: driverSScore,
+                                    dComfortScore: driverOScore,
 
-                            passengerAverageScore : passengerAvgScore,
-                            pPunctualityScore: passengerPScore,
-                            pCourtesyScore: passengerCScore,
-                            pPolitenessScore: passengerLScore,
+                                    passengerAverageScore : passengerAvgScore,
+                                    pPunctualityScore: passengerPScore,
+                                    pCourtesyScore: passengerCScore,
+                                    pPolitenessScore: passengerLScore,
 
-                            comments:commentariesTexts,
-                            commentsIssuers:ps,
-                            userOfProfile:user.get('username'),
+                                    comments:commentariesTexts,
+                                    commentsIssuers:ps,
+                                    userOfProfile:user.get('username'),
 
-                            age:user.get('age'),
-                            education:user.get('education'),
-                            music:user.get('music'),
-                            anecdote:user.get('anecdote'),
-                            goalInLife:user.get('goalInLife'),
+                                    age:user.get('age'),
+                                    education:user.get('education'),
+                                    music:user.get('music'),
+                                    anecdote:user.get('anecdote'),
+                                    goalInLife:user.get('goalInLife'),
 
-                            profile: require('../views/fr/profile.js'),
-                            ratingPnD: require('../views/fr/ratingPnD.js'),
+                                    profile: require('../views/fr/profile.js'),
+                                    ratingPnD: require('../views/fr/ratingPnD.js'),
 
-                            foot : foot,
-                            header:header
+                                    foot : foot,
+                                    header:header
 
 
+                                });
                             });
-                        });
 
-                    })
-            }
-            //TODO page issue de l'else si l'utilisateur est inexistant
+                        })
+                }
+                //TODO page issue de l'else si l'utilisateur est inexistant
 
-        });
+            });
 
     });
 
@@ -201,21 +202,21 @@ module.exports = function (app, passport) {
 
                 var vote = new Model.ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'0'});
                 vote.fetch().then(function (m) {
-                    if (m == null) {
-                        vote.save(
-                            {dratingPunctuality: ratePunctuality,
-                            dratingCourtesy:rateCourtesy,
-                            dratingReliability:rateReliability,
-                            dratingSecurity:rateSecurity,
-                            dratingComfort:rateComfort}, {method: 'insert'});
-                    } else {
-                        vote.save(
-                            {dratingPunctuality: ratePunctuality,
-                            dratingCourtesy:rateCourtesy,
-                            dratingReliability:rateReliability,
-                            dratingSecurity:rateSecurity,
-                            dratingComfort:rateComfort}, {method: 'update'});
-                }})
+                        if (m == null) {
+                            vote.save(
+                                {dratingPunctuality: ratePunctuality,
+                                    dratingCourtesy:rateCourtesy,
+                                    dratingReliability:rateReliability,
+                                    dratingSecurity:rateSecurity,
+                                    dratingComfort:rateComfort}, {method: 'insert'});
+                        } else {
+                            vote.save(
+                                {dratingPunctuality: ratePunctuality,
+                                    dratingCourtesy:rateCourtesy,
+                                    dratingReliability:rateReliability,
+                                    dratingSecurity:rateSecurity,
+                                    dratingComfort:rateComfort}, {method: 'update'});
+                        }})
                     .then(function(){
                         res.redirect('/profile/'+judgedun);
                     });
@@ -240,23 +241,23 @@ module.exports = function (app, passport) {
             .fetch()
             .then(function (u) {
 
-            var vote = new Model.ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
+                var vote = new Model.ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
 
-            vote.fetch().then(function (m) {
-                if (m == null) {
-                    vote.save(
-                        {pratingPunctuality: ratePunctuality,
-                            pratingCourtesy:rateCourtesy,
-                            pratingPoliteness:ratePoliteness}, {method: 'insert'});
-                } else {
-                    vote.save(
-                        {pratingPunctuality: ratePunctuality,
-                            pratingCourtesy:rateCourtesy,
-                            pratingPoliteness:ratePoliteness}, {method: 'update'});
-                }})
-                .then(function () {
-                    res.redirect('/profile/'+judgedun);
-                });
+                vote.fetch().then(function (m) {
+                        if (m == null) {
+                            vote.save(
+                                {pratingPunctuality: ratePunctuality,
+                                    pratingCourtesy:rateCourtesy,
+                                    pratingPoliteness:ratePoliteness}, {method: 'insert'});
+                        } else {
+                            vote.save(
+                                {pratingPunctuality: ratePunctuality,
+                                    pratingCourtesy:rateCourtesy,
+                                    pratingPoliteness:ratePoliteness}, {method: 'update'});
+                        }})
+                    .then(function () {
+                        res.redirect('/profile/'+judgedun);
+                    });
             });
     });
 
@@ -311,14 +312,15 @@ module.exports = function (app, passport) {
                     petsAllowed : pets,
                     driver:req.session.req.user.id,
                     availableSeat:req.body.spinner_d,
+                    takenSeat:0,
                     luggagesSize :luggage,
                     //comments: req.body.commentsRide_d,
                     cost:req.body.cost_d},
 
                 {method: 'insert'}
             ).catch(function (err) {
-                    log.error(err);
-                });
+                log.error(err);
+            });
         }
 
 
@@ -343,8 +345,8 @@ module.exports = function (app, passport) {
 
                 {method: 'insert'}
             ).catch(function (err) {
-                    log.error(err);
-                });
+                log.error(err);
+            });
         }
 
         res.redirect('/');
@@ -354,7 +356,6 @@ module.exports = function (app, passport) {
     //Searching rides
 
     app.get('/search', function (req, res) {
-
 
         var idTravel_arr = [];
         var driver_arr = [];
@@ -368,38 +369,20 @@ module.exports = function (app, passport) {
         var luggageSize_arr = [];
         var petsAllowed_arr = [];
         var cost_arr = [];
-
+        var promiseArr = [];
         var dest = req.query.destination;
         var currLocation = req.query.currentLocation;
-
-
-        //var date= new Date(req.query.datepicker);
         var date=req.query.datepicker;
         var newdate = date.split("/").reverse().join("/");
+        var temp_date;
+        var temp_time;
+
+
         newdate = new Date(newdate);
 
+        moment.locale("fr");
+        moment().format('LLL');
 
-        var finishRequest = function () {
-            res.render('pages/results.ejs', {
-                idTravel:idTravel_arr,
-                drivers: driver_arr,
-                passengers: passenger_arr,
-                comment: comment_arr,
-                seatsTaken: seatsTaken_arr,
-                seatsAvailable: seatsAvailable_arr,
-                travelTime: travelTime_arr,
-                departureTime: departureTime_arr,
-                departureDate: departureDate_arr,
-                luggageSize: luggageSize_arr,
-                petsAllowed: petsAllowed_arr,
-                cost: cost_arr,
-                destination: dest,
-                currentLocation: currLocation,
-                logged: authentificated(req),
-                header: header,
-                foot: foot
-            });
-        };
 
         if(req.query.searchDriver == "on") {
 
@@ -425,21 +408,51 @@ module.exports = function (app, passport) {
 
                         if(newdate <= resultJSON[i]['departureDate'])
                         {
+                            temp_date = resultJSON[i]['departureDate'];
+                            temp_date = moment(temp_date).format("dddd, Do MMMM YYYY")
+                            departureDate_arr.push(capitalize(temp_date));
+
+                            temp_time = resultJSON[i]['departureTime'];
+                            temp_time = moment(temp_time, ["HH:mm"]).format("h:mm A");
+                            departureTime_arr.push(temp_time);
+
                             idTravel_arr.push(resultJSON[i]['idAddTravel']);
                             driver_arr.push(resultJSON[i]['driver']);
                             luggageSize_arr.push(resultJSON[i]['luggagesSize']);
-                            departureTime_arr.push(resultJSON[i]['departureTime']);
                             comment_arr.push(resultJSON[i]['comments']);
                             petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
-                            departureDate_arr.push(resultJSON[i]['departureDate']);
                             seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
                             seatsTaken_arr.push(resultJSON[i]['takenSeat']);
                             cost_arr.push(resultJSON[i]['cost']);
+                            promiseArr.push(getUsernameFromDBAsync(resultJSON[i]['driver']));
                         }
 
                     }
 
-                    finishRequest();
+
+                    Promise.all(promiseArr).then(function(ps){
+                        res.render('pages/results.ejs', {
+                            idTravel:idTravel_arr,
+                            drivers: driver_arr,
+                            passengers: passenger_arr,
+                            comment: comment_arr,
+                            seatsTaken: seatsTaken_arr,
+                            seatsAvailable: seatsAvailable_arr,
+                            departureTime: departureTime_arr,
+                            departureDate: departureDate_arr,
+                            luggageSize: luggageSize_arr,
+                            petsAllowed: petsAllowed_arr,
+                            cost: cost_arr,
+                            destination: dest,
+                            currentLocation: currLocation,
+                            name : ps,
+                            logged: authentificated(req),
+                            header: header,
+                            foot: foot
+                        });
+
+
+                    });
                 }
 
             }).catch(function (err) {
@@ -466,6 +479,7 @@ module.exports = function (app, passport) {
 
                 var resultJSON = user.toJSON();
 
+
                 if (resultJSON.length == 0) {
                     res.render('pages/no-results.ejs', {
                         logged: authentificated(req),
@@ -479,18 +493,46 @@ module.exports = function (app, passport) {
 
                         if(newdate <= resultJSON[i]['departureDate'])
                         {
+                            temp_date = resultJSON[i]['departureDate'];
+                            temp_date = moment(temp_date).format("dddd, Do MMMM YYYY")
+                            departureDate_arr.push(capitalize(temp_date));
+
+                            temp_time = resultJSON[i]['departureTime'];
+                            temp_time = moment(temp_time, ["HH:mm"]).format("h:mm A");
+                            departureTime_arr.push(temp_time);
+
                             idTravel_arr.push(resultJSON[i]['idAddTravel']);
                             passenger_arr.push(resultJSON[i]['passenger']);
                             luggageSize_arr.push(resultJSON[i]['luggageSize']);
-                            departureTime_arr.push(resultJSON[i]['departureTime']);
                             comment_arr.push(resultJSON[i]['comments']);
                             petsAllowed_arr.push(resultJSON[i]['pets']);
-                            departureDate_arr.push(resultJSON[i]['departureDate']);
+                            //departureDate_arr.push(resultJSON[i]['departureDate']);
+
+                            promiseArr.push(getUsernameFromDBAsync(resultJSON[i]['passenger']));
                         }
 
                     }
 
-                    finishRequest();
+                    Promise.all(promiseArr).then(function(ps){
+                        res.render('pages/results.ejs', {
+                            idTravel:idTravel_arr,
+                            drivers: driver_arr,
+                            passengers: passenger_arr,
+                            comment: comment_arr,
+                            departureTime: departureTime_arr,
+                            departureDate: departureDate_arr,
+                            luggageSize: luggageSize_arr,
+                            petsAllowed: petsAllowed_arr,
+                            destination: dest,
+                            currentLocation: currLocation,
+                            name : ps,
+                            logged: authentificated(req),
+                            header: header,
+                            foot: foot
+                        });
+
+
+                    });
                 }
 
 
@@ -606,7 +648,6 @@ module.exports = function (app, passport) {
     app.post('/sign-up', function(req, res, next) {
         verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
             if(success){
-                var moment = require('moment');
                 var user = req.body;
                 var usernamePromise = null;
 
@@ -659,8 +700,8 @@ module.exports = function (app, passport) {
                                 email: user.email,
                                 password: hash,
                                 typeSignUp: typeSign,
-                                firstName: firstName,
-                                familyName: familyName,
+                                firstName: firstName.trim(),
+                                familyName: familyName.trim(),
                                 birthday: dateBirthday,
                                 username: firstName + "." + familyName + "." + countUser
                             });
@@ -875,6 +916,7 @@ function getUsernameFromDBAsync(userId) {
             var prenom = u.get('firstName');
             var nom = u.get('familyName');
             var s = prenom + " " + nom;
+
             return s;
         });
 }
@@ -903,10 +945,22 @@ function addTravelPassenger(travelId, userId){
         },
         {method: 'insert'}
     ).catch(function (err) {
-            log.error(err);
-        });
+        log.error(err);
+    });
 
 }
+//Momentjs in french doesnt capitalize the month or the day. This circumvents that problem
+function capitalize(str)
+{
+    var pieces = str.split(" ");
+    for ( var i = 0; i < pieces.length; i++ )
+    {
+        var j = pieces[i].charAt(0).toUpperCase();
+        pieces[i] = j + pieces[i].substr(1);
+    }
+    return pieces.join(" ");
+}
+
 
 
 //uploading
@@ -914,10 +968,10 @@ function addTravelPassenger(travelId, userId){
 var upload = multer({
     dest: pathAvatar,
     /*limits: {
-        fieldNameSize: 100,
-        files: 2,
-        fields: 5
-    },*/
+     fieldNameSize: 100,
+     files: 2,
+     fields: 5
+     },*/
     rename: function(fieldname, filename){
         return Math.random() + Date.now();
     },

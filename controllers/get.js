@@ -4,19 +4,17 @@
 
 //load the model
 var Model = require('../models/models');
-var bcrypt = require('bcrypt-nodejs');
 var https = require('https');
 var Promise = require('bluebird');
 var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
-var moment = require("moment");
-var multer = require('multer');
-var pathAvatar = './public/images/avatar';
 
 //View en français
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var loginString = require('../views/fr/sign.js');
+var profile = require('../views/fr/profile.js');
+var ratingPnD = require('../views/fr/ratingPnD.js');
 
 var utils = require('./utils.js');
 
@@ -73,7 +71,7 @@ function getProfile(req, res){
         page = 'pages/profile.ejs'
     }
 
-    new Model.Users()
+    new Model.ModelUsers.Users()
         .query({where:{'username': un}, orWhere:{'idUser': Juser.attributes.idUser}})
         .fetch()
         .then(function(user) {
@@ -100,7 +98,7 @@ function getProfile(req, res){
 
                 //commentaires
                 userId = user.get('idUser');
-                new Model.Comments().where({
+                new Model.ModelComments.Comments().where({
                     commentType: 0,
                     commentProfileId: userId
                 }).fetchAll({withRelated:['user']})
@@ -115,7 +113,7 @@ function getProfile(req, res){
 
                             for(i= 0; i<resultJSON.length; ++i) {
                                 commentariesTexts.push(resultJSON[i]['comment']);
-                                promiseArr.push(getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
+                                promiseArr.push(Model.ModelUsers.getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                             }
                         }
 
@@ -148,9 +146,8 @@ function getProfile(req, res){
                                 anecdote:user.get('anecdote'),
                                 goalInLife:user.get('goalInLife'),
 
-                                profile: require('../views/fr/profile.js'),
-                                ratingPnD: require('../views/fr/ratingPnD.js'),
-
+                                profile: profile,
+                                ratingPnD: ratingPnD,
                                 foot : foot,
                                 header:header
 
@@ -216,7 +213,7 @@ function getSearchRide(req, res) {
 
     if(req.query.searchDriver == "on") {
 
-        new Model.Travel().where({
+        new Model.ModelTravel.Travel().where({
             destinationAddress: dest,
             startAddress: currLocation
         }).query(function (qb) {
@@ -270,7 +267,7 @@ function getSearchRide(req, res) {
 
     else {
 
-        new Model.TravelRequest().where({
+        new Model.ModelTravelRequest.TravelRequest().where({
             destinationAddress: dest,
             startAddress: currLocation
         }).query(function (qb) {
@@ -384,64 +381,4 @@ function getLogout(req, res){
     }
 
     res.redirect('/');
-}
-
-
-//TODO a supprimer quand les modèles seront refait
-function getUserName(id){
-
-    var firstName = "Unknown";
-
-    var finishRequest = function () {return firstName;};
-
-    new Model.Users({idUser: id}).fetch().then(function (model) {
-        firstName = model.get('firstName');
-        console.log(id + " : " + firstName);
-        finishRequest();
-    });
-}
-
-var commentariesTexts = [];
-
-function getUsernameFromDBAsync(userId) {
-
-    return new Model.Users({
-        idUser: userId
-    })
-        .fetch()
-        .then(function(u){
-            var prenom = u.get('firstName');
-            var nom = u.get('familyName');
-            var s = prenom + " " + nom;
-            return s;
-        });
-}
-
-function updateSeats(travelId, takenSeats, availableSeats){
-
-    new Model.Travel().where({
-        idAddTravel: travelId
-    }).save({
-
-        takenSeat :takenSeats+1,
-        availableSeat : availableSeats-1
-
-    }, {method: 'update'}).catch(function (err) {
-        log.error(err);
-    });
-
-}
-
-function addTravelPassenger(travelId, userId){
-
-    new Model.TravelPassengers().save({
-            passenger:userId,
-            travel : travelId
-
-        },
-        {method: 'insert'}
-    ).catch(function (err) {
-            log.error(err);
-        });
-
 }

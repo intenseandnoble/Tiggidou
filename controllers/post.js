@@ -37,7 +37,7 @@ function postUploadProfileAvatar(req, res){
 
         var userSession = req.session.req.user;
 
-        new Model.Users({'email': userSession.attributes.email }).fetch().then(function(user){
+        new Model.ModelUsers.Users({'email': userSession.attributes.email }).fetch().then(function(user){
             if(user){
                 var filename = req.files.userPhoto.name;
                 user.save({
@@ -64,11 +64,11 @@ function postRateDriver(req, res) {
     var judgedun = req.body.usernameOfProfile;
     var votingu = req.session.req.user.attributes.idUser;
 
-    new Model.Users({'username':judgedun})
+    new Model.ModelUsers.Users({'username':judgedun})
         .fetch()
         .then(function (u) {
 
-            var vote = new Model.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'0'});
+            var vote = new Model.ModelRating.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'0'});
             vote.fetch().then(function (m) {
                 if (m == null) {
                     vote.save(
@@ -105,11 +105,11 @@ function postRatePassenger(req, res) {
     var judgedun = req.body.usernameOfProfile;
     var votingu = req.session.req.user.attributes.idUser;
 
-    new Model.Users({'username':judgedun})
+    new Model.ModelUsers.Users({'username':judgedun})
         .fetch()
         .then(function (u) {
 
-            var vote = new Model.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
+            var vote = new Model.ModelRating.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
 
             vote.fetch().then(function (m) {
                 if (m == null) {
@@ -134,10 +134,10 @@ function postProfileComment(req, res) {
     var ci = req.session.req.user.attributes.idUser;
     var un = req.body.usernameOfProfile;
 
-    new Model.Users({'username':un})
+    new Model.ModelUsers.Users({'username':un})
         .fetch()
         .then( function (u) {
-            var commentaire = new Model.Comments({
+            var commentaire = new Model.ModelComments.Comments({
                 'commentIssuer': ci,
                 'commentProfileId': u.get('idUser'),
                 'commentType': '0',
@@ -168,7 +168,7 @@ function postRide(req, res) {
         if(req.body.luggageRadio_d == 'Yes') luggage= 0;
         else luggage = 1;
 
-        new Model.Travel().save({
+        new Model.ModelTravel.Travel().save({
                 startAddress :req.body.currentLocation,
                 destinationAddress:req.body.destination,
                 departureTime:req.body.clockpicker,
@@ -195,7 +195,7 @@ function postRide(req, res) {
         if(req.body.luggageRadio_d == 'Yes') luggage= 1;
         else luggage = 0;
 
-        new Model.TravelRequest().save({
+        new Model.ModelTravelRequest.TravelRequest().save({
                 startAddress :req.body.currentLocation,
                 destinationAddress:req.body.destination,
                 departureTime:req.body.clockpicker,
@@ -219,14 +219,14 @@ function postAddPassenger(req, res) {
     //What if 2 users add it at the same time? With only 1 place left? Revisit this
     if(req.user){
 
-        new Model.Travel().where({
+        new Model.ModelTravel.Travel().where({
             idAddTravel: req.body.idTravel
         }).fetch().then(function (user) {
 
             if( 0 <user.get('availableSeat')){
 
-                updateSeats(req.body.idTravel, user.get('takenSeat'),  user.get('availableSeat') );
-                addTravelPassenger(req.body.idTravel,req.session.req.user.id);
+                Model.ModelTravel.updateSeats(req.body.idTravel, user.get('takenSeat'),  user.get('availableSeat') );
+                Model.ModelTravelPassenger.add(req.body.idTravel,req.session.req.user.id);
                 res.redirect('/');
             }
             else{
@@ -253,7 +253,7 @@ function postSignUp(req, res, next) {
 
             var age =  moment().diff(moment(birthday, "YYYYMMDD"), 'years');
 
-            usernamePromise = new Model.Users({email: user.email}).fetch();
+            usernamePromise = new Model.ModelUsers.Users({email: user.email}).fetch();
             return usernamePromise.then(function(model) {
                 if(model) {
                     req.flash("signupMessage", "Le courriel existe déjà");
@@ -285,7 +285,7 @@ function postSignUp(req, res, next) {
 
                     var promiseArr = [];
 
-                    promiseArr.push(new Model.Users().getCountName(firstName, familyName));
+                    promiseArr.push(new Model.ModelUsers.Users().getCountName(firstName, familyName));
                     var countUser;
 
                     Promise.all(promiseArr).then(function(ps){
@@ -294,7 +294,7 @@ function postSignUp(req, res, next) {
                             countUser = countTest[key];
                         }
 
-                        var signUpUser = new Model.Users({
+                        var signUpUser = new Model.ModelUsers.Users({
                             email: user.email,
                             password: hash,
                             typeSignUp: typeSign,
@@ -338,62 +338,3 @@ var upload = multer({
         log.info(file.fieldname + ' uploaded to ' + file.path);
     }
 });
-
-//TODO a supprimer quand les modèles seront refait
-function getUserName(id){
-
-    var firstName = "Unknown";
-
-    var finishRequest = function () {return firstName;};
-
-    new Model.Users({idUser: id}).fetch().then(function (model) {
-        firstName = model.get('firstName');
-        console.log(id + " : " + firstName);
-        finishRequest();
-    });
-}
-
-var commentariesTexts = [];
-
-function getUsernameFromDBAsync(userId) {
-
-    return new Model.Users({
-        idUser: userId
-    })
-        .fetch()
-        .then(function(u){
-            var prenom = u.get('firstName');
-            var nom = u.get('familyName');
-            var s = prenom + " " + nom;
-            return s;
-        });
-}
-
-function updateSeats(travelId, takenSeats, availableSeats){
-
-    new Model.Travel().where({
-        idAddTravel: travelId
-    }).save({
-
-        takenSeat :takenSeats+1,
-        availableSeat : availableSeats-1
-
-    }, {method: 'update'}).catch(function (err) {
-        log.error(err);
-    });
-
-}
-
-function addTravelPassenger(travelId, userId){
-
-    new Model.TravelPassengers().save({
-            passenger:userId,
-            travel : travelId
-
-        },
-        {method: 'insert'}
-    ).catch(function (err) {
-            log.error(err);
-        });
-
-}

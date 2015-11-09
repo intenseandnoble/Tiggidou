@@ -10,5 +10,18 @@ var TravelPassengers = DB.Model.extend({
 });
 
 module.exports = {
-    TravelPassengers : TravelPassengers
+    TravelPassengers : TravelPassengers,
+    add: addTravelPassenger
 };
+
+
+function addTravelPassenger(travelId, userId){
+    new TravelPassengers().save({
+            passenger:userId,
+            travel : travelId
+        },
+        {method: 'insert'}
+    ).catch(function (err) {
+            log.error(err);
+        });
+}

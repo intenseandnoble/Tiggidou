@@ -10,5 +10,20 @@ var Travel = DB.Model.extend({
 });
 
 module.exports = {
-    Travel : Travel
+    Travel : Travel,
+    updateSeats: updateSeats
 };
+
+function updateSeats(travelId, takenSeats, availableSeats){
+
+    new Travel().where({
+        idAddTravel: travelId
+    }).save({
+        takenSeat :takenSeats+1,
+        availableSeat : availableSeats-1
+
+    }, {method: 'update'}).catch(function (err) {
+        log.error(err);
+    });
+
+}

@@ -24,5 +24,36 @@ var Users = DB.Model.extend({
 });
 
 module.exports = {
-    Users: Users
+    Users: Users,
+    getUserName: getUserName,
+    getUsernameFromDBAsync: getUsernameFromDBAsync
 };
+
+function getUserName(id){
+
+    var firstName = "Unknown";
+
+    var finishRequest = function () {return firstName;};
+
+    new Model.Users({idUser: id}).fetch().then(function (model) {
+        firstName = model.get('firstName');
+        console.log(id + " : " + firstName);
+        finishRequest();
+    });
+}
+
+function getUsernameFromDBAsync(userId) {
+
+    return new Users({
+        idUser: userId
+    })
+        .fetch()
+        .then(function(u){
+            var prenom = u.get('firstName');
+            var nom = u.get('familyName');
+            var s = prenom + " " + nom;
+            return s;
+        });
+}
+
+

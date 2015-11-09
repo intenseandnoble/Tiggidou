@@ -10,11 +10,11 @@ var travelRequest = require('./travelRequest');
 var user = require('./user');
 
 module.exports = {
-    Comments: comments.Comments,
-    Rating: rating.Ratings,
-    Travel: travel.Travel,
-    TravelPassenger: travelPassenger.TravelPassengers,
-    TravelRequest: travelRequest.TravelRequest,
-    Users: user.Users
+    ModelComments: comments,
+    ModelRating: rating,
+    ModelTravel: travel,
+    ModelTravelPassenger: travelPassenger,
+    ModelTravelRequest: travelRequest,
+    ModelUsers: user
 };
 

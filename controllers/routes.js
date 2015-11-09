@@ -3,19 +3,20 @@
  */
 
 //load the model
-var covoso = require(__dirname + '/../models/covosocialSearchDepartures');
-var Model = require('../models/user');
+var Model = require('../models/models');
 var bcrypt = require('bcrypt-nodejs');
-var header = require('../views/fr/header.js');
-var foot = require('../views/fr/footer.js');
 var https = require('https');
 var Promise = require('bluebird');
 var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
-var loginString = require('../views/fr/sign.js');
 var moment = require("moment");
 var multer = require('multer');
 var pathAvatar = './public/images/avatar';
+
+//View en français
+var header = require('../views/fr/header.js');
+var foot = require('../views/fr/footer.js');
+var loginString = require('../views/fr/sign.js');
 
 // show routes to app
 module.exports = function (app, passport) {
@@ -94,7 +95,7 @@ module.exports = function (app, passport) {
 
                 //commentaires
                 userId = user.get('idUser');
-                new Model.comments().where({
+                new Model.Comments().where({
                     commentType: 0,
                     commentProfileId: userId
                 }).fetchAll({withRelated:['user']})
@@ -202,7 +203,7 @@ module.exports = function (app, passport) {
             .fetch()
             .then(function (u) {
 
-                var vote = new Model.ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'0'});
+                var vote = new Model.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'0'});
                 vote.fetch().then(function (m) {
                     if (m == null) {
                         vote.save(
@@ -243,7 +244,7 @@ module.exports = function (app, passport) {
             .fetch()
             .then(function (u) {
 
-            var vote = new Model.ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
+            var vote = new Model.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
 
             vote.fetch().then(function (m) {
                 if (m == null) {
@@ -275,7 +276,7 @@ module.exports = function (app, passport) {
             .fetch()
             .then( function (u) {
 
-                var commentaire = new Model.comments({
+                var commentaire = new Model.Comments({
                     'commentIssuer': ci,
                     'commentProfileId': u.get('idUser'),
                     'commentType': '0',
@@ -609,7 +610,6 @@ module.exports = function (app, passport) {
     app.post('/sign-up', function(req, res, next) {
         verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
             if(success){
-                var moment = require('moment');
                 var user = req.body;
                 var usernamePromise = null;
 

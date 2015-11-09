@@ -11,7 +11,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // load up the user model
-var UserModel = require('../models/user');
+var User = require('../models/user').Users;
 var bcrypt = require('bcrypt-nodejs');
 var configAuth = require('./authentification');
 var log = require('./logger').log;
@@ -35,7 +35,7 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        new UserModel.Users({idUser:id}).fetch().then(function(user){ //user object ataches to the request as req.user
+        new User({idUser:id}).fetch().then(function(user){ //user object ataches to the request as req.user
             done(null, user);
         })
     });
@@ -52,7 +52,7 @@ module.exports = function(passport) {
             passwordField : 'password'
         },
         function(email, password, done) {
-            new UserModel.Users({email: email}).fetch().then(function(data) {
+            new User({email: email}).fetch().then(function(data) {
                 var user = data;
                 if(user) {
                     return done(null, false, {title: 'signup', errorMessage: 'username already exists'});
@@ -90,7 +90,7 @@ module.exports = function(passport) {
             passwordField: 'password'
         },
         function(email, password, done) {
-            new UserModel.Users({email: email}).fetch().then(function(data) {
+            new User({email: email}).fetch().then(function(data) {
                 var user = data;
                 if(user === null) {
                     return done(null, false, {message: 'Courriel ou mot de passe invalide'});
@@ -120,14 +120,14 @@ module.exports = function(passport) {
         // facebook will send back the token and profile
         function(token, refreshToken, profile, done) {
             var email = profile.emails[0].value;
-            new UserModel.Users({email: email}).fetch().then(function(data) {
+            new User({email: email}).fetch().then(function(data) {
                 var user = data;
                 if(user) {
                     user = data.toJSON();
                     return done(null, user);
                 } else {
                     var promiseArr = [];
-                    promiseArr.push(new UserModel.Users().getCountName(profile.name.givenName, profile.name.familyName));
+                    promiseArr.push(new User().getCountName(profile.name.givenName, profile.name.familyName));
                     var countUser;
 
                    /* var picture = profile.photos[0].value;
@@ -166,7 +166,7 @@ module.exports = function(passport) {
                             countUser = countTest[key];
                         }
 
-                        var signUpUser = new UserModel.Users(
+                        var signUpUser = new User(
                             {
                                 idusertemp: profile.id,
                                 email: profile.emails[0].value,
@@ -203,14 +203,14 @@ module.exports = function(passport) {
         function(token, refreshToken, profile, done) {
 
             // asynchronous
-            new UserModel.Users({email: profile.emails[0].value}).fetch().then(function(data) {
+            new User({email: profile.emails[0].value}).fetch().then(function(data) {
                 var user = data;
                 if(user) {
                     user = data.toJSON();
                     return done(null, user);
                 } else {
                     var promiseArr = [];
-                    promiseArr.push(new UserModel.Users().getCountName(profile.name.givenName, profile.name.familyName));
+                    promiseArr.push(new User().getCountName(profile.name.givenName, profile.name.familyName));
                     var countUser;
 
                     Promise.all(promiseArr).then(function(ps) {
@@ -219,7 +219,7 @@ module.exports = function(passport) {
                             countUser = countTest[key];
                         }
 
-                        var signUpUser = new UserModel.Users(
+                        var signUpUser = new User(
                             {
                                 idusertemp: profile.id,
                                 email: profile.emails[0].value,

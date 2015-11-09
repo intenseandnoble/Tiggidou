@@ -5,7 +5,7 @@ var bunyan = require('bunyan');
 
 //Log configuration
 var logging = bunyan.createLogger({
-    name: "covoiturage",
+    name: "tiggidou",
     streams: [
         {
             level: 'debug',
@@ -13,11 +13,11 @@ var logging = bunyan.createLogger({
         },
         {
             level: 'info',
-            path: '../myLogFile.log'
+            path: '../logFile.log'
         },
         {
             level: 'error',
-            path: '../myErrLogFile.log'
+            path: '../errorLogFile.log'
         }
     ],
     serializers: {

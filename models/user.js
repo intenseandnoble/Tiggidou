@@ -23,49 +23,6 @@ var Users = DB.Model.extend({
     }
 });
 
-var Ratings = DB.Model.extend({
-    tableName: 'ratings',
-    idAttribute: 'idRating'
-});
-
-
-var Travel = DB.Model.extend({
-    tableName: 'travel',
-    idAttribute: 'idAddTravel',
-
-
-});
-
-var TravelRequest = DB.Model.extend({
-    tableName: 'searchTravel',
-    idAttribute: 'idSearchTravel'
-
-});
-
-var TravelPassengers = DB.Model.extend({
-    tableName: 'travelpassengers'
-
-
-});
-
-
-
-
-var Comments = DB.Model.extend({
-    tableName: 'comments',
-    idAttribute: 'commentId',
-    user: function () {
-        return this.belongsTo(Users, 'idUser');
-    }
-});
-
 module.exports = {
-    Users: Users,
-    ratings: Ratings,
-    Travel : Travel,
-    TravelRequest : TravelRequest,
-    TravelPassengers : TravelPassengers,
-    comments: Comments
-
-
+    Users: Users
 };

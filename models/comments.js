@@ -12,6 +12,8 @@ var Comments = DB.Model.extend({
     }
 });
 
+//commentType: 0 => profil; 1 => travel; 2 => requestTravel/searchtravel
+
 module.exports = {
     Comments: Comments
 };

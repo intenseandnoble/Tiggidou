@@ -6,7 +6,7 @@
 var DB = require('../config/database');
 
 var TravelRequest = DB.Model.extend({
-    tableName: 'searchTravel',
+    tableName: 'searchtravel',
     idAttribute: 'idSearchTravel'
 
 });

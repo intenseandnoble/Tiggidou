@@ -17,6 +17,7 @@ var profile = require('../views/fr/profile.js');
 var ratingPnD = require('../views/fr/ratingPnD.js');
 
 var utils = require('./utils.js');
+var searchRide = require('../models/searchRide.js');
 
 
 module.exports = {
@@ -150,8 +151,6 @@ function getProfile(req, res){
                                 ratingPnD: ratingPnD,
                                 foot : foot,
                                 header:header
-
-
                             });
                         });
 
@@ -163,24 +162,12 @@ function getProfile(req, res){
 
 }
 
+
+
 function getSearchRide(req, res) {
-
-
-    var idTravel_arr = [];
-    var driver_arr = [];
-    var passenger_arr=[];
-    var comment_arr = [];
-    var seatsTaken_arr = [];
-    var seatsAvailable_arr = [];
-    var travelTime_arr = [];
-    var departureTime_arr = [];
-    var departureDate_arr = [];
-    var luggageSize_arr = [];
-    var petsAllowed_arr = [];
-    var cost_arr = [];
-
-    var dest = req.query.destination;
-    var currLocation = req.query.currentLocation;
+    var ride = new searchRide();
+    ride.des = req.query.destination;
+    ride.currLocation = req.query.currentLocation;
 
 
     //var date= new Date(req.query.datepicker);
@@ -188,134 +175,17 @@ function getSearchRide(req, res) {
     var newdate = date.split("/").reverse().join("/");
     newdate = new Date(newdate);
 
-
-    var finishRequest = function () {
-        res.render('pages/results.ejs', {
-            idTravel:idTravel_arr,
-            drivers: driver_arr,
-            passengers: passenger_arr,
-            comment: comment_arr,
-            seatsTaken: seatsTaken_arr,
-            seatsAvailable: seatsAvailable_arr,
-            travelTime: travelTime_arr,
-            departureTime: departureTime_arr,
-            departureDate: departureDate_arr,
-            luggageSize: luggageSize_arr,
-            petsAllowed: petsAllowed_arr,
-            cost: cost_arr,
-            destination: dest,
-            currentLocation: currLocation,
-            logged: authentificated(req),
-            header: header,
-            foot: foot
-        });
-    };
-
     if(req.query.searchDriver == "on") {
-
-        new Model.ModelTravel.Travel().where({
-            destinationAddress: dest,
-            startAddress: currLocation
-        }).query(function (qb) {
-            qb.orderBy('departureDate', 'ASC');
-        }).fetchAll().then(function (user) {
-
-            var resultJSON = user.toJSON();
-
-            if (resultJSON.length == 0) {
-                res.render('pages/no-results.ejs', {
-                    logged: authentificated(req),
-                    header: header,
-                    foot: foot
-                });
-            }
-            else {
-
-                for (i = 0; i < resultJSON.length; i++) {
-
-                    if(newdate <= resultJSON[i]['departureDate'])
-                    {
-                        idTravel_arr.push(resultJSON[i]['idAddTravel']);
-                        driver_arr.push(resultJSON[i]['driver']);
-                        luggageSize_arr.push(resultJSON[i]['luggagesSize']);
-                        departureTime_arr.push(resultJSON[i]['departureTime']);
-                        comment_arr.push(resultJSON[i]['comments']);
-                        petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
-                        departureDate_arr.push(resultJSON[i]['departureDate']);
-                        seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
-                        seatsTaken_arr.push(resultJSON[i]['takenSeat']);
-                        cost_arr.push(resultJSON[i]['cost']);
-                    }
-
-                }
-
-                finishRequest();
-            }
-
-        }).catch(function (err) {
-
-            res.render('pages/no-results.ejs', {
-                logged: utils.authentificated(req),
-                header: header,
-                foot: foot //In case of error
-
-            });
-
-        });
-
+        ride.searchDriver(req, res, newdate);
     }
 
     else {
-
-        new Model.ModelTravelRequest.TravelRequest().where({
-            destinationAddress: dest,
-            startAddress: currLocation
-        }).query(function (qb) {
-            qb.orderBy('departureDate', 'ASC');
-        }).fetchAll().then(function (user) {
-
-            var resultJSON = user.toJSON();
-
-            if (resultJSON.length == 0) {
-                res.render('pages/no-results.ejs', {
-                    logged: utils.authentificated(req),
-                    header: header,
-                    foot: foot
-                });
-            }
-            else {
-
-                for (i = 0; i < resultJSON.length; i++) {
-
-                    if(newdate <= resultJSON[i]['departureDate'])
-                    {
-                        idTravel_arr.push(resultJSON[i]['idAddTravel']);
-                        passenger_arr.push(resultJSON[i]['passenger']);
-                        luggageSize_arr.push(resultJSON[i]['luggageSize']);
-                        departureTime_arr.push(resultJSON[i]['departureTime']);
-                        comment_arr.push(resultJSON[i]['comments']);
-                        petsAllowed_arr.push(resultJSON[i]['pets']);
-                        departureDate_arr.push(resultJSON[i]['departureDate']);
-                    }
-
-                }
-
-                finishRequest();
-            }
-
-
-        }).catch(function (err) {
-            res.render('pages/no-results.ejs', {
-                logged: utils.authentificated(req),
-                header: header,
-                foot: foot //In case of error
-
-            });
-
-        });
+        ride.searchPassengers(req, res, newdate);
     }
 
 }
+
+
 
 function getLogin(req, res) {
     if(req.user){
@@ -348,7 +218,6 @@ function getSignUp(req, res) {
 }
 
 function getAskRide (req, res) {
-    //res.render('pages/ask-ride.ejs')
     res.render('pages/ask-ride.ejs',
         {
             logged: utils.authentificated(req),
@@ -357,7 +226,6 @@ function getAskRide (req, res) {
         });
 }
 function getResults(req, res) {
-    //res.render('pages/results.ejs')
     res.render('pages/results.ejs',
         {
             logged: utils.authentificated(req),
@@ -367,7 +235,6 @@ function getResults(req, res) {
 }
 
 function getNoResult(req, res) {
-    //res.render('pages/no-results.ejs')
     res.render('pages/no-results.ejs',
         {
             logged: utils.authentificated(req),
@@ -382,3 +249,4 @@ function getLogout(req, res){
 
     res.redirect('/');
 }
+

@@ -1,4 +1,4 @@
-<div class="content-wrapper-2-columns clearfix">
+<div class="content-wrapper-2-columns">
 
     <div class="left">
         <h3><%= ratingPnD.driver %></h3>
@@ -224,9 +224,7 @@
             </div>
         </form>
 
-
-        <% include ../partials/ratingDriver %>
-
+            <a href="#lightDriver" class="button"><%= ratingPnD.give_opinion %></a>
 
     </div>
     <div class="right">
@@ -379,8 +377,16 @@
             </div>
         </form>
 
-        <% include ../partials/ratingPassenger %>
+        <br>
+
+        <a href="#lightPassenger" class="button"><%= ratingPnD.give_opinion %></a>
 
     </div>
 
 </div>
+<div class="clearfix">
+    <% include ../partials/ratingDriver %>
+    <% include ../partials/ratingPassenger %>
+</div>
+
+

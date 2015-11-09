@@ -16,8 +16,7 @@ module.exports = {
     authentificated: authentificated,
     verifyRecaptcha: verifyRecaptcha,
     roundingCeilOrFloor: roundingCeilOrFloor,
-    arrayOrNot: arrayOrNot,
-    upload: upload
+    arrayOrNot: arrayOrNot
 };
 
 // route middleware to make sure a user is logged in
@@ -74,25 +73,7 @@ function arrayOrNot (avar) {
     }
 }
 
-//uploading
-// https://github.com/expressjs/multer
-var upload = multer({
-    dest: pathAvatar,
-    /*limits: {
-     fieldNameSize: 100,
-     files: 2,
-     fields: 5
-     },*/
-    rename: function(fieldname, filename){
-        return Math.random() + Date.now();
-    },
-    onFileUploadStart: function (file){
-        log.info(file.originalname + ' is starting ...');
-    },
-    onFileUploadComplete: function (file){
-        log.info(file.fieldname + ' uploaded to ' + file.path);
-    }
-});
+
 
 //TODO a supprimer quand les modèles seront refait
 function getUserName(id){

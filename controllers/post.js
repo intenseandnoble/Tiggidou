@@ -235,13 +235,8 @@ function postAddPassenger(req, res) {
         });
     }
     else{
-        //res.render('pages/login.ejs'/*, {message: req.flash('loginMessage')}*/);
-        res.render('pages/login.ejs',
-            {
-                logged: authentificated(req),
-                header: header,
-                foot : foot
-            });
+        req.flash("signupMessage", "Vous devez être connecté");
+        res.redirect('/login');
     }
 
     // res.redirect('/');
@@ -323,6 +318,26 @@ function postSignUp(req, res, next) {
         }
     })
 }
+
+//uploading
+// https://github.com/expressjs/multer
+var upload = multer({
+    dest: pathAvatar,
+    /*limits: {
+     fieldNameSize: 100,
+     files: 2,
+     fields: 5
+     },*/
+    rename: function(fieldname, filename){
+        return Math.random() + Date.now();
+    },
+    onFileUploadStart: function (file){
+        log.info(file.originalname + ' is starting ...');
+    },
+    onFileUploadComplete: function (file){
+        log.info(file.fieldname + ' uploaded to ' + file.path);
+    }
+});
 
 //TODO a supprimer quand les modèles seront refait
 function getUserName(id){

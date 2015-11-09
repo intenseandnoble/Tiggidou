@@ -3,6 +3,7 @@
  */
 
 var DB = require('../config/database');
+var Users = require('./user.js').Users;
 
 var Comments = DB.Model.extend({
     tableName: 'comments',

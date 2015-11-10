@@ -61,32 +61,38 @@ function postRateDriver(req, res) {
     var rateSecurity = arrayOrNot(req.body.dSecurityVote);
     var rateComfort = arrayOrNot(req.body.dComfortVote);
 
-    var judgedun = req.body.usernameOfProfile;
-    var votingu = req.session.req.user.attributes.idUser;
+    var judgedUsername = req.body.usernameOfProfile;
+    var votingUsername = req.session.req.user.attributes.idUser;
 
-    new Model.ModelUsers.Users({'username':judgedun})
+    new Model.ModelUsers.Users({'username':judgedUsername})
         .fetch()
-        .then(function (u) {
+        .then(function (user) {
 
-            var vote = new Model.ModelRating.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'0'});
-            vote.fetch().then(function (m) {
-                if (m == null) {
+            var vote = new Model.ModelRating.Ratings({'votingUser': votingUsername, 'judgedUser': user.get('idUser'), 'ratingType':'0'});
+            vote.fetch().then(function (modelVoting) {
+                if (modelVoting == null) {
                     vote.save(
-                        {dratingPunctuality: ratePunctuality,
+                        {
+                            dratingPunctuality: ratePunctuality,
                             dratingCourtesy:rateCourtesy,
                             dratingReliability:rateReliability,
                             dratingSecurity:rateSecurity,
-                            dratingComfort:rateComfort}, {method: 'insert'});
+                            dratingComfort:rateComfort
+                        },
+                        {method: 'insert'});
                 } else {
                     vote.save(
-                        {dratingPunctuality: ratePunctuality,
+                        {
+                            dratingPunctuality: ratePunctuality,
                             dratingCourtesy:rateCourtesy,
                             dratingReliability:rateReliability,
                             dratingSecurity:rateSecurity,
-                            dratingComfort:rateComfort}, {method: 'update'});
+                            dratingComfort:rateComfort
+                        },
+                        {method: 'update'});
                 }})
                 .then(function(){
-                    res.redirect('/profile/'+judgedun);
+                    res.redirect('/profile/'+judgedUsername);
                 });
 
         });
@@ -94,65 +100,65 @@ function postRateDriver(req, res) {
 }
 
 function postRatePassenger(req, res) {
-
-
-
     var ratePunctuality = arrayOrNot(req.body.pPunctualityVote);
     var rateCourtesy = arrayOrNot(req.body.pCourtesyVote);
     var ratePoliteness = arrayOrNot(req.body.pPolitenessVote);
 
-    //jun: judged username, vu:voting user
-    var judgedun = req.body.usernameOfProfile;
-    var votingu = req.session.req.user.attributes.idUser;
+    var judgedUsername = req.body.usernameOfProfile;
+    var votingUsername = req.session.req.user.attributes.idUser;
 
-    new Model.ModelUsers.Users({'username':judgedun})
+    new Model.ModelUsers.Users({'username':judgedUsername})
         .fetch()
-        .then(function (u) {
+        .then(function (user) {
 
-            var vote = new Model.ModelRating.Ratings({'votingUser': votingu, 'judgedUser': u.get('idUser'), 'ratingType':'1'});
-
-            vote.fetch().then(function (m) {
-                if (m == null) {
+            var vote = new Model.ModelRating.Ratings({'votingUser': votingUsername, 'judgedUser': user.get('idUser'), 'ratingType':'1'});
+            vote.fetch().then(function (modelVoting) {
+                if (modelVoting == null) {
                     vote.save(
-                        {pratingPunctuality: ratePunctuality,
+                        {
+                            pratingPunctuality: ratePunctuality,
                             pratingCourtesy:rateCourtesy,
-                            pratingPoliteness:ratePoliteness}, {method: 'insert'});
+                            pratingPoliteness:ratePoliteness
+                        },
+                        {method: 'insert'});
                 } else {
                     vote.save(
-                        {pratingPunctuality: ratePunctuality,
+                        {
+                            pratingPunctuality: ratePunctuality,
                             pratingCourtesy:rateCourtesy,
-                            pratingPoliteness:ratePoliteness}, {method: 'update'});
+                            pratingPoliteness:ratePoliteness
+                        },
+                        {method: 'update'});
                 }})
                 .then(function () {
-                    res.redirect('/profile/'+judgedun);
+                    res.redirect('/profile/'+judgedUsername);
                 });
         });
 }
 
 function postProfileComment(req, res) {
-    var c = req.body.comment;
-    var ci = req.session.req.user.attributes.idUser;
-    var un = req.body.usernameOfProfile;
+    var commentTxt = req.body.comment;
+    var commentIssuer = req.session.req.user.attributes.idUser;
+    var username = req.body.usernameOfProfile;
 
-    new Model.ModelUsers.Users({'username':un})
+    new Model.ModelUsers.Users({'username':username})
         .fetch()
-        .then( function (u) {
+        .then( function (user) {
             var commentaire = new Model.ModelComments.Comments({
-                'commentIssuer': ci,
-                'commentProfileId': u.get('idUser'),
+                'commentIssuer': commentIssuer,
+                'commentProfileId': user.get('idUser'),
                 'commentType': '0',
-                'comment': c
+                'comment': commentTxt
             });
 
             commentaire.save();
-            res.redirect('/profile/' + un);
+            res.redirect('/profile/' + username);
 
         });
 
 }
 
 function postRide(req, res) {
-
     var pets = 0;
     var luggage =0;
 
@@ -205,7 +211,6 @@ function postRide(req, res) {
                 luggageSize :luggage//,
                 //comments: req.body.commentsRide_p
             },
-
             {method: 'insert'}
         ).catch(function (err) {
                 log.error(err);
@@ -216,9 +221,8 @@ function postRide(req, res) {
 }
 
 function postAddPassenger(req, res) {
-    //What if 2 users add it at the same time? With only 1 place left? Revisit this
+    //TODO What if 2 users add it at the same time? With only 1 place left? Revisit this
     if(req.user){
-
         new Model.ModelTravel.Travel().where({
             idAddTravel: req.body.idTravel
         }).fetch().then(function (user) {
@@ -230,6 +234,7 @@ function postAddPassenger(req, res) {
                 res.redirect('/');
             }
             else{
+                //TODO msg d'erreur
                 //Not available anymore
             }
         });
@@ -238,9 +243,6 @@ function postAddPassenger(req, res) {
         req.flash("signupMessage", "Vous devez être connecté");
         res.redirect('/login');
     }
-
-    // res.redirect('/');
-
 }
 
 function postSignUp(req, res, next) {

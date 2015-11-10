@@ -68,10 +68,7 @@ function getProfile(req, res){
 
 
 function getSearchRide(req, res) {
-    var ride = new searchRide();
-    ride.des = req.query.destination;
-    ride.currLocation = req.query.currentLocation;
-
+    var ride = new searchRide(req.query.destination, req.query.currentLocation);
 
     //var date= new Date(req.query.datepicker);
     var date=req.query.datepicker;

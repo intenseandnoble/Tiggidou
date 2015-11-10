@@ -25,7 +25,9 @@ var cost_arr = [];
 var dest = null;
 var currLocation = null;
 
-function Ride() {
+function Ride(temp_dest, temp_currlocation) {
+    dest = temp_dest;
+    currLocation = temp_currlocation;
 }
 
 

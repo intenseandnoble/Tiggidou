@@ -20,6 +20,17 @@ var Users = DB.Model.extend({
             .then(function(count){
                 return count;
             })
+    },
+    getUsernames: function(partialUsername) {
+        return DB.knex('users')
+            .where('username', 'like', partialUsername)
+            .then(function (result) {
+                var uns = [];
+                for (var i = 0; i<result.length; ++i) {
+                    uns.push(result[i].username);
+                }
+                return uns;
+            })
     }
 });
 

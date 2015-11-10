@@ -55,11 +55,15 @@ module.exports = function (app, passport) {
 
     app.get('/login', get.getLogin);
 
-    app.post('/login', postLogin);
+    app.post('/login', function (req, res, next) {
+        post.postLogin(req, res, next, passport)}
+    );
 
     app.get('/sign-up', get.getSignUp);
 
-    app.post('/sign-up', post.postSignUp);
+    app.post('/sign-up', function(req, res, next) {
+        post.postSignUp(req, res, next, passport)
+    });
 
     app.get('/results', get.getResults);
 
@@ -69,7 +73,7 @@ module.exports = function (app, passport) {
 
     app.get('/logout', get.getLogout);
 
-
+/*
     function postLogin(req, res, next) {
         passport.authenticate('local-login', {
                 successRedirect : '/profile',
@@ -98,4 +102,5 @@ module.exports = function (app, passport) {
                 });
             })(req, res, next);
     }
+    */
 };

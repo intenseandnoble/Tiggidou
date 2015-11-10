@@ -16,31 +16,54 @@ var profile = require('../views/fr/profile.js');
 
 module.exports = Profile;
 
-var driverAvgScore = null;
-var driverPScore = null;
-var driverCScore = null;
-var driverRScore = null;
-var driverSScore = null;
-var driverOScore = null;
+var driverAvgScore;
+var driverPScore;
+var driverCScore;
+var driverRScore;
+var driverSScore;
+var driverOScore;
 
-var passengerAvgScore = null;
-var passengerPScore = null;
-var passengerCScore = null;
-var passengerLScore = null;
+var passengerAvgScore;
+var passengerPScore;
+var passengerCScore;
+var passengerLScore;
 
-var userName = null;
-var userAvatar = null;
-var userId = null;
-var userOfProfile = null;
-var age = null;
-var education = null;
-var music = null;
-var anecdote = null;
-var goalInLife = null;
+var userName;
+var userAvatar;
+var userId;
+var userOfProfile;
+var age;
+var education;
+var music;
+var anecdote;
+var goalInLife;
 
-var commentariesTexts = [];
+var commentariesTexts;
 
 function Profile() {
+    driverAvgScore = null;
+    driverPScore = null;
+    driverCScore = null;
+    driverRScore = null;
+    driverSScore = null;
+    driverOScore = null;
+
+    passengerAvgScore = null;
+    passengerPScore = null;
+    passengerCScore = null;
+    passengerLScore = null;
+
+    userName = null;
+    userAvatar = null;
+    userId = null;
+    userOfProfile = null;
+    age = null;
+    education = null;
+    music = null;
+    anecdote = null;
+    goalInLife = null;
+
+    commentariesTexts = [];
 }
 
 

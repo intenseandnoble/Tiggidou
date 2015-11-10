@@ -1,23 +1,17 @@
 /**
  * Created by dave on 09/11/15.
  */
-
-//load the model
-var Model = require('../models/models');
-var https = require('https');
-var Promise = require('bluebird');
-var mailling = require('../config/mailer.js');
-var log = require('../config/logger').log;
-
 //View en français
-var header = require('../views/fr/header.js');
-var foot = require('../views/fr/footer.js');
-var loginString = require('../views/fr/sign.js');
-var profile = require('../views/fr/profile.js');
-var ratingPnD = require('../views/fr/ratingPnD.js');
+var headerFR = require('../views/fr/header.js');
+var footFR = require('../views/fr/footer.js');
+var loginStringFR = require('../views/fr/sign.js');
 
+//Models and utils
 var utils = require('./utils.js');
+var log = require('../config/logger').log;
 var searchRide = require('../models/searchRide.js');
+var profile = require('../models/profile.js');
+var Model = require('../models/models');
 
 
 module.exports = {
@@ -36,130 +30,39 @@ function getHome(req, res) {
     res.render('pages/index.ejs',
         {
             logged: utils.authentificated(req),
-            header: header,
-            foot : foot
+            header: headerFR,
+            foot : footFR
         });
 }
+
+
 
 function getProfile(req, res){
     //Todo prendre les donnees de l'utilisateur connecte
     //Todo faire en sorte qu'un vote soit pris en compte par le serveur/bd
-    var Juser = req.session.req.user;
-    var driverAvgScore;
-    var driverPScore;
-    var driverCScore;
-    var driverRScore;
-    var driverSScore;
-    var driverOScore;
+    var userSession = req.session.req.user;
+    var usernameParams = req.params.username;
+    var profileDisplay = new profile();
 
-    var passengerAvgScore;
-    var passengerPScore;
-    var passengerCScore;
-    var passengerLScore;
-
-    var userName;
-    var userAvatar;
-    var un = req.params.username;
     var page;
-
-    var userId;
-    var commentariesTexts = [];
-    var promiseArr = [];
-
-    if (un == Juser.attributes.username || un== undefined) {
+    if (usernameParams == userSession.attributes.username || usernameParams == undefined) {
         page = 'pages/my-profile.ejs';
     } else {
         page = 'pages/profile.ejs'
     }
 
     new Model.ModelUsers.Users()
-        .query({where:{'username': un}, orWhere:{'idUser': Juser.attributes.idUser}})
+        .query({where:{'username': usernameParams}, orWhere:{'idUser': userSession.attributes.idUser}})
         .fetch()
         .then(function(user) {
             if(user) {
-
-                //nom d'utilisateur
-                userName = user.get("firstName") + " " + user.get("familyName");
-                userAvatar = user.get("avatar");
-
-                //calcul du score
-                /* driver scores */
-                driverAvgScore = utils.roundingCeilOrFloor(user.get('driverTotalScore') / (user.get('driverNbVotes') * 5));
-                driverPScore = utils.roundingCeilOrFloor(user.get('dPunctualityScore') / user.get('driverNbVotes'));
-                driverCScore = utils.roundingCeilOrFloor(user.get('dCourtesyScore') / user.get('driverNbVotes'));
-                driverRScore = utils.roundingCeilOrFloor(user.get('dReliabilityScore') / user.get('driverNbVotes'));
-                driverSScore = utils.roundingCeilOrFloor(user.get('dSecurityScore') / user.get('driverNbVotes'));
-                driverOScore = utils.roundingCeilOrFloor(user.get('dComfortScore') / user.get('driverNbVotes'));
-
-                /* passenger scores */
-                passengerAvgScore = utils.roundingCeilOrFloor(user.get('passengerTotalScore') / (user.get('passengerNbVotes') * 3));
-                passengerPScore = utils.roundingCeilOrFloor(user.get('pPunctualityScore') / user.get('passengerNbVotes'));
-                passengerCScore = utils.roundingCeilOrFloor(user.get('pCourtesyScore') / user.get('passengerNbVotes'));
-                passengerLScore = utils.roundingCeilOrFloor(user.get('pPolitenessScore') / user.get('passengerNbVotes'));
-
-                //commentaires
-                userId = user.get('idUser');
-                new Model.ModelComments.Comments().where({
-                    commentType: 0,
-                    commentProfileId: userId
-                }).fetchAll({withRelated:['user']})
-                    //TODO limit the number of results
-                    .then(function (comm) {
-
-                        var resultJSON = comm.toJSON();
-
-                        if (resultJSON.length == 0) {
-                            //TODO if no comments
-                        } else {
-
-                            for(i= 0; i<resultJSON.length; ++i) {
-                                commentariesTexts.push(resultJSON[i]['comment']);
-                                promiseArr.push(Model.ModelUsers.getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
-                            }
-                        }
-
-                        Promise.all(promiseArr).then(function(ps){
-
-                            res.render(page,{
-                                logged: utils.authentificated(req),
-                                userName : userName,
-                                avatarImage: userAvatar,
-
-                                driverAverageScore : driverAvgScore,
-                                dPunctualityScore: driverPScore,
-                                dCourtesyScore: driverCScore,
-                                dReliabilityScore: driverRScore,
-                                dSecurityScore: driverSScore,
-                                dComfortScore: driverOScore,
-
-                                passengerAverageScore : passengerAvgScore,
-                                pPunctualityScore: passengerPScore,
-                                pCourtesyScore: passengerCScore,
-                                pPolitenessScore: passengerLScore,
-
-                                comments:commentariesTexts,
-                                commentsIssuers:ps,
-                                userOfProfile:user.get('username'),
-
-                                age:user.get('age'),
-                                education:user.get('education'),
-                                music:user.get('music'),
-                                anecdote:user.get('anecdote'),
-                                goalInLife:user.get('goalInLife'),
-
-                                profile: profile,
-                                ratingPnD: ratingPnD,
-                                foot : foot,
-                                header:header
-                            });
-                        });
-
-                    })
+                profileDisplay.setUserValue(user);
+                profileDisplay.displayProfile(req, res, page);
             }
-            //TODO page issue de l'else si l'utilisateur est inexistant
-
+            else{
+                res.redirect('/login');
+            }
         });
-
 }
 
 
@@ -195,9 +98,9 @@ function getLogin(req, res) {
         res.render('pages/login.ejs',
             {
                 logged: utils.authentificated(req),
-                login: loginString,
-                header: header,
-                foot : foot,
+                login: loginStringFR,
+                header: headerFR,
+                foot : footFR,
                 message: req.flash('loginMessage')
             });
     }
@@ -210,9 +113,9 @@ function getSignUp(req, res) {
     res.render('pages/sign-up.ejs',
         {
             logged: utils.authentificated(req),
-            login: loginString,
-            header: header,
-            foot : foot,
+            login: loginStringFR,
+            header: headerFR,
+            foot : footFR,
             message: req.flash('signupMessage')
         });
 }
@@ -221,16 +124,16 @@ function getAskRide (req, res) {
     res.render('pages/ask-ride.ejs',
         {
             logged: utils.authentificated(req),
-            header: header,
-            foot : foot
+            header: headerFR,
+            foot : footFR
         });
 }
 function getResults(req, res) {
     res.render('pages/results.ejs',
         {
             logged: utils.authentificated(req),
-            header: header,
-            foot : foot
+            header: headerFR,
+            foot : footFR
         });
 }
 
@@ -238,8 +141,8 @@ function getNoResult(req, res) {
     res.render('pages/no-results.ejs',
         {
             logged: utils.authentificated(req),
-            header: header,
-            foot : foot
+            header: headerFR,
+            foot : footFR
         });
 }
 function getLogout(req, res){

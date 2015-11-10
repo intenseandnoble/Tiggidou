@@ -15,7 +15,6 @@ module.exports = {
     requireAuth: requireAuth,
     authentificated: authentificated,
     verifyRecaptcha: verifyRecaptcha,
-    roundingCeilOrFloor: roundingCeilOrFloor,
     arrayOrNot: arrayOrNot
 };
 
@@ -54,15 +53,6 @@ function verifyRecaptcha(key, callback){
             }
         });
     });
-}
-
-function roundingCeilOrFloor (score) {
-    if (score % 1 != 0 && score % 1 >= 0.5) {
-        score = Math.ceil(score);
-    } else if (score % 1 < 0.5) {
-        score = Math.floor(score);
-    }
-    return score;
 }
 
 function arrayOrNot (avar) {

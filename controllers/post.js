@@ -12,7 +12,7 @@ var log = require('../config/logger').log;
 var moment = require("moment");
 var multer = require('multer');
 var pathAvatar = './public/images/avatar';
-
+var utils = require('./utils.js');
 //View en français
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
@@ -243,8 +243,10 @@ function postAddPassenger(req, res) {
 
 }
 
-function postSignUp(req, res, next) {
-    verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
+
+
+function postSignUp(req, res, next, passport) {
+    utils.verifyRecaptcha(req.body["g-recaptcha-response"], function(success){
         if(success){
             var user = req.body;
             var usernamePromise = null;
@@ -281,17 +283,33 @@ function postSignUp(req, res, next) {
                     var firstName = user.firstName;
                     var familyName = user.familyName;
 
-
+                    var partialUsername = firstName+"."+familyName+".";
 
                     var promiseArr = [];
 
-                    promiseArr.push(new Model.ModelUsers.Users().getCountName(firstName, familyName));
-                    var countUser;
+                    promiseArr.push(new Model.ModelUsers.Users().getUsernames(partialUsername+"%"));
+                    var usernameTry;
 
-                    Promise.all(promiseArr).then(function(ps){
-                        var countTest = ps[0][0];
-                        for(var key in countTest){
-                            countUser = countTest[key];
+                    Promise.all(promiseArr).then(function(usernames){
+
+                        var counter = 0;
+                        var bool = true;
+
+                        while(bool){
+
+                            usernameTry = partialUsername+counter;
+                            var isValidUsername = true;
+                            for (var i=0; i<usernames[0].length; ++i) {
+                                if (usernames[0][i] == usernameTry) {
+                                    isValidUsername=false;
+                                    ++counter;
+                                    break;
+                                }
+                            }
+
+                            if (isValidUsername) {
+                                bool = false;
+                            }
                         }
 
                         var signUpUser = new Model.ModelUsers.Users({
@@ -301,12 +319,12 @@ function postSignUp(req, res, next) {
                             firstName: firstName,
                             familyName: familyName,
                             birthday: dateBirthday,
-                            username: firstName + "." + familyName + "." + countUser
+                            username: usernameTry
                         });
 
                         signUpUser.save().then(function(model) {
                             // sign in the newly registered user
-                            postLogin(req, res, next);
+                            postLogin(req, res, next, passport);
                         });
                     });
                 }
@@ -317,6 +335,37 @@ function postSignUp(req, res, next) {
             res.redirect('/sign-up');
         }
     })
+}
+
+var pssprt;
+
+function postLogin(req, res, next, passport) {
+    passport.authenticate('local-login', {
+            successRedirect : '/profile',
+            failureRedirect : '/login',
+            failureFlash : true //allow flash message
+        },
+        function(err, user, info) {
+            //error
+            if(err) {
+                req.flash("loginMessage", err);
+                return res.redirect('/login');
+            }
+            //user don't exist
+            if(!user) {
+                req.flash("loginMessage", info);
+                return res.redirect('/login');
+            }
+            return req.logIn(user, function(err) {
+                //error when trying to login with session
+                if(err) {
+                    req.flash("loginMessage", err);
+                    return res.redirect('/login');
+                } else {
+                    return res.redirect('/profile');
+                }
+            });
+        })(req, res, next);
 }
 
 //uploading

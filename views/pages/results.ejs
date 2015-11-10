@@ -5,7 +5,7 @@
     <% include ../partials/head %>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
-<body class="left-sidebar" onload="google_autocomplete()">
+<body class="left-sidebar" onload="google_maps()">
 <div id="page-wrapper">
 
     <!-- Header -->
@@ -102,7 +102,6 @@
 
                 <div class="8u 12u$(medium) important(medium)">
                     <div id="content">
-
                         <!--- PASSENGERS LOOKING FOR DRIVERS-->
                         <%for ( i= 0;i<drivers.length;i++) { %>
                         <form method="post" action="/add-passenger">
@@ -113,8 +112,10 @@
 
                                         <input type="hidden" name="idTravel" value =<%= idTravel[i]%>>
 
-                                        <h2><%= drivers[i] %></h2>
-                                        <span><h2><%= cost[i] %>$</h2></span>
+
+                                        <% var pieces = name[i].split(" ");%>
+                                        <h3><%= pieces[0]+"."+pieces[1].substring(0,1)%></h3>
+                                        <span><h3><%= cost[i] %>$</h3></span>
                                         <!--logos here and goodies. -->
 
                                     </div>
@@ -123,7 +124,9 @@
                                         <%=departureDate[i]%><br>
                                         <%=departureTime[i]%><br>
                                         <%=currentLocation%> → <%=destination%><br>
+
                                         Sièges pris: <%=seatsTaken[i]%><br>
+
                                         Sièges disponible: <%=seatsAvailable[i]%><br>
                                         <% if (petsAllowed[i] == 0){ %>
                                         Animaux permis? : Non<br>
@@ -149,7 +152,8 @@
                         <a href="/results" >
                             <article class="row">
                                 <div>
-                                    <h2><%= passengers[i] %></h2>
+                                    <% var pieces = name[i].split(" ");%>
+                                    <h3><%= pieces[0]+"."+pieces[1].substring(0,1);%></h3>
                                     <!--logos here and goodies. -->
 
                                 </div>

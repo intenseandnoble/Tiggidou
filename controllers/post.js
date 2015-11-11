@@ -25,7 +25,8 @@ module.exports = {
     postProfileComment: postProfileComment,
     postRide: postRide,
     postAddPassenger: postAddPassenger,
-    postSignUp: postSignUp
+    postSignUp: postSignUp,
+    postLogin: postLogin
 };
 
 function postUploadProfileAvatar(req, res){

@@ -10,6 +10,9 @@ var Users = DB.Model.extend({
     comments: function() {
         return this.hasMany(Comments, 'commentIssuer');
     },
+    score: function() {
+        return this.hasOne(Score, 'userId');
+    },
     getCountName: function(firstName, familyName){
         return DB.knex('users')
             .where({

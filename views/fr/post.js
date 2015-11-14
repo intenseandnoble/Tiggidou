@@ -4,6 +4,9 @@
 module.exports =
 {
 
+    //postAddPassenger
+    notConnected:"Vous devez \u00EAtre connect\u00E9",
+
     //postSignUp
     existingEmail:"Le courriel existe d\u00E9j\u00E0",
     differentPWDs:"Les mots de passe ne sont pas pareils",

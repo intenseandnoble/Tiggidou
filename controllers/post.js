@@ -241,7 +241,7 @@ function postAddPassenger(req, res) {
         });
     }
     else{
-        req.flash("signupMessage", "Vous devez \u00EAtre connect\u00E9");
+        req.flash("signupMessage", strings.notConnected);
         res.redirect('/login');
     }
 }
@@ -388,3 +388,11 @@ var upload = multer({
         log.info(file.fieldname + ' uploaded to ' + file.path);
     }
 });
+
+function arrayOrNot (avar) {
+    if(avar.constructor == Array) {
+        return avar[1];
+    } else {
+        return avar;
+    }
+}

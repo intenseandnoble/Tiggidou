@@ -56,11 +56,11 @@ function postUploadProfileAvatar(req, res){
 }
 
 function postRateDriver(req, res) {
-    var ratePunctuality = arrayOrNot(req.body.dPunctualityVote);
-    var rateCourtesy = arrayOrNot(req.body.dCourtesyVote);
-    var rateReliability = arrayOrNot(req.body.dReliabilityVote);
-    var rateSecurity = arrayOrNot(req.body.dSecurityVote);
-    var rateComfort = arrayOrNot(req.body.dComfortVote);
+    var ratePunctuality = utils.arrayOrNot(req.body.dPunctualityVote);
+    var rateCourtesy = utils.arrayOrNot(req.body.dCourtesyVote);
+    var rateReliability = utils.arrayOrNot(req.body.dReliabilityVote);
+    var rateSecurity = utils.arrayOrNot(req.body.dSecurityVote);
+    var rateComfort = utils.arrayOrNot(req.body.dComfortVote);
 
     var judgedUsername = req.body.usernameOfProfile;
     var votingUsername = req.session.req.user.attributes.idUser;
@@ -104,9 +104,9 @@ function postRateDriver(req, res) {
 }
 
 function postRatePassenger(req, res) {
-    var ratePunctuality = arrayOrNot(req.body.pPunctualityVote);
-    var rateCourtesy = arrayOrNot(req.body.pCourtesyVote);
-    var ratePoliteness = arrayOrNot(req.body.pPolitenessVote);
+    var ratePunctuality = utils.arrayOrNot(req.body.pPunctualityVote);
+    var rateCourtesy = utils.arrayOrNot(req.body.pCourtesyVote);
+    var ratePoliteness = utils.arrayOrNot(req.body.pPolitenessVote);
 
     var judgedUsername = req.body.usernameOfProfile;
     var votingUsername = req.session.req.user.attributes.idUser;
@@ -404,11 +404,3 @@ var upload = multer({
         log.info(file.fieldname + ' uploaded to ' + file.path);
     }
 });
-
-function arrayOrNot (avar) {
-    if(avar.constructor == Array) {
-        return avar[1];
-    } else {
-        return avar;
-    }
-}

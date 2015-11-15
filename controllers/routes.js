@@ -72,4 +72,5 @@ module.exports = function (app, passport) {
     app.get('/ask-ride', utils.requireAuth, get.getAskRide);
 
     app.get('/logout', get.getLogout);
+
 };

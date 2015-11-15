@@ -16,7 +16,7 @@ var utils = require('./utils.js');
 //View en français
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
-
+var strings = require('../views/fr/post.js');
 
 module.exports = {
     postUploadProfileAvatar: postUploadProfileAvatar,
@@ -253,7 +253,7 @@ function postAddPassenger(req, res) {
             });
     }
     else{
-        req.flash("signupMessage", "Vous devez être connecté");
+        req.flash("signupMessage", strings.notConnected);
         res.redirect('/login');
     }
 }
@@ -269,14 +269,14 @@ function postSignUp(req, res, next, passport) {
             usernamePromise = new Model.ModelUsers.Users({email: user.email}).fetch();
             return usernamePromise.then(function(model) {
                 if(model) {
-                    req.flash("signupMessage", "Le courriel existe déjà");
+                    req.flash("signupMessage", strings.existingEmail);
                     res.redirect('/sign-up');
 
                 } else {
                     var password = user.password;
                     var passwordConfirm = user.confirm_password;
                     if(!(password == passwordConfirm)){
-                        req.flash("signupMessage", "Les mot de passe ne sont pas pareil");
+                        req.flash("signupMessage", strings.differentPWDs);
                         res.redirect('/sign-up');
                     }
 
@@ -290,7 +290,7 @@ function postSignUp(req, res, next, passport) {
                     var age =  moment().diff(birthday, 'years');
                     var dateBirthday = birthday.toDate();
                     if(age < 17){
-                        req.flash("signupMessage", "Vous devez être âgé de 17 ans et plus");
+                        req.flash("signupMessage", strings.legallyMinor);
                         res.redirect('/sign-up');
                     }
 
@@ -349,13 +349,12 @@ function postSignUp(req, res, next, passport) {
                     log.error(err);
                 })
         } else {
-            req.flash("signupMessage", "captcha échoué");
+            var user = req.body;
+            req.flash("signupMessage", strings.failedCaptcha);
             res.redirect('/sign-up');
         }
     })
 }
-
-var pssprt;
 
 function postLogin(req, res, next, passport) {
     passport.authenticate('local-login', {
@@ -405,3 +404,11 @@ var upload = multer({
         log.info(file.fieldname + ' uploaded to ' + file.path);
     }
 });
+
+function arrayOrNot (avar) {
+    if(avar.constructor == Array) {
+        return avar[1];
+    } else {
+        return avar;
+    }
+}

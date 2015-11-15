@@ -39,6 +39,7 @@ var music;
 var anecdote;
 var goalInLife;
 
+var commentsDate;
 var commentariesTexts;
 var scoreArray;
 
@@ -64,6 +65,8 @@ function Profile() {
     music = null;
     anecdote = null;
     goalInLife = null;
+
+    commentsDate = [];
 
     commentariesTexts = [];
 
@@ -107,6 +110,7 @@ Profile.prototype.displayProfile = function (req, res, page) {
             else {
                 for (i = 0; i < resultJSON.length; ++i) {
                     commentariesTexts.push(resultJSON[i]['comment']);
+                    commentsDate.push(resultJSON[i]['commentDisplayDate']);
                     promiseArr.push(modelUsers.getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                 }
             }
@@ -181,6 +185,7 @@ function renderProfile(req, res, ps, page) {
 
                 comments: commentariesTexts,
                 commentsIssuers: ps,
+                commentsDate: commentsDate,
                 userOfProfile: userOfProfile,
 
                 age: age,

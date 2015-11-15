@@ -2,14 +2,9 @@
  * Created by dave on 09/11/15.
  */
 var Model = require('../models/models');
-var bcrypt = require('bcrypt-nodejs');
 var https = require('https');
-var Promise = require('bluebird');
 var mailling = require('../config/mailer.js');
 var log = require('../config/logger').log;
-var moment = require("moment");
-var multer = require('multer');
-var pathAvatar = './public/images/avatar';
 
 module.exports = {
     requireAuth: requireAuth,
@@ -61,65 +56,4 @@ function arrayOrNot (avar) {
     } else {
         return avar;
     }
-}
-
-
-
-//TODO a supprimer quand les modèles seront refait
-function getUserName(id){
-
-    var firstName = "Unknown";
-
-    var finishRequest = function () {return firstName;};
-
-    new Model.Users({idUser: id}).fetch().then(function (model) {
-        firstName = model.get('firstName');
-        console.log(id + " : " + firstName);
-        finishRequest();
-    });
-}
-
-var commentariesTexts = [];
-
-function getUsernameFromDBAsync(userId) {
-
-    return new Model.Users({
-        idUser: userId
-    })
-        .fetch()
-        .then(function(u){
-            var prenom = u.get('firstName');
-            var nom = u.get('familyName');
-            var s = prenom + " " + nom;
-            return s;
-        });
-}
-
-function updateSeats(travelId, takenSeats, availableSeats){
-
-    new Model.Travel().where({
-        idAddTravel: travelId
-    }).save({
-
-        takenSeat :takenSeats+1,
-        availableSeat : availableSeats-1
-
-    }, {method: 'update'}).catch(function (err) {
-        log.error(err);
-    });
-
-}
-
-function addTravelPassenger(travelId, userId){
-
-    new Model.TravelPassengers().save({
-            passenger:userId,
-            travel : travelId
-
-        },
-        {method: 'insert'}
-    ).catch(function (err) {
-            log.error(err);
-        });
-
 }

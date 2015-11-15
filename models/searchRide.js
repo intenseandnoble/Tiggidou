@@ -9,6 +9,8 @@ var foot = require('../views/fr/footer.js');
 var utils = require('../controllers/utils.js');
 var modelUsers = require('./user');
 var moment = require('moment');
+var Promise = require('bluebird');
+var log = require('../config/logger').log;
 
 module.exports = Ride;
 
@@ -30,6 +32,12 @@ var currLocation;
 var date;
 var time;
 
+/*
+ * @param {string} temp_dest Valid address
+ * @param {string} temp_currlocation Valid address
+ * @error
+ */
+//est-ce qu'on ait aussi sure que le format est bon?
 function Ride(temp_dest, temp_currlocation) {
 
     dest = temp_dest;
@@ -54,7 +62,10 @@ function Ride(temp_dest, temp_currlocation) {
     moment().format('LLL');
 }
 
+/*
 
+@param {date} newdate must be a date format
+ */
 Ride.prototype.searchDriver = function (req, res, newdate) {
     new Travel().where({
         destinationAddress: dest,
@@ -74,6 +85,8 @@ Ride.prototype.searchDriver = function (req, res, newdate) {
             });
         }
     }).catch(function (err) {
+        //TODO voir quel erreur sera donné si un crash (ici normalement, c'est une erreur de prog..)
+        log.error(err);
         res.redirect('/no-results');
     });
 };
@@ -87,8 +100,6 @@ Ride.prototype.searchPassengers = function (req, res, newdate) {
     }).fetchAll().then(function (user) {
         var resultJSON = user.toJSON();
 
-
-
         if (resultJSON.length == 0) {
             res.redirect('/no-results');
         }
@@ -98,59 +109,66 @@ Ride.prototype.searchPassengers = function (req, res, newdate) {
                 renderRide(req, res, ps);
             });
         }
-
-
     }).catch(function (err) {
+        log.error(err);
         res.redirect('/no-results');
     });
 };
 
+/*
+Setup the result to display when searching for a Driver
+@param {jsonObject} resultJSON
+ */
 function setSearchDriverRide(resultJSON, newdate) {
-    for (i = 0; i < resultJSON.length; i++) {
-        if (newdate <= resultJSON[i]['departureDate']) {
+    for (var indiceElement in resultJSON) {
+        var jsonTrip = resultJSON[indiceElement];
 
-            date = resultJSON[i]['departureDate'];
+        if (newdate <= jsonTrip['departureDate']) {
+            //TODO sa cause pas de problème une date et l'utiliser pour elle même dans un type différent?
+            date = jsonTrip['departureDate'];
             date = moment(date).format("dddd, Do MMMM YYYY");
             departureDate_arr.push(capitalize(date));
 
-            time = resultJSON[i]['departureTime'];
+            time = jsonTrip['departureTime'];
             time = moment(time, ["HH:mm"]).format("h:mm A");
             departureTime_arr.push(time);
 
-            idTravel_arr.push(resultJSON[i]['idAddTravel']);
-            driver_arr.push(resultJSON[i]['driver']);
-            luggageSize_arr.push(resultJSON[i]['luggagesSize']);
-            comment_arr.push(resultJSON[i]['comments']);
-            petsAllowed_arr.push(resultJSON[i]['petsAllowed']);
-            seatsAvailable_arr.push(resultJSON[i]['availableSeat']);
-            seatsTaken_arr.push(resultJSON[i]['takenSeat']);
-            cost_arr.push(resultJSON[i]['cost']);
-            promiseArr.push(modelUsers.getUsernameFromDBAsync(resultJSON[i]['driver']));
+            idTravel_arr.push(jsonTrip['idAddTravel']);
+            driver_arr.push(jsonTrip['driver']);
+            luggageSize_arr.push(jsonTrip['luggagesSize']);
+            comment_arr.push(jsonTrip['comments']);
+            petsAllowed_arr.push(jsonTrip['petsAllowed']);
+            seatsAvailable_arr.push(jsonTrip['availableSeat']);
+            seatsTaken_arr.push(jsonTrip['takenSeat']);
+            cost_arr.push(jsonTrip['cost']);
+            promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['driver']));
+
         }
     }
 }
 
 function setSearchPassengerRide(resultJSON, newdate) {
-    for (i = 0; i < resultJSON.length; i++) {
-        if (newdate <= resultJSON[i]['departureDate']) {
+    for (var indiceElement in resultJSON) {
+        var jsonTrip = resultJSON[indiceElement];
 
-            date = resultJSON[i]['departureDate'];
+        if (newdate <= jsonTrip['departureDate']) {
+
+            date = jsonTrip['departureDate'];
             date = moment(date).format("dddd, Do MMMM YYYY");
             departureDate_arr.push(capitalize(date));
 
-            time = resultJSON[i]['departureTime'];
+            time = jsonTrip['departureTime'];
             time = moment(time, ["HH:mm"]).format("h:mm A");
             departureTime_arr.push(time);
 
-            idTravel_arr.push(resultJSON[i]['idAddTravel']);
-            passenger_arr.push(resultJSON[i]['passenger']);
-            luggageSize_arr.push(resultJSON[i]['luggageSize']);
-            comment_arr.push(resultJSON[i]['comments']);
-            petsAllowed_arr.push(resultJSON[i]['pets']);
+            idTravel_arr.push(jsonTrip['idAddTravel']);
+            passenger_arr.push(jsonTrip['passenger']);
+            luggageSize_arr.push(jsonTrip['luggageSize']);
+            comment_arr.push(jsonTrip['comments']);
+            petsAllowed_arr.push(jsonTrip['pets']);
 
-            promiseArr.push(modelUsers.getUsernameFromDBAsync(resultJSON[i]['passenger']));
+            promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['passenger']));
         }
-
     }
 }
 

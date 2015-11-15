@@ -1,7 +1,7 @@
 /**
  * Created by dave on 28/09/15.
  */
-
+var log = require('../config/logger').log;
 var DB = require('../config/database');
 
 var Users = DB.Model.extend({
@@ -40,19 +40,6 @@ module.exports = {
     getUsernameFromDBAsync: getUsernameFromDBAsync
 };
 
-function getUserName(id){
-
-    var firstName = "Unknown";
-
-    var finishRequest = function () {return firstName;};
-
-    new Model.Users({idUser: id}).fetch().then(function (model) {
-        firstName = model.get('firstName');
-        console.log(id + " : " + firstName);
-        finishRequest();
-    });
-}
-
 function getUsernameFromDBAsync(userId) {
 
     return new Users({
@@ -64,6 +51,9 @@ function getUsernameFromDBAsync(userId) {
             var nom = u.get('familyName');
             var s = prenom + " " + nom;
             return s;
+        })
+        .catch(function(err){
+            log.error(err);
         });
 }
 

@@ -4,6 +4,7 @@
 //Constante
 var NUMBER_TYPE_COMMENT = 0;
 //utils et model
+var log = require('../config/logger').log;
 var utils = require('../controllers/utils.js');
 var Comments = require('./comments').Comments;
 var modelUsers = require('./user');

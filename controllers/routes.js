@@ -72,35 +72,4 @@ module.exports = function (app, passport) {
     app.get('/ask-ride', utils.requireAuth, get.getAskRide);
 
     app.get('/logout', get.getLogout);
-
-/*
-    function postLogin(req, res, next) {
-        passport.authenticate('local-login', {
-                successRedirect : '/profile',
-                failureRedirect : '/login',
-                failureFlash : true //allow flash message
-            },
-            function(err, user, info) {
-                //error
-                if(err) {
-                    req.flash("loginMessage", err);
-                    return res.redirect('/login');
-                }
-                //user don't exist
-                if(!user) {
-                    req.flash("loginMessage", info);
-                    return res.redirect('/login');
-                }
-                return req.logIn(user, function(err) {
-                    //error when trying to login with session
-                    if(err) {
-                        req.flash("loginMessage", err);
-                        return res.redirect('/login');
-                    } else {
-                        return res.redirect('/profile');
-                    }
-                });
-            })(req, res, next);
-    }
-    */
 };

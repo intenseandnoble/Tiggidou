@@ -96,6 +96,9 @@ function postRateDriver(req, res) {
                     res.redirect('/profile/'+judgedUsername);
                 });
 
+        })
+        .catch(function(err){
+            log.error(err);
         });
 
 }
@@ -134,6 +137,9 @@ function postRatePassenger(req, res) {
                 .then(function () {
                     res.redirect('/profile/'+judgedUsername);
                 });
+        })
+        .catch(function(err){
+            log.error(err);
         });
 }
 
@@ -155,6 +161,9 @@ function postProfileComment(req, res) {
             commentaire.save();
             res.redirect('/profile/' + username);
 
+        })
+        .catch(function(err){
+            log.error(err);
         });
 
 }
@@ -238,7 +247,10 @@ function postAddPassenger(req, res) {
                 //TODO msg d'erreur
                 //Not available anymore
             }
-        });
+        })
+            .catch(function(err){
+                log.error(err);
+            });
     }
     else{
         req.flash("signupMessage", "Vous devez être connecté");
@@ -254,10 +266,6 @@ function postSignUp(req, res, next, passport) {
             var user = req.body;
             var usernamePromise = null;
 
-            var birthday = req.body.birthday_year+req.body.birthday_month+req.body.birthday_day;
-
-            var age =  moment().diff(moment(birthday, "YYYYMMDD"), 'years');
-
             usernamePromise = new Model.ModelUsers.Users({email: user.email}).fetch();
             return usernamePromise.then(function(model) {
                 if(model) {
@@ -271,9 +279,14 @@ function postSignUp(req, res, next, passport) {
                         req.flash("signupMessage", "Les mot de passe ne sont pas pareil");
                         res.redirect('/sign-up');
                     }
-                    //TODO ajouter la date de naissance
-                    //https://stackoverflow.com/questions/2587345/javascript-date-parse (pour les dates)
-                    var birthday = moment(req.body.birthday_year+"-"+req.body.birthday_month+"-"+req.body.birthday_day, "YYYY-MM-DD");
+
+                    var birthDayString = req.body.birthday_year+"-"+req.body.birthday_month+"-"+req.body.birthday_day;
+                    if(!moment(birthDayString).isValide()){
+                        req.flash("signupMessage", "La date sélectionnée n'est pas valide");
+                        res.redirect('/sign-up');
+                    }
+
+                    var birthday = moment(birthDayString, "YYYY-MM-DD");
                     var age =  moment().diff(birthday, 'years');
                     var dateBirthday = birthday.toDate();
                     if(age < 17){
@@ -332,8 +345,10 @@ function postSignUp(req, res, next, passport) {
                     });
                 }
             })
+                .catch(function(err){
+                    log.error(err);
+                })
         } else {
-            var user = req.body;
             req.flash("signupMessage", "captcha échoué");
             res.redirect('/sign-up');
         }

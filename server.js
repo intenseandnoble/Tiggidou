@@ -11,6 +11,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var log = require('./config/logger').log;
+var cfg = require('./config/config').Config;
 
 var app = module.exports = express(); // cr�ation de l'app avec express
 var port = 8080;
@@ -41,3 +42,7 @@ require('./controllers/routes')(app, passport);
 //listen (start app with node server.js)
 app.listen(port);
 log.info("App listening on port " + port);
+process.env.NODE_ENV = cfg.env;
+var prod = process.env.NODE_ENV == "prod";
+log.info("Mode prod activate: " + prod);
+log.info("process env NODE_ENV: " + processBlabla);

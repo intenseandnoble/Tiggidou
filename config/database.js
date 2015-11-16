@@ -3,7 +3,14 @@
  * Hold database connection settings
  */
 
-var configConnection = {
+var configConnectionDev = {
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'covosocialschema',
+    charset: 'UTF8_GENERAL_CI'
+};
+var configConnectionProd = {
     host: 'localhost',
     user: 'root',
     password: '',
@@ -14,7 +21,7 @@ var configConnection = {
 var mysql = require('mysql');
 var Knex = require('knex')({
     client: 'mysql',
-    connection: configConnection
+    connection: process.env.NODE_ENV = "prod" ? configConnectionProd : configConnectionDev
 });
 var Bookshelf = require('bookshelf')(Knex);
 

@@ -5,7 +5,7 @@ module.exports =
     "education":"\u00C9ducation: ",
     "music":"Style de musique: ",
     "goalInLIfe":"But(s) dans la vie",
-    "contacts":"Contacts",
+    "travels":"Voyages",
 
     //
     "submenu":"Sous-menu",

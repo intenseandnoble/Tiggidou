@@ -8,6 +8,8 @@ var log = require('../config/logger').log;
 var utils = require('../controllers/utils.js');
 var Comments = require('./comments').Comments;
 var Score = require('./score').Score;
+var Travel = require('./travel').Travel;
+var TravelPassengers = require('./travelPassengers').TravelPassengers;
 var modelUsers = require('./user');
 var Promise = require('bluebird');
 //Vue en francais
@@ -43,6 +45,8 @@ var goalInLife;
 var commentsDate;
 var commentariesTexts;
 var scoreArray;
+var travelsAsDriver;
+var travelsAsPassenger;
 
 function Profile() {
     driverAvgScore = null;
@@ -90,6 +94,8 @@ Profile.prototype.setUserValue = function(user) {
     goalInLife = user.get('goalInLife');
 
     scoreArray = getScores();
+    travelsAsDriver = getTravelsAsDriver();
+    travelsAsPassenger = getTravelsAsPassenger();
 
 };
 
@@ -122,6 +128,14 @@ Profile.prototype.displayProfile = function (req, res, page) {
 
         })
 };
+
+function getTravelsAsDriver () {
+    var promiseTravelsDArray = [];
+}
+
+function getTravelsAsPassenger () {
+    var promiseTravelsPArray = [];
+}
 
 function getScores () {
     var promiseScoreArray = [];

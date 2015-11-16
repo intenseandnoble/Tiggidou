@@ -370,7 +370,7 @@ function postLogin(req, res, next, passport) {
             }
             //user don't exist
             if(!user) {
-                req.flash("loginMessage", info);
+                req.flash("loginMessage", info["message"]);
                 return res.redirect('/login');
             }
             return req.logIn(user, function(err) {

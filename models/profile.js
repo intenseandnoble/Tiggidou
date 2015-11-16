@@ -131,6 +131,25 @@ Profile.prototype.displayProfile = function (req, res, page) {
 
 function getTravelsAsDriver () {
     var promiseTravelsDArray = [];
+    var userSession = req.session.req.user;
+
+    return new Travel()
+        .where({
+            driver:userSession.attributes.idUser
+        })
+        .orderBy('departureDate', 'asc')
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                promiseTravelsDArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsDArray;
+
+        })
+
 }
 
 function getTravelsAsPassenger () {
@@ -178,8 +197,8 @@ function getScores () {
 
 function renderProfile(req, res, ps, page) {
     //and resolution de la promeese sur les scores
-    Promise.all(scoreArray)
-        .then(function (scores){
+    Promise.all(scoreArray, travelsAsDriver)
+        .then(function (scores, travelsD){
 
             res.render(page, {
                 logged: utils.authentificated(req),
@@ -202,6 +221,8 @@ function renderProfile(req, res, ps, page) {
                 commentsIssuers: ps,
                 commentsDate: commentsDate,
                 userOfProfile: userOfProfile,
+
+                travelsAsDriver: travelsD,
 
                 age: age,
                 education: education,

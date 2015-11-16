@@ -38,7 +38,7 @@
                             <% }
                             { %>
                             <footer>
-                                <a href="#" class="button icon fa-info-circle"><%= profile.travels %></a>
+                                <a href="#" class="button icon fa-info-circle"><%= profile.contacts %></a>
                             </footer>
                             <% } %>
                         </section>
@@ -50,6 +50,8 @@
                                 <li><a href="#tabs-2"><%= profile.ads %></a></li>
                                 <li><a href="#tabs-3"><%= profile.reservation %></a></li>
                                 <li><a href="#tabs-4"><%= profile.messages %></a></li>
+                                <li><a href="#myTravels"><%= profile.myTravels %></a></li>
+                                <% include ../partials/myTravels %>
                                 <li><% include ../partials/profileAvatar %></li>
                             </ul>
                         </section>

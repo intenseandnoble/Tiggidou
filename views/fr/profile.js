@@ -5,13 +5,14 @@ module.exports =
     "education":"\u00C9ducation: ",
     "music":"Style de musique: ",
     "goalInLIfe":"But(s) dans la vie",
-    "travels":"Voyages",
+    "contacts": "Contacts",
 
     //
     "submenu":"Sous-menu",
     "dashboard":"Tableau de bord",
     "ads":"Annonces",
-    "reservation":"R\u00E9servation",
+    "reservation":"R\u00E9servations",
+    "myTravels":"Mes voyages",
     "messages":"Messages",
 
     "submitbtn":"Soumettre",

@@ -4,6 +4,7 @@
 
 // set up
 var express = require('express');
+var cfg = require('./config/config').Config;
 var mysql = require('./config/database');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -41,3 +42,6 @@ require('./controllers/routes')(app, passport);
 //listen (start app with node server.js)
 app.listen(port);
 log.info("App listening on port " + port);
+process.env.NODE_ENV = cfg.env;
+var prod = process.env.NODE_ENV == "prod";
+log.info("Mode prod activate: " + prod);

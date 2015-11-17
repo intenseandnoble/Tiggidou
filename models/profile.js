@@ -94,8 +94,6 @@ Profile.prototype.setUserValue = function(user) {
     goalInLife = user.get('goalInLife');
 
     scoreArray = getScores();
-    travelsAsDriver = getTravelsAsDriver();
-    travelsAsPassenger = getTravelsAsPassenger();
 
 };
 
@@ -129,7 +127,7 @@ Profile.prototype.displayProfile = function (req, res, page) {
         })
 };
 
-function getTravelsAsDriver () {
+function getTravelsAsDriver (req) {
     var promiseTravelsDArray = [];
     var userSession = req.session.req.user;
 
@@ -137,7 +135,6 @@ function getTravelsAsDriver () {
         .where({
             driver:userSession.attributes.idUser
         })
-        .orderBy('departureDate', 'asc')
         .fetchAll()
         .then(function (results) {
             var resultsJSON = results.toJSON();
@@ -152,7 +149,7 @@ function getTravelsAsDriver () {
 
 }
 
-function getTravelsAsPassenger () {
+function getTravelsAsPassenger (req) {
     var promiseTravelsPArray = [];
 }
 
@@ -197,6 +194,9 @@ function getScores () {
 
 function renderProfile(req, res, ps, page) {
     //and resolution de la promeese sur les scores
+    travelsAsDriver = getTravelsAsDriver(req);
+    travelsAsPassenger = getTravelsAsPassenger(req);
+
     Promise.all(scoreArray, travelsAsDriver)
         .then(function (scores, travelsD){
 

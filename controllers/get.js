@@ -47,22 +47,39 @@ function getProfile(req, res){
     var page;
     if (usernameParams == userSession.attributes.username || usernameParams == undefined) {
         page = 'pages/my-profile.ejs';
+
+        new Model.ModelUsers.Users()
+            .where({'username': userSession.attributes.username })
+            .fetch()
+            .then(function(user) {
+                if(user) {
+                    profileDisplay.setUserValue(user);
+                    profileDisplay.displayProfile(req, res, page);
+                }
+                else{
+                    res.redirect('/login');
+                }
+            });
+
     } else {
-        page = 'pages/profile.ejs'
+        page = 'pages/profile.ejs';
+
+        new Model.ModelUsers.Users()
+            .where({'username': usernameParams})
+            .fetch()
+            .then(function(user) {
+                if(user) {
+                    profileDisplay.setUserValue(user);
+                    profileDisplay.displayProfile(req, res, page);
+                }
+                else{
+                    res.redirect('/login');
+                }
+            });
+
     }
 
-    new Model.ModelUsers.Users()
-        .query({where:{'username': usernameParams}, orWhere:{'idUser': userSession.attributes.idUser}})
-        .fetch()
-        .then(function(user) {
-            if(user) {
-                profileDisplay.setUserValue(user);
-                profileDisplay.displayProfile(req, res, page);
-            }
-            else{
-                res.redirect('/login');
-            }
-        });
+
 }
 
 

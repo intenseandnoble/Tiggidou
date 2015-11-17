@@ -266,8 +266,17 @@ textarea.form-control{height:auto;}
 	-webkit-transform: translate(0, 0);
 	-ms-transform: translate(0, 0);
 	transform: translate(0, 0);
-	top: 20%;
+	top: 10%;
 }
+
+
+@media screen and (max-height: 700px) {
+	.modal-dialog {
+		overflow-y: scroll;
+		bottom: 10%;
+	}
+}
+
 
 .modal-dialog {
 	background: #fefefe;
@@ -354,7 +363,7 @@ textarea.form-control{height:auto;}
 	margin-bottom:20px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 475px) {
 	.left, .right {
 		float: none;
 		margin-left: 0;

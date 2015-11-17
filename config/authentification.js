@@ -16,7 +16,7 @@ var devFacebookAuth = {
 var prodGoogleAuth = {
     'clientID'      : '56140469261-h17r00bo0kc29sen21mi4kghlu1kmcf9.apps.googleusercontent.com',
     'clientSecret'  : 'b7CTlPWTacsbV_CKNulRDjiK',
-    'callbackURL'   : 'http://localhost:8080/auth/google/callback'
+    'callbackURL'   : 'http://132.210.238.88:8080/auth/google/callback'
 };
 
 var devGoogleAuth = {
@@ -26,11 +26,8 @@ var devGoogleAuth = {
 };
 
 module.exports = {
-
-    'facebookAuth' : process.env.NODE_ENV = "prod" ? prodFacebookAuth : devFacebookAuth,
-
-    'googleAuth' : process.env.NODE_ENV = "prod" ? prodGoogleAuth : devGoogleAuth
-
+    'facebookAuth' : process.env.NODE_ENV == "prod" ? prodFacebookAuth : devFacebookAuth,
+    'googleAuth' : process.env.NODE_ENV == "prod" ? prodGoogleAuth : devGoogleAuth
 };
 
 

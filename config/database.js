@@ -21,7 +21,7 @@ var configConnectionProd = {
 var mysql = require('mysql');
 var Knex = require('knex')({
     client: 'mysql',
-    connection: process.env.NODE_ENV = "prod" ? configConnectionProd : configConnectionDev
+    connection: process.env.NODE_ENV == "prod" ? configConnectionProd : configConnectionDev
 });
 var Bookshelf = require('bookshelf')(Knex);
 

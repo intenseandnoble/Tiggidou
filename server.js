@@ -4,6 +4,7 @@
 
 // set up
 var express = require('express');
+var cfg = require('./config/config').Config;
 var mysql = require('./config/database');
 var passport = require('passport');
 var flash    = require('connect-flash');
@@ -11,7 +12,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 var log = require('./config/logger').log;
-var cfg = require('./config/config').Config;
 
 var app = module.exports = express(); // cr�ation de l'app avec express
 var port = 8080;
@@ -45,4 +45,3 @@ log.info("App listening on port " + port);
 process.env.NODE_ENV = cfg.env;
 var prod = process.env.NODE_ENV == "prod";
 log.info("Mode prod activate: " + prod);
-log.info("process env NODE_ENV: " + processBlabla);

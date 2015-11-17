@@ -6,7 +6,8 @@ var markers_currLoc= [];
 var markers_destLoc= [];
 var circle_currLoc =[];
 var circle_destLoc =[];
-
+var radius_destLoc =[];
+var radius_currLoc =[];
 
 (function($) {
 
@@ -647,7 +648,7 @@ $(document).ready(function() {
 function google_maps() {
 
     var options = {
-        types: ['(cities)'],
+        //types: ['(cities)'],
         componentRestrictions: {country: "can"}
     };
 
@@ -666,8 +667,8 @@ function google_maps() {
     var dest_input = document.getElementById('destination');
     var input = document.getElementById('pac-input');
 
-    var autocompleteCurr = new google.maps.places.Autocomplete(curr_input);
-    var autocompleteDest = new google.maps.places.Autocomplete(dest_input);
+    var autocompleteCurr = new google.maps.places.Autocomplete(curr_input,options);
+    var autocompleteDest = new google.maps.places.Autocomplete(dest_input,options);
     var autocompletePlaces = new google.maps.places.Autocomplete(input,options2);
 
 
@@ -691,53 +692,32 @@ function google_maps() {
     google.maps.event.addListener(autocompleteCurr, 'place_changed', function() {
 
         place_curr =  autocompleteCurr.getPlace();
-        infowindow.close();
-        marker.setVisible(false);
         var place = autocompleteCurr.getPlace();
 
         if (!place.geometry) {
             return;
         }
-
-
         if (place.geometry.viewport) {
 
             map.setCenter(place.geometry.location);
             map.setZoom(15);
+
+
+
         }
 
-
-        marker.setIcon(/** @type {google.maps.Icon} */({
-            url: place.icon,
-            size: new google.maps.Size(71, 71),
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(35, 35)
-        }));
-        marker.setPosition(place.geometry.location);
-        marker.setVisible(true);
-
-        /*var address = '';
-         if (place.address_components) {
-         address = [
-         (place.address_components[0] && place.address_components[0].short_name || ''),
-         (place.address_components[1] && place.address_components[1].short_name || ''),
-         (place.address_components[2] && place.address_components[2].short_name || '')
-         ].join(' ');
-         }
-
-         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-         infowindow.open(map, marker);*/
     });
 
     google.maps.event.addListener(autocompleteDest, 'place_changed', function() {
         place_dest =  autocompleteDest.getPlace();
     });
 
-    autocompletePlaces.addListener('place_changed', function() {
+    google.maps.event.addListener(autocompletePlaces, 'place_changed', function() {
+
+
         infowindow.close();
         marker.setVisible(false);
-        var place = autocomplete.getPlace();
+        var place = autocompletePlaces.getPlace();
         if (!place.geometry) {
             window.alert("Autocomplete's returned place contains no geometry");
             return;
@@ -749,8 +729,15 @@ function google_maps() {
         } else {
             map.setCenter(place.geometry.location);
             map.setZoom(17);  // Why 17? Because it looks good.
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: place_curr.geometry.location,
+                radius: 500,
+                types: ['store']
+            }, callback);
+
         }
-        marker.setIcon(/** @type {google.maps.Icon} */({
+        marker.setIcon(({
             url: place.icon,
             size: new google.maps.Size(71, 71),
             origin: new google.maps.Point(0, 0),
@@ -779,6 +766,7 @@ function google_maps() {
 
 
 function callback(results, status) {
+
     if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
@@ -812,7 +800,11 @@ function placeMarker(location,map) {
     }
 
 
-    if (marker_arr.length > 0)deleteMarkers();
+    if (marker_arr.length > 0){
+        var km =  document.getElementById('radius').value;
+        deleteMarkers();
+        document.getElementById('radius').value = km;
+    }
     var marker = new google.maps.Marker({
         position: location,
         map: map,
@@ -867,10 +859,12 @@ function deleteMarkers() {
 
     var marker_arr = markers_currLoc;
     var circle_arr = circle_currLoc;
+    var radius_arr = radius_currLoc;
 
     if(document.getElementById('radio-map-destination').checked) {
         marker_arr = markers_destLoc;
         circle_arr = circle_destLoc;
+        radius_arr = radius_destLoc;
     }
 
 
@@ -884,7 +878,11 @@ function deleteMarkers() {
             circle_arr[i].setMap(null);
         }
         circle_arr.length = 0;
+        radius_arr.length =0;
+        $('#radius').val("");
     }
+
+
 
 
 
@@ -894,19 +892,25 @@ function deleteMarkers() {
 
 function drawRadius(){
 
+    var km =  document.getElementById('radius').value;
     var marker_arr = markers_currLoc;
     var circle_arr = circle_currLoc;
+    var radius_arr = radius_currLoc;
     var color = "#00FF00";
+
+
 
     if(document.getElementById('radio-map-destination').checked) {
         marker_arr = markers_destLoc;
         circle_arr = circle_destLoc;
+        radius_arr = radius_destLoc;
         color = "#FF0000";
     }
 
-    var km =  document.getElementById('radius').value;
 
     if(km > 1000)km=1000;
+
+
     if(circle_arr.length>0){
         for (i in circle_arr) {
             circle_arr[i].setMap(null);
@@ -915,15 +919,20 @@ function drawRadius(){
 
     }
 
+  radius_arr.length = 0;
     //for (marker in markers_currLoc) {
     for(i=0; i < marker_arr.length;i++){
         // Add the circle for this city to the map.
         var circle = new google.maps.Circle({
             map: map,
-            radius: km*1,    // 10 miles in metres
+            radius: km*1,
             fillColor: color
         });
 
+
+
+
+        radius_arr.push(km);
         circle_arr.push(circle);
         circle.bindTo('center', marker_arr[i], 'position');
 
@@ -967,7 +976,12 @@ $('.preventEnter').on('keyup keypress', function(e) {
 $('#currentLocationMap').click(function() {
 
     var curr_input = document.getElementById('currentLocation');
+
     if(curr_input.value.length == 0)return;
+
+    if(radius_currLoc.length>0)$('#radius').val(radius_currLoc[0]);
+    else $('#radius').val("");
+
 
     if(markers_currLoc.length>0){
         map.setCenter(markers_currLoc[0].getPosition());
@@ -994,6 +1008,9 @@ $('#destinationMap').click(function() {
     var dest_input = document.getElementById('destination');
 
     if(dest_input.value.length == 0)return;
+
+    if(radius_destLoc.length>0)$('#radius').val(radius_destLoc[0]);
+    else $('#radius').val("");
 
     if(markers_destLoc.length>0){
         map.setCenter(markers_destLoc[0].getPosition());
@@ -1064,10 +1081,13 @@ $(document).ready(function(){
 
 //Spinner button for seats available etc...
 
-$(function() {
+/*$(function() {
     var spinner = $( "#spinner" ).spinner({min: 1, max: 10});
     $( "button" ).button();
 });
+
+*/
+
 
 
 // This is to prevent 2 checkboxes to be checked at the same time.
@@ -1130,3 +1150,36 @@ function resizeMap()
     google.maps.event.trigger(map,'resize');
     map.setZoom( map.getZoom() );
 }
+
+
+$('.dateGlyph').click(function() {
+    $(this).closest('div').find('#datepicker').focus();
+
+});
+
+
+$('.costGlyph').click(function() {
+    $(this).closest('div').find('#costInput').focus();
+    var cost = $("#costInput").val();
+    cost = parseInt(cost)
+
+    if(cost > 0) $("#costInput").val(cost+1);
+    else $("#costInput").val(1);
+
+});
+
+$('.seatsGlyph').click(function() {
+    $(this).closest('div').find('#spinner').focus();
+    var spinner = $("#spinner").val();
+    spinner = parseInt(spinner)
+
+    if(spinner == 6)return;
+    if(spinner > 0) $("#spinner").val(spinner+1);
+    else $("#spinner").val(1);
+
+
+});
+
+$(document).ready(function() {
+    $('#example').DataTable();
+} );

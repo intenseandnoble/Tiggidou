@@ -228,6 +228,8 @@ body {
 .form-control[disabled],.form-control[readonly],fieldset[disabled] .form-control{cursor:not-allowed;background-color:#eeeeee;}
 textarea.form-control{height:auto;}
 
+
+
 /*Custom*/
 .btn-close {
 	color: #aaa;
@@ -2945,6 +2947,7 @@ button.indexBtn {
 	background-color: #fff;
 
 
+
 }
 
 input[type=text].input-group {
@@ -2960,6 +2963,7 @@ input[type=text].input-group {
 	padding: .2em .2em 0;
 	display: none;
 	z-index: 2000 !important;
+
 }
 
 .hideDisplay{
@@ -2967,12 +2971,13 @@ input[type=text].input-group {
 }
 
 .generalSpinner{
-	display: inline-block;
-	width: 35px;
-	margin:auto;
-	position:relative;
+	 display: inline-block;
+	 width: 100px;
+	 margin:auto;
+	 position:relative;
+	 text-align: center;
 
-}
+ }
 
 input[type="radio"].typeUser{
 	visibility:hidden;
@@ -3069,7 +3074,8 @@ input[type=button].reset-markers{
 
 input[type=number].radius{
 
-	width:150px;
+	width:180px;
+	text-align: center;
 
 }
 
@@ -3084,4 +3090,93 @@ input[type=button].choose-arrival-point{
 	height: 50px;
 	display: inline-block;
 
+}
+
+input[type=text].controls {
+
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
+}
+
+.pac-container {
+    font-family: Roboto;
+}
+
+#type-selector {
+    display: inline-block;
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+    display: inline-block;
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+input[type=text].datepicker {
+	height: 50px;
+	width: 300px;
+}
+
+input[type='number'] {
+	 -moz-appearance: textfield;
+	 appearance: textfield;
+ }
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+}
+input::outer-spin-button, input::inner-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.formBootStrap{
+	font-weight:600;
+}
+
+.glyphicon{
+	cursor:pointer
+}
+
+.nameResult{
+max-width: 230px;
+width: 230px;
+
+
+
+}
+
+.infoResult{
+margin-left: 100px;
+
+}
+
+.vertical-line{
+	border-left: thick solid ;
 }

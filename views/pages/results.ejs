@@ -5,7 +5,7 @@
     <% include ../partials/head %>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
-<body class="left-sidebar" onload="google_maps()">
+<body class="left-sidebar">
 <div id="page-wrapper">
 
     <!-- Header -->
@@ -14,6 +14,9 @@
     <!-- Main -->
     <div id="main-wrapper">
         <div class="container">
+            <div class="btn-toolbar">
+
+            </div>
             <div class="row 200%">
                 <div class="4u 12u$(medium)">
                     <div id="sidebar">
@@ -22,8 +25,8 @@
 
                             <div >
                                 <form method="get" action="/search">
-                                    <input type="text" class="search-panel" id="currentLocation" name = "currentLocation" onFocus="geolocate()" placeholder="De"><br>
-                                    <input type="text" class="search-panel" id="destination" name = "destination" onFocus="geolocate()" placeholder="À"><br>
+                                    <input type="text" class="search-panel" id="currentLocation" name = "currentLocation" placeholder="De"><br>
+                                    <input type="text" class="search-panel" id="destination" name = "destination"  placeholder="À"><br>
                                     <input type="text" class="search-panel" id="datepicker" name="datepicker" placeholder="Date"/><br>
 
                                     <div class="[ form-group ] ">
@@ -99,35 +102,61 @@
                     </div>
                 </div>
 
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Date
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Ascendant</a></li>
+                        <li><a href="#">Descendant</a></li>
+                    </ul>
+                </div>
 
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Prix
+                        <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Ascendant</a></li>
+                        <li><a href="#">Descendant</a></li>
+                    </ul>
+                </div>
                 <div class="8u 12u$(medium) important(medium)">
+
+
+
                     <div id="content">
                         <!--- PASSENGERS LOOKING FOR DRIVERS-->
                         <%for ( i= 0;i<drivers.length;i++) { %>
                         <form method="post" action="/add-passenger">
+
+
                             <a href="javascript:;" onclick="parentNode.submit();">
+
+
                                 <article class="row">
-                                    <div>
+                                    <div class=" nameResult">
                                         <p name="idTravel" hidden><%= idTravel[i] %> </p>
 
                                         <input type="hidden" name="idTravel" value =<%= idTravel[i]%>>
 
 
                                         <% var pieces = name[i].split(" ");%>
-                                        <h3><%= pieces[0]+"."+pieces[1].substring(0,1)%></h3>
+                                        <h1><%= pieces[0]+"."+pieces[1].substring(0,1)%></h1>
                                         <span><h3><%= cost[i] %>$</h3></span>
                                         <!--logos here and goodies. -->
 
-                                    </div>
-                                    <div>
 
-                                        <%=departureDate[i]%><br>
+                                        <div class = "vertical-line"></div>
+                                    </div>
+
+                                    <div class = "infoResult">
+
+                                       <%=departureDate[i]%><br>
                                         <%=departureTime[i]%><br>
                                         <%=currentLocation%> → <%=destination%><br>
 
                                         Sièges pris: <%=seatsTaken[i]%><br>
 
-                                        Sièges disponible: <%=seatsAvailable[i]%><br>
+                                        Sièges disponibles: <%=seatsAvailable[i]%><br>
                                         <% if (petsAllowed[i] == 0){ %>
                                         Animaux permis? : Non<br>
                                         <%}else{ %>
@@ -142,10 +171,11 @@
                         </form>
 
 
+
+
                         <hr>
 
                         <%}%>
-
 
                         <!--- DRIVERS LOOKING FOR PASSENGERS-->
                         <%for ( i= 0;i<passengers.length;i++) { %>
@@ -177,6 +207,7 @@
                                 </div>
 
                             </article>
+
                         </a>
 
                         <hr>

@@ -59,9 +59,9 @@
 
 
 
-                    <input type="text" id="currentLocation" class=" input-group"  name = "currentLocation" placeholder="De">
+                    <input type="text" id="currentLocation" class=" input-group"  name = "currentLocation" placeholder="De"> →
 
-                    <input type="text" id="destination" class="input-group"  name = "destination" placeholder="À"><br>
+                    <input type="text" id="destination" class="input-group"  name = "destination" placeholder="À"><br><br>
 
 
                     <div class="clearfix">
@@ -73,8 +73,12 @@
                         </div>
                     </div>
 
-
-                    <input type="text" class=" input-group"  id="datepicker" name="datepicker"  placeholder="Date" />
+                            <div class="input-group">
+                    <input type="text" class="form-control formBootStrap"  id="datepicker" name="datepicker"  placeholder="Date" />
+                              <span class="input-group-addon widerGlyph dateGlyph">
+                                            <span class="glyphicon glyphicon-calendar widerGlyph"></span>
+                                                </span>
+                                  </div>
 
 
 
@@ -98,15 +102,28 @@
 
                         </div>
 
-
-
-
                     </div>
 
 
 <!--Drivers -->        <div class="driverOptions hideDisplay">
 
-                         <input class="input-group" id="costInput" type="text" name="cost_d"  placeholder="Coût"><br><br>
+                                        <div class="input-group">
+                                            <input type="number"  id="costInput"  name="cost_d" placeholder="Coût" class="form-control formBootStrap" id="amount" min="0"/>
+                                            <span class="input-group-addon widerGlyph costGlyph">
+                                            <span class="glyphicon glyphicon-usd widerGlyph"></span>
+                                                </span>
+                                        </div>
+
+                                <div class="input-group">
+                                    <input type="number"  id="spinner"  name="spinner_d" placeholder="Sièges disponibles"  class="form-control formBootStrap" id="spinner" min="1" max="6"/>
+                                            <span class="input-group-addon widerGlyph seatsGlyph">
+                                            <span class="glyphicon glyphicon-plus widerGlyph"></span>
+                                                </span>
+                                </div><br>
+
+                        <!-- <input class="input-group" id="costInput" type="text" name="cost_d"  placeholder="Coût"><br><br>-->
+
+                         <!--       Sièges disponibles:    <input class="generalSpinner" id="spinner" name="spinner_d" value="0"><br><br>-->
 
                         <div id="accordion2"  style="width:580px;">
 
@@ -117,7 +134,7 @@
                             <div><br> Score moyen du passager: ******<br><br>
 
 
-                                Sièges disponibles: <input class="generalSpinner" id="spinner" name="spinner_d" value="0"><br><br>
+
 
 
 
@@ -156,7 +173,10 @@
                                    placeholder="Enter a location">
                        <div id="googleMap" class="googleMap"></div>
                         <input type="button"  class="reset-markers"  id="resetMarkers" value="Réinitialiser">
-                        <input type="number" class="radius" id="radius" min="0" max="1000" placeholder="Rayon (en mètres)" value="100">
+                        <input type="number" class="radius" id="radius" min="0" max="1000" placeholder="Rayon (en mètres)">
+                        <input type="hidden" id="latitude">
+                        <input type="hidden" id="longitude">
+
 
 
                     <div class="post-ride">

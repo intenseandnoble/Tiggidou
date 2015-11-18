@@ -73,16 +73,18 @@
 
                     <!-- show any messages that come back with authentication -->
                     <% if (message.length > 0) { %>
-                    <div class="alert alert-danger sign-error"><%= message %></div>
+                    <div class="alert alert-danger"><%= message %></div>
                     <% } %>
 
                     <form action = "/sign-up" method="post" name="signupForm" onsubmit="return validateForm()">
-                        <input type="text" class="login-textbox"  name = "firstName" placeholder ="<%= login.firstName %>"
-                               required="required"><br>
-                        <input type="text" class="login-textbox"  name = "familyName" placeholder ="<%= login.familyName %>"
-                               required="required"><br>
-                        <input type="email" class="signup-email" name = "email" placeholder="<%= login.email %>"
-                               required="required"><br>
+                        <input type="text" class="login-textbox"  name = "firstName" pattern="[a-zA-Z\-'\s]+"
+                               title="<%= login.incorrectName %>"
+                               placeholder ="<%= login.firstName %>" required="required"><br>
+                        <input type="text" class="login-textbox"  name = "familyName" pattern="[a-zA-Z\-'\s]+"
+                               title="<%= login.incorrectName %>"
+                               placeholder ="<%= login.familyName %>" required="required"><br>
+                        <input type="email" class="signup-email" name = "email"
+                               placeholder="<%= login.email %>" required="required"><br>
                         <input type="password" class="signup-pass" name = "password" id="password"
                                placeholder="<%= login.pwd %>" required="required"><br>
                         <input type="password" class="signup-pass" name = "confirm_password" id="confirm_password"

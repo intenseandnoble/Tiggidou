@@ -281,12 +281,11 @@ function postSignUp(req, res, next, passport) {
                     }
 
                     var birthDayString = req.body.birthday_year+"-"+req.body.birthday_month+"-"+req.body.birthday_day;
-                    /*if(!moment(birthDayString).isValide()){
+                    var birthday = moment(birthDayString, "YYYY-MM-DD");
+                    if(!birthday.isValid()){
                         req.flash("signupMessage", "La date sélectionnée n'est pas valide");
                         res.redirect('/sign-up');
-                    }*/
-
-                    var birthday = moment(birthDayString, "YYYY-MM-DD");
+                    }
                     var age =  moment().diff(birthday, 'years');
                     var dateBirthday = birthday.toDate();
                     if(age < 17){

@@ -192,6 +192,7 @@ function postRide(req, res) {
                 petsAllowed : pets,
                 driver:req.session.req.user.id,
                 availableSeat:req.body.spinner_d,
+                takenSeat: 0,
                 luggagesSize :luggage,
                 //comments: req.body.commentsRide_d,
                 cost:req.body.cost_d},

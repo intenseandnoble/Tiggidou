@@ -62,57 +62,67 @@ function Ride(temp_dest, temp_currlocation) {
     moment().format('LLL');
 }
 
+
+
 /*
 
 @param {date} newdate must be a date format
  */
 Ride.prototype.searchDriver = function (req, res, newdate) {
-    new Travel().where({
-        destinationAddress: dest,
-        startAddress: currLocation
-    }).query(function (qb) {
-        qb.orderBy('departureDate', 'ASC');
-    }).fetchAll().then(function (user) {
-        var resultJSON = user.toJSON();
+    var rechercheOption = getTravelOption();
 
-        if (resultJSON.length == 0) {
+    if(rechercheOption){
+        new Travel().where(rechercheOption).query(function (qb) {
+            qb.orderBy('departureDate', 'ASC');
+        }).fetchAll().then(function (user) {
+            var resultJSON = user.toJSON();
+
+            if (resultJSON.length == 0) {
+                res.redirect('/no-results');
+            }
+            else {
+                setSearchDriverRide(resultJSON, newdate);
+                Promise.all(promiseArr).then(function (ps) {
+                    renderRide(req, res, ps);
+                });
+            }
+        }).catch(function (err) {
+            //TODO voir quel erreur sera donné si un crash (ici normalement, c'est une erreur de prog..)
+            log.error(err);
             res.redirect('/no-results');
-        }
-        else {
-            setSearchDriverRide(resultJSON, newdate);
-            Promise.all(promiseArr).then(function (ps) {
-                renderRide(req, res, ps);
-            });
-        }
-    }).catch(function (err) {
-        //TODO voir quel erreur sera donné si un crash (ici normalement, c'est une erreur de prog..)
-        log.error(err);
-        res.redirect('/no-results');
-    });
+        });
+    }else{
+        renderRide(req, res, ps);
+    }
 };
 
 Ride.prototype.searchPassengers = function (req, res, newdate) {
-    new TravelRequest().where({
-        destinationAddress: dest,
-        startAddress: currLocation
-    }).query(function (qb) {
-        qb.orderBy('departureDate', 'ASC');
-    }).fetchAll().then(function (user) {
-        var resultJSON = user.toJSON();
+    var rechercheOption = getTravelOption();
 
-        if (resultJSON.length == 0) {
+    if(rechercheOption){
+        new TravelRequest().where(rechercheOption).query(function (qb) {
+            qb.orderBy('departureDate', 'ASC');
+        }).fetchAll().then(function (user) {
+            var resultJSON = user.toJSON();
+
+            if (resultJSON.length == 0) {
+                res.redirect('/no-results');
+            }
+            else {
+                setSearchPassengerRide(resultJSON, newdate);
+                Promise.all(promiseArr).then(function (ps) {
+                    renderRide(req, res, ps);
+                });
+            }
+        }).catch(function (err) {
+            log.error(err);
             res.redirect('/no-results');
-        }
-        else {
-            setSearchPassengerRide(resultJSON, newdate);
-            Promise.all(promiseArr).then(function (ps) {
-                renderRide(req, res, ps);
-            });
-        }
-    }).catch(function (err) {
-        log.error(err);
-        res.redirect('/no-results');
-    });
+        });
+    }
+    else{
+        renderRide(req, res, ps);
+    }
+
 };
 
 /*
@@ -193,6 +203,26 @@ function renderRide(req, res, ps) {
         header: header,
         foot: foot
     });
+}
+
+function getTravelOption() {
+    var rech = null;
+    if(dest && currLocation){
+        rech = {
+            destinationAddress: dest,
+            startAddress: currLocation
+        }
+    }else if(dest){
+        rech = {
+            destinationAddress: dest
+        }
+    }else if(currLocation) {
+        rech = {
+            startAddress: currLocation
+        }
+    }
+
+    return rech;
 }
 
 function capitalize(str)

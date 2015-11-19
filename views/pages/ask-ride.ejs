@@ -18,28 +18,28 @@
         <div align="center" >
 
 
-                <form class="ride-posting preventEnter" method="post" action ="/post-ride">
+            <form class="ride-posting preventEnter" method="post" action ="/post-ride">
 
-                    <button type = "button" id="btnTypePassenger" class="passengerOpt button icon fa-arrow-circle-right">Je suis un passager!</button>
-                    <button type = "button" id="btnTypeDriver" class="driversOpt button icon fa-arrow-circle-right ">Je suis conducteur!</button>
-
-
-                    <div class="fadeinAction hideDisplay" >
+                <button type = "button" id="btnTypePassenger" class="passengerOpt button icon fa-arrow-circle-right">Je suis un passager!</button>
+                <button type = "button" id="btnTypeDriver" class="driversOpt button icon fa-arrow-circle-right ">Je suis conducteur!</button>
 
 
-                        <div class="[ form-group ] ">
-                            <input  class="radio" type="checkbox" name="passengerCheckbox" id="passengerCheckbox" checked />
+                <div class="fadeinAction hideDisplay" >
 
 
-                            <div class="[ btn-group ]">
-                                <label for="passengerCheckbox" class="[ btn btn-primary ]">
-                                    <span class="[ glyphicon glyphicon-ok ]"></span>
-                                    <span> </span>
-                                </label>
-                                <label for="passengerCheckbox" class="[ btn btn-default active ] checkboxUserlbl">
-                                   Passenger
-                                </label>
-                            </div>
+                    <div class="[ form-group ] ">
+                        <input  class="radio" type="checkbox" name="passengerCheckbox" id="passengerCheckbox" checked />
+
+
+                        <div class="[ btn-group ]">
+                            <label for="passengerCheckbox" class="[ btn btn-primary ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span> </span>
+                            </label>
+                            <label for="passengerCheckbox" class="[ btn btn-default active ] checkboxUserlbl">
+                                Passenger
+                            </label>
+                        </div>
 
                         <div class="[ form-group ] ">
                             <input class="radio" type="checkbox" name="driverCheckbox" id="driverCheckbox"  />
@@ -59,104 +59,104 @@
 
 
 
-                    <input type="text" id="currentLocation" class=" input-group"  name = "currentLocation" placeholder="De"> →
+                        <input type="text" id="currentLocation" class=" input-group"  name = "currentLocation" placeholder="De"> →
 
-                    <input type="text" id="destination" class="input-group"  name = "destination" placeholder="À"><br><br>
+                        <input type="text" id="destination" class="input-group"  name = "destination" placeholder="À"><br><br>
 
 
-                    <div class="clearfix">
-                        <div class="input-group clockpicker"   data-align="top" data-autoclose="true">
-                            <input type="text" class="form-control" name="clockpicker" id="withBootStrap" value="12:00">
+                        <div class="clearfix">
+                            <div class="input-group clockpicker"   data-align="top" data-autoclose="true">
+                                <input type="text" class="form-control" name="clockpicker" id="withBootStrap" value="12:00">
 				                <span class="input-group-addon widerGlyph">
 					            <span class="glyphicon glyphicon-time widerGlyph"></span>
 				                </span>
+                            </div>
                         </div>
-                    </div>
 
-                            <div class="input-group">
-                    <input type="text" class="form-control formBootStrap"  id="datepicker" name="datepicker"  placeholder="Date" />
+                        <div class="input-group">
+                            <input type="text" class="form-control formBootStrap"  id="datepicker" name="datepicker"  placeholder="Date" />
                               <span class="input-group-addon widerGlyph dateGlyph">
                                             <span class="glyphicon glyphicon-calendar widerGlyph"></span>
                                                 </span>
-                                  </div>
+                        </div>
 
 
 
-<!--Passengers -->                    <div class="passengerOptions hideDisplay">
-                        <br>
+                        <!--Passengers -->                    <div class="passengerOptions hideDisplay">
+                            <br>
 
-                        <div id="accordion"  style="width:580px;">
-                            <h3>More options</h3>
+                            <div id="accordion"  style="width:580px;">
+                                <h3>More options</h3>
 
-                            <div><br> Score du conducteur: ******<br><br>
+                                <div><br> Score du conducteur: ******<br><br>
 
-                                Animaux accepté? <br><input type="radio" name="petsRadio_p" value="Yes">Oui
-                                <input type="radio" name="petsRadio_p" value="No" checked>Non <br><br>
+                                    Animaux accepté? <br><input type="radio" name="petsRadio_p" value="Yes">Oui
+                                    <input type="radio" name="petsRadio_p" value="No" checked>Non <br><br>
 
-                                Valises acceptés?<br><input type="radio" name="luggageRadio_p" value="Yes">Oui
-                                <input type="radio" name="luggageRadio_p" value="No" checked>Non <br><br>
-                                Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_p"></textarea><br><br>
+                                    Valises acceptés?<br><input type="radio" name="luggageRadio_p" value="Yes">Oui
+                                    <input type="radio" name="luggageRadio_p" value="No" checked>Non <br><br>
+                                    Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_p"></textarea><br><br>
+
+                                </div>
+
 
                             </div>
 
-
                         </div>
 
-                    </div>
 
+                        <!--Drivers -->        <div class="driverOptions hideDisplay">
 
-<!--Drivers -->        <div class="driverOptions hideDisplay">
-
-                                        <div class="input-group">
-                                            <input type="number"  id="costInput"  name="cost_d" placeholder="Coût" class="form-control formBootStrap" id="amount" min="0"/>
+                            <div class="input-group">
+                                <input type="number"  id="costInput"  name="cost_d" placeholder="Coût" class="form-control formBootStrap" id="amount" min="0"/>
                                             <span class="input-group-addon widerGlyph costGlyph">
                                             <span class="glyphicon glyphicon-usd widerGlyph"></span>
                                                 </span>
-                                        </div>
+                            </div>
 
-                                <div class="input-group">
-                                    <input type="number"  id="spinner"  name="spinner_d" placeholder="Sièges disponibles"  class="form-control formBootStrap" id="spinner" min="1" max="6"/>
+                            <div class="input-group">
+                                <input type="number"  id="spinner"  name="spinner_d" placeholder="Sièges disponibles"  class="form-control formBootStrap" id="spinner" min="1" max="6"/>
                                             <span class="input-group-addon widerGlyph seatsGlyph">
                                             <span class="glyphicon glyphicon-plus widerGlyph"></span>
                                                 </span>
-                                </div><br>
+                            </div><br>
 
-                        <!-- <input class="input-group" id="costInput" type="text" name="cost_d"  placeholder="Coût"><br><br>-->
+                            <!-- <input class="input-group" id="costInput" type="text" name="cost_d"  placeholder="Coût"><br><br>-->
 
-                         <!--       Sièges disponibles:    <input class="generalSpinner" id="spinner" name="spinner_d" value="0"><br><br>-->
+                            <!--       Sièges disponibles:    <input class="generalSpinner" id="spinner" name="spinner_d" value="0"><br><br>-->
 
-                        <div id="accordion2"  style="width:580px;">
-
-
-
-                            <h3>More options</h3>
-
-                            <div><br> Score moyen du passager: ******<br><br>
+                            <div id="accordion2"  style="width:580px;">
 
 
+
+                                <h3>More options</h3>
+
+                                <div><br> Score moyen du passager: ******<br><br>
 
 
 
 
 
-                                Animaux acceptés?  <br><input type="radio" name="petsRadio_d" value="Yes">Oui
-                                <input type="radio" name="petsRadio_d" value="No" checked>Non <br><br>
-
-                                Valises acceptés?<br><input type="radio" name="luggageRadio_d" value="Yes">Oui
-                                <input type="radio" name="luggageRadio_d" value="No" checked>Non <br><br>
 
 
+                                    Animaux acceptés?  <br><input type="radio" name="petsRadio_d" value="Yes">Oui
+                                    <input type="radio" name="petsRadio_d" value="No" checked>Non <br><br>
 
-                                Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_d"></textarea><br><br>
+                                    Valises acceptés?<br><input type="radio" name="luggageRadio_d" value="Yes">Oui
+                                    <input type="radio" name="luggageRadio_d" value="No" checked>Non <br><br>
 
 
+
+                                    Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_d"></textarea><br><br>
+
+
+
+
+                                </div>
 
 
                             </div>
-
-
                         </div>
-                    </div>
 
                         <br><div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-primary active" id="currentLocationMap">
@@ -169,19 +169,22 @@
 
 
 
-                            <input id="pac-input" class="controls" type="text"
-                                   placeholder="Enter a location">
-                       <div id="googleMap" class="googleMap"></div>
+                        <input id="pac-input" class="controls" type="text"
+                               placeholder="Enter a location">
+                        <div id="googleMap" class="googleMap"></div>
+
+                        <input type="text" id="selectedPickupPoint" class="selectedPoints" readonly="readonly">
+                        <input type="text" id ="selectedDropOffPoint" class="selectedPoints" readonly="readonly"><br><br>
                         <input type="button"  class="reset-markers"  id="resetMarkers" value="Réinitialiser">
-                        <input type="number" class="radius" id="radius" min="0" max="1000" placeholder="Rayon (en mètres)">
+                        <input type="number" class="radius" id="radius" min="0" max="1000" placeholder="Rayon (en mètres)"><br>
                         <input type="hidden" id="latitude">
                         <input type="hidden" id="longitude">
 
 
 
-                    <div class="post-ride">
-                        <br><br>  <input type="submit" value="Publier" >
-                    </div>
+                        <div class="post-ride">
+                            <br><br>  <input type="submit" value="Publier" >
+                        </div>
 
                     </div>
 
@@ -197,13 +200,13 @@
 
 
 
+                </div>
+            </form>
         </div>
-                </form>
     </div>
-</div>
 
-<!-- Footer -->
-<% include ../partials/footer %>
+    <!-- Footer -->
+    <% include ../partials/footer %>
 
 </div>
 </body>

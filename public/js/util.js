@@ -648,12 +648,12 @@ $(document).ready(function() {
 function google_maps() {
 
     var options = {
-        //types: ['(cities)'],
+        types: ['(cities)'],
         componentRestrictions: {country: "can"}
     };
 
     var options2 = {
-        types:  ['establishment'],
+        // types:  ['establishment'],
         componentRestrictions: {country: "can"}
     };
 
@@ -673,7 +673,7 @@ function google_maps() {
 
 
     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 
     var infowindow = new google.maps.InfoWindow();
@@ -686,6 +686,9 @@ function google_maps() {
 
     google.maps.event.addListener(map, 'click', function(event) {
         placeMarker(event.latLng, map);
+
+
+
 
     });
 
@@ -719,7 +722,7 @@ function google_maps() {
         marker.setVisible(false);
         var place = autocompletePlaces.getPlace();
         if (!place.geometry) {
-            window.alert("Autocomplete's returned place contains no geometry");
+            //window.alert("Autocomplete's returned place contains no geometry");
             return;
         }
 
@@ -727,15 +730,16 @@ function google_maps() {
         if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
         } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-            var service = new google.maps.places.PlacesService(map);
-            service.nearbySearch({
-                location: place_curr.geometry.location,
-                radius: 500,
-                types: ['store']
-            }, callback);
-
+            placeMarker(place.geometry.location,map);
+            //     map.setCenter(place.geometry.location);
+            //   map.setZoom(15);  // Why 17? Because it looks good.
+            /*   var service = new google.maps.places.PlacesService(map);
+             service.nearbySearch({
+             location: place_curr.geometry.location,
+             radius: 500,
+             types: ['store']
+             }, callback);
+             */
         }
         marker.setIcon(({
             url: place.icon,
@@ -744,11 +748,11 @@ function google_maps() {
             anchor: new google.maps.Point(17, 34),
             scaledSize: new google.maps.Size(35, 35)
         }));
-         marker.setPosition(place.geometry.location);
-         marker.setVisible(true);
+        marker.setPosition(place.geometry.location);
+        // marker.setVisible(true);
 
-         var address = '';
-         if (place.address_components) {
+        var address = '';
+        if (place.address_components) {
             address = [
                 (place.address_components[0] && place.address_components[0].short_name || ''),
                 (place.address_components[1] && place.address_components[1].short_name || ''),
@@ -756,9 +760,11 @@ function google_maps() {
             ].join(' ');
         }
 
-         infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-         infowindow.open(map, marker);
-         });
+        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+        infowindow.open(map, marker);
+    });
+
+    map.panTo(place.geometry.location);
 
 
 
@@ -792,11 +798,15 @@ function placeMarker(location,map) {
 
     var marker_arr = markers_currLoc;
     var icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
-
+    var input_loc =document.getElementById('selectedPickupPoint');
+    var message_input ="Lieu de départ: ";
+    var address = " ";
 
     if(document.getElementById('radio-map-destination').checked) {
         marker_arr = markers_destLoc;
         icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+        input_loc = document.getElementById('selectedDropOffPoint');
+        message_input ="Lieu d'arrivé: ";
     }
 
 
@@ -814,6 +824,7 @@ function placeMarker(location,map) {
 
 
 
+    reverseGeocode(message_input,input_loc,location.toString());
 
     marker_arr.push(marker);
 
@@ -853,6 +864,45 @@ function placeMarker(location,map) {
     map.panTo(position);
 
 }
+
+
+function reverseGeocode(message_input,input_loc, location) {
+
+
+    location = location.slice(1,-1);
+    var latlngStr = location.split(',', 2);
+
+    var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+    var geocoder = new google.maps.Geocoder;
+
+    geocoder.geocode({'location': latlng}, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                // alert(JSON.stringify(results));
+
+                if(results[1].formatted_address.indexOf(" / ") != -1){
+                    input_loc.value= message_input+results[1].formatted_address;
+                }
+                else{
+                    input_loc.value= message_input+results[0].formatted_address;
+                }
+
+
+
+
+
+
+
+            } else {
+                input_loc.value= message_input+results[1].formatted_address;
+            }
+        }
+
+    });
+
+}
+
+
 
 function deleteMarkers() {
 
@@ -919,7 +969,7 @@ function drawRadius(){
 
     }
 
-  radius_arr.length = 0;
+    radius_arr.length = 0;
     //for (marker in markers_currLoc) {
     for(i=0; i < marker_arr.length;i++){
         // Add the circle for this city to the map.
@@ -1082,11 +1132,11 @@ $(document).ready(function(){
 //Spinner button for seats available etc...
 
 /*$(function() {
-    var spinner = $( "#spinner" ).spinner({min: 1, max: 10});
-    $( "button" ).button();
-});
+ var spinner = $( "#spinner" ).spinner({min: 1, max: 10});
+ $( "button" ).button();
+ });
 
-*/
+ */
 
 
 

@@ -64,7 +64,7 @@ function Ride(temp_dest, temp_currlocation) {
 
 /*
 
-@param {date} newdate must be a date format
+ @param {date} newdate must be a date format
  */
 Ride.prototype.searchDriver = function (req, res, newdate) {
     new Travel().where({
@@ -116,8 +116,8 @@ Ride.prototype.searchPassengers = function (req, res, newdate) {
 };
 
 /*
-Setup the result to display when searching for a Driver
-@param {jsonObject} resultJSON
+ Setup the result to display when searching for a Driver
+ @param {jsonObject} resultJSON
  */
 function setSearchDriverRide(resultJSON, newdate) {
     for (var indiceElement in resultJSON) {
@@ -130,7 +130,7 @@ function setSearchDriverRide(resultJSON, newdate) {
             departureDate_arr.push(capitalize(date));
 
             time = jsonTrip['departureTime'];
-            time = moment(time, ["HH:mm"]).format("h:mm A");
+            time = moment(time, ["HH:mm"]).format("H:mm");
             departureTime_arr.push(time);
 
             idTravel_arr.push(jsonTrip['idAddTravel']);

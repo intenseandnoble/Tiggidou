@@ -1,5 +1,8 @@
 module.exports =
 {
+    //title
+    "driverRatingTitle": "Jugez ses talents de conducteur",
+    "passengerRatingTitle": "Jugez ses talents de passager",
     // ratings
     "give_opinion":"Donnez votre avis",
     "punctuality":"Ponctualit\u00E9",

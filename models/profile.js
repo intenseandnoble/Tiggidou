@@ -9,7 +9,7 @@ var utils = require('../controllers/utils.js');
 var Comments = require('./comments').Comments;
 var Score = require('./score').Score;
 var Travel = require('./travel').Travel;
-var TravelPassengers = require('./travelPassengers').TravelPassengers;
+var TravelRequest = require('./travelRequest').TravelRequest;
 var modelUsers = require('./user');
 var Promise = require('bluebird');
 //Vue en francais
@@ -151,6 +151,24 @@ function getTravelsAsDriver (req) {
 
 function getTravelsAsPassenger (req) {
     var promiseTravelsPArray = [];
+    var userSession = req.session.req.user;
+
+    return new TravelRequest()
+        .where({
+            passenger:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                promiseTravelsPArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsPArray;
+
+        })
+
 }
 
 function getScores () {
@@ -197,44 +215,45 @@ function renderProfile(req, res, ps, page) {
     travelsAsDriver = getTravelsAsDriver(req);
     travelsAsPassenger = getTravelsAsPassenger(req);
 
-    Promise.all(scoreArray, travelsAsDriver)
-        .then(function (scores, travelsD){
+    Promise.join(scoreArray, travelsAsDriver, travelsAsPassenger, function (scores, travelsD, travelsP){
 
-            res.render(page, {
-                logged: utils.authentificated(req),
-                userName: userName,
-                avatarImage: userAvatar,
+           res.render(page, {
+               logged: utils.authentificated(req),
+               userName: userName,
+               avatarImage: userAvatar,
 
-                driverAverageScore: scores[0],
-                dPunctualityScore: scores[1],
-                dCourtesyScore: scores[2],
-                dReliabilityScore: scores[3],
-                dSecurityScore: scores[4],
-                dComfortScore: scores[5],
+               driverAverageScore: scores[0],
+               dPunctualityScore: scores[1],
+               dCourtesyScore: scores[2],
+               dReliabilityScore: scores[3],
+               dSecurityScore: scores[4],
+               dComfortScore: scores[5],
 
-                passengerAverageScore: scores[6],
-                pPunctualityScore: scores[7],
-                pCourtesyScore: scores[8],
-                pPolitenessScore: scores[9],
+               passengerAverageScore: scores[6],
+               pPunctualityScore: scores[7],
+               pCourtesyScore: scores[8],
+               pPolitenessScore: scores[9],
 
-                comments: commentariesTexts,
-                commentsIssuers: ps,
-                commentsDate: commentsDate,
-                userOfProfile: userOfProfile,
+               comments: commentariesTexts,
+               commentsIssuers: ps,
+               commentsDate: commentsDate,
+               userOfProfile: userOfProfile,
 
-                travelsAsDriver: travelsD,
+               travelsAsDriver: travelsD,
+               travelsAsPassenger: travelsP,
 
-                age: age,
-                education: education,
-                music: music,
-                anecdote: anecdote,
-                goalInLife: goalInLife,
+               age: age,
+               education: education,
+               music: music,
+               anecdote: anecdote,
+               goalInLife: goalInLife,
 
-                profile: profile,
-                ratingPnD: ratingPnD,
-                foot: foot,
-                header: header
-            });
+               profile: profile,
+               ratingPnD: ratingPnD,
+               foot: foot,
+               header: header
+           });
+
 
         });
 

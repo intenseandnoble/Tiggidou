@@ -18,6 +18,12 @@ module.exports =
     "submitbtn":"Soumettre",
 
     // Comments
-    "comments":"Commentaires"
+    "comments":"Commentaires",
 
+    //Mes voyages
+    "popUpTitle":"Mes voyages",
+    "noTravelsAsDriver":"Aucune offre de voyage existante.",
+    "noTravelsAsPassenger":"Aucune demande de voyage existante.",
+    "maxNbResulstsTravelsDriver": "Cliquez ici, pour voir tous les voyages que vous offrez.",
+    "maxNbResulstsTravelsPassenger": "Cliquez ici, pour voir tous les voyages que vous demandez."
 };

@@ -27,21 +27,27 @@ var luggageSize_arr;
 var petsAllowed_arr;
 var cost_arr;
 var promiseArr;
-var dest;
-var currLocation;
 var date;
 var time;
+
+var dest;
+var currLocation;
+var dateRequest;
 
 /*
  * @param {string} temp_dest Valid address
  * @param {string} temp_currlocation Valid address
  * @error
  */
-//est-ce qu'on ait aussi sure que le format est bon?
-function Ride(temp_dest, temp_currlocation) {
+function Ride(temp_dest, temp_currlocation, temp_date) {
 
     dest = temp_dest;
     currLocation = temp_currlocation;
+    dateRequest = moment(temp_date, "DD-MM-YYYY").format("YYYY-MM-DD");
+    if(!dateRequest || dateRequest == 'undefined' || dateRequest == "Invalid date"){
+        dateRequest = moment().format("YYYY-MM-DD");
+    }
+
     idTravel_arr = [];
     driver_arr = [];
     passenger_arr=[];
@@ -68,7 +74,7 @@ function Ride(temp_dest, temp_currlocation) {
 
 @param {date} newdate must be a date format
  */
-Ride.prototype.searchDriver = function (req, res, newdate) {
+Ride.prototype.searchDriver = function (req, res) {
     var rechercheOption = getTravelOption();
 
     if(rechercheOption){
@@ -81,7 +87,7 @@ Ride.prototype.searchDriver = function (req, res, newdate) {
                 res.redirect('/no-results');
             }
             else {
-                setSearchDriverRide(resultJSON, newdate);
+                setSearchDriverRide(resultJSON);
                 Promise.all(promiseArr).then(function (ps) {
                     renderRide(req, res, ps);
                 });
@@ -96,7 +102,7 @@ Ride.prototype.searchDriver = function (req, res, newdate) {
     }
 };
 
-Ride.prototype.searchPassengers = function (req, res, newdate) {
+Ride.prototype.searchPassengers = function (req, res) {
     var rechercheOption = getTravelOption();
 
     if(rechercheOption){
@@ -109,7 +115,7 @@ Ride.prototype.searchPassengers = function (req, res, newdate) {
                 res.redirect('/no-results');
             }
             else {
-                setSearchPassengerRide(resultJSON, newdate);
+                setSearchPassengerRide(resultJSON);
                 Promise.all(promiseArr).then(function (ps) {
                     renderRide(req, res, ps);
                 });
@@ -129,56 +135,49 @@ Ride.prototype.searchPassengers = function (req, res, newdate) {
 Setup the result to display when searching for a Driver
 @param {jsonObject} resultJSON
  */
-function setSearchDriverRide(resultJSON, newdate) {
+function setSearchDriverRide(resultJSON) {
     for (var indiceElement in resultJSON) {
         var jsonTrip = resultJSON[indiceElement];
 
-        if (newdate <= jsonTrip['departureDate']) {
-            //TODO sa cause pas de problème une date et l'utiliser pour elle même dans un type différent?
-            date = jsonTrip['departureDate'];
-            date = moment(date).format("dddd, Do MMMM YYYY");
-            departureDate_arr.push(capitalize(date));
+        date = jsonTrip['departureDate'];
+        date = moment(date).format("dddd, Do MMMM YYYY");
+        departureDate_arr.push(capitalize(date));
 
-            time = jsonTrip['departureTime'];
-            time = moment(time, ["HH:mm"]).format("h:mm A");
-            departureTime_arr.push(time);
+        time = jsonTrip['departureTime'];
+        time = moment(time, ["HH:mm"]).format("h:mm A");
+        departureTime_arr.push(time);
 
-            idTravel_arr.push(jsonTrip['idAddTravel']);
-            driver_arr.push(jsonTrip['driver']);
-            luggageSize_arr.push(jsonTrip['luggagesSize']);
-            comment_arr.push(jsonTrip['comments']);
-            petsAllowed_arr.push(jsonTrip['petsAllowed']);
-            seatsAvailable_arr.push(jsonTrip['availableSeat']);
-            seatsTaken_arr.push(jsonTrip['takenSeat']);
-            cost_arr.push(jsonTrip['cost']);
-            promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['driver']));
-
-        }
+        idTravel_arr.push(jsonTrip['idAddTravel']);
+        driver_arr.push(jsonTrip['driver']);
+        luggageSize_arr.push(jsonTrip['luggagesSize']);
+        comment_arr.push(jsonTrip['comments']);
+        petsAllowed_arr.push(jsonTrip['petsAllowed']);
+        seatsAvailable_arr.push(jsonTrip['availableSeat']);
+        seatsTaken_arr.push(jsonTrip['takenSeat']);
+        cost_arr.push(jsonTrip['cost']);
+        promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['driver']));
     }
 }
 
-function setSearchPassengerRide(resultJSON, newdate) {
+function setSearchPassengerRide(resultJSON) {
     for (var indiceElement in resultJSON) {
         var jsonTrip = resultJSON[indiceElement];
 
-        if (newdate <= jsonTrip['departureDate']) {
+        date = jsonTrip['departureDate'];
+        date = moment(date).format("dddd, Do MMMM YYYY");
+        departureDate_arr.push(capitalize(date));
 
-            date = jsonTrip['departureDate'];
-            date = moment(date).format("dddd, Do MMMM YYYY");
-            departureDate_arr.push(capitalize(date));
+        time = jsonTrip['departureTime'];
+        time = moment(time, ["HH:mm"]).format("h:mm A");
+        departureTime_arr.push(time);
 
-            time = jsonTrip['departureTime'];
-            time = moment(time, ["HH:mm"]).format("h:mm A");
-            departureTime_arr.push(time);
+        idTravel_arr.push(jsonTrip['idAddTravel']);
+        passenger_arr.push(jsonTrip['passenger']);
+        luggageSize_arr.push(jsonTrip['luggageSize']);
+        comment_arr.push(jsonTrip['comments']);
+        petsAllowed_arr.push(jsonTrip['pets']);
 
-            idTravel_arr.push(jsonTrip['idAddTravel']);
-            passenger_arr.push(jsonTrip['passenger']);
-            luggageSize_arr.push(jsonTrip['luggageSize']);
-            comment_arr.push(jsonTrip['comments']);
-            petsAllowed_arr.push(jsonTrip['pets']);
-
-            promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['passenger']));
-        }
+        promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['passenger']));
     }
 }
 
@@ -210,15 +209,18 @@ function getTravelOption() {
     if(dest && currLocation){
         rech = {
             destinationAddress: dest,
-            startAddress: currLocation
+            startAddress: currLocation,
+            departureDate: dateRequest
         }
     }else if(dest){
         rech = {
-            destinationAddress: dest
+            destinationAddress: dest,
+            departureDate: dateRequest
         }
     }else if(currLocation) {
         rech = {
-            startAddress: currLocation
+            startAddress: currLocation,
+            departureDate: dateRequest
         }
     }
 

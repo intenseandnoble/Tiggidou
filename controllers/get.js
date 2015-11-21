@@ -68,19 +68,15 @@ function getProfile(req, res){
 
 
 function getSearchRide(req, res) {
-    var ride = new searchRide(req.query.destination, req.query.currentLocation);
+    var ride = new searchRide(req.query.destination, req.query.currentLocation, req.query.datepicker);
 
-    //var date= new Date(req.query.datepicker);
-    var date=req.query.datepicker;
-    var newdate = date.split("/").reverse().join("/");
-    newdate = new Date(newdate);
+
 
     if(req.query.searchDriver == "on") {
-        ride.searchDriver(req, res, newdate);
+        ride.searchDriver(req, res);
     }
-
     else {
-        ride.searchPassengers(req, res, newdate);
+        ride.searchPassengers(req, res);
     }
 
 }

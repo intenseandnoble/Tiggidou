@@ -81,7 +81,7 @@ Ride.prototype.searchDriver = function (req, res, newdate) {
         else {
             setSearchDriverRide(resultJSON, newdate);
             Promise.all(promiseArr).then(function (ps) {
-                renderRide(req, res, ps);
+                renderRide(req, res, ps, resultJSON);
             });
         }
     }).catch(function (err) {
@@ -106,7 +106,7 @@ Ride.prototype.searchPassengers = function (req, res, newdate) {
         else {
             setSearchPassengerRide(resultJSON, newdate);
             Promise.all(promiseArr).then(function (ps) {
-                renderRide(req, res, ps);
+                renderRide(req, res, ps, resultJSON);
             });
         }
     }).catch(function (err) {
@@ -172,7 +172,7 @@ function setSearchPassengerRide(resultJSON, newdate) {
     }
 }
 
-function renderRide(req, res, ps) {
+function renderRide(req, res, ps, resultJSON) {
     res.render('pages/results.ejs', {
         name : ps,
         idTravel: idTravel_arr,
@@ -189,6 +189,7 @@ function renderRide(req, res, ps) {
         cost: cost_arr,
         destination: dest,
         currentLocation: currLocation,
+        jsonObject:resultJSON,
         logged: utils.authentificated(req),
         header: header,
         foot: foot

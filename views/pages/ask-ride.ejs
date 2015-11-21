@@ -173,13 +173,14 @@
                                placeholder="Enter a location">
                         <div id="googleMap" class="googleMap"></div>
 
-                        <input type="text" id="selectedPickupPoint" class="selectedPoints" readonly="readonly">
-                        <input type="text" id ="selectedDropOffPoint" class="selectedPoints" readonly="readonly"><br><br>
+                        <input type="text" id="selectedPickupPoint" name ="selectedPickupPoint" class="selectedPoints" readonly="readonly">
+                        <input type="text" id ="selectedDropOffPoint" name ="selectedDropOffPoint" class="selectedPoints" readonly="readonly"><br><br>
                         <input type="button"  class="reset-markers"  id="resetMarkers" value="Réinitialiser">
                         <input type="number" class="radius" id="radius" min="0" max="1000" placeholder="Rayon (en mètres)"><br>
-                        <input type="hidden" id="latitude">
-                        <input type="hidden" id="longitude">
-
+                        <input type="hidden" id="curr-latLong" name="curr_latlong">
+                        <input type="hidden" id="dest-latLong" name="dest_latLong">
+                        <input type="hidden" id="radius-curr" name="radiusCurr">
+                        <input type="hidden" id="radius-dest" name="radiusDest">
 
 
                         <div class="post-ride">

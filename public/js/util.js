@@ -796,17 +796,20 @@ function createMarker(place) {
 
 function placeMarker(location,map) {
 
+
     var marker_arr = markers_currLoc;
     var icon = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
     var input_loc =document.getElementById('selectedPickupPoint');
     var message_input ="Lieu de départ: ";
     var address = " ";
+    var hiddenInput = document.getElementById("curr-latLong");
 
     if(document.getElementById('radio-map-destination').checked) {
         marker_arr = markers_destLoc;
         icon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
         input_loc = document.getElementById('selectedDropOffPoint');
         message_input ="Lieu d'arrivé: ";
+        hiddenInput = document.getElementById("dest-latLong");
     }
 
 
@@ -824,11 +827,21 @@ function placeMarker(location,map) {
 
 
 
-    reverseGeocode(message_input,input_loc,location.toString());
+    if(document.getElementById('pac-input').value != ''){
+        input_loc.value= message_input+document.getElementById('pac-input').value;
 
+    }
+    else{
+        reverseGeocode(message_input,input_loc,location.toString());
+    }
+
+
+    hiddenInput.value = location.toString().slice(1,-1).trim();
+    map.setCenter(location);
     marker_arr.push(marker);
 
-    //Code kinda useless while posting, but might be useful when displayning
+
+    //Code kinda useless while posting, but might be useful when displaying
     //Traces the route btw
     /*
      if(markers_currLoc.length>0 & markers_destLoc.length>0) {
@@ -859,9 +872,8 @@ function placeMarker(location,map) {
      */
 
 
-
-
     map.panTo(position);
+
 
 }
 
@@ -886,12 +898,6 @@ function reverseGeocode(message_input,input_loc, location) {
                 else{
                     input_loc.value= message_input+results[0].formatted_address;
                 }
-
-
-
-
-
-
 
             } else {
                 input_loc.value= message_input+results[1].formatted_address;
@@ -947,6 +953,7 @@ function drawRadius(){
     var circle_arr = circle_currLoc;
     var radius_arr = radius_currLoc;
     var color = "#00FF00";
+    var hiddenInput = document.getElementById("radius-curr");
 
 
 
@@ -955,6 +962,7 @@ function drawRadius(){
         circle_arr = circle_destLoc;
         radius_arr = radius_destLoc;
         color = "#FF0000";
+        hiddenInput = document.getElementById("radius-dest");
     }
 
 
@@ -985,6 +993,7 @@ function drawRadius(){
         radius_arr.push(km);
         circle_arr.push(circle);
         circle.bindTo('center', marker_arr[i], 'position');
+        hiddenInput.value = km;
 
     }
 
@@ -1048,7 +1057,7 @@ $('#currentLocationMap').click(function() {
         }
     }
 
-
+    $('#pac-input').val("");
 
 });
 
@@ -1075,6 +1084,7 @@ $('#destinationMap').click(function() {
             map.setZoom(15);
         }
     }
+    $('#pac-input').val("");
 
 });
 

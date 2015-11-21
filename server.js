@@ -16,6 +16,9 @@ var log = require('./config/logger').log;
 var app = module.exports = express(); // cr�ation de l'app avec express
 var port = 8080;
 
+app.on('uncaughtException', function(err){
+    log.error(err);
+});
 // set up our express application
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json() ); // to support JSON-encoded bodies
@@ -39,9 +42,14 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 require('./config/passport')(passport); // pass passport for configuration
 require('./controllers/routes')(app, passport);
 
-//listen (start app with node server.js)
-app.listen(port);
-log.info("App listening on port " + port);
 process.env.NODE_ENV = cfg.env;
-var prod = process.env.NODE_ENV == "prod";
-log.info("Mode prod activate: " + prod);
+log.info("Mode prod activate: " + process.env.NODE_ENV);
+
+
+//listen (start app with node server.js)
+app.listen(port).on('error', function(err){
+    app.close();
+    log.error(err);
+});
+log.info("App listening on port " + port);
+

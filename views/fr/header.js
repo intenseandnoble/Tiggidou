@@ -9,7 +9,8 @@ module.exports =
         "login": "Connexion",
         "search": "Rechercher",
         "publish": "Publier",
-        "logout": "Deconnexion"
+        "logout": "Deconnexion",
+        "profil": "Profile"
     },
     "logged": logged
 };

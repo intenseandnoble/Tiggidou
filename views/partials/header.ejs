@@ -17,7 +17,12 @@
                 <li><a href="/login"> <%= header.links.login %></a></li>
                 <% }%>
                 <li><a href="/"> <%= header.links.search %> </a></li>
+                <%if(logged) {%>
                 <li><a href="/ask-ride"> <%= header.links.publish %> </a></li>
+                <% }%>
+                <%if(logged) {%>
+                <li><a href="/profile"> <%= header.links.profil %> </a></li>
+                <% }%>
                 <%if(logged) {%>
                 <li><a href="/logout"> <%= header.links.logout %> </a></li>
                 <% }%>

@@ -72,7 +72,6 @@ function Profile() {
     goalInLife = null;
 
     commentsDate = [];
-
     commentariesTexts = [];
 
     scoreArray = [];
@@ -113,9 +112,12 @@ Profile.prototype.displayProfile = function (req, res, page) {
                 //TODO if no comments
             }
             else {
+                var nameBuffer;
+                var arrayBuffer = [];
                 for (i = 0; i < resultJSON.length; ++i) {
                     commentariesTexts.push(resultJSON[i]['comment']);
                     commentsDate.push(resultJSON[i]['commentDisplayDate']);
+
                     promiseArr.push(modelUsers.getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                 }
             }
@@ -214,6 +216,8 @@ function renderProfile(req, res, ps, page) {
     //and resolution de la promeese sur les scores
     travelsAsDriver = getTravelsAsDriver(req);
     travelsAsPassenger = getTravelsAsPassenger(req);
+
+
 
     Promise.join(scoreArray, travelsAsDriver, travelsAsPassenger, function (scores, travelsD, travelsP){
 

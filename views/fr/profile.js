@@ -22,8 +22,17 @@ module.exports =
 
     //Mes voyages
     "popUpTitle":"Mes voyages",
+    "travelOffers":"Offre(s) de voyage: ",
+    "travelDemands":"Demande(s) de voyage: ",
     "noTravelsAsDriver":"Aucune offre de voyage existante.",
     "noTravelsAsPassenger":"Aucune demande de voyage existante.",
     "maxNbResulstsTravelsDriver": "Cliquez ici, pour voir tous les voyages que vous offrez.",
-    "maxNbResulstsTravelsPassenger": "Cliquez ici, pour voir tous les voyages que vous demandez."
+    "maxNbResulstsTravelsPassenger": "Cliquez ici, pour voir tous les voyages que vous demandez.",
+    "seatsTaken": "Sièges pris: ",
+    "availableSeats":"Sièges disponible: ",
+    "petsAllowed": "Animaux permis?: ",
+    "moreOptions": "Cliquez sur un voyage pour obtenir plus d'options.",
+    "yes": "Oui",
+    "no": "Non"
+
 };

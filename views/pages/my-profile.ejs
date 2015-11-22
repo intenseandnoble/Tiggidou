@@ -116,7 +116,10 @@
                                         <li class="list-group-item">
                                             <hr>
                                             <p >
-                                                <a href="#"  title="NAME" class="user"><%= commentsIssuers[i] %></a>
+                                                <a href="/profile/<%= commentsIssuers[i] %>"  title="NAME" class="user">
+                                                    <%var buffer = commentsIssuers[i].split("."); %>
+                                                    <%= buffer[0]+" "+buffer[1]; %>
+                                                </a>
                                                 <span class="time"><%= commentsDate[i] %></span>
                                             </p>
                                             <p class="comment">

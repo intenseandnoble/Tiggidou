@@ -179,36 +179,40 @@
 
                         <!--- DRIVERS LOOKING FOR PASSENGERS-->
                         <%for ( i= 0;i<passengers.length;i++) { %>
-                        <a href="/results" >
-                            <article class="row">
-                                <div>
-                                    <% var pieces = name[i].split(" ");%>
-                                    <h3><%= pieces[0]+"."+pieces[1].substring(0,1);%></h3>
-                                    <!--logos here and goodies. -->
+                        <form method="get" action="/select-passenger">
+                            <a href="javascript:;" onclick="parentNode.submit();" >
+                                <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(jsonObject[i])%>">
+                                <article class="row">
+                                    <div>
+                                        <% var pieces = name[i].split(" ");%>
+                                        <h3><%= pieces[0]+"."+pieces[1].substring(0,1);%></h3>
+                                        <!--logos here and goodies. -->
 
-                                </div>
-                                <div>
+                                    </div>
+                                    <div>
 
-                                    <%=departureDate[i]%><br>
-                                    <%=departureTime[i]%><br>
-                                    <%=currentLocation%> → <%=destination%><br>
+                                        <%=departureDate[i]%><br>
+                                        <%=departureTime[i]%><br>
+                                        <%=currentLocation%> → <%=destination%><br>
 
-                                    Nb de Valise : <%=luggageSize[i]%><br>
-
-
-
-                                    <% if (petsAllowed[i] == 0){ %>
-                                    Animaux? : Non<br>
-                                    <%}else{ %>
-                                    Animaux? : Oui <br>
-                                    <% } %>
+                                        Nb de Valise : <%=luggageSize[i]%><br>
 
 
-                                </div>
 
-                            </article>
+                                        <% if (petsAllowed[i] == 0){ %>
+                                        Animaux? : Non<br>
+                                        <%}else{ %>
+                                        Animaux? : Oui <br>
+                                        <% } %>
 
-                        </a>
+
+                                    </div>
+
+                                </article>
+
+                            </a>
+                        </form>
+
 
                         <hr>
 

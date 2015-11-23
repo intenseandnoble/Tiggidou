@@ -72,7 +72,7 @@ function Ride(temp_dest, temp_currlocation, temp_date) {
 
 /*
 
-@param {date} newdate must be a date format
+ @param {date} newdate must be a date format
  */
 Ride.prototype.searchDriver = function (req, res) {
     var rechercheOption = getTravelOption();
@@ -89,7 +89,7 @@ Ride.prototype.searchDriver = function (req, res) {
             else {
                 setSearchDriverRide(resultJSON);
                 Promise.all(promiseArr).then(function (ps) {
-                    renderRide(req, res, ps);
+                    renderRide(req, res, ps, resultJSON);
                 });
             }
         }).catch(function (err) {
@@ -117,7 +117,7 @@ Ride.prototype.searchPassengers = function (req, res) {
             else {
                 setSearchPassengerRide(resultJSON);
                 Promise.all(promiseArr).then(function (ps) {
-                    renderRide(req, res, ps);
+                    renderRide(req, res, ps, resultJSON);
                 });
             }
         }).catch(function (err) {
@@ -132,8 +132,8 @@ Ride.prototype.searchPassengers = function (req, res) {
 };
 
 /*
-Setup the result to display when searching for a Driver
-@param {jsonObject} resultJSON
+ Setup the result to display when searching for a Driver
+ @param {jsonObject} resultJSON
  */
 function setSearchDriverRide(resultJSON) {
     for (var indiceElement in resultJSON) {
@@ -181,7 +181,7 @@ function setSearchPassengerRide(resultJSON) {
     }
 }
 
-function renderRide(req, res, ps) {
+function renderRide(req, res, ps, resultJSON) {
     res.render('pages/results.ejs', {
         name : ps,
         idTravel: idTravel_arr,
@@ -198,6 +198,7 @@ function renderRide(req, res, ps) {
         cost: cost_arr,
         destination: dest,
         currentLocation: currLocation,
+        jsonObject:resultJSON,
         logged: utils.authentificated(req),
         header: header,
         foot: foot

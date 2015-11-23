@@ -18,12 +18,15 @@ module.exports = {
     getIndex: getHome,
     getProfile: getProfile,
     getSearchRide: getSearchRide,
+    getSelectedPassenger:getSelectedPassenger,
     getLogin: getLogin,
     getSignUp: getSignUp,
     getAskRide: getAskRide,
     getResults: getResults,
     getNoResult: getNoResult,
     getLogout: getLogout
+
+
 };
 
 function getHome(req, res) {
@@ -78,6 +81,29 @@ function getSearchRide(req, res) {
     }
 
 }
+
+
+function getSelectedPassenger(req, res) {
+    //TODO What if 2 users add it at the same time? With only 1 place left? Revisit this
+    if(req.user){
+
+        console.log(req.body);
+
+        res.render('pages/selectPassenger.ejs',
+            {
+                logged: utils.authentificated(req),
+                header: headerFR,
+                foot : footFR
+            });
+
+    }
+
+    else{
+        //req.flash("signupMessage", strings.notConnected);
+        res.redirect('/login');
+    }
+}
+
 
 
 

@@ -313,9 +313,9 @@ textarea.form-control{height:auto;}
 
 /* Login */
 .content-wrapper-2-columns-login {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
@@ -2916,7 +2916,7 @@ input[type=text].indexElement{
 
 button.indexBtn {
 
-    margin: auto;
+	margin: auto;
 
 	width: 340px;
 	height : 50px;
@@ -2928,12 +2928,12 @@ button.indexBtn {
 	display: inline-block;
 	margin:auto;
 	position:relative;
-    width: 340px;
-    margin-bottom: 10px;
+	width: 340px;
+	margin-bottom: 10px;
 }
 .pull-center {
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #withBootStrap {
@@ -2971,13 +2971,13 @@ input[type=text].input-group {
 }
 
 .generalSpinner{
-	 display: inline-block;
-	 width: 100px;
-	 margin:auto;
-	 position:relative;
-	 text-align: center;
+	display: inline-block;
+	width: 100px;
+	margin:auto;
+	position:relative;
+	text-align: center;
 
- }
+}
 
 input[type="radio"].typeUser{
 	visibility:hidden;
@@ -3094,47 +3094,47 @@ input[type=button].choose-arrival-point{
 
 input[type=text].controls {
 
-    margin-top: 10px;
-    border: 1px solid transparent;
-    border-radius: 2px 0 0 2px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    height: 32px;
-    outline: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 #pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 300px;
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 300px;
 }
 
 #pac-input:focus {
-    border-color: #4d90fe;
+	border-color: #4d90fe;
 }
 
 .pac-container {
-    font-family: Roboto;
+	font-family: Roboto;
 }
 
 #type-selector {
-    display: inline-block;
-    color: #fff;
-    background-color: #4d90fe;
-    padding: 5px 11px 0px 11px;
+	display: inline-block;
+	color: #fff;
+	background-color: #4d90fe;
+	padding: 5px 11px 0px 11px;
 }
 
 #type-selector label {
-    display: inline-block;
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
+	display: inline-block;
+	font-family: Roboto;
+	font-size: 13px;
+	font-weight: 300;
 }
 
 input[type=text].datepicker {
@@ -3143,9 +3143,9 @@ input[type=text].datepicker {
 }
 
 input[type='number'] {
-	 -moz-appearance: textfield;
-	 appearance: textfield;
- }
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
@@ -3165,15 +3165,15 @@ input::outer-spin-button, input::inner-spin-button {
 }
 
 .nameResult{
-max-width: 230px;
-width: 230px;
+	max-width: 230px;
+	width: 230px;
 
 
 
 }
 
 .infoResult{
-margin-left: 100px;
+	margin-left: 100px;
 
 }
 
@@ -3182,10 +3182,10 @@ margin-left: 100px;
 }
 
 .alert {
-    display: inline-block;
-    margin:auto;
-    position:relative;
-    width: 300px;
+	display: inline-block;
+	margin:auto;
+	position:relative;
+	width: 300px;
 	padding: 15px;
 	margin-bottom: 20px;
 	border: 1px solid transparent;
@@ -3275,4 +3275,16 @@ margin-left: 100px;
 
 .alert-danger .alert-link {
 	color: #953b39;
+}
+
+input[type=text].selectedPoints{
+	white-space: normal;
+	font-size: 15px;
+	margin-left: 15px;
+	text-align: center;
+	position: relative;
+	width:680px;
+	height: 50px;
+	display: inline-block;
+
 }

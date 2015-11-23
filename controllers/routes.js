@@ -31,7 +31,10 @@ module.exports = function (app, passport) {
 
     app.get('/search', get.getSearchRide);
 
+    app.get('/select-passenger', get.getSelectedPassenger);
+
     app.post('/add-passenger', post.postAddPassenger);
+
 
     // route for facebook authentication and login
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email', "user_birthday"] }));

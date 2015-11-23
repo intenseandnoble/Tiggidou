@@ -172,9 +172,38 @@ function postRide(req, res) {
     var pets = 0;
     var luggage =0;
 
+    var radiusCurr=0;
+    var radiusDest=0;
+    var currCoordinates = req.body.curr_latlong;
+    var destCoordinates = req.body.dest_latLong;
+    var curr_arr = new Array(2);
+
+
+    var dest_arr = new Array(2);
+    var availableSeats = 1;
+
     date=req.body.datepicker;
     var newdate = date.split("/").reverse().join("/");
 
+    if(currCoordinates.length!=0){
+        curr_arr = currCoordinates.split(',');
+    }
+
+    if(destCoordinates.length!=0){
+        dest_arr = destCoordinates.split(',');
+    }
+
+
+    if(req.body.radiusCurr.length!=0){
+        radiusCurr = req.body.radiusCurr;
+    }
+
+    if(req.body.radiusDest.length!=0){
+        radiusDest = req.body.radiusDest;
+    }
+    if(req.body.spinner_d!=0){
+        availableSeats = req.body.spinner_d;
+    }
 
     if(req.body.driverCheckbox == 'on') //insert into Travel
     {
@@ -191,8 +220,15 @@ function postRide(req, res) {
                 departureDate: newdate,
                 petsAllowed : pets,
                 driver:req.session.req.user.id,
-                availableSeat:req.body.spinner_d,
+                availableSeat:availableSeats,
+                takenSeat: 0,
+                radiusPickUp: radiusCurr,
+                radiusDropOff: radiusDest,
                 luggagesSize :luggage,
+                latitudePickUp:curr_arr[0],
+                longitudePickUp:curr_arr[1],
+                latitudeDropOff:dest_arr[0],
+                longitudeDropOff:dest_arr[1],
                 //comments: req.body.commentsRide_d,
                 cost:req.body.cost_d},
 
@@ -218,6 +254,12 @@ function postRide(req, res) {
                 departureDate: newdate,
                 pets: pets,
                 passenger:req.session.req.user.id,
+                radiusPickUp: radiusCurr,
+                radiusDropOff: radiusDest,
+                latitudePickUp:curr_arr[0],
+                longitudePickUp:curr_arr[1],
+                latitudeDropOff:dest_arr[0],
+                longitudeDropOff:dest_arr[1],
                 luggageSize :luggage//,
                 //comments: req.body.commentsRide_p
             },
@@ -257,6 +299,8 @@ function postAddPassenger(req, res) {
         res.redirect('/login');
     }
 }
+
+
 
 
 

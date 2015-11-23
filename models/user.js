@@ -49,10 +49,12 @@ function getUsernameFromDBAsync(userId) {
     })
         .fetch()
         .then(function(u){
+            /*
             var prenom = u.get('firstName');
             var nom = u.get('familyName');
             var s = prenom + " " + nom;
-            return s;
+            */
+            return u.get('username');
         })
         .catch(function(err){
             log.error(err);

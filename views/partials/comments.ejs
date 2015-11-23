@@ -1,0 +1,57 @@
+<div class="row-comments">
+    <div class="column-comments">
+        <div class="panel">
+            <div class="panel-heading"><%= profile.comments %></div>
+            <div class="panel-body">
+
+
+                <form id="write_comment" class="form-horizontal" method="post" action ="/post_comment">
+                    <div class="form-group">
+                        <input type="hidden" name="usernameOfProfile" value="<%= userOfProfile %>">
+                        <input type="hidden" name="typeOfComment" value="<%= typeOfComment %>">
+                    </div><!--form-group-->
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea name="comment" rows="3" class="form-control input-md" placeholder="<%= profile.addComment %>"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!--col-md-5-->
+                        <div class="col-md-5">
+                            <input type="submit" class="button" value="<%= profile.submitbtn %>"/>
+                        </div><!--col-md-5-->
+
+                    </div>
+                </form>
+
+
+            </div><!--panel-body class="meta clearfix"  -->
+
+
+            <ul class="list-group">
+
+                <% if (comments != undefined && comments.length > 0 ) {
+                for (var i =0; i<comments.length; i+=1) { %>
+                <li class="list-group-item">
+                    <hr>
+                    <p >
+                        <a href="/profile/<%= commentsIssuers[i] %>"  title="NAME" class="user">
+                            <%var buffer = commentsIssuers[i].split("."); %>
+                            <%= buffer[0]+" "+buffer[1] %>
+                        </a>
+                        <span class="time"><%= commentsDate[i] %></span>
+                    </p>
+                    <p class="comment">
+                    <p> <%= comments[i] %> </p>
+                    </p>
+                </li>
+
+                <% }
+                } %>
+
+            </ul>
+        </div>
+    </div>
+</div>

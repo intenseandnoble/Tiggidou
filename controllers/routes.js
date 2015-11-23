@@ -25,7 +25,7 @@ module.exports = function (app, passport) {
 
     app.post('/rate_passenger', post.postRatePassenger);
 
-    app.post('/post_profile_comment', post.postProfileComment);
+    app.post('/post_comment', post.postComment);
 
     app.post('/post-ride', post.postRide);
 
@@ -75,5 +75,9 @@ module.exports = function (app, passport) {
     app.get('/ask-ride', utils.requireAuth, get.getAskRide);
 
     app.get('/logout', get.getLogout);
+
+    app.get('/travel/:travelId', get.getTravel);
+
+    app.get('/travelrequest/:reqTravelId', get.getTravelRequest)
 
 };

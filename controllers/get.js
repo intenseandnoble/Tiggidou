@@ -13,7 +13,8 @@ var searchRide = require('../models/searchRide.js');
 var profile = require('../models/profile.js');
 var Model = require('../models/models');
 var moment = require('moment');
-
+var Travel = require('../models/travel');
+var TravelRequest = require('../models/travelRequest');
 
 module.exports = {
     getIndex: getHome,
@@ -25,9 +26,9 @@ module.exports = {
     getAskRide: getAskRide,
     getResults: getResults,
     getNoResult: getNoResult,
-    getLogout: getLogout
-
-
+    getLogout: getLogout,
+    getTravel: getTravel,
+    getTravelRequest: getTravelRequest
 };
 
 function getHome(req, res) {
@@ -51,22 +52,39 @@ function getProfile(req, res){
     var page;
     if (usernameParams == userSession.attributes.username || usernameParams == undefined) {
         page = 'pages/my-profile.ejs';
+
+        new Model.ModelUsers.Users()
+            .where({'username': userSession.attributes.username })
+            .fetch()
+            .then(function(user) {
+                if(user) {
+                    profileDisplay.setUserValue(user);
+                    profileDisplay.displayProfile(req, res, page);
+                }
+                else{
+                    res.redirect('/login');
+                }
+            });
+
     } else {
-        page = 'pages/profile.ejs'
+        page = 'pages/profile.ejs';
+
+        new Model.ModelUsers.Users()
+            .where({'username': usernameParams})
+            .fetch()
+            .then(function(user) {
+                if(user) {
+                    profileDisplay.setUserValue(user);
+                    profileDisplay.displayProfile(req, res, page);
+                }
+                else{
+                    res.redirect('/login');
+                }
+            });
+
     }
 
-    new Model.ModelUsers.Users()
-        .query({where:{'username': usernameParams}, orWhere:{'idUser': userSession.attributes.idUser}})
-        .fetch()
-        .then(function(user) {
-            if(user) {
-                profileDisplay.setUserValue(user);
-                profileDisplay.displayProfile(req, res, page);
-            }
-            else{
-                res.redirect('/login');
-            }
-        });
+
 }
 
 
@@ -113,9 +131,6 @@ function getSelectedPassenger(req, res) {
             log.error(err);
         });
 }
-
-
-
 
 function getLogin(req, res) {
     if(req.user){
@@ -180,3 +195,14 @@ function getLogout(req, res){
     res.redirect('/');
 }
 
+function getTravel(req, res) {
+
+    Travel.displayPageOfATravelwComments(req,res);
+
+}
+
+function getTravelRequest(req, res) {
+
+    TravelRequest.displayPageOfAReqTravelwComments(req, res);
+
+}

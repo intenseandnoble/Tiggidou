@@ -1240,6 +1240,8 @@ $('.seatsGlyph').click(function() {
 
 });
 
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
+$('#reloadPage').click(function() {
+
+    alert('this is wehre we sorttt ws ');
+
+});

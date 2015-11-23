@@ -76,27 +76,30 @@ function displayPageAndComments (req, res, travel, travelId) {
             var profil = new ProfileModel();
             Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req), commentariesTextsPromise,
                 commentsDatePromise, commentsUsernamesPromise,
-                function (travelsD, travelsP, commentariesTexts, commentsUsernames, commentsDate) {
+                function (travelsD, travelsP, commentariesTexts, commentsDate, commentsUsernames) {
 
-                    res.render('pages/travel.ejs',
-                        {
-                            logged: utils.authentificated(req),
-                            header: header,
-                            foot : foot,
-                            profile: profile,
+                    Promise.all(commentsUsernames)
+                        .then(function (cUsernames) {
+                            res.render('pages/travel.ejs',
+                                {
+                                    logged: utils.authentificated(req),
+                                    header: header,
+                                    foot : foot,
+                                    profile: profile,
 
-                            travelsAsDriver: travelsD,
-                            travelsAsPassenger: travelsP,
+                                    travelsAsDriver: travelsD,
+                                    travelsAsPassenger: travelsP,
 
-                            travel: travel,
+                                    travel: travel,
 
-                            typeOfComment: 1,
-                            pageType:1,
-                            comments: commentariesTexts,
-                            commentsIssuers: commentsUsernames,
-                            commentsDate: commentsDate,
-                            userOfProfile: travelId
+                                    typeOfComment: 1,
+                                    pageType:1,
+                                    comments: commentariesTexts,
+                                    commentsIssuers: cUsernames,
+                                    commentsDate: commentsDate,
+                                    userOfProfile: travelId
 
+                                });
                         });
                 });
         });

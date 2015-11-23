@@ -80,25 +80,28 @@ function displayPageandComments (req, res, travel, reqTravelId) {
                 commentsDatePromise, commentsUsernamesPromise,
                 function (travelsD, travelsP, commentariesTexts, commentsDate, commentsUsernames) {
 
-                    res.render('pages/travel.ejs',
-                        {
-                            logged: utils.authentificated(req),
-                            header: header,
-                            foot : foot,
-                            profile: profile,
+                    Promise.all(commentsUsernames)
+                        .then (function (cUsernames) {
+                            res.render('pages/travel.ejs',
+                                {
+                                    logged: utils.authentificated(req),
+                                    header: header,
+                                    foot : foot,
+                                    profile: profile,
 
-                            travelsAsDriver: travelsD,
-                            travelsAsPassenger: travelsP,
+                                    travelsAsDriver: travelsD,
+                                    travelsAsPassenger: travelsP,
 
-                            travel: travel,
+                                    travel: travel,
 
-                            typeOfComment: 2,
-                            pageType:2,
-                            comments: commentariesTexts,
-                            commentsIssuers: commentsUsernames,
-                            commentsDate: commentsDate,
-                            userOfProfile: reqTravelId
+                                    typeOfComment: 2,
+                                    pageType:2,
+                                    comments: commentariesTexts,
+                                    commentsIssuers: cUsernames,
+                                    commentsDate: commentsDate,
+                                    userOfProfile: reqTravelId
 
+                                });
                         });
                 });
         });

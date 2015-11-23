@@ -106,7 +106,7 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Date
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Ascendant</a></li>
+                        <li><a href="#" >Ascendant</a></li>
                         <li><a href="#">Descendant</a></li>
                     </ul>
                 </div>
@@ -115,15 +115,19 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Prix
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Ascendant</a></li>
-                        <li><a href="#">Descendant</a></li>
+                        <li><a href="#" >Ascendant</a></li>
+                        <li><a href="#"> Descendant</a></li>
                     </ul>
                 </div>
+
+
                 <div class="8u 12u$(medium) important(medium)">
 
 
                     <div id="content">
                         <!--- PASSENGERS LOOKING FOR DRIVERS-->
+                        <button id="reloadPage" hidden></button>
+
                         <%if(driverBool == "on") { %>
 
                         <%for ( i= 0;i< name.length;i++) { %>
@@ -132,20 +136,17 @@
 
                             <a href="javascript:;" onclick="parentNode.submit();">
 
-
                                 <article class="row">
                                     <div class=" nameResult">
                                         <p name="idTravel" hidden><%= jsonObject[i]['driver'] %> </p>
 
                                         <input type="hidden" name="idTravel" value =<%= jsonObject[i]['idAddTravel']%>>
 
-
                                         <% var pieces = name[i].split(" ");%>
                                         <h1><%= pieces[0]+"."+pieces[1].substring(0,1)%></h1>
                                         <span><h3><%= jsonObject[i]['cost'] %>$</h3></span>
 
                                         <!--logos here and goodies. -->
-
 
                                         <div class = "vertical-line"></div>
                                     </div>
@@ -165,15 +166,11 @@
                                         Animaux permis? : Oui <br>
                                         <% } %>
 
-
                                     </div>
 
                                 </article>
                             </a>
                         </form>
-
-
-
 
                         <hr>
 
@@ -250,6 +247,20 @@
     <% include ../partials/footer %>
 
 </div>
+<script>
+
+    function sortJson(prop, asc) {
+
+alert(JSON.stringify(jsonObject[i]));
+        jsonObject = jsonObject.sort(function(a, b) {
+            if (asc) return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+            else return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+        });
+
+        document.getElementById('reloadPage').click();
+
+    }
+</script>
 
 </body>
 </html>

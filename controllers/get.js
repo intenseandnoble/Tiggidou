@@ -105,6 +105,29 @@ function getSelectedPassenger(req, res) {
 }
 
 
+function getSelectedPassenger(req, res) {
+    //TODO What if 2 users add it at the same time? With only 1 place left? Revisit this
+    if(req.user){
+
+        console.log(req.body);
+
+        res.render('pages/selectPassenger.ejs',
+            {
+                logged: utils.authentificated(req),
+                header: headerFR,
+                foot : footFR
+            });
+
+    }
+
+    else{
+        //req.flash("signupMessage", strings.notConnected);
+        res.redirect('/login');
+    }
+}
+
+
+
 
 
 function getLogin(req, res) {

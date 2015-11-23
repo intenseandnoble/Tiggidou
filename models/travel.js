@@ -30,7 +30,6 @@ function displayPageOfATravelwComments (req, res) {
     var travelId = req.params.travelId;
 
     var travelPromise;
-    var commentsPromise;
 
     var commentsDatePromise;
     var commentariesTextsPromise;
@@ -44,7 +43,7 @@ function displayPageOfATravelwComments (req, res) {
         .then(function (result) {
             var resultat = result.toJSON();
 
-            resultat['departureDate'] =moment(resultat['departureDate']).format("dddd, Do MMMM YYYY"); ;
+            resultat['departureDate'] =moment(resultat['departureDate']).format("dddd, Do MMMM YYYY");
 
             return resultat;
         });

@@ -12,6 +12,10 @@ var Travel = require('./travel').Travel;
 var TravelRequest = require('./travelRequest').TravelRequest;
 var modelUsers = require('./user');
 var Promise = require('bluebird');
+var moment = require('moment');
+moment.locale("fr");
+moment().format('LLL');
+
 //Vue en francais
 var ratingPnD = require('../views/fr/ratingPnD.js');
 var header = require('../views/fr/header.js');
@@ -232,6 +236,7 @@ Profile.prototype.getTravelsAsDriver = function  (req) {
             var resultsJSON = results.toJSON();
 
             for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
                 promiseTravelsDArray.push(resultsJSON[i]);
             }
 
@@ -254,6 +259,7 @@ function getTravelsAsDriver (req) {
             var resultsJSON = results.toJSON();
 
             for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
                 promiseTravelsDArray.push(resultsJSON[i]);
             }
 
@@ -275,6 +281,7 @@ Profile.prototype.getTravelsAsPassenger = function (req) {
             var resultsJSON = results.toJSON();
 
             for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
                 promiseTravelsPArray.push(resultsJSON[i]);
             }
 
@@ -296,6 +303,7 @@ function getTravelsAsPassenger (req) {
             var resultsJSON = results.toJSON();
 
             for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
                 promiseTravelsPArray.push(resultsJSON[i]);
             }
 

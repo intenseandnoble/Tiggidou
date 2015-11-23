@@ -1,0 +1,11 @@
+<%= travel['cost'] %> $ <br>
+<%= travel['departureDate'] %><br>
+<%= travel['departureTime'] %><br>
+<%= travel['startAddress'] %> → <%= travel['destinationAddress'] %><br>
+<%= profile.seatsTaken %> <%= travel['takenSeat'] %> <br>
+<%= profile.availableSeats %> <%= travel['availableSeat'] %><br>
+<% if (travel['petsAllowed'] == 0){ %>
+<%= profile.petsAllowed %><%= profile.no %><br>
+<%} else { %>
+<%= profile.petsAllowed %><%= profile.yes %><br>
+<% } %>

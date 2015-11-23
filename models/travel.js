@@ -5,6 +5,9 @@ var utils = require('../controllers/utils.js');
 var log = require('../config/logger').log;
 var DB = require('../config/database');
 var Promise = require('bluebird');
+var moment = require('moment');
+moment.locale("fr");
+moment().format('LLL');
 
 var Comments = require('./comments').Comments;
 
@@ -37,7 +40,14 @@ function displayPageOfATravelwComments (req, res) {
         .where({
             idAddTravel:travelId
         })
-        .fetch();
+        .fetch()
+        .then(function (result) {
+            var resultat = result.toJSON();
+
+            resultat['departureDate'] =moment(resultat['departureDate']).format("dddd, Do MMMM YYYY"); ;
+
+            return resultat;
+        });
 
     new Comments().where({
         commentType: 1,
@@ -53,7 +63,6 @@ function displayPageOfATravelwComments (req, res) {
                 for (i = 0; i < resultJSON.length; ++i) {
                     commentariesTextsPromise.push(resultJSON[i]['comment']);
                     commentsDatePromise.push(resultJSON[i]['commentDisplayDate']);
-
                     commentsUsernamesPromise.push(modelUsers.getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                 }
             }
@@ -73,6 +82,8 @@ function displayPageOfATravelwComments (req, res) {
                             travelsAsDriver: travelsD,
                             travelsAsPassenger: travelsP,
 
+                            travel: travel,
+
                             typeOfComment: 1,
                             pageType:1,
                             comments: commentariesTextsPromise,
@@ -82,10 +93,10 @@ function displayPageOfATravelwComments (req, res) {
 
                         });
                 });
-
         });
-
 }
+
+
 
 function updateSeats(travelId, takenSeats, availableSeats){
 

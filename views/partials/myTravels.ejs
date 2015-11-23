@@ -17,17 +17,9 @@
             for (i=0; i<limitLoop; ++i) { %>
                 <a href="/travel/<%= travelsAsDriver[i]['idAddTravel'] %>">
 
-                <%= travelsAsDriver[i]['cost'] %> $
                 <%= travelsAsDriver[i]['departureDate'] %><br>
-                <%= travelsAsDriver[i]['departureTime'] %><br>
                 <%= travelsAsDriver[i]['startAddress'] %> → <%= travelsAsDriver[i]['destinationAddress'] %><br>
-                <%= profile.seatsTaken %> <%= travelsAsDriver[i]['takenSeat'] %> <br>
-                <%= profile.availableSeats %> <%= travelsAsDriver[i]['availaableSeat'] %><br>
-                <% if (travelsAsDriver[i]['petsAllowed'] == 0){ %>
-                <%= profile.availableSeats %><%= profile.no %><br>
-                <%} else { %>
-                <%= profile.availableSeats %><%= profile.yes %> <br>
-                <% } %>
+
                 </a>
                 <hr>
 
@@ -50,13 +42,7 @@
                 <%= travelsAsPassenger[i]['departureDate'] %><br>
                 <%= travelsAsPassenger[i]['departureTime'] %><br>
                 <%= travelsAsPassenger[i]['startAddress'] %> → <%= travelsAsPassenger[i]['destinationAddress'] %><br>
-                <%= profile.seatsTaken %> <%= travelsAsPassenger[i]['takenSeat'] %> <br>
-                <%= profile.availableSeats %> <%= travelsAsPassenger[i]['availaableSeat'] %><br>
-                <% if (travelsAsPassenger[i]['pets'] == 0){ %>
-                <%= profile.availableSeats %><%= profile.no %><br>
-                <%} else { %>
-                <%= profile.availableSeats %><%= profile.yes %> <br>
-                <% } %>
+
                 </a>
                 <hr>
 

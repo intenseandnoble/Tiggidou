@@ -14,22 +14,10 @@ var log = require('../config/logger').log;
 
 module.exports = Ride;
 
-var idTravel_arr;
-var driver_arr;
-var passenger_arr;
-var comment_arr;
-var seatsTaken_arr;
-var seatsAvailable_arr;
-var travelTime_arr;
-var departureTime_arr;
-var departureDate_arr;
-var luggageSize_arr;
-var petsAllowed_arr;
-var cost_arr;
 var promiseArr;
 var date;
 var time;
-
+var jsonObject;
 var dest;
 var currLocation;
 var dateRequest;
@@ -48,18 +36,6 @@ function Ride(temp_dest, temp_currlocation, temp_date) {
         dateRequest = moment().format("YYYY-MM-DD");
     }
 
-    idTravel_arr = [];
-    driver_arr = [];
-    passenger_arr=[];
-    comment_arr = [];
-    seatsTaken_arr = [];
-    seatsAvailable_arr = [];
-    travelTime_arr = [];
-    departureTime_arr = [];
-    departureDate_arr = [];
-    luggageSize_arr = [];
-    petsAllowed_arr = [];
-    cost_arr = [];
     promiseArr = [];
     date = null;
     time = null;
@@ -67,7 +43,6 @@ function Ride(temp_dest, temp_currlocation, temp_date) {
     moment.locale("fr");
     moment().format('LLL');
 }
-
 
 
 /*
@@ -82,12 +57,12 @@ Ride.prototype.searchDriver = function (req, res) {
             qb.orderBy('departureDate', 'ASC');
         }).fetchAll().then(function (user) {
             var resultJSON = user.toJSON();
-
+            jsonObject = user.toJSON();
             if (resultJSON.length == 0) {
                 res.redirect('/no-results');
             }
             else {
-                setSearchDriverRide(resultJSON);
+                setSearchRide(resultJSON, true);
                 Promise.all(promiseArr).then(function (ps) {
                     renderRide(req, res, ps);
                 });
@@ -110,12 +85,13 @@ Ride.prototype.searchPassengers = function (req, res) {
             qb.orderBy('departureDate', 'ASC');
         }).fetchAll().then(function (user) {
             var resultJSON = user.toJSON();
+            jsonObject = user.toJSON();
 
             if (resultJSON.length == 0) {
                 res.redirect('/no-results');
             }
             else {
-                setSearchPassengerRide(resultJSON);
+                setSearchRide(resultJSON, false);
                 Promise.all(promiseArr).then(function (ps) {
                     renderRide(req, res, ps);
                 });
@@ -135,69 +111,32 @@ Ride.prototype.searchPassengers = function (req, res) {
 Setup the result to display when searching for a Driver
 @param {jsonObject} resultJSON
  */
-function setSearchDriverRide(resultJSON) {
+function setSearchRide(resultJSON,driver_bool ) {
     for (var indiceElement in resultJSON) {
         var jsonTrip = resultJSON[indiceElement];
 
         date = jsonTrip['departureDate'];
         date = moment(date).format("dddd, Do MMMM YYYY");
-        departureDate_arr.push(capitalize(date));
+        jsonObject[indiceElement]['departureDate'] =capitalize(date);
 
         time = jsonTrip['departureTime'];
-        time = moment(time, ["HH:mm"]).format("h:mm A");
-        departureTime_arr.push(time);
+        time = moment(time, ["HH:mm"]).format("h:mm");
+        jsonObject[indiceElement]['departureTime'] =time;
 
-        idTravel_arr.push(jsonTrip['idAddTravel']);
-        driver_arr.push(jsonTrip['driver']);
-        luggageSize_arr.push(jsonTrip['luggagesSize']);
-        comment_arr.push(jsonTrip['comments']);
-        petsAllowed_arr.push(jsonTrip['petsAllowed']);
-        seatsAvailable_arr.push(jsonTrip['availableSeat']);
-        seatsTaken_arr.push(jsonTrip['takenSeat']);
-        cost_arr.push(jsonTrip['cost']);
-        promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['driver']));
+        if(driver_bool)
+            promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['driver']));
+        else
+            promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['passenger']));
+
     }
 }
 
-function setSearchPassengerRide(resultJSON) {
-    for (var indiceElement in resultJSON) {
-        var jsonTrip = resultJSON[indiceElement];
-
-        date = jsonTrip['departureDate'];
-        date = moment(date).format("dddd, Do MMMM YYYY");
-        departureDate_arr.push(capitalize(date));
-
-        time = jsonTrip['departureTime'];
-        time = moment(time, ["HH:mm"]).format("h:mm A");
-        departureTime_arr.push(time);
-
-        idTravel_arr.push(jsonTrip['idAddTravel']);
-        passenger_arr.push(jsonTrip['passenger']);
-        luggageSize_arr.push(jsonTrip['luggageSize']);
-        comment_arr.push(jsonTrip['comments']);
-        petsAllowed_arr.push(jsonTrip['pets']);
-
-        promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['passenger']));
-    }
-}
 
 function renderRide(req, res, ps) {
     res.render('pages/results.ejs', {
         name : ps,
-        idTravel: idTravel_arr,
-        drivers: driver_arr,
-        passengers: passenger_arr,
-        comment: comment_arr,
-        seatsTaken: seatsTaken_arr,
-        seatsAvailable: seatsAvailable_arr,
-        travelTime: travelTime_arr,
-        departureTime: departureTime_arr,
-        departureDate: departureDate_arr,
-        luggageSize: luggageSize_arr,
-        petsAllowed: petsAllowed_arr,
-        cost: cost_arr,
-        destination: dest,
-        currentLocation: currLocation,
+        driverBool : req.query.searchDriver,
+        jsonObject: jsonObject,
         logged: utils.authentificated(req),
         header: header,
         foot: foot

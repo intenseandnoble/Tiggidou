@@ -177,26 +177,7 @@ function getTravel(req, res) {
 }
 
 function getTravelRequest(req, res) {
-/*
-    var promiseTravelsPArray = [];
-    var reqTravelId = req.params.reqTravelId;
 
-    return new TravelRequest()
-        .where({
-            passenger:reqTravelId
-        })
-        .fetch()
-        .then(function (result) {
-            var resultJSON = result.toJSON();
+    TravelRequest.displayPageOfAReqTravelwComments(req, res);
 
-
-            res.render('pages/travel.ejs',
-                {
-                    logged: utils.authentificated(req),
-                    header: headerFR,
-                    foot : footFR
-                });
-
-        })
-*/
 }

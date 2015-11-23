@@ -1,4 +1,6 @@
-<%= travel['cost'] %> $ <br>
+<% if (travel['cost'] != undefined) { %>
+ <%= travel['cost'] %> $ <br>
+<% } %>
 <%= travel['departureDate'] %><br>
 <%= travel['departureTime'] %><br>
 <%= travel['startAddress'] %> → <%= travel['destinationAddress'] %><br>

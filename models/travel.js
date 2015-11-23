@@ -29,24 +29,29 @@ module.exports = {
 function displayPageOfATravelwComments (req, res) {
     var travelId = req.params.travelId;
 
-    var travelPromise;
+    new Travel()
+        .where({
+            idAddTravel: travelId
+        })
+        .fetch()
+        .then(function (result) {
+            if (result) {
+                var resultat = result.toJSON();
+                resultat['departureDate'] = moment(resultat['departureDate']).format("dddd, Do MMMM YYYY");
+                displayPageAndComments(req, res, resultat, travelId);
+            }
+            else {
+                res.redirect('/login');
+            }
+        });
+
+}
+
+function displayPageAndComments (req, res, travel, travelId) {
 
     var commentsDatePromise;
     var commentariesTextsPromise;
     var commentsUsernamesPromise;
-
-    travelPromise = new Travel()
-        .where({
-            idAddTravel:travelId
-        })
-        .fetch()
-        .then(function (result) {
-            var resultat = result.toJSON();
-
-            resultat['departureDate'] =moment(resultat['departureDate']).format("dddd, Do MMMM YYYY");
-
-            return resultat;
-        });
 
     new Comments().where({
         commentType: 1,
@@ -68,8 +73,8 @@ function displayPageOfATravelwComments (req, res) {
 
             var ProfileModel = require('./profile');
             var profil = new ProfileModel();
-            Promise.join(travelPromise, profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req),
-                function (travel, travelsD, travelsP) {
+            Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req),
+                function (travelsD, travelsP) {
 
                     res.render('pages/travel.ejs',
                         {

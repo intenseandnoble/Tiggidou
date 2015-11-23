@@ -48,7 +48,6 @@ log.info("Mode prod activate: " + process.env.NODE_ENV);
 
 //listen (start app with node server.js)
 app.listen(port).on('error', function(err){
-    app.close();
     log.error(err);
 });
 log.info("App listening on port " + port);

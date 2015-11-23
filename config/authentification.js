@@ -2,6 +2,8 @@
  * Created by dave on 28/09/15.
  * hold all our client secret keys (facebook, twitter?, google, ...)
  */
+var config = require("./config").Config;
+
 var prodFacebookAuth = {
     'clientID'      : '1485205418448219', // your App ID
     'clientSecret'  : '762cbe869c813e1e47e9f4f902702bfa', // your App Secret
@@ -26,8 +28,8 @@ var devGoogleAuth = {
 };
 
 module.exports = {
-    'facebookAuth' : process.env.NODE_ENV == "prod" ? prodFacebookAuth : devFacebookAuth,
-    'googleAuth' : process.env.NODE_ENV == "prod" ? prodGoogleAuth : devGoogleAuth
+    'facebookAuth' : config.env == "prod" ? prodFacebookAuth : devFacebookAuth,
+    'googleAuth' : config.env == "prod" ? prodGoogleAuth : devGoogleAuth
 };
 
 

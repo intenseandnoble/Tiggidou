@@ -31,7 +31,7 @@ module.exports = function (app, passport) {
 
     app.get('/search', get.getSearchRide);
 
-    app.get('/select-passenger', get.getSelectedPassenger);
+    app.get('/select-passenger', utils.requireAuth, get.getSelectedPassenger);
 
     app.post('/add-passenger', post.postAddPassenger);
 

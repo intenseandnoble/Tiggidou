@@ -16,20 +16,20 @@
 
     <!-- Banner -->
 
-
             <div class="box container">
 
-
-
-
-
-
-
-
-
-
-
-</div>
+                <div>
+                    <FORM>
+                        <% if(driverOffer.length > 0){ %>
+                            <select   name="travelOffer" >
+                                <% for(i= 0; i<driverOffer.length; i++){ %>
+                                    <option value="<%= i%>"><%= driverOffer[i]['idAddTravel'] %> --> <%= driverOffer[i]['departureTime']%> </option>
+                                <% }%>
+                            </select>
+                        <% } %>
+                    </FORM>
+                </div>
+            </div>
 
     <!-- Footer -->
     <% include ../partials/footer %>

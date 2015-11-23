@@ -12,6 +12,7 @@ var log = require('../config/logger').log;
 var searchRide = require('../models/searchRide.js');
 var profile = require('../models/profile.js');
 var Model = require('../models/models');
+var moment = require('moment');
 
 
 module.exports = {
@@ -85,23 +86,32 @@ function getSearchRide(req, res) {
 
 function getSelectedPassenger(req, res) {
     //TODO What if 2 users add it at the same time? With only 1 place left? Revisit this
-    if(req.user){
-
-        console.log(req.body);
-
-        res.render('pages/selectPassenger.ejs',
-            {
-                logged: utils.authentificated(req),
-                header: headerFR,
-                foot : footFR
-            });
-
-    }
-
-    else{
-        //req.flash("signupMessage", strings.notConnected);
-        res.redirect('/login');
-    }
+    var idUser = req.session.req.user.attributes.idUser;
+    var travelPassengerJson = JSON.parse(req.query.jsonObject);
+    var date = moment(travelPassengerJson['departureDate'], 'YYYY-MM-DD').format('YYYY-MM-DD');
+    var search = {
+        driver: idUser,
+        startAddress: travelPassengerJson['startAddress'],
+        destinationAddress: travelPassengerJson['destinationAddress'],
+        departureDate: date
+    };
+    new Model.ModelTravel.Travel()
+        .query({where:search})
+        .fetchAll()
+        .then(function(travels){
+            var travelOffer = travels.toJSON();
+            res.render('pages/selectPassenger.ejs',
+                {
+                    logged: utils.authentificated(req),
+                    header: headerFR,
+                    foot : footFR,
+                    passengerSearch: req.query.jsonObject,
+                    driverOffer: travelOffer
+                });
+        })
+        .catch(function(err){
+            log.error(err);
+        });
 }
 
 

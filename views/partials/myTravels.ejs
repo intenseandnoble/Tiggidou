@@ -15,10 +15,9 @@
         if (travelsAsDriver != undefined && travelsAsDriver.length != 0 ) {
             var limitLoop = Math.min(5, travelsAsDriver.length);
             for (i=0; i<limitLoop; ++i) { %>
+                <a href="/travel/<%= travelsAsDriver[i]['idAddTravel'] %>">
 
-                <%= travelsAsDriver[i]['idAddTravel'] %>
                 <%= travelsAsDriver[i]['cost'] %> $
-
                 <%= travelsAsDriver[i]['departureDate'] %><br>
                 <%= travelsAsDriver[i]['departureTime'] %><br>
                 <%= travelsAsDriver[i]['startAddress'] %> → <%= travelsAsDriver[i]['destinationAddress'] %><br>
@@ -29,7 +28,7 @@
                 <%} else { %>
                 <%= profile.availableSeats %><%= profile.yes %> <br>
                 <% } %>
-
+                </a>
                 <hr>
 
         <%  }
@@ -47,7 +46,7 @@
                 var limitLoop = Math.min(5, travelsAsPassenger.length);
             for (i=0; i<limitLoop; ++i) { %>
 
-                <%= travelsAsPassenger[i]['idSearchTravel'] %>
+                <a href="/travelrequest/<%= travelsAsPassenger[i]['idSearchTravel'] %>">
                 <%= travelsAsPassenger[i]['departureDate'] %><br>
                 <%= travelsAsPassenger[i]['departureTime'] %><br>
                 <%= travelsAsPassenger[i]['startAddress'] %> → <%= travelsAsPassenger[i]['destinationAddress'] %><br>
@@ -58,7 +57,7 @@
                 <%} else { %>
                 <%= profile.availableSeats %><%= profile.yes %> <br>
                 <% } %>
-
+                </a>
                 <hr>
 
         <%  }

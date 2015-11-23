@@ -14,11 +14,13 @@ module.exports =
     "reservation":"R\u00E9servations",
     "myTravels":"Mes voyages",
     "messages":"Messages",
+    "aTravel":"Voyage",
 
     "submitbtn":"Soumettre",
 
     // Comments
     "comments":"Commentaires",
+    "addComment": "Ajoutez un commentaire",
 
     //Mes voyages
     "popUpTitle":"Mes voyages",

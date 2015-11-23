@@ -112,8 +112,6 @@ Profile.prototype.displayProfile = function (req, res, page) {
                 //TODO if no comments
             }
             else {
-                var nameBuffer;
-                var arrayBuffer = [];
                 for (i = 0; i < resultJSON.length; ++i) {
                     commentariesTexts.push(resultJSON[i]['comment']);
                     commentsDate.push(resultJSON[i]['commentDisplayDate']);
@@ -128,50 +126,6 @@ Profile.prototype.displayProfile = function (req, res, page) {
 
         })
 };
-
-function getTravelsAsDriver (req) {
-    var promiseTravelsDArray = [];
-    var userSession = req.session.req.user;
-
-    return new Travel()
-        .where({
-            driver:userSession.attributes.idUser
-        })
-        .fetchAll()
-        .then(function (results) {
-            var resultsJSON = results.toJSON();
-
-            for(i=0; i<resultsJSON.length; ++i) {
-                promiseTravelsDArray.push(resultsJSON[i]);
-            }
-
-            return promiseTravelsDArray;
-
-        })
-
-}
-
-function getTravelsAsPassenger (req) {
-    var promiseTravelsPArray = [];
-    var userSession = req.session.req.user;
-
-    return new TravelRequest()
-        .where({
-            passenger:userSession.attributes.idUser
-        })
-        .fetchAll()
-        .then(function (results) {
-            var resultsJSON = results.toJSON();
-
-            for(i=0; i<resultsJSON.length; ++i) {
-                promiseTravelsPArray.push(resultsJSON[i]);
-            }
-
-            return promiseTravelsPArray;
-
-        })
-
-}
 
 function getScores () {
     var promiseScoreArray = [];
@@ -242,6 +196,8 @@ function renderProfile(req, res, ps, page) {
                commentsIssuers: ps,
                commentsDate: commentsDate,
                userOfProfile: userOfProfile,
+               typeOfComment: 0,
+               pageType: 0,
 
                travelsAsDriver: travelsD,
                travelsAsPassenger: travelsP,
@@ -260,6 +216,92 @@ function renderProfile(req, res, ps, page) {
 
 
         });
+
+}
+
+Profile.prototype.getTravelsAsDriver = function  (req) {
+    var Travel = require('./travel').Travel;
+    var promiseTravelsDArray = [];
+    var userSession = req.session.req.user;
+
+    return new Travel().where({
+            driver:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                promiseTravelsDArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsDArray;
+
+        });
+
+};
+
+function getTravelsAsDriver (req) {
+    var Travel = require('./travel').Travel;
+    var promiseTravelsDArray = [];
+    var userSession = req.session.req.user;
+
+    return new Travel().where({
+            driver:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                promiseTravelsDArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsDArray;
+
+        });
+
+}
+
+Profile.prototype.getTravelsAsPassenger = function (req) {
+    var promiseTravelsPArray = [];
+    var userSession = req.session.req.user;
+
+    return new TravelRequest().where({
+            passenger:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                promiseTravelsPArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsPArray;
+
+        })
+
+};
+
+function getTravelsAsPassenger (req) {
+    var promiseTravelsPArray = [];
+    var userSession = req.session.req.user;
+
+    return new TravelRequest().where({
+            passenger:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                promiseTravelsPArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsPArray;
+
+        })
 
 }
 

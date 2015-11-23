@@ -1,0 +1,49 @@
+<div class="4u 12u$(medium)">
+    <div id="sidebar">
+
+        <!-- Sidebar -->
+        <section>
+            <% switch (pageType) {
+                case 0:%>
+                    <h3><%= profile.profile %></h3>
+            <div class="image">
+                <img src="/images/avatar/<%= avatarImage %>" alt="avatar"/>
+            </div>
+            <%
+                 if (age != null) { %>
+                    <h3><%= profile.age %>  </h3>
+            <% }
+                 if (education != null ) { %>
+                    <h3><%= profile.education %>  </h3>
+            <% }
+                if (music != null) { %>
+                    <h3><%= profile.music %>  </h3>
+            <% }
+                    { %>
+            <footer>
+                <a href="#" class="button icon fa-info-circle"><%= profile.contacts %></a>
+            </footer>
+            <% } %>
+                <% break;
+                case 1:%>
+                <h3><%= profile.aTravel %></h3>
+                   <% break;
+            } %>
+
+        </section>
+
+        <section>
+            <h3><%= profile.submenu %></h3>
+            <ul class="style2">
+                <li><a href="#tabs-1"><%= profile.dashboard %></a></li>
+                <li><a href="#tabs-2"><%= profile.ads %></a></li>
+                <li><a href="#tabs-3"><%= profile.reservation %></a></li>
+                <li><a href="#tabs-4"><%= profile.messages %></a></li>
+                <li><a href="#myTravels"><%= profile.myTravels %></a></li>
+                <% include ../partials/myTravels %>
+                <li><% include ../partials/profileAvatar %></li>
+            </ul>
+        </section>
+
+    </div>
+</div>

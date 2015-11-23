@@ -289,7 +289,6 @@ textarea.form-control{height:auto;}
 	left: 50%;
 	top: -100%;
 	z-index: 11;
-	width: 360px;
 	-webkit-transform: translate(0, -500%);
 	-ms-transform: translate(0, -500%);
 	transform: translate(0, -500%);

@@ -12,7 +12,8 @@ var log = require('../config/logger').log;
 var searchRide = require('../models/searchRide.js');
 var profile = require('../models/profile.js');
 var Model = require('../models/models');
-
+var Travel = require('../models/travel');
+var TravelRequest = require('../models/travelRequest');
 
 module.exports = {
     getIndex: getHome,
@@ -24,9 +25,9 @@ module.exports = {
     getAskRide: getAskRide,
     getResults: getResults,
     getNoResult: getNoResult,
-    getLogout: getLogout
-
-
+    getLogout: getLogout,
+    getTravel: getTravel,
+    getTravelRequest: getTravelRequest
 };
 
 function getHome(req, res) {
@@ -210,3 +211,14 @@ function getLogout(req, res){
     res.redirect('/');
 }
 
+function getTravel(req, res) {
+
+    Travel.displayPageOfATravelwComments(req,res);
+
+}
+
+function getTravelRequest(req, res) {
+
+    TravelRequest.displayPageOfAReqTravelwComments(req, res);
+
+}

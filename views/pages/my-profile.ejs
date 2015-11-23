@@ -16,121 +16,18 @@
     <div id="main-wrapper">
         <div class="container">
             <div class="row 200%">
-                <div class="4u 12u$(medium)">
-                    <div id="sidebar">
 
-                        <!-- Sidebar -->
-                        <section>
-                            <h3><%= profile.profile %></h3>
-                            <% { %>
-                            <div class="image">
-                                <img src="/images/avatar/<%= avatarImage %>" alt="avatar"/>
-                            </div>
-                            <% }
-                            if (age != null) { %>
-                            <h3><%= profile.age %>  </h3>
-                            <% }
-                            if (education != null ) { %>
-                            <h3><%= profile.education %>  </h3>
-                            <% }
-                            if (music != null) { %>
-                            <h3><%= profile.music %>  </h3>
-                            <% }
-                            { %>
-                            <footer>
-                                <a href="#" class="button icon fa-info-circle"><%= profile.contacts %></a>
-                            </footer>
-                            <% } %>
-                        </section>
+                <% include ../partials/sidebar %>
 
-                        <section>
-                            <h3><%= profile.submenu %></h3>
-                            <ul class="style2">
-                                <li><a href="#tabs-1"><%= profile.dashboard %></a></li>
-                                <li><a href="#tabs-2"><%= profile.ads %></a></li>
-                                <li><a href="#tabs-3"><%= profile.reservation %></a></li>
-                                <li><a href="#tabs-4"><%= profile.messages %></a></li>
-                                <li><a href="#myTravels"><%= profile.myTravels %></a></li>
-                                <% include ../partials/myTravels %>
-                                <li><% include ../partials/profileAvatar %></li>
-                            </ul>
-                        </section>
-
-                    </div>
-                </div>
                 <div class="8u 12u$(medium) important(medium)">
                     <div id="content">
 
-                        <!-- Content -->
-                        <article>
-
-                            <h2><%= userName %></h2>
-                            <% if (anecdote != null) { %>
-                            <p><%= anecdote %></p>
-                            <% }
-                            if (goalInLife != null) { %>
-                            <h3><%= goalInLife %></h3>
-                            <p><%= goalInLife %></p>
-                            <% } %>
-
-                        </article>
+                        <% include ../partials/profileContent %>
 
                         <% include ../partials/myScore %>
 
                         <br>
-                        <div class="row-comments">
-                            <div class="column-comments">
-                                <div class="panel">
-                                    <div class="panel-heading"><%= profile.comments %></div>
-                                    <div class="panel-body">
-
-
-                                        <form id="write_comment" class="form-horizontal" method="post" action ="/post_profile_comment">
-                                            <div class="form-group">
-                                                <input type="hidden" name="usernameOfProfile" value="<%= userOfProfile %>">
-                                            </div><!--form-group-->
-
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <textarea name="comment" rows="3" class="form-control input-md" placeholder="Add a comment"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <!--col-md-5-->
-                                                <div class="col-md-5">
-                                                    <input type="submit" class="button" value="<%= profile.submitbtn %>"/>
-                                                </div><!--col-md-5-->
-
-                                            </div>
-                                        </form>
-
-
-                                    </div><!--panel-body class="meta clearfix"  -->
-
-
-                                    <ul class="list-group">
-
-                                        <% if (comments.length > 0 ) {
-                                        for (var i =0; i<comments.length; i+=1) { %>
-                                        <li class="list-group-item">
-                                            <hr>
-                                            <p >
-                                                <a href="#"  title="NAME" class="user"><%= commentsIssuers[i] %></a>
-                                                <span class="time"><%= commentsDate[i] %></span>
-                                            </p>
-                                            <p class="comment">
-                                            <p> <%= comments[i] %> </p>
-                                            </p>
-                                        </li>
-
-                                        <% }
-                                        } %>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        <% include ../partials/comments %>
                     </div>
                 </div>
             </div>

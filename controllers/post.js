@@ -22,7 +22,7 @@ module.exports = {
     postUploadProfileAvatar: postUploadProfileAvatar,
     postRateDriver: postRateDriver,
     postRatePassenger: postRatePassenger,
-    postProfileComment: postProfileComment,
+    postComment: postComment,
     postRide: postRide,
     postAddPassenger: postAddPassenger,
     postSignUp: postSignUp,
@@ -143,28 +143,64 @@ function postRatePassenger(req, res) {
         });
 }
 
-function postProfileComment(req, res) {
+function postComment(req, res) {
     var commentTxt = req.body.comment;
     var commentIssuer = req.session.req.user.attributes.idUser;
     var username = req.body.usernameOfProfile;
 
-    new Model.ModelUsers.Users({'username':username})
-        .fetch()
-        .then( function (user) {
-            var commentaire = new Model.ModelComments.Comments({
-                'commentIssuer': commentIssuer,
-                'commentProfileId': user.get('idUser'),
-                'commentType': '0',
-                'comment': commentTxt
+    var typeOfComment = req.body.typeOfComment;
+
+    if (typeOfComment == 0) {
+
+        new Model.ModelUsers.Users({'username':username})
+            .fetch()
+            .then( function (user) {
+                var commentaire = new Model.ModelComments.Comments({
+                    'commentIssuer': commentIssuer,
+                    'commentProfileId': user.get('idUser'),
+                    'commentType': '0',
+                    'comment': commentTxt
+                });
+
+                commentaire.save();
+                res.redirect('/profile/' + username);
+
+            })
+            .catch(function(err){
+                log.error(err);
             });
 
-            commentaire.save();
-            res.redirect('/profile/' + username);
+    } else if (typeOfComment == 1) {
 
-        })
-        .catch(function(err){
+        var commentaire = new Model.ModelComments.Comments({
+            'commentIssuer': commentIssuer,
+            'commentTravelId': username,
+            'commentType': '1',
+            'comment': commentTxt
+        }).catch(function(err){
             log.error(err);
         });
+
+        commentaire.save();
+        res.redirect('/travel/' + username);
+
+
+
+    } else if (typeOfComment == 2) {
+
+        var commentaire = new Model.ModelComments.Comments({
+            'commentIssuer': commentIssuer,
+            'commentReqTravelId': username,
+            'commentType': '2',
+            'comment': commentTxt
+        }).catch(function(err){
+            log.error(err);
+        });
+
+        commentaire.save();
+        res.redirect('/travelrequest/' + username);
+
+    }
 
 }
 

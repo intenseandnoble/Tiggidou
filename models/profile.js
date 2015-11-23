@@ -9,9 +9,13 @@ var utils = require('../controllers/utils.js');
 var Comments = require('./comments').Comments;
 var Score = require('./score').Score;
 var Travel = require('./travel').Travel;
-var TravelPassengers = require('./travelPassengers').TravelPassengers;
+var TravelRequest = require('./travelRequest').TravelRequest;
 var modelUsers = require('./user');
 var Promise = require('bluebird');
+var moment = require('moment');
+moment.locale("fr");
+moment().format('LLL');
+
 //Vue en francais
 var ratingPnD = require('../views/fr/ratingPnD.js');
 var header = require('../views/fr/header.js');
@@ -72,7 +76,6 @@ function Profile() {
     goalInLife = null;
 
     commentsDate = [];
-
     commentariesTexts = [];
 
     scoreArray = [];
@@ -116,6 +119,7 @@ Profile.prototype.displayProfile = function (req, res, page) {
                 for (i = 0; i < resultJSON.length; ++i) {
                     commentariesTexts.push(resultJSON[i]['comment']);
                     commentsDate.push(resultJSON[i]['commentDisplayDate']);
+
                     promiseArr.push(modelUsers.getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                 }
             }
@@ -126,32 +130,6 @@ Profile.prototype.displayProfile = function (req, res, page) {
 
         })
 };
-
-function getTravelsAsDriver (req) {
-    var promiseTravelsDArray = [];
-    var userSession = req.session.req.user;
-
-    return new Travel()
-        .where({
-            driver:userSession.attributes.idUser
-        })
-        .fetchAll()
-        .then(function (results) {
-            var resultsJSON = results.toJSON();
-
-            for(i=0; i<resultsJSON.length; ++i) {
-                promiseTravelsDArray.push(resultsJSON[i]);
-            }
-
-            return promiseTravelsDArray;
-
-        })
-
-}
-
-function getTravelsAsPassenger (req) {
-    var promiseTravelsPArray = [];
-}
 
 function getScores () {
     var promiseScoreArray = [];
@@ -197,46 +175,141 @@ function renderProfile(req, res, ps, page) {
     travelsAsDriver = getTravelsAsDriver(req);
     travelsAsPassenger = getTravelsAsPassenger(req);
 
-    Promise.all(scoreArray, travelsAsDriver)
-        .then(function (scores, travelsD){
 
-            res.render(page, {
-                logged: utils.authentificated(req),
-                userName: userName,
-                avatarImage: userAvatar,
 
-                driverAverageScore: scores[0],
-                dPunctualityScore: scores[1],
-                dCourtesyScore: scores[2],
-                dReliabilityScore: scores[3],
-                dSecurityScore: scores[4],
-                dComfortScore: scores[5],
+    Promise.join(scoreArray, travelsAsDriver, travelsAsPassenger, function (scores, travelsD, travelsP){
 
-                passengerAverageScore: scores[6],
-                pPunctualityScore: scores[7],
-                pCourtesyScore: scores[8],
-                pPolitenessScore: scores[9],
+           res.render(page, {
+               logged: utils.authentificated(req),
+               userName: userName,
+               avatarImage: userAvatar,
 
-                comments: commentariesTexts,
-                commentsIssuers: ps,
-                commentsDate: commentsDate,
-                userOfProfile: userOfProfile,
+               driverAverageScore: scores[0],
+               dPunctualityScore: scores[1],
+               dCourtesyScore: scores[2],
+               dReliabilityScore: scores[3],
+               dSecurityScore: scores[4],
+               dComfortScore: scores[5],
 
-                travelsAsDriver: travelsD,
+               passengerAverageScore: scores[6],
+               pPunctualityScore: scores[7],
+               pCourtesyScore: scores[8],
+               pPolitenessScore: scores[9],
 
-                age: age,
-                education: education,
-                music: music,
-                anecdote: anecdote,
-                goalInLife: goalInLife,
+               comments: commentariesTexts,
+               commentsIssuers: ps,
+               commentsDate: commentsDate,
+               userOfProfile: userOfProfile,
+               typeOfComment: 0,
+               pageType: 0,
 
-                profile: profile,
-                ratingPnD: ratingPnD,
-                foot: foot,
-                header: header
-            });
+               travelsAsDriver: travelsD,
+               travelsAsPassenger: travelsP,
+
+               age: age,
+               education: education,
+               music: music,
+               anecdote: anecdote,
+               goalInLife: goalInLife,
+
+               profile: profile,
+               ratingPnD: ratingPnD,
+               foot: foot,
+               header: header
+           });
+
 
         });
+
+}
+
+Profile.prototype.getTravelsAsDriver = function  (req) {
+    var Travel = require('./travel').Travel;
+    var promiseTravelsDArray = [];
+    var userSession = req.session.req.user;
+
+    return new Travel().where({
+            driver:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
+                promiseTravelsDArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsDArray;
+
+        });
+
+};
+
+function getTravelsAsDriver (req) {
+    var Travel = require('./travel').Travel;
+    var promiseTravelsDArray = [];
+    var userSession = req.session.req.user;
+
+    return new Travel().where({
+            driver:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
+                promiseTravelsDArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsDArray;
+
+        });
+
+}
+
+Profile.prototype.getTravelsAsPassenger = function (req) {
+    var promiseTravelsPArray = [];
+    var userSession = req.session.req.user;
+
+    return new TravelRequest().where({
+            passenger:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
+                promiseTravelsPArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsPArray;
+
+        })
+
+};
+
+function getTravelsAsPassenger (req) {
+    var promiseTravelsPArray = [];
+    var userSession = req.session.req.user;
+
+    return new TravelRequest().where({
+            passenger:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                resultsJSON[i]['departureDate'] = moment(resultsJSON[i]['departureDate']).format("dddd, Do MMMM YYYY");
+                promiseTravelsPArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsPArray;
+
+        })
 
 }
 

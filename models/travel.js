@@ -7,7 +7,6 @@ var DB = require('../config/database');
 var Promise = require('bluebird');
 
 var Comments = require('./comments').Comments;
-var ProfileModel = require('./profile');
 
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
@@ -40,7 +39,7 @@ function displayPageOfATravelwComments (req, res) {
         })
         .fetch();
 
-    commentsPromise =  new Comments().where({
+    new Comments().where({
         commentType: 1,
         commentTravelId: travelId
     }).fetchAll()
@@ -58,32 +57,33 @@ function displayPageOfATravelwComments (req, res) {
                     commentsUsernamesPromise.push(modelUsers.getUsernameFromDBAsync(resultJSON[i]['commentIssuer']));
                 }
             }
+
+            var ProfileModel = require('./profile');
+            var profil = new ProfileModel();
+            Promise.join(travelPromise, profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req),
+                function (travel, travelsD, travelsP) {
+
+                    res.render('pages/travel.ejs',
+                        {
+                            logged: utils.authentificated(req),
+                            header: header,
+                            foot : foot,
+                            profile: profile,
+
+                            travelsAsDriver: travelsD,
+                            travelsAsPassenger: travelsP,
+
+                            typeOfComment: 1,
+                            pageType:1,
+                            comments: commentariesTextsPromise,
+                            commentsIssuers: commentsUsernamesPromise,
+                            commentsDate: commentsDatePromise,
+                            userOfProfile: travelId
+
+                        });
+                });
+
         });
-    var ProfileModel = require('./profile');
-    Promise.join(travelPromise, commentsPromise, ProfileModel.getTravelsAsDriver(req), ProfileModel.getTravelsAsPassenger(req),
-        function (travel, comments, travelsD, travelsP) {
-        res.render('pages/travel.ejs',
-            {
-                logged: utils.authentificated(req),
-                header: header,
-                foot : foot,
-                profile: profile,
-
-                travelsAsDriver: travelsD,
-                travelsAsPassenger: travelsP,
-
-                pageType:1,
-                comments: commentariesTextsPromise,
-                commentsIssuers: commentsUsernamesPromise,
-                commentsDate: commentsDatePromise,
-                userOfProfile: travelId
-
-            });
-    });
-
-
-
-
 
 }
 

@@ -177,8 +177,6 @@ function postComment(req, res) {
             'commentTravelId': username,
             'commentType': '1',
             'comment': commentTxt
-        }).catch(function(err){
-            log.error(err);
         });
 
         commentaire.save();
@@ -193,8 +191,6 @@ function postComment(req, res) {
             'commentReqTravelId': username,
             'commentType': '2',
             'comment': commentTxt
-        }).catch(function(err){
-            log.error(err);
         });
 
         commentaire.save();

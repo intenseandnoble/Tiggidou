@@ -6,6 +6,7 @@ var log = require('../config/logger').log;
 var DB = require('../config/database');
 var Promise = require('bluebird');
 var moment = require('moment');
+var modelUsers = require('./user');
 moment.locale("fr");
 moment().format('LLL');
 
@@ -51,9 +52,9 @@ function displayPageOfAReqTravelwComments (req, res) {
 
 function displayPageandComments (req, res, travel, reqTravelId) {
 
-    var commentsDatePromise;
-    var commentariesTextsPromise;
-    var commentsUsernamesPromise;
+    var commentsDatePromise = [];
+    var commentariesTextsPromise = [];
+    var commentsUsernamesPromise = [];
 
     new Comments().where({
         commentType: 2,
@@ -75,8 +76,9 @@ function displayPageandComments (req, res, travel, reqTravelId) {
 
             var ProfileModel = require('./profile');
             var profil = new ProfileModel();
-            Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req),
-                function (travelsD, travelsP) {
+            Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req), commentariesTextsPromise,
+                commentsDatePromise, commentsUsernamesPromise,
+                function (travelsD, travelsP, commentariesTexts, commentsDate, commentsUsernames) {
 
                     res.render('pages/travel.ejs',
                         {
@@ -92,9 +94,9 @@ function displayPageandComments (req, res, travel, reqTravelId) {
 
                             typeOfComment: 2,
                             pageType:2,
-                            comments: commentariesTextsPromise,
-                            commentsIssuers: commentsUsernamesPromise,
-                            commentsDate: commentsDatePromise,
+                            comments: commentariesTexts,
+                            commentsIssuers: commentsUsernames,
+                            commentsDate: commentsDate,
                             userOfProfile: reqTravelId
 
                         });

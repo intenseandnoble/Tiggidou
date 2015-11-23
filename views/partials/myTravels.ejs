@@ -1,0 +1,18 @@
+
+<a href="#" class="modal" id="myTravels" aria-hidden="true">
+</a>
+<div class="modal-dialog">
+
+    <div class="modal-header">
+        <a href="#" class="btn-close" aria-hidden="true">&#215;</a>
+    </div>
+    <div class="modal-header">
+
+        <% if (travelsAsDriver != undefined) {
+            for (i=0; i<travelsAsDriver.length; ++i) { %>
+                <br>
+                <%= travelsAsDriver[i]['idAddTravel'] %>
+        <%  }
+        } %>
+    </div>
+</div>

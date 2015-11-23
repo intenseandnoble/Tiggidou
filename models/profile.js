@@ -8,6 +8,8 @@ var log = require('../config/logger').log;
 var utils = require('../controllers/utils.js');
 var Comments = require('./comments').Comments;
 var Score = require('./score').Score;
+var Travel = require('./travel').Travel;
+var TravelPassengers = require('./travelPassengers').TravelPassengers;
 var modelUsers = require('./user');
 var Promise = require('bluebird');
 //Vue en francais
@@ -43,6 +45,8 @@ var goalInLife;
 var commentsDate;
 var commentariesTexts;
 var scoreArray;
+var travelsAsDriver;
+var travelsAsPassenger;
 
 function Profile() {
     driverAvgScore = null;
@@ -123,6 +127,32 @@ Profile.prototype.displayProfile = function (req, res, page) {
         })
 };
 
+function getTravelsAsDriver (req) {
+    var promiseTravelsDArray = [];
+    var userSession = req.session.req.user;
+
+    return new Travel()
+        .where({
+            driver:userSession.attributes.idUser
+        })
+        .fetchAll()
+        .then(function (results) {
+            var resultsJSON = results.toJSON();
+
+            for(i=0; i<resultsJSON.length; ++i) {
+                promiseTravelsDArray.push(resultsJSON[i]);
+            }
+
+            return promiseTravelsDArray;
+
+        })
+
+}
+
+function getTravelsAsPassenger (req) {
+    var promiseTravelsPArray = [];
+}
+
 function getScores () {
     var promiseScoreArray = [];
 
@@ -164,8 +194,11 @@ function getScores () {
 
 function renderProfile(req, res, ps, page) {
     //and resolution de la promeese sur les scores
-    Promise.all(scoreArray)
-        .then(function (scores){
+    travelsAsDriver = getTravelsAsDriver(req);
+    travelsAsPassenger = getTravelsAsPassenger(req);
+
+    Promise.all(scoreArray, travelsAsDriver)
+        .then(function (scores, travelsD){
 
             res.render(page, {
                 logged: utils.authentificated(req),
@@ -188,6 +221,8 @@ function renderProfile(req, res, ps, page) {
                 commentsIssuers: ps,
                 commentsDate: commentsDate,
                 userOfProfile: userOfProfile,
+
+                travelsAsDriver: travelsD,
 
                 age: age,
                 education: education,

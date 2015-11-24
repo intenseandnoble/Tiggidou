@@ -58,7 +58,7 @@ function displayPageandComments (req, res, travel, reqTravelId) {
 
     new Comments().where({
         commentType: 2,
-        commentTravelId: reqTravelId
+        commentReqTravelId: reqTravelId
     }).fetchAll()
         .then(function (results) {
             var resultJSON = results.toJSON();

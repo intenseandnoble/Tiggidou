@@ -76,8 +76,12 @@ module.exports = function (app, passport) {
 
     app.get('/logout', get.getLogout);
 
+    //app.get('/travel/all', get.getAllTravels);
+
     app.get('/travel/:travelId', get.getTravel);
 
-    app.get('/travelrequest/:reqTravelId', get.getTravelRequest)
+    //app.get('/travelrequest/all', get.getAllTravelRequest);
+
+    app.get('/travelrequest/:reqTravelId', get.getTravelRequest);
 
 };

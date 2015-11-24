@@ -142,8 +142,8 @@
 
                                         <input type="hidden" name="idTravel" value =<%= jsonObject[i]['idAddTravel']%>>
 
-                                        <% var pieces = name[i].split(" ");%>
-                                        <h1><%= pieces[0]+"."+pieces[1].substring(0,1)%></h1>
+                                        <% var pieces = name[i].split(".");%>
+                                        <h1><%= pieces[0]+"."+pieces[1]/*.substring(0,1)*/%></h1>
                                         <span><h3><%= jsonObject[i]['cost'] %>$</h3></span>
 
                                         <!--logos here and goodies. -->
@@ -186,8 +186,8 @@
                                     <div class=" nameResult">
 
                                     <div>
-                                        <% var pieces = name[i].split(" ");%>
-                                        <h1><%= pieces[0]+"."+pieces[1].substring(0,1);%></h1>
+                                        <% var pieces = name[i].split(".");%>
+                                        <h1><%= pieces[0]+"."+pieces[1]/*.substring(0,1)*/;%></h1>
                                         <!--logos here and goodies. -->
 
                                     </div>

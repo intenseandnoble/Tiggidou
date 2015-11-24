@@ -12,24 +12,31 @@
 
     <!-- Header -->
     <% include ../partials/header %>
-
-
     <!-- Banner -->
-
-            <div class="box container">
-
-                <div>
-                    <FORM>
-                        <% if(driverOffer.length > 0){ %>
-                            <select   name="travelOffer" >
-                                <% for(i= 0; i<driverOffer.length; i++){ %>
-                                    <option value="<%= i%>"><%= driverOffer[i]['idAddTravel'] %> --> <%= driverOffer[i]['departureTime']%> </option>
-                                <% }%>
-                            </select>
-                        <% } %>
-                    </FORM>
-                </div>
+        <div class="box container">
+            <div>
+                <h2>Information sur la demande de voyage</h2>
             </div>
+
+            <div>
+                <h2>Offrir un voyage</h2>
+                <% if(driverOffer.length > 0){ %>
+                    <FORM>
+                        <select   name="travelOffer" >
+                            <option value="0" selected="1">Offrir un voyage existant (Numéro du voyage → heure du voyage)</option>
+                            <% for(i= 0; i<driverOffer.length; i++){ %>
+                                <option value="<%= i+1%>"><%= driverOffer[i]['idAddTravel'] %> --> <%= driverOffer[i]['departureTime']%> </option>
+                            <% }%>
+                        </select>
+                    </FORM>
+                <% } %>
+                <form action="/createFastTravel" method="get">
+                    <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(passengerSearch)%>">
+                    <button class="button small icon fa-arrow-circle-right">Créer un nouveau voyage rapidement</button>
+                </form>
+
+            </div>
+        </div>
 
     <!-- Footer -->
     <% include ../partials/footer %>

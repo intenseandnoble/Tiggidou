@@ -135,6 +135,7 @@ function getSelectedPassenger(req, res) {
 
 function getCreateFastTravel(req,res){
     var travelPassengerJson = JSON.parse(req.query.jsonObject);
+    travelPassengerJson['departureDate'] = moment(travelPassengerJson['departureDate'],"dddd, Do MMMM YYYY").format("DD/MM/YYYY");
 
     res.render('pages/fastRideOffer.ejs',
         {

@@ -16,6 +16,29 @@
         <div class="box container">
             <div>
                 <h2>Information sur la demande de voyage</h2>
+                <article class="row">
+                    <div class = "infoResult">
+
+                        <div>
+
+                            <%=passengerSearch['departureDate']%><br>
+                            <%=passengerSearch['departureTime']%><br>
+                            <%=passengerSearch['startAddress']%> → <%=passengerSearch['destinationAddress']%><br>
+
+                            Nb de Valises : <%=passengerSearch['luggagesSize']%><br>
+
+
+
+                            <% if (passengerSearch['petsAllowed'] == 0){ %>
+                            Animaux? : Non<br>
+                            <%}else{ %>
+                            Animaux? : Oui <br>
+                            <% } %>
+
+
+                        </div>
+                    </div>
+                </article>
             </div>
 
             <div>

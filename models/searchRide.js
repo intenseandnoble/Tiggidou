@@ -73,7 +73,7 @@ Ride.prototype.searchDriver = function (req, res) {
             res.redirect('/no-results');
         });
     }else{
-        renderRide(req, res, ps);
+        renderRide(req, res, null);
     }
 };
 
@@ -102,7 +102,7 @@ Ride.prototype.searchPassengers = function (req, res) {
         });
     }
     else{
-        renderRide(req, res, ps);
+        renderRide(req, res, null);
     }
 
 };

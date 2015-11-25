@@ -214,8 +214,8 @@ function postRide(req, res) {
     var dest_arr = new Array(2);
     var availableSeats = 1;
 
-    date=req.body.datepicker;
-    var newdate = date.split("/").reverse().join("/");
+    //var newdate = date.split("/").reverse().join("/");
+    var newdate = moment(req.body.datepicker, "DD/MM/YYYY").format("YYYY-MM-DD");
 
     if(currCoordinates.length!=0){
         curr_arr = currCoordinates.split(',');
@@ -227,7 +227,7 @@ function postRide(req, res) {
 
 
     if(req.body.radiusCurr.length!=0){
-        radiusCurr = req.body.radiusCurr;
+        radiusCurr = req.body.radiulocasCurr;
     }
 
     if(req.body.radiusDest.length!=0){

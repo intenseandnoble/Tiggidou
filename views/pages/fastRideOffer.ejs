@@ -20,15 +20,17 @@
 
             <form class="ride-posting preventEnter" method="post" action ="/post-ride">
                 <div class="[ form-group ] ">
+                    <input type="hidden" id="driverCheckbox" name="driverCheckbox" value="on">
                     <input type="text" id="currentLocation" class=" input-group"  name = "currentLocation"
-                           placeholder="De" value="<%= travelResearch['startAddress']%>"> →
+                           placeholder="De" value="<%= travelResearch['startAddress']%>" readonly="readonly"> →
 
                     <input type="text" id="destination" class="input-group"  name = "destination"
-                           placeholder="À" value="<%= travelResearch['destinationAddress']%>"><br><br>
+                           placeholder="À" value="<%= travelResearch['destinationAddress']%>" readonly="readonly"><br><br>
 
                     <div class="clearfix">
                         <div class="input-group clockpicker"   data-align="top" data-autoclose="true">
-                            <input type="text" class="form-control" name="clockpicker" id="withBootStrap" value="<%= travelResearch['departureTime']%>">
+                            <input type="text" class="form-control" name="clockpicker" id="withBootStrap"
+                                   value="<%= travelResearch['departureTime']%>">
 				                <span class="input-group-addon widerGlyph">
 					            <span class="glyphicon glyphicon-time widerGlyph"></span>
 				                </span>
@@ -36,7 +38,8 @@
                     </div>
 
                     <div class="input-group">
-                        <input type="text" class="form-control formBootStrap"  id="datepicker" name="datepicker"  placeholder="Date" value="<%= travelResearch['departureDate']%>" />
+                        <input type="text" class="form-control formBootStrap"  id="datepicker" name="datepicker"
+                               placeholder="Date" value="<%= travelResearch['departureDate']%>" readonly="readonly"/>
                               <span class="input-group-addon widerGlyph dateGlyph">
                                             <span class="glyphicon glyphicon-calendar widerGlyph"></span>
                                                 </span>

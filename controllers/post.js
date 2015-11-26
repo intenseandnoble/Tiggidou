@@ -25,6 +25,7 @@ module.exports = {
     postComment: postComment,
     postRide: postRide,
     postAddPassenger: postAddPassenger,
+    postAddPropositionTransport: postAddPropositionTransport,
     postSignUp: postSignUp,
     postLogin: postLogin
 };
@@ -302,6 +303,24 @@ function postRide(req, res) {
     }
 
     res.redirect('/');
+}
+
+function postAddPropositionTransport(req, res){
+    var idTravelSearch = req.body.idTravelSearch;
+    var idTransportOffer = req.body.travelOffer;
+    var offerToAdd = new Model.ModelTransportOffer.TransportOffer({idtravel:idTransportOffer, idsearchtravel:idTravelSearch});
+    offerToAdd.fetch()
+        .then(function(transport){
+            if(transport){
+                //TODO il y a deja eu une offre, retourner une erreur
+                return res.redirect('/no-results');
+            }
+
+            offerToAdd.save().then(function(model) {
+                res.redirect('/')
+            });
+        })
+
 }
 
 function postAddPassenger(req, res) {

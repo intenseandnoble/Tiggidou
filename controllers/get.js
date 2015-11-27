@@ -27,7 +27,9 @@ module.exports = {
     getNoResult: getNoResult,
     getLogout: getLogout,
     getTravel: getTravel,
-    getTravelRequest: getTravelRequest
+    getTravelRequest: getTravelRequest,
+    getAllTravels: getAllTravels,
+    getAllTravelRequests: getAllTravelRequests
 };
 
 function getHome(req, res) {
@@ -217,8 +219,20 @@ function getTravel(req, res) {
 
 }
 
+function getAllTravels(req, res) {
+
+    Travel.displayPageOfAllTravelsOfUser(req,res);
+
+}
+
 function getTravelRequest(req, res) {
 
     TravelRequest.displayPageOfAReqTravelwComments(req, res);
+
+}
+
+function getAllTravelRequests(req, res) {
+
+    TravelRequest.displayPageOfAllTravelsOfUser(req, res);
 
 }

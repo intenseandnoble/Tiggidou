@@ -24,7 +24,8 @@ var TravelRequest = DB.Model.extend({
 
 module.exports = {
     TravelRequest : TravelRequest,
-    displayPageOfAReqTravelwComments: displayPageOfAReqTravelwComments
+    displayPageOfAReqTravelwComments: displayPageOfAReqTravelwComments,
+    displayPageOfAllTravelsOfUser: displayPageOfAllTravelsOfUser
 };
 
 function displayPageOfAReqTravelwComments (req, res) {
@@ -47,6 +48,29 @@ function displayPageOfAReqTravelwComments (req, res) {
                 res.redirect('/login');
             }
 
+        });
+}
+
+function displayPageOfAllTravelsOfUser (req, res) {
+    var ProfileModel = require('./profile');
+    var profil = new ProfileModel();
+    Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req),
+        function (travelsD, travelsP) {
+
+            res.render('pages/all-travels.ejs',
+                {
+                    logged: utils.authentificated(req),
+                    header: header,
+                    foot : foot,
+                    profile: profile,
+                    pageType : 4,
+
+                    allTravels: travelsP,
+
+                    travelsAsDriver: travelsD,
+                    travelsAsPassenger: travelsP
+
+                });
         });
 }
 

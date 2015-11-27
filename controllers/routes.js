@@ -31,10 +31,11 @@ module.exports = function (app, passport) {
 
     app.get('/search', get.getSearchRide);
 
-    app.get('/select-passenger', get.getSelectedPassenger);
+    app.get('/select-passenger', utils.requireAuth, get.getSelectedPassenger);
 
     app.post('/add-passenger', post.postAddPassenger);
 
+    app.post('/addPropositionTransport', utils.requireAuth, post.postAddPropositionTransport);
 
     // route for facebook authentication and login
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email', "user_birthday"] }));
@@ -78,6 +79,8 @@ module.exports = function (app, passport) {
 
     app.get('/travel/:travelId', get.getTravel);
 
-    app.get('/travelrequest/:reqTravelId', get.getTravelRequest)
+    app.get('/travelrequest/:reqTravelId', get.getTravelRequest);
+
+    app.get('/createFastTravel', utils.requireAuth, get.getCreateFastTravel);
 
 };

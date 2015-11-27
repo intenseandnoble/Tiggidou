@@ -12,24 +12,59 @@
 
     <!-- Header -->
     <% include ../partials/header %>
-
-
     <!-- Banner -->
+        <div class="box container">
+            <div>
+                <h2>Information sur la demande de voyage</h2>
+                <article class="row">
+                    <div class = "infoResult">
+
+                        <div>
+
+                            <%=passengerSearch['departureDate']%><br>
+                            <%=passengerSearch['departureTime']%><br>
+                            <%=passengerSearch['startAddress']%> → <%=passengerSearch['destinationAddress']%><br>
+
+                            Nb de Valises : <%=passengerSearch['luggagesSize']%><br>
 
 
-            <div class="box container">
+
+                            <% if (passengerSearch['petsAllowed'] == 0){ %>
+                            Animaux? : Non<br>
+                            <%}else{ %>
+                            Animaux? : Oui <br>
+                            <% } %>
 
 
+                        </div>
+                    </div>
+                </article>
+            </div>
 
+            <div>
+                <h2>Offrir un voyage</h2>
+                <% if(driverOffer.length > 0){ %>
+                    <FORM action="/addPropositionTransport" method="post">
+                        <input type="hidden" name="idTravelSearch" id="idTravelSearch" value="<%= passengerSearch['idSearchTravel']%>">
+                        <select   name="travelOffer" >
+                            <option value="0" selected="1">Offrir un voyage existant (Numéro du voyage → heure du voyage)</option>
+                            <% for(i= 0; i<driverOffer.length; i++){ %>
+                                <option value="<%= driverOffer[i]['idAddTravel']%>"><%= driverOffer[i]['idAddTravel'] %> --> <%= driverOffer[i]['departureTime']%> </option>
+                            <% }%>
+                        </select>
+                        <button class="button small icon fa-arrow-circle-right">Offrir le voyage</button>
+                    </FORM>
+                <% } %>
+                <div>
+                    <h3> Vous pouvez creer un voyage rapide</h3>
+                </div>
+                <form action="/createFastTravel" method="get">
+                    <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(passengerSearch)%>">
+                    <button class="button small icon fa-arrow-circle-right">Créer un nouveau voyage rapidement</button>
+                </form>
 
-
-
-
-
-
-
-
-</div>
+            </div>
+        </div>
 
     <!-- Footer -->
     <% include ../partials/footer %>

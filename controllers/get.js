@@ -12,6 +12,7 @@ var log = require('../config/logger').log;
 var searchRide = require('../models/searchRide.js');
 var profile = require('../models/profile.js');
 var Model = require('../models/models');
+var moment = require('moment');
 var Travel = require('../models/travel');
 var TravelRequest = require('../models/travelRequest');
 
@@ -27,7 +28,8 @@ module.exports = {
     getNoResult: getNoResult,
     getLogout: getLogout,
     getTravel: getTravel,
-    getTravelRequest: getTravelRequest
+    getTravelRequest: getTravelRequest,
+    getCreateFastTravel: getCreateFastTravel
 };
 
 function getHome(req, res) {
@@ -103,50 +105,47 @@ function getSearchRide(req, res) {
 
 function getSelectedPassenger(req, res) {
     //TODO What if 2 users add it at the same time? With only 1 place left? Revisit this
-    if(req.user){
-
-        console.log(req.body);
-
-        res.render('pages/selectPassenger.ejs',
-            {
-                logged: utils.authentificated(req),
-                header: headerFR,
-                foot : footFR
-            });
-
-    }
-
-    else{
-        //req.flash("signupMessage", strings.notConnected);
-        res.redirect('/login');
-    }
+    var idUser = req.session.req.user.attributes.idUser;
+    var travelPassengerJson = JSON.parse(req.query.jsonObject);
+    var date = moment(travelPassengerJson['departureDate'], "dddd, Do MMMM YYYY").format('YYYY-MM-DD');
+    var search = {
+        driver: idUser,
+        startAddress: travelPassengerJson['startAddress'],
+        destinationAddress: travelPassengerJson['destinationAddress'],
+        departureDate: date
+    };
+    new Model.ModelTravel.Travel()
+        .query({where:search})
+        .fetchAll()
+        .then(function(travels){
+            var travelOffer = travels.toJSON();
+            res.render('pages/selectPassenger.ejs',
+                {
+                    logged: utils.authentificated(req),
+                    header: headerFR,
+                    foot : footFR,
+                    passengerSearch: travelPassengerJson,
+                    driverOffer: travelOffer
+                });
+        })
+        .catch(function(err){
+            log.error(err);
+        });
 }
 
+function getCreateFastTravel(req,res){
+    var travelPassengerJson = JSON.parse(req.query.jsonObject);
+    travelPassengerJson['departureDate'] = moment(travelPassengerJson['departureDate'],"dddd, Do MMMM YYYY").format("DD/MM/YYYY");
 
-function getSelectedPassenger(req, res) {
-    //TODO What if 2 users add it at the same time? With only 1 place left? Revisit this
-    if(req.user){
+    res.render('pages/fastRideOffer.ejs',
+        {
+            logged: utils.authentificated(req),
+            header: headerFR,
+            foot : footFR,
+            travelResearch: travelPassengerJson
+        });
 
-        console.log(req.body);
-
-        res.render('pages/selectPassenger.ejs',
-            {
-                logged: utils.authentificated(req),
-                header: headerFR,
-                foot : footFR
-            });
-
-    }
-
-    else{
-        //req.flash("signupMessage", strings.notConnected);
-        res.redirect('/login');
-    }
 }
-
-
-
-
 
 function getLogin(req, res) {
     if(req.user){

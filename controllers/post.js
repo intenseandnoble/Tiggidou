@@ -25,6 +25,7 @@ module.exports = {
     postComment: postComment,
     postRide: postRide,
     postAddPassenger: postAddPassenger,
+    postAddPropositionTransport: postAddPropositionTransport,
     postSignUp: postSignUp,
     postLogin: postLogin
 };
@@ -214,8 +215,8 @@ function postRide(req, res) {
     var dest_arr = new Array(2);
     var availableSeats = 1;
 
-    date=req.body.datepicker;
-    var newdate = date.split("/").reverse().join("/");
+    //var newdate = date.split("/").reverse().join("/");
+    var newdate = moment(req.body.datepicker, "DD/MM/YYYY").format("YYYY-MM-DD");
 
     if(currCoordinates.length!=0){
         curr_arr = currCoordinates.split(',');
@@ -227,7 +228,7 @@ function postRide(req, res) {
 
 
     if(req.body.radiusCurr.length!=0){
-        radiusCurr = req.body.radiusCurr;
+        radiusCurr = req.body.radiulocasCurr;
     }
 
     if(req.body.radiusDest.length!=0){
@@ -302,6 +303,25 @@ function postRide(req, res) {
     }
 
     res.redirect('/');
+}
+
+function postAddPropositionTransport(req, res){
+    var idTravelSearch = req.body.idTravelSearch;
+    var idTransportOffer = req.body.travelOffer;
+    var offerToAdd = new Model.ModelTransportOffer.TransportOffer({idtravel:idTransportOffer, idsearchtravel:idTravelSearch});
+    offerToAdd.fetch()
+        .then(function(transport){
+            //Trouve une offre déjà existante
+            if(transport){
+                var backURL = req.headers.referer || '/';
+                return res.redirect(backURL);
+            }
+
+            offerToAdd.save().then(function(model) {
+                res.redirect('/')
+            });
+        })
+
 }
 
 function postAddPassenger(req, res) {

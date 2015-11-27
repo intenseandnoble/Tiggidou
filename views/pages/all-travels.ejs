@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <% include ../partials/head %>
+
+</head>
+
+<body class="homepage">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <% include ../partials/header %>
+
+    <!-- Main -->
+    <div id="main-wrapper">
+        <div class="container">
+            <div class="row 200%">
+
+                <% include ../partials/sidebar %>
+
+                <div class="8u 12u$(medium) important(medium)">
+                    <div id="content">
+
+                        <h1><%= profile.travelOffers %></h1>
+                        <%  //AFFICHAGE des VOYAGES en tant que CONDUCTEUR
+                        if (allTravels != undefined && allTravels.length != 0 ) {
+                            for (i=0; i<allTravels.length; ++i) {
+                                if (pageType ==3) {%>
+                                        <a href="/travel/<%= allTravels[i]['idAddTravel'] %>">
+                                <% } else { %>
+                                        <a href="/travelrequest/<%= allTravels[i]['idSearchTravel'] %>">
+                                <% } %>
+                                <%= allTravels[i]['departureDate'] %><br>
+                            <%= allTravels[i]['startAddress'] %> → <%= allTravels[i]['destinationAddress'] %><br>
+                            </a><hr>
+                        <%  }
+                        } else { %>
+                        <%= profile.noTravelsAsDriver %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <% include ../partials/footer %>
+
+</div>
+</body>
+</html>

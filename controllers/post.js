@@ -311,9 +311,10 @@ function postAddPropositionTransport(req, res){
     var offerToAdd = new Model.ModelTransportOffer.TransportOffer({idtravel:idTransportOffer, idsearchtravel:idTravelSearch});
     offerToAdd.fetch()
         .then(function(transport){
+            //Trouve une offre déjà existante
             if(transport){
-                //TODO il y a deja eu une offre, retourner une erreur
-                return res.redirect('/no-results');
+                var backURL = req.headers.referer || '/';
+                return res.redirect(backURL);
             }
 
             offerToAdd.save().then(function(model) {

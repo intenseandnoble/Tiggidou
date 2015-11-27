@@ -41,45 +41,6 @@ module.exports = function(passport) {
     });
 
     // =========================================================================
-    // LOCAL SIGNUP ============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
-
-   /* passport.use('local-signup', new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField : 'email',
-            passwordField : 'password'
-        },
-        function(email, password, done) {
-            new User({email: email}).fetch().then(function(data) {
-                var user = data;
-                if(user) {
-                    return done(null, false, {title: 'signup', errorMessage: 'username already exists'});
-                } else {
-                    // MORE VALIDATION GOES HERE(E.G. PASSWORD VALIDATION)
-                    var password = user.password;
-                    var hash = bcrypt.hashSync(password);
-
-                    var signUpUser = new Model.User({email: user.email, password: hash});
-
-                    signUpUser.save().then(function(model) {
-                        // sign in the newly registered user
-                        loginPost(req, res, next);
-                    });
-                }
-                    user = data.toJSON();
-                    if(!bcrypt.compareSync(password, user.password)) {
-                        return done(null, false, {message: 'Invalid email or password'});
-                    } else {
-                        return done(null, user);
-                    }
-                }
-            );
-        }));
-*/
-
-    // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
     // we are using named strategies since we have one for login and one for signup
@@ -90,19 +51,24 @@ module.exports = function(passport) {
             passwordField: 'password'
         },
         function(email, password, done) {
-            new User({email: email}).fetch().then(function(data) {
-                var user = data;
-                if(user === null) {
-                    return done(null, false, {message: 'Courriel ou mot de passe invalide'});
-                }  else {
-                    user = data.toJSON();
-                    if(!bcrypt.compareSync(password, user.password)) {
-                        return done(null, false, {message: 'Courriel ou mot de passe invalide'});
-                    } else {
-                        return done(null, user);
+            if(email){
+                new User({email: email}).fetch().then(function(data) {
+                    var user = data;
+                    if(user === null) {
+                        return done(null, false, {message: 'Courriel invalide'});
+                    }  else {
+                        user = data.toJSON();
+                        if(!bcrypt.compareSync(password, user.password)) {
+                            return done(null, false, {message: 'Mot de passe invalide'});
+                        } else {
+                            return done(null, user);
+                        }
                     }
-                }
-            });
+                });
+            } else{
+                return done(null, false, {message: 'Courriel invalide'})
+            }
+
         }
     ));
 
@@ -129,36 +95,6 @@ module.exports = function(passport) {
                     var promiseArr = [];
                     promiseArr.push(new User().getCountName(profile.name.givenName, profile.name.familyName));
                     var countUser;
-
-                   /* var picture = profile.photos[0].value;
-                    https.get(picture, function(res){
-                        log.info("statusCode: " + res.statusCode);
-                        log.info("header: " + res.headers);
-
-                        res.on('data', function(data){
-                            var filePath = path.join(__dirname, "/tmptest/test.jpg");
-                            fs.open("./tmptest/test.jpg", 'w', function(err, fd){
-                                if(err){
-                                    log.info(err);
-                                    return;
-                                }
-
-                                fs.write(fd, data, 0, data.length, null, function(err){
-                                    if(err){
-                                        log.info(err);
-                                        return;
-                                    }
-                                    fs.close(fd, function(){
-                                        log.info("le fichier a été écrit avec succès");
-                                    });
-                                });
-                            });
-
-
-                        })
-                    }).on('error', function(err){
-                        log.error(err);
-                    });*/
 
                     Promise.all(promiseArr).then(function(ps) {
                         var countTest = ps[0][0];

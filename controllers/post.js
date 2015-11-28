@@ -262,8 +262,10 @@ function postRide(req, res) {
                 longitudePickUp:curr_arr[1],
                 latitudeDropOff:dest_arr[0],
                 longitudeDropOff:dest_arr[1],
-                //comments: req.body.commentsRide_d,
-                cost:req.body.cost_d},
+                comments: req.body.commentsRide_d,
+                desiredAvgPassengerScore: utils.arrayOrNot(req.body.avgScorePassenger),
+                cost:req.body.cost_d
+        },
 
             {method: 'insert'}
         ).catch(function (err) {
@@ -293,8 +295,9 @@ function postRide(req, res) {
                 longitudePickUp:curr_arr[1],
                 latitudeDropOff:dest_arr[0],
                 longitudeDropOff:dest_arr[1],
-                luggageSize :luggage//,
-                //comments: req.body.commentsRide_p
+                luggageSize :luggage,
+                comments: req.body.commentsRide_p,
+                desiredAvgDriverScore: utils.arrayOrNot(req.body.avgScoreDriver)
             },
             {method: 'insert'}
         ).catch(function (err) {

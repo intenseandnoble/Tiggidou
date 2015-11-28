@@ -15,6 +15,7 @@ var Model = require('../models/models');
 var moment = require('moment');
 var Travel = require('../models/travel');
 var TravelRequest = require('../models/travelRequest');
+var Promise = require('bluebird');
 
 module.exports = {
     getIndex: getHome,
@@ -31,7 +32,8 @@ module.exports = {
     getTravelRequest: getTravelRequest,
     getCreateFastTravel: getCreateFastTravel,
     getAllTravels: getAllTravels,
-    getAllTravelRequests: getAllTravelRequests
+    getAllTravelRequests: getAllTravelRequests,
+    getPropositionTransport: getPropositionTransport
 };
 
 function getHome(req, res) {
@@ -233,5 +235,38 @@ function getTravelRequest(req, res) {
 function getAllTravelRequests(req, res) {
 
     TravelRequest.displayPageOfAllTravelsOfUser(req, res);
+
+}
+
+function getPropositionTransport(req, res){
+    var userId = req.user.id;
+    var resultsProposition = [];
+    new Model.ModelTravelRequest.TravelRequest({passenger: userId}).fetchAll()
+        .then(function(listSearchTravel){
+            var promiseArr = [];
+            var listToSearch = listSearchTravel.models;
+            listToSearch.forEach(function(travel){
+                var idSearchTransport = travel.attributes.idSearchTravel;
+                promiseArr.push(new Model.ModelTransportOffer.TransportOffer({idSearchTravel:idSearchTransport})
+                    .fetchAll()
+                    .then(function(results){
+                        resultsProposition.push({
+                            searchID: idSearchTransport,
+                            offer: results
+                        });
+                    }))
+            });
+            Promise.all(promiseArr).then(function(doc){
+                res.render('pages/transportOffer.ejs',
+                    {
+                        logged: utils.authentificated(req),
+                        profile: require('../views/fr/profile.js'),
+                        header: headerFR,
+                        foot : footFR
+                    })
+            });
+
+        });
+
 
 }

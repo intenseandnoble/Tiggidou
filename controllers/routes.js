@@ -37,6 +37,8 @@ module.exports = function (app, passport) {
 
     app.post('/addPropositionTransport', utils.requireAuth, post.postAddPropositionTransport);
 
+    app.get('/getPropositionTransport', utils.requireAuth, get.getPropositionTransport);
+
     // route for facebook authentication and login
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email', "user_birthday"] }));
 

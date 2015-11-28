@@ -14,8 +14,8 @@ module.exports =
     "reservation":"R\u00E9servations",
     "myTravels":"Mes voyages",
     "messages":"Messages",
-    "aTravel":"Voyage que vous offrez",
-    "aTravelRequest":"Voyage que vous demandez",
+    "aTravel":"Voyage offert",
+    "aTravelRequest":"Voyage demand\u00E9",
     "allTravels":"Tous les voyages que vous offrez",
     "allTravelRequests":"Tous les voyages que vous demandez",
 

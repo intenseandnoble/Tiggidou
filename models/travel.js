@@ -73,7 +73,7 @@ function displayPageOfAllTravelsOfUser (req, res) {
 }
 
 function displayPageAndComments (req, res, travel, travelId) {
-
+    var username = modelUsers.getUsernameFromDBAsync(req.session.req.user.attributes.idUser);
     var commentsDatePromise = [];
     var commentariesTextsPromise = [];
     var commentsUsernamesPromise = [];
@@ -99,8 +99,8 @@ function displayPageAndComments (req, res, travel, travelId) {
             var ProfileModel = require('./profile');
             var profil = new ProfileModel();
             Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req), commentariesTextsPromise,
-                commentsDatePromise, commentsUsernamesPromise,
-                function (travelsD, travelsP, commentariesTexts, commentsDate, commentsUsernames) {
+                commentsDatePromise, commentsUsernamesPromise, username,
+                function (travelsD, travelsP, commentariesTexts, commentsDate, commentsUsernames, username) {
 
                     Promise.all(commentsUsernames)
                         .then(function (cUsernames) {
@@ -111,6 +111,7 @@ function displayPageAndComments (req, res, travel, travelId) {
                                     foot : foot,
                                     profile: profile,
 
+                                    username: username,
                                     travelsAsDriver: travelsD,
                                     travelsAsPassenger: travelsP,
 

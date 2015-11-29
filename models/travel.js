@@ -52,7 +52,7 @@ function displayPageOfATravelwComments (req, res) {
 function displayPageOfAllTravelsOfUser (req, res) {
     var ProfileModel = require('./profile');
     var profil = new ProfileModel();
-    Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req),
+    Promise.join(profil.getTravelsAsDriver(req),
         function (travelsD, travelsP) {
 
             res.render('pages/all-travels.ejs',
@@ -63,10 +63,7 @@ function displayPageOfAllTravelsOfUser (req, res) {
                     profile: profile,
                     pageType : 3,
 
-                    allTravels: travelsD,
-
-                    travelsAsDriver: travelsD,
-                    travelsAsPassenger: travelsP
+                    allTravels: travelsD
 
                 });
         });
@@ -98,9 +95,9 @@ function displayPageAndComments (req, res, travel, travelId) {
 
             var ProfileModel = require('./profile');
             var profil = new ProfileModel();
-            Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req), commentariesTextsPromise,
+            Promise.join(commentariesTextsPromise,
                 commentsDatePromise, commentsUsernamesPromise,
-                function (travelsD, travelsP, commentariesTexts, commentsDate, commentsUsernames) {
+                function (commentariesTexts, commentsDate, commentsUsernames) {
 
                     Promise.all(commentsUsernames)
                         .then(function (cUsernames) {
@@ -110,9 +107,6 @@ function displayPageAndComments (req, res, travel, travelId) {
                                     header: header,
                                     foot : foot,
                                     profile: profile,
-
-                                    travelsAsDriver: travelsD,
-                                    travelsAsPassenger: travelsP,
 
                                     travel: travel,
 

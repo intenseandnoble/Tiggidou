@@ -96,7 +96,7 @@ function getProfile(req, res){
 function getSearchRide(req, res) {
     var ride = new searchRide(req.query.destination, req.query.currentLocation, req.query.datepicker);
 
-    if(req.query.searchDriver == "on") {
+    if(req.query.search == "driver") {
         ride.searchDriver(req, res);
     }
     else {

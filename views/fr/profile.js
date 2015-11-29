@@ -38,6 +38,10 @@ module.exports =
     "petsAllowed": "Animaux permis?: ",
     "moreOptions": "Cliquez sur un voyage pour obtenir plus d'options.",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+
+    //photo
+    "modPic":"Modifiez votre photo de profil",
+    "selectPic":"Choisir votre nouvelle photo de profil"
 
 };

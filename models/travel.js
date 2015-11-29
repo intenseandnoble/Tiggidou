@@ -70,7 +70,6 @@ function displayPageOfAllTravelsOfUser (req, res) {
 }
 
 function displayPageAndComments (req, res, travel, travelId) {
-
     var commentsDatePromise = [];
     var commentariesTextsPromise = [];
     var commentsUsernamesPromise = [];
@@ -101,23 +100,30 @@ function displayPageAndComments (req, res, travel, travelId) {
 
                     Promise.all(commentsUsernames)
                         .then(function (cUsernames) {
-                            res.render('pages/travel.ejs',
-                                {
-                                    logged: utils.authentificated(req),
-                                    header: header,
-                                    foot : foot,
-                                    profile: profile,
+                            new modelUsers.Users().where({idUser: travel.driver})
+                                .fetch()
+                                .then(function(user){
+                                    res.render('pages/travel.ejs',
+                                        {
+                                            logged: utils.authentificated(req),
+                                            header: header,
+                                            foot : foot,
+                                            profile: profile,
 
-                                    travel: travel,
+                                            travel: travel,
 
-                                    typeOfComment: 1,
-                                    pageType:1,
-                                    comments: commentariesTexts,
-                                    commentsIssuers: cUsernames,
-                                    commentsDate: commentsDate,
-                                    userOfProfile: travelId
+                                            typeOfComment: 1,
+                                            pageType:1,
+                                            comments: commentariesTexts,
+                                            commentsIssuers: cUsernames,
+                                            commentsDate: commentsDate,
+                                            userOfProfile: travelId,
 
+                                            username: user.attributes.username
+
+                                        });
                                 });
+
                         });
                 });
         });

@@ -101,23 +101,30 @@ function displayPageandComments (req, res, travel, reqTravelId) {
 
                     Promise.all(commentsUsernames)
                         .then (function (cUsernames) {
-                            res.render('pages/travel.ejs',
-                                {
-                                    logged: utils.authentificated(req),
-                                    header: header,
-                                    foot : foot,
-                                    profile: profile,
+                            new modelUsers.Users().where({idUser: travel.passenger})
+                                .fetch()
+                                .then(function(user){
+                                    res.render('pages/travel.ejs',
+                                        {
+                                            logged: utils.authentificated(req),
+                                            header: header,
+                                            foot : foot,
+                                            profile: profile,
 
-                                    travel: travel,
+                                            travel: travel,
 
-                                    typeOfComment: 2,
-                                    pageType:2,
-                                    comments: commentariesTexts,
-                                    commentsIssuers: cUsernames,
-                                    commentsDate: commentsDate,
-                                    userOfProfile: reqTravelId
+                                            typeOfComment: 2,
+                                            pageType:2,
+                                            comments: commentariesTexts,
+                                            commentsIssuers: cUsernames,
+                                            commentsDate: commentsDate,
+                                            userOfProfile: reqTravelId,
 
+                                            username: user.attributes.username
+
+                                        });
                                 });
+
                         });
                 });
         });

@@ -24,7 +24,8 @@
                             <h3> Code du voyage: <%= items.searchID%></h3>
                             <h4> Proposition de voyage: </h4>
                             <% items.offer.forEach(function(transport){%>
-                                <p><%= transport.attributes.idTravel%></p>
+                                <p>Departure time: <%= transport.attributes.departureTime%></p>
+                                <p>Cost: <%= transport.attributes.cost%></p>
                             <%})%>
 
                         <% }) %>

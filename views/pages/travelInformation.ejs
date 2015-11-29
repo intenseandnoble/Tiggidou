@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <% include ../partials/head %>
+
+</head>
+
+<body class="homepage">
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <% include ../partials/header %>
+
+    <!-- Main -->
+    <div id="main-wrapper">
+        <div class="container">
+            <div class="row 200%">
+
+                <!--% include ../partials/sidebar %-->
+
+                <div class="8u 12u$(medium) important(medium)">
+                    <div id="content">
+                        <form method="post" action="/add-passenger">
+                            <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(travel)%>">
+                            <a href="/profile/<%= username %>" > <h1><%= username %> </h1> </a>
+                            <% if (travel['cost'] != undefined) { %>
+                            <%= travel['cost'] %> $ <br>
+                            <% } %>
+                            <%= travel['departureDate'] %><br>
+                            <%= travel['departureTime'] %><br>
+                            <%= travel['startAddress'] %> → <%= travel['destinationAddress'] %><br>
+                            <%= profile.seatsTaken %> <%= travel['takenSeat'] %> <br>
+                            <%= profile.availableSeats %> <%= travel['availableSeat'] %><br>
+                            <% if (travel['petsAllowed'] == 0 || travel['pets'] ==0){ %>
+                            <%= profile.petsAllowed %><%= profile.no %><br>
+                            <%} else { %>
+                            <%= profile.petsAllowed %><%= profile.yes %><br>
+                            <% } %>
+                            <button type="submit" class="button small icon fa-arrow-circle-right"> S'ajouter au transport </button>
+
+                        </form>
+
+
+
+                    </div>
+                    <div class="8u 12u$(medium) important(medium)">
+                        <div id="content">
+                            <% include ../partials/comments %>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <% include ../partials/footer %>
+
+</div>
+</body>
+</html>

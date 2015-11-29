@@ -103,7 +103,7 @@ function displayPageAndComments (req, res, travel, travelId) {
                             new modelUsers.Users().where({idUser: travel.driver})
                                 .fetch()
                                 .then(function(user){
-                                    res.render('pages/travel.ejs',
+                                    res.render('pages/travelInformation.ejs',
                                         {
                                             logged: utils.authentificated(req),
                                             header: header,

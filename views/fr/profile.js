@@ -37,7 +37,7 @@ module.exports =
     "maxNbResulstsTravelsPassenger": "Cliquez ici, pour voir tous les voyages que vous demandez.",
     "seatsTaken": "Sièges pris: ",
     "availableSeats":"Sièges disponible: ",
-    "petsAllowed": "Animaux permis?: ",
+    "petsAllowed": "Animaux permis: ",
     "moreOptions": "Cliquez sur un voyage pour obtenir plus d'options.",
     "yes": "Oui",
     "no": "Non",

@@ -131,11 +131,8 @@
                             <%if(driverBool == "on") { %>
 
                             <%for ( i= 0;i< name.length;i++) { %>
-                            <form method="post" action="/add-passenger">
-                                <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(jsonObject[i])%>">
-
+                            <form method="get" action="/travel/<%= jsonObject[i]['idAddTravel']%>">
                                 <a href="javascript:;" onclick="parentNode.submit();">
-
                                     <article class="row">
                                         <div class=" nameResult">
                                             <p name="idTravel" hidden><%= jsonObject[i]['driver'] %> </p>

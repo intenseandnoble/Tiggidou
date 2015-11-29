@@ -26,10 +26,19 @@
                                 <h3> Code de votre voyage: <%= items.searchID%></h3>
                                 <h4> Voyage proposé: </h4>
                                 <% items.offer.forEach(function(transport){%>
-                                    <form>
-                                        <p>Heure du départ: <%= transport.attributes.departureTime %></p>
-                                        <p>Coût: <%= transport.attributes.cost %></p>
+                                    <form method="get" action="/travel/<%= transport.attributes.idAddTravel %>">
+                                        <a href="javascript:;" onclick="parentNode.submit();">
+                                            <%= transport.attributes.startAddress %> → <%= transport.attributes.destinationAddress%><br>
+                                            <p>Heure du départ: <%= transport.attributes.departureTime %></p>
+                                            <p>Coût: <%= transport.attributes.cost %></p>
+                                            <% if (transport.attributes.petsAllowed == 1){ %>
+                                                <%= strings.petsAllowed %> <%= strings.no %><br>
+                                            <%}else{ %>
+                                                <%= strings.petsAllowed %> <%= strings.yes %> <br>
+                                            <% } %>
+                                        </a>
                                     </form>
+                                    <hr>
 
                                 <%})%>
                             <% }) %>

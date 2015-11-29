@@ -22,6 +22,7 @@
                 <div class="8u 12u$(medium) important(medium)">
                     <div id="content">
                         <form method="post" action="/add-passenger">
+                            <input type="hidden" name="idTravel" value =<%= travel['idAddTravel']%>>
                             <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(travel)%>">
                             <a href="/profile/<%= username %>" > <h1><%= username %> </h1> </a>
                             <% if (travel['cost'] != undefined) { %>
@@ -40,9 +41,6 @@
                             <button type="submit" class="button small icon fa-arrow-circle-right"> S'ajouter au transport </button>
 
                         </form>
-
-
-
                     </div>
                     <div class="8u 12u$(medium) important(medium)">
                         <div id="content">

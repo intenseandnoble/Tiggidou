@@ -5,12 +5,12 @@
 //View en français
 var headerFR = require('../views/fr/header.js');
 var footFR = require('../views/fr/footer.js');
+var variousLilStrings = require('../views/fr/variousLilStrings.js');
 //Models and utils
 var utils = require('../controllers/utils.js');
 var log = require('../config/logger').log;
 var profile = require('../models/profile.js');
 var Model = require('../models/models');
-var Promise = require('bluebird');
 var TravelRequest = require('../models/travelRequest').TravelRequest;
 
 module.exports = TripSearchOffer;
@@ -39,6 +39,7 @@ TripSearchOffer.prototype.display = function(req, res){
                         profile: require('../views/fr/profile.js'),
                         header: headerFR,
                         foot : footFR,
+                        strings: variousLilStrings,
                         proposition : resultsProposition
                     })
             });

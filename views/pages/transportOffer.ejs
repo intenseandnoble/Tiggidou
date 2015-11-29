@@ -20,6 +20,14 @@
 
                 <div class="8u 12u$(medium) important(medium)">
                     <div id="content">
+                        <% proposition.forEach(function(items){%>
+                            <h3> Code du voyage: <%= items.searchID%></h3>
+                            <h4> Proposition de voyage: </h4>
+                            <% items.offer.forEach(function(transport){%>
+                                <p><%= transport.attributes.idTravel%></p>
+                            <%})%>
+
+                        <% }) %>
 
                     </div>
                 </div>

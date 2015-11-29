@@ -238,34 +238,80 @@ function getAllTravelRequests(req, res) {
 
 }
 
-function getPropositionTransport(req, res){
-    var userId = req.user.id;
+function setInformationTrip(propositionTrip, done) {
+    var tripInformationList = [];
+    var promiseArr = [];
+    //get the proposition information
+
+    propositionTrip.models.forEach(function (proposition) {
+        promiseArr.push(new Model.ModelTravel.Travel()
+            .query({where:{idAddTravel: proposition.attributes.idTravel}})
+            .fetch()
+            .then(function (tripInformation) {
+                tripInformationList.push(tripInformation);
+            }))
+    });
+
+    return Promise.all(promiseArr).then(function(doc) {
+            return done(null, tripInformationList);
+    })
+
+
+
+}
+function getOfferTransportInformation(listToSearch, done) {
     var resultsProposition = [];
-    new Model.ModelTravelRequest.TravelRequest({passenger: userId}).fetchAll()
-        .then(function(listSearchTravel){
-            var promiseArr = [];
-            var listToSearch = listSearchTravel.models;
-            listToSearch.forEach(function(travel){
-                var idSearchTransport = travel.attributes.idSearchTravel;
-                promiseArr.push(new Model.ModelTransportOffer.TransportOffer({idSearchTravel:idSearchTransport})
-                    .fetchAll()
-                    .then(function(results){
+    var promiseArr = [];
+    listToSearch.forEach(function (travel) {
+        var idSearchTransport = travel.attributes.idSearchTravel;
+        //get every proposition of transport
+        var results = new Model.ModelTransportOffer.TransportOffer()
+            .query({where: {idSearchTravel: idSearchTransport}})
+            .fetchAll()
+            .then(function (propositionTrip) {
+                if (propositionTrip.models.length > 0) {
+                    setInformationTrip(propositionTrip, function(err, listInformation){
+                        if(err){
+                            log.error(err);
+                            return res.redirect('/no-results');
+                        }
                         resultsProposition.push({
                             searchID: idSearchTransport,
-                            offer: results
+                            offer: listInformation
                         });
-                    }))
+                    })
+                }
             });
-            Promise.all(promiseArr).then(function(doc){
+        promiseArr.push(results)
+    });
+
+    Promise.all(promiseArr).then(function(doc){
+        return done(null, resultsProposition);
+    })
+}
+function getPropositionTransport(req, res){
+    var userId = req.user.id;
+
+    //Get search transport from this actual user
+    new Model.ModelTravelRequest.TravelRequest()
+        .query({where:{passenger: userId}})
+        .fetchAll()
+        .then(function(listSearchTravel){
+            getOfferTransportInformation(listSearchTravel.models, function(err, resultsProposition){
+                if(err){
+                    log.error(err);
+                    return res.redirect('/no-results');
+                }
+
                 res.render('pages/transportOffer.ejs',
                     {
                         logged: utils.authentificated(req),
                         profile: require('../views/fr/profile.js'),
                         header: headerFR,
-                        foot : footFR
+                        foot : footFR,
+                        proposition : resultsProposition
                     })
             });
-
         });
 
 

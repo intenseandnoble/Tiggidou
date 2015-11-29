@@ -13,9 +13,11 @@ module.exports =
     "ads":"Annonces",
     "reservation":"R\u00E9servations",
     "myTravels":"Mes voyages",
+    "myTravelOffers":"Mes offres de voyage",
+    "myTravelRequests":"Mes demandes de voyage",
     "messages":"Messages",
-    "aTravel":"Voyage que vous offrez",
-    "aTravelRequest":"Voyage que vous demandez",
+    "aTravel":"Voyage offert",
+    "aTravelRequest":"Voyage demand\u00E9",
     "allTravels":"Tous les voyages que vous offrez",
     "allTravelRequests":"Tous les voyages que vous demandez",
 
@@ -38,6 +40,10 @@ module.exports =
     "petsAllowed": "Animaux permis?: ",
     "moreOptions": "Cliquez sur un voyage pour obtenir plus d'options.",
     "yes": "Oui",
-    "no": "Non"
+    "no": "Non",
+
+    //photo
+    "modPic":"Modifiez votre photo de profil",
+    "selectPic":"Choisir votre nouvelle photo de profil"
 
 };

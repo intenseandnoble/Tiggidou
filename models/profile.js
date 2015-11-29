@@ -172,12 +172,8 @@ function getScores () {
 
 function renderProfile(req, res, ps, page) {
     //and resolution de la promeese sur les scores
-    travelsAsDriver = getTravelsAsDriver(req);
-    travelsAsPassenger = getTravelsAsPassenger(req);
 
-
-
-    Promise.join(scoreArray, travelsAsDriver, travelsAsPassenger, function (scores, travelsD, travelsP){
+    Promise.join(scoreArray, function (scores, travelsD, travelsP){
 
            res.render(page, {
                logged: utils.authentificated(req),
@@ -202,9 +198,6 @@ function renderProfile(req, res, ps, page) {
                userOfProfile: userOfProfile,
                typeOfComment: 0,
                pageType: 0,
-
-               travelsAsDriver: travelsD,
-               travelsAsPassenger: travelsP,
 
                age: age,
                education: education,

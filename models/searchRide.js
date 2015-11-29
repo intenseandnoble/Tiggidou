@@ -6,6 +6,7 @@ var TravelRequest = require('./travelRequest').TravelRequest;
 //View en français
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
+var variousLilStrings = require('../views/fr/variousLilStrings.js');
 var utils = require('../controllers/utils.js');
 var modelUsers = require('./user');
 var moment = require('moment');
@@ -139,7 +140,8 @@ function renderRide(req, res, ps) {
         jsonObject: jsonObject,
         logged: utils.authentificated(req),
         header: header,
-        foot: foot
+        foot: foot,
+        strings: variousLilStrings
     });
 }
 

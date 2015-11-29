@@ -20,15 +20,22 @@
 
                 <div class="8u 12u$(medium) important(medium)">
                     <div id="content">
-                        <% proposition.forEach(function(items){%>
-                            <h3> Code du voyage: <%= items.searchID%></h3>
-                            <h4> Proposition de voyage: </h4>
-                            <% items.offer.forEach(function(transport){%>
-                                <p>Departure time: <%= transport.attributes.departureTime%></p>
-                                <p>Cost: <%= transport.attributes.cost%></p>
-                            <%})%>
+                        <h2>Proposition de voyage</h2>
+                        <%if(proposition.length > 0) { %>
+                            <% proposition.forEach(function(items){%>
+                                <h3> Code de votre voyage: <%= items.searchID%></h3>
+                                <h4> Voyage proposé: </h4>
+                                <% items.offer.forEach(function(transport){%>
+                                    <form>
+                                        <p>Heure du départ: <%= transport.attributes.departureTime %></p>
+                                        <p>Coût: <%= transport.attributes.cost %></p>
+                                    </form>
 
-                        <% }) %>
+                                <%})%>
+                            <% }) %>
+                        <%} else{ %>
+                            <p> vous n'avez reçu aucune proposition de transport</p>
+                        <% } %>
 
                     </div>
                 </div>

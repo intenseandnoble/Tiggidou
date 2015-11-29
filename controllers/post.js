@@ -276,11 +276,11 @@ function postRide(req, res) {
 
     else //insert into searchTravel
     {
-        if(req.body.petsRadio_p == 'Yes') pets= 1;
-        else pets = 0;
+        if(req.body.petsRadio_p == 'Yes') pets= 0;
+        else pets = 1;
 
-        if(req.body.luggageRadio_d == 'Yes') luggage= 1;
-        else luggage = 0;
+        if(req.body.luggageRadio_d == 'Yes') luggage= 0;
+        else luggage = 1;
 
         new Model.ModelTravelRequest.TravelRequest().save({
                 startAddress :req.body.currentLocation,

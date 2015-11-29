@@ -15,7 +15,7 @@
     <!-- Banner -->
         <div class="box container">
             <div>
-                <h2>Information sur la demande de voyage</h2>
+                <h2><%= strings.infoOnRequest %></h2>
                 <article class="row">
                     <div class = "infoResult">
 
@@ -25,14 +25,14 @@
                             <%=passengerSearch['departureTime']%><br>
                             <%=passengerSearch['startAddress']%> → <%=passengerSearch['destinationAddress']%><br>
 
-                            Nb de Valises : <%=passengerSearch['luggagesSize']%><br>
+                            <%= strings.luggage %> <%=passengerSearch['luggagesSize']%><br>
 
 
 
                             <% if (passengerSearch['petsAllowed'] == 0){ %>
-                            Animaux? : Non<br>
+                            <%= strings.petsAllowed %> <%= strings.no %><br>
                             <%}else{ %>
-                            Animaux? : Oui <br>
+                            <%= strings.petsAllowed %> <%= strings.yes %> <br>
                             <% } %>
 
 
@@ -42,25 +42,25 @@
             </div>
 
             <div>
-                <h2>Offrir un voyage</h2>
+                <h2><%= strings.travelOffer%></h2>
                 <% if(driverOffer.length > 0){ %>
                     <FORM action="/addPropositionTransport" method="post">
                         <input type="hidden" name="idTravelSearch" id="idTravelSearch" value="<%= passengerSearch['idSearchTravel']%>">
                         <select   name="travelOffer" >
-                            <option value="0" selected="1">Offrir un voyage existant (Numéro du voyage → heure du voyage)</option>
+                            <option value="0" selected="1"><%= strings.verboseTravelOffer %></option>
                             <% for(i= 0; i<driverOffer.length; i++){ %>
-                                <option value="<%= driverOffer[i]['idAddTravel']%>"><%= driverOffer[i]['idAddTravel'] %> --> <%= driverOffer[i]['departureTime']%> </option>
+                                <option value="<%= driverOffer[i]['idAddTravel']%>"><%= driverOffer[i]['idAddTravel'] %> → <%= driverOffer[i]['departureTime']%> </option>
                             <% }%>
                         </select>
-                        <button class="button small icon fa-arrow-circle-right">Offrir le voyage</button>
+                        <button class="button small icon fa-arrow-circle-right"><%= strings.offerTheTravel %></button>
                     </FORM>
                 <% } %>
                 <div>
-                    <h3> Vous pouvez creer un voyage rapide</h3>
+                    <h3><%= strings.possibilityCreateTravelFast %></h3>
                 </div>
                 <form action="/createFastTravel" method="get">
                     <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(passengerSearch)%>">
-                    <button class="button small icon fa-arrow-circle-right">Créer un nouveau voyage rapidement</button>
+                    <button class="button small icon fa-arrow-circle-right"><%= strings.createNewTravelFast %></button>
                 </form>
 
             </div>

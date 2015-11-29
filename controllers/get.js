@@ -5,7 +5,7 @@
 var headerFR = require('../views/fr/header.js');
 var footFR = require('../views/fr/footer.js');
 var loginStringFR = require('../views/fr/sign.js');
-
+var variousLilStrings = require('../views/fr/variousLilStrings.js');
 //Models and utils
 var utils = require('./utils.js');
 var log = require('../config/logger').log;
@@ -39,7 +39,8 @@ function getHome(req, res) {
         {
             logged: utils.authentificated(req),
             header: headerFR,
-            foot : footFR
+            foot : footFR,
+            strings : variousLilStrings
         });
 }
 
@@ -127,7 +128,8 @@ function getSelectedPassenger(req, res) {
                     header: headerFR,
                     foot : footFR,
                     passengerSearch: travelPassengerJson,
-                    driverOffer: travelOffer
+                    driverOffer: travelOffer,
+                    strings: variousLilStrings
                 });
         })
         .catch(function(err){
@@ -184,7 +186,8 @@ function getAskRide (req, res) {
         {
             logged: utils.authentificated(req),
             header: headerFR,
-            foot : footFR
+            foot : footFR,
+            strings : variousLilStrings
         });
 }
 function getResults(req, res) {
@@ -192,7 +195,8 @@ function getResults(req, res) {
         {
             logged: utils.authentificated(req),
             header: headerFR,
-            foot : footFR
+            foot : footFR,
+            strings : variousLilStrings
         });
 }
 
@@ -201,7 +205,8 @@ function getNoResult(req, res) {
         {
             logged: utils.authentificated(req),
             header: headerFR,
-            foot : footFR
+            foot : footFR,
+            strings : variousLilStrings
         });
 }
 function getLogout(req, res){

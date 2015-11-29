@@ -37,7 +37,7 @@
                                 <span> </span>
                             </label>
                             <label for="passengerCheckbox" class="[ btn btn-default active ] checkboxUserlbl">
-                                Passenger
+                                <%= strings.passenger %>
                             </label>
                         </div>
 
@@ -51,7 +51,7 @@
                                     <span> </span>
                                 </label>
                                 <label for="driverCheckbox" class="[ btn btn-default active ] checkboxUserlbl ">
-                                    Conducteur
+                                    <%= strings.driver %>
                                 </label>
                             </div>
 
@@ -86,9 +86,9 @@
                             <br>
 
                             <div id="accordion"  style="width:580px;">
-                                <h3>More options</h3>
+                                <h3><%= strings.moreOptions %></h3>
 
-                                <div><br> Score du conducteur désiré:
+                                <div><br> <%= strings.desiredAvgDScore %>
 
                                     <div class="rating-star" align="left">
                                         <input type="hidden" name="avgScoreDriver" value="0" />
@@ -112,11 +112,11 @@
 
                                     <br>
 
-                                    Animaux accepté? <br><input type="radio" name="petsRadio_p" value="Yes">Oui
-                                    <input type="radio" name="petsRadio_p" value="No" checked>Non <br><br>
+                                    <%= strings.petsAllowed %> <br><input type="radio" name="petsRadio_p" value="Yes"><%= strings.yes %>
+                                    <input type="radio" name="petsRadio_p" value="No" checked><%= strings.no %> <br><br>
 
-                                    Valises acceptés?<br><input type="radio" name="luggageRadio_p" value="Yes">Oui
-                                    <input type="radio" name="luggageRadio_p" value="No" checked>Non <br><br>
+                                    <%= strings.luggage %><br><input type="radio" name="luggageRadio_p" value="Yes"><%= strings.yes %>
+                                    <input type="radio" name="luggageRadio_p" value="No" checked><%= strings.no %> <br><br>
                                     Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_p" style="background-color: #E1EEF2"></textarea><br><br>
 
                                 </div>
@@ -151,9 +151,9 @@
 
 
 
-                                <h3>More options</h3>
+                                <h3><%= strings.moreOptions %></h3>
 
-                                <div><br> Score moyen du passager désiré:
+                                <div><br> <%= strings.desiredAvgPScore %>
 
                                     <div class="rating-star" align="left">
                                         <input type="hidden" name="avgScorePassenger" value="0" />
@@ -183,15 +183,15 @@
 
 
 
-                                    Animaux acceptés?  <br><input type="radio" name="petsRadio_d" value="Yes">Oui
+                                    <%= strings.petsAllowed %> <br><input type="radio" name="petsRadio_d" value="Yes">Oui
                                     <input type="radio" name="petsRadio_d" value="No" checked>Non <br><br>
 
-                                    Valises acceptés?<br><input type="radio" name="luggageRadio_d" value="Yes">Oui
+                                    <%= strings.luggage %><br><input type="radio" name="luggageRadio_d" value="Yes">Oui
                                     <input type="radio" name="luggageRadio_d" value="No" checked>Non <br><br>
 
 
 
-                                    Commentaires:<br> <br><textarea id="comments-post-ride" name = "commentsRide_d" style="background-color: #E1EEF2"></textarea><br><br>
+                                    <%= strings.comments %><br> <br><textarea id="comments-post-ride" name = "commentsRide_d" style="background-color: #E1EEF2"></textarea><br><br>
 
 
 
@@ -204,10 +204,10 @@
 
                         <br><div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-primary active" id="currentLocationMap">
-                                <input type="radio" name="locationMap" id ="radio-map-currentLocation" checked> Lieu de départ
+                                <input type="radio" name="locationMap" id ="radio-map-currentLocation" checked> <%= strings.departureAddr %>
                             </label>
                             <label class="btn btn-primary" id="destinationMap">
-                                <input type="radio" name="locationMap" id ="radio-map-destination" > Lieu d'arrivé
+                                <input type="radio" name="locationMap" id ="radio-map-destination" > <%= strings.arrivalAddr %>
                             </label>
                         </div>
 

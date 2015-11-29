@@ -39,7 +39,7 @@
                                                 <span> </span>
                                             </label>
                                             <label for="searchTravelId" class="[ btn btn-default active ] checkboxUserlbl">
-                                                Trouvez un conducteur!
+                                                <%= strings.findDriver %>
                                             </label>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                                 <span> </span>
                                             </label>
                                             <label for="searchOffersId" class="[ btn btn-default active ] checkboxUserlbl ">
-                                                Trouvez un passager!
+                                                <%= strings.findPassenger %>
                                             </label>
                                         </div>
 
@@ -81,7 +81,7 @@
                         <section>
                             <div><br>
 
-                                <h1>Experience</h1><input type="radio" name="smoker-radio" value="Super">Super-Experience<br>
+                                <h1><%= strings.exp %></h1><input type="radio" name="smoker-radio" value="Super">Super-Experience<br>
                                 <input type="radio" name="smoker-radio" value="Moyen" checked>Moyen-Experience <br>
                                 <input type="radio" name="smoker-radio" value="Ex" checked>Experience <br>
                                 <input type="radio" name="smoker-radio" value="Low" checked>Low-Experience <br>
@@ -106,8 +106,8 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Date
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" >Ascendant</a></li>
-                        <li><a href="#">Descendant</a></li>
+                        <li><a href="#" ><%= strings.asc %></a></li>
+                        <li><a href="#"><%= strings.desc %></a></li>
                     </ul>
                 </div>
 
@@ -115,8 +115,8 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Prix
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" >Ascendant</a></li>
-                        <li><a href="#"> Descendant</a></li>
+                        <li><a href="#" ><%= strings.asc %></a></li>
+                        <li><a href="#"><%= strings.desc %></a></li>
                     </ul>
                 </div>
 
@@ -157,13 +157,13 @@
                                             <%=jsonObject[i]['departureTime']%><br>
                                             <%=jsonObject[i]['startAddress']%> → <%=jsonObject[i]['destinationAddress']%><br>
 
-                                            Sièges pris: <%=jsonObject[i]['takenSeat']%><br>
+                                            <%= strings.seatsTaken %> <%=jsonObject[i]['takenSeat']%><br>
 
-                                            Sièges disponibles: <%=jsonObject[i]['availableSeat']%><br>
-                                            <% if (jsonObject[i]['petsAllowed'] == 0){ %>
-                                            Animaux permis? : Non<br>
+                                            <%= strings.availableSeats %> <%=jsonObject[i]['availableSeat']%><br>
+                                            <% if (jsonObject[i]['petsAllowed'] == 1){ %>
+                                            <%= strings.petsAllowed %> <%= strings.no %><br>
                                             <%}else{ %>
-                                            Animaux permis? : Oui <br>
+                                            <%= strings.petsAllowed %> <%= strings.yes %> <br>
                                             <% } %>
 
                                         </div>
@@ -187,7 +187,7 @@
 
                                     <div>
                                         <% var pieces = name[i].split(".");%>
-                                        <h1><%= pieces[0]+"."+pieces[1].substring(0,1);%></h1>
+                                        <h1><%= pieces[0]+"."+pieces[1].substring(0,1) %></h1>
                                         <!--logos here and goodies. -->
 
                                             </div>
@@ -203,14 +203,16 @@
                                                 <%=jsonObject[i]['departureTime']%><br>
                                                 <%=jsonObject[i]['startAddress']%> → <%=jsonObject[i]['destinationAddress']%><br>
 
-                                                Nb de Valises : <%=jsonObject[i]['luggagesSize']%><br>
-
-
-
-                                                <% if (jsonObject[i]['petsAllowed'] == 0){ %>
-                                                Animaux? : Non<br>
+                                               <% if (jsonObject[i]['luggagesSize'] == 1) { %>
+                                                <%= strings.luggages %> <%= strings.no %><br>
                                                 <%}else{ %>
-                                                Animaux? : Oui <br>
+                                                <%= strings.luggages %> <%= strings.yes %> <br>
+                                                <% } %>
+
+                                                <% if (jsonObject[i]['pets'] == 1){ %>
+                                                <%= strings.petsAllowed %> <%= strings.no %><br>
+                                                <%}else{ %>
+                                                <%= strings.petsAllowed %> <%= strings.yes %> <br>
                                                 <% } %>
 
 
@@ -228,7 +230,7 @@
                             <%}%>
                         <%}else{%>
                             <form action = "Destination textBox">
-                                <h3 align="center">Spécifié votre recherche</h3>
+                                <h3 align="center"><%= strings.specifySearch %></h3>
                                 <br>
                             </form>
                         <%}%>

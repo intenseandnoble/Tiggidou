@@ -77,9 +77,13 @@ module.exports = function (app, passport) {
 
     app.get('/logout', get.getLogout);
 
-    app.get('/travel/:travelId', get.getTravel);
+    app.get('/travel/all', utils.requireAuth, get.getAllTravels);
 
-    app.get('/travelrequest/:reqTravelId', get.getTravelRequest);
+    app.get('/travel/:travelId', utils.requireAuth, get.getTravel);
+
+    app.get('/travelrequest/all', utils.requireAuth, get.getAllTravelRequests);
+
+    app.get('/travelrequest/:reqTravelId', utils.requireAuth, get.getTravelRequest);
 
     app.get('/createFastTravel', utils.requireAuth, get.getCreateFastTravel);
 

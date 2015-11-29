@@ -24,7 +24,8 @@ var TravelRequest = DB.Model.extend({
 
 module.exports = {
     TravelRequest : TravelRequest,
-    displayPageOfAReqTravelwComments: displayPageOfAReqTravelwComments
+    displayPageOfAReqTravelwComments: displayPageOfAReqTravelwComments,
+    displayPageOfAllTravelsOfUser: displayPageOfAllTravelsOfUser
 };
 
 function displayPageOfAReqTravelwComments (req, res) {
@@ -50,6 +51,26 @@ function displayPageOfAReqTravelwComments (req, res) {
         });
 }
 
+function displayPageOfAllTravelsOfUser (req, res) {
+    var ProfileModel = require('./profile');
+    var profil = new ProfileModel();
+    Promise.join(profil.getTravelsAsPassenger(req),
+        function (travelsP) {
+
+            res.render('pages/all-travels.ejs',
+                {
+                    logged: utils.authentificated(req),
+                    header: header,
+                    foot : foot,
+                    profile: profile,
+                    pageType : 4,
+
+                    allTravels: travelsP
+
+                });
+        });
+}
+
 function displayPageandComments (req, res, travel, reqTravelId) {
 
     var commentsDatePromise = [];
@@ -58,7 +79,7 @@ function displayPageandComments (req, res, travel, reqTravelId) {
 
     new Comments().where({
         commentType: 2,
-        commentTravelId: reqTravelId
+        commentReqTravelId: reqTravelId
     }).fetchAll()
         .then(function (results) {
             var resultJSON = results.toJSON();
@@ -74,31 +95,29 @@ function displayPageandComments (req, res, travel, reqTravelId) {
                 }
             }
 
-            var ProfileModel = require('./profile');
-            var profil = new ProfileModel();
-            Promise.join(profil.getTravelsAsDriver(req), profil.getTravelsAsPassenger(req), commentariesTextsPromise,
+            Promise.join(commentariesTextsPromise,
                 commentsDatePromise, commentsUsernamesPromise,
-                function (travelsD, travelsP, commentariesTexts, commentsDate, commentsUsernames) {
+                function (commentariesTexts, commentsDate, commentsUsernames) {
 
-                    res.render('pages/travel.ejs',
-                        {
-                            logged: utils.authentificated(req),
-                            header: header,
-                            foot : foot,
-                            profile: profile,
+                    Promise.all(commentsUsernames)
+                        .then (function (cUsernames) {
+                            res.render('pages/travel.ejs',
+                                {
+                                    logged: utils.authentificated(req),
+                                    header: header,
+                                    foot : foot,
+                                    profile: profile,
 
-                            travelsAsDriver: travelsD,
-                            travelsAsPassenger: travelsP,
+                                    travel: travel,
 
-                            travel: travel,
+                                    typeOfComment: 2,
+                                    pageType:2,
+                                    comments: commentariesTexts,
+                                    commentsIssuers: cUsernames,
+                                    commentsDate: commentsDate,
+                                    userOfProfile: reqTravelId
 
-                            typeOfComment: 2,
-                            pageType:2,
-                            comments: commentariesTexts,
-                            commentsIssuers: commentsUsernames,
-                            commentsDate: commentsDate,
-                            userOfProfile: reqTravelId
-
+                                });
                         });
                 });
         });

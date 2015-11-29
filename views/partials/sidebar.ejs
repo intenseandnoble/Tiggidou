@@ -47,9 +47,8 @@
                 <li><a href="#tabs-1"><%= profile.dashboard %></a></li>
                 <li><a href="#tabs-2"><%= profile.ads %></a></li>
                 <li><a href="#tabs-3"><%= profile.reservation %></a></li>
-                <li><a href="#tabs-4"><%= profile.messages %></a></li>
-                <li><a href="#myTravels"><%= profile.myTravels %></a></li>
-                <% include ../partials/myTravels %>
+                <li><a href="/travelrequest/all"><%= profile.myTravelRequests %></a></li>
+                <li><a href="/travel/all"><%= profile.myTravelOffers %></a></li>
                 <li><% include ../partials/profileAvatar %></li>
             </ul>
         </section>

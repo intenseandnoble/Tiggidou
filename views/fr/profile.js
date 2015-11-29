@@ -13,6 +13,8 @@ module.exports =
     "ads":"Annonces",
     "reservation":"R\u00E9servations",
     "myTravels":"Mes voyages",
+    "myTravelOffers":"Mes offres de voyage",
+    "myTravelRequests":"Mes demandes de voyage",
     "messages":"Messages",
     "aTravel":"Voyage offert",
     "aTravelRequest":"Voyage demand\u00E9",

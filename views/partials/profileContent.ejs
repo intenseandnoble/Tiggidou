@@ -1,7 +1,9 @@
 <!-- Content -->
 <article>
-
     <h2><%= userName %></h2>
+    <div class="image">
+        <img src="/images/avatar/<%= avatarImage %>" alt="avatar"/>
+    </div>
     <% if (anecdote != null) { %>
     <p><%= anecdote %></p>
     <% }

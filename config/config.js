@@ -16,5 +16,5 @@ var production = {
     env : global.process.env.NODE_ENV = 'prod'
 };
 
-//exports.Config = production;
-exports.Config = development;
+exports.Config = production;
+//exports.Config = development;

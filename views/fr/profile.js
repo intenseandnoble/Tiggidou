@@ -11,7 +11,7 @@ module.exports =
     "submenu":"Sous-menu",
     "dashboard":"Tableau de bord",
     "ads":"Annonces",
-    "reservation":"R\u00E9servations",
+    "reservation":"Propositions de voyages",
     "myTravels":"Mes voyages",
     "myTravelOffers":"Mes offres de voyage",
     "myTravelRequests":"Mes demandes de voyage",
@@ -41,6 +41,9 @@ module.exports =
     "moreOptions": "Cliquez sur un voyage pour obtenir plus d'options.",
     "yes": "Oui",
     "no": "Non",
+
+    //Mes demandes de voyage
+    "offerTitle": "Transport offert",
 
     //photo
     "modPic":"Modifiez votre photo de profil",

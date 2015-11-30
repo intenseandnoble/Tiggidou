@@ -34,6 +34,9 @@
                     case 4:%>
                     <h3><%= profile.allTravelRequests %></h3>
                     <% break;
+                    case 5:%>
+                    <h3><%= profile.offerTitle %></h3>
+                    <% break;
             } %>
 
         </section>
@@ -41,8 +44,8 @@
         <section>
             <h3><%= profile.submenu %></h3>
             <ul class="style2">
-                <li><a href="#tabs-1"><%= profile.dashboard %></a></li>
-                <li><a href="#tabs-2"><%= profile.ads %></a></li>
+                <li><a href="/profile"><%= profile.dashboard %></a></li>
+                <!--li><a href="#tabs-2"--><!--%= profile.ads %--><!--/a></li-->
                 <li><a href="/getPropositionTransport"><%= profile.reservation %></a></li>
                 <li><a href="/travelrequest/all"><%= profile.myTravelRequests %></a></li>
                 <li><a href="/travel/all"><%= profile.myTravelOffers %></a></li>

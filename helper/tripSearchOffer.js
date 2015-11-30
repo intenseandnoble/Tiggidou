@@ -6,6 +6,7 @@
 var headerFR = require('../views/fr/header.js');
 var footFR = require('../views/fr/footer.js');
 var variousLilStrings = require('../views/fr/variousLilStrings.js');
+var profileFR = require('../views/fr/profile');
 //Models and utils
 var utils = require('../controllers/utils.js');
 var log = require('../config/logger').log;
@@ -36,11 +37,12 @@ TripSearchOffer.prototype.display = function(req, res){
                 res.render('pages/transportOffer.ejs',
                     {
                         logged: utils.authentificated(req),
-                        profile: require('../views/fr/profile.js'),
                         header: headerFR,
                         foot : footFR,
                         strings: variousLilStrings,
-                        proposition : resultsProposition
+                        profile: profileFR,
+                        pageType: 5,
+                        proposition: resultsProposition
                     })
             });
         });

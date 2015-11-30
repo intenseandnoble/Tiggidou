@@ -29,41 +29,17 @@
                                     <input type="text" class="search-panel" id="destination" name = "destination"  placeholder="À"><br>
                                     <input type="text" class="search-panel" id="datepicker" name="datepicker" placeholder="Date"/><br>
 
-                                    <div class="[ form-group ] ">
-                                        <input  class="radio" type="checkbox" name="searchDriver" id="searchTravelId" checked />
+                                    <div align="center">
 
-
-                                        <div class="[ btn-group ]">
-                                            <label for="searchTravelId" class="[ btn btn-primary ]">
-                                                <span class="[ glyphicon glyphicon-ok ]"></span>
-                                                <span> </span>
-                                            </label>
-                                            <label for="searchTravelId" class="[ btn btn-default active ] checkboxUserlbl">
-                                                <%= strings.findDriver %>
-                                            </label>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="[ form-group ] ">
-                                        <input class="radio" type="checkbox" name="searchPassenger" id="searchOffersId"  />
-
-
-                                        <div class="[ btn-group ] ">
-                                            <label for="searchOffersId" class="[ btn btn-primary ] ">
-                                                <span class="[ glyphicon glyphicon-ok ]"></span>
-                                                <span> </span>
-                                            </label>
-                                            <label for="searchOffersId" class="[ btn btn-default active ] checkboxUserlbl ">
-                                                <%= strings.findPassenger %>
-                                            </label>
-                                        </div>
+                                        <button class="button  icon fa-arrow-circle-right result-btn" type="submit" name="search" value="driver">
+                                            <%= strings.findDriver %>
+                                        </button>
+                                        <br><br>
+                                        <button class="button  icon fa-arrow-circle-right result-btn" type="submit" name="search" value="passenger">
+                                            <%= strings.findPassenger %>
+                                        </button>
 
                                     </div>
-
-
-
-                                    <br><button class="button small icon fa-arrow-circle-right">Go!</button>
                                 </form>
 
 

@@ -136,7 +136,7 @@ function setSearchRide(resultJSON,driver_bool ) {
 function renderRide(req, res, ps) {
     res.render('pages/results.ejs', {
         name : ps,
-        driverBool : req.query.searchDriver,
+        driverBool : req.query.search,
         jsonObject: jsonObject,
         logged: utils.authentificated(req),
         header: header,

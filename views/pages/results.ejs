@@ -104,7 +104,7 @@
                         <!--- PASSENGERS LOOKING FOR DRIVERS-->
                         <button id="reloadPage" hidden></button>
                         <%if(name){%>
-                            <%if(driverBool == "on") { %>
+                            <%if(driverBool == "driver") { %>
 
                             <%for ( i= 0;i< name.length;i++) { %>
                             <form method="get" action="/travel/<%= jsonObject[i]['idAddTravel']%>">

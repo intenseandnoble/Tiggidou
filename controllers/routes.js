@@ -33,6 +33,8 @@ module.exports = function (app, passport) {
 
     app.get('/select-passenger', utils.requireAuth, get.getSelectedPassenger);
 
+    app.get('/select-driver', utils.requireAuth, get.getSelectedDriver);
+
     app.post('/add-passenger', post.postAddPassenger);
 
     app.post('/addPropositionTransport', utils.requireAuth, post.postAddPropositionTransport);

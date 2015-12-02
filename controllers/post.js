@@ -228,7 +228,7 @@ function postRide(req, res) {
 
 
     if(req.body.radiusCurr.length!=0){
-        radiusCurr = req.body.radiulocasCurr;
+        radiusCurr = req.body.radiusCurr;
     }
 
     if(req.body.radiusDest.length!=0){
@@ -329,15 +329,20 @@ function postAddPropositionTransport(req, res){
 
 function postAddPassenger(req, res) {
     //TODO What if 2 users add it at the same time? With only 1 place left? Revisit this
+
+    var jsonObject = JSON.parse(req.body.jsonObject);
+    var idTravel = jsonObject.idAddTravel;
+    console.log(idTravel);
+
     if(req.user){
         new Model.ModelTravel.Travel().where({
-            idAddTravel: req.body.idTravel
+            idAddTravel: idTravel
         }).fetch().then(function (user) {
 
             if( 0 <user.get('availableSeat')){
 
-                Model.ModelTravel.updateSeats(req.body.idTravel, user.get('takenSeat'),  user.get('availableSeat') );
-                Model.ModelTravelPassenger.add(req.body.idTravel,req.session.req.user.id);
+                Model.ModelTravel.updateSeats(idTravel, user.get('takenSeat'),  user.get('availableSeat') );
+                Model.ModelTravelPassenger.add(idTravel,req.session.req.user.id);
                 res.redirect('/');
             }
             else{

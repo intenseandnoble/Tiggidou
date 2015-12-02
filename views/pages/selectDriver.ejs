@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <% include ../partials/head %>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+</head>
+
+<body class="homepage"  onload="initialize_resultMap();drawTrip();">>
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <% include ../partials/header %>
+    <!-- Banner -->
+        <div class="box container">
+            <div id="googleMap-results" class="googleMap-results"></div>
+            <div><h3 id="duration"><%= strings.travelDuration %> : </h3></div><br>
+
+
+            <div>
+                <h2><%= strings.infoOnRequest %></h2>
+                <article class="row">
+                    <div class = "infoResult">
+                        <div>
+
+                           <h2> <%=passengerSearch['name']%><br></h2>
+                            <h2> <%=passengerSearch['cost']%>$<br></h2>
+                            <%=passengerSearch['departureDate']%><br>
+                            <%=passengerSearch['departureTime']%><br>
+                            <%=passengerSearch['startAddress']%> → <%=passengerSearch['destinationAddress']%><br>
+                            <%= strings.luggage %> <%=passengerSearch['luggagesSize']%><br>
+
+                            <% if (passengerSearch['petsAllowed'] == 0){ %>
+                            <%= strings.petsAllowed %> <%= strings.no %><br>
+                            <%}else{ %>
+                            <%= strings.petsAllowed %> <%= strings.yes %> <br>
+                            <% } %>
+
+
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div>
+                <form action="/add-passenger" method="post">
+                    <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(passengerSearch)%>">
+                    <button class="button small icon fa-arrow-circle-right"><%= strings.addPassenger %></button>
+                </form>
+
+            </div>
+        </div>
+
+    <!-- Footer -->
+    <% include ../partials/footer %>
+
+</div>
+</body>
+</html>

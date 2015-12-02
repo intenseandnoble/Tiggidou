@@ -22,6 +22,7 @@ module.exports = {
     getProfile: getProfile,
     getSearchRide: getSearchRide,
     getSelectedPassenger:getSelectedPassenger,
+    getSelectedDriver:getSelectedDriver,
     getLogin: getLogin,
     getSignUp: getSignUp,
     getAskRide: getAskRide,
@@ -125,6 +126,37 @@ function getSelectedPassenger(req, res) {
         .then(function(travels){
             var travelOffer = travels.toJSON();
             res.render('pages/selectPassenger.ejs',
+                {
+                    logged: utils.authentificated(req),
+                    header: headerFR,
+                    foot : footFR,
+                    passengerSearch: travelPassengerJson,
+                    driverOffer: travelOffer,
+                    strings: variousLilStrings
+                });
+        })
+        .catch(function(err){
+            log.error(err);
+        });
+}
+
+function getSelectedDriver(req, res) {
+
+    var idUser = req.session.req.user.attributes.idUser;
+    var travelPassengerJson = JSON.parse(req.query.jsonObject);
+    var date = moment(travelPassengerJson['departureDate'], "dddd, Do MMMM YYYY").format('YYYY-MM-DD');
+    var search = {
+        driver: idUser,
+        startAddress: travelPassengerJson['startAddress'],
+        destinationAddress: travelPassengerJson['destinationAddress'],
+        departureDate: date
+    };
+    new Model.ModelTravel.Travel()
+        .query({where:search})
+        .fetchAll()
+        .then(function(travels){
+            var travelOffer = travels.toJSON();
+            res.render('pages/selectDriver.ejs',
                 {
                     logged: utils.authentificated(req),
                     header: headerFR,

@@ -134,6 +134,12 @@ function setSearchRide(resultJSON,driver_bool ) {
 
 
 function renderRide(req, res, ps) {
+
+    for(var i =0; i< jsonObject.length;i++)
+    {
+        jsonObject[i].name = ps[i];
+    }
+
     res.render('pages/results.ejs', {
         name : ps,
         driverBool : req.query.search,

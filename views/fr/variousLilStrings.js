@@ -32,11 +32,19 @@ module.exports =
     "arrivalAddr":"Lieu d'arrivé",
     "departureAddr":"Lieu de départ",
 
-    //select passenger
+    //select passenger/driver
     "infoOnRequest":"Information sur la demande de voyage",
     "travelOffer":"Offrir un voyage",
     "verboseTravelOffer": "Offrir un voyage existant (Numéro du voyage \u2192 heure du voyage)",
     "offerTheTravel": "Offrir le voyage",
     "possibilityCreateTravelFast":"Vous pouvez cr\u00E9er un voyage rapide",
-    "createNewTravelFast":"Cr\u00E9er un nouveau voyage rapidement"
+    "createNewTravelFast":"Cr\u00E9er un nouveau voyage rapidement",
+    "travelDuration":"Dur\u00E9e du voyage",
+    "travelLength":"Longueur du trajet",
+    "addPassenger":"Rajouter ce voyage"
+
+
+
+
+
 };

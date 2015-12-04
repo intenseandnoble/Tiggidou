@@ -92,14 +92,35 @@ module.exports = function(passport) {
                     user = data.toJSON();
                     return done(null, user);
                 } else {
-                    var promiseArr = [];
-                    promiseArr.push(new User().getCountName(profile.name.givenName, profile.name.familyName));
-                    var countUser;
+                    var firstName = profile.name.givenName;
+                    var familyName = profile.name.familyName;
 
-                    Promise.all(promiseArr).then(function(ps) {
-                        var countTest = ps[0][0];
-                        for (var key in countTest) {
-                            countUser = countTest[key];
+                    var partialUsername = firstName+"."+familyName+".";
+
+                    var promiseArr = [];
+
+                    promiseArr.push(new User().getUsernames(partialUsername+"%"));
+                    var usernameTry;
+
+                    Promise.all(promiseArr).then(function(usernames) {
+                        var counter = 0;
+                        var bool = true;
+
+                        while(bool){
+
+                            usernameTry = partialUsername+counter;
+                            var isValidUsername = true;
+                            for (var i=0; i<usernames[0].length; ++i) {
+                                if (usernames[0][i] == usernameTry) {
+                                    isValidUsername=false;
+                                    ++counter;
+                                    break;
+                                }
+                            }
+
+                            if (isValidUsername) {
+                                bool = false;
+                            }
                         }
 
                         var signUpUser = new User(
@@ -110,7 +131,7 @@ module.exports = function(passport) {
                                 familyName: profile.name.familyName,
                                 firstName: profile.name.givenName,
                                 typeSignUp: "facebook",
-                                username: profile.name.givenName + "." + profile.name.familyName + "." + countUser
+                                username: usernameTry
                             });
 
                         signUpUser.save().then(function(model) {
@@ -145,14 +166,35 @@ module.exports = function(passport) {
                     user = data.toJSON();
                     return done(null, user);
                 } else {
-                    var promiseArr = [];
-                    promiseArr.push(new User().getCountName(profile.name.givenName, profile.name.familyName));
-                    var countUser;
+                    var firstName = profile.name.givenName;
+                    var familyName = profile.name.familyName;
 
-                    Promise.all(promiseArr).then(function(ps) {
-                        var countTest = ps[0][0];
-                        for (var key in countTest) {
-                            countUser = countTest[key];
+                    var partialUsername = firstName+"."+familyName+".";
+
+                    var promiseArr = [];
+
+                    promiseArr.push(new User().getUsernames(partialUsername+"%"));
+                    var usernameTry;
+
+                    Promise.all(promiseArr).then(function(usernames) {
+                        var counter = 0;
+                        var bool = true;
+
+                        while(bool){
+
+                            usernameTry = partialUsername+counter;
+                            var isValidUsername = true;
+                            for (var i=0; i<usernames[0].length; ++i) {
+                                if (usernames[0][i] == usernameTry) {
+                                    isValidUsername=false;
+                                    ++counter;
+                                    break;
+                                }
+                            }
+
+                            if (isValidUsername) {
+                                bool = false;
+                            }
                         }
 
                         var signUpUser = new User(
@@ -163,7 +205,7 @@ module.exports = function(passport) {
                                 familyName: profile.name.familyName,
                                 firstName: profile.name.givenName,
                                 typeSignUp: "google",
-                                username: profile.name.givenName + "." + profile.name.familyName + "." + countUser
+                                username: usernameTry
                             });
 
                         signUpUser.save().then(function(model) {

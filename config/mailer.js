@@ -1,6 +1,8 @@
 /**
- * Created by dave on 25/10/15.
+ * Created by Dave Bernier on 25/10/15.
  * http://nodemailer.com/
+ * This class need a valide email
+ * Google and hotmail limits number of email sent
  */
 
 var nodemailer = require('nodemailer');

@@ -1,6 +1,7 @@
 /**
- * Created by dave on 28/09/15.
+ * Created by Dave Bernier on 28/09/15.
  * configuring the strategies for passport
+ * helper for login, signup and with the session
  * http://passportjs.org/docs
  * https://scotch.io/tutorials/easy-node-authentication-setup-and-local
  */
@@ -17,8 +18,7 @@ var configAuth = require('./authentification');
 var log = require('./logger').log;
 var Promise = require('bluebird');
 var https = require('https');
-var fs = require('fs');
-var path = require('path');
+var signFr = require('../views/fr/sign');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -40,43 +40,37 @@ module.exports = function(passport) {
         })
     });
 
-    // =========================================================================
-    // LOCAL LOGIN =============================================================
-    // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
-
+    //Local login
     passport.use('local-login',new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password'
         },
         function(email, password, done) {
+            //need email to connect
             if(email){
                 new User({email: email}).fetch().then(function(data) {
                     var user = data;
                     if(user === null) {
-                        return done(null, false, {message: 'Courriel invalide'});
+                        return done(null, false, {message: signFr.errEmailInvalid});
                     }  else {
                         user = data.toJSON();
+                        //Hash the password to compare with the good one
                         if(!bcrypt.compareSync(password, user.password)) {
-                            return done(null, false, {message: 'Mot de passe invalide'});
+                            return done(null, false, {message: signFr.errPwdInvalid});
                         } else {
                             return done(null, user);
                         }
                     }
                 });
+            //No email received
             } else{
-                return done(null, false, {message: 'Courriel invalide'})
+                return done(null, false, {message: signFr.errEmailInvalid})
             }
 
         }
     ));
 
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
+    //Facebook signup and signin
     passport.use(new FacebookStrategy({
             clientID: configAuth.facebookAuth.clientID,
             clientSecret: configAuth.facebookAuth.clientSecret,
@@ -86,11 +80,13 @@ module.exports = function(passport) {
         // facebook will send back the token and profile
         function(token, refreshToken, profile, done) {
             var email = profile.emails[0].value;
-            new User({email: email}).fetch().then(function(data) {
-                var user = data;
+            new User({email: email}).fetch().then(function(userData) {
+                var user = userData;
+                //existing user, login
                 if(user) {
-                    user = data.toJSON();
+                    user = userData.toJSON();
                     return done(null, user);
+                //don't exist, signup
                 } else {
                     var promiseArr = [];
                     promiseArr.push(new User().getCountName(profile.name.givenName, profile.name.familyName));

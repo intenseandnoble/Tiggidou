@@ -42,6 +42,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 require('./config/passport')(passport); // pass passport for configuration
 require('./controllers/routes')(app, passport);
 
+//setup environnement (dev=devellopement and prod=production)
 process.env.NODE_ENV = cfg.env;
 log.info("Mode prod activate: " + process.env.NODE_ENV);
 

@@ -16,7 +16,7 @@ var devFacebookAuth = {
     'clientSecret'  : '6d19339218d1fed159a9a9da680ffc67', // your App Secret
     'callbackURL'   : 'http://localhost:8080/auth/facebook/callback'
 };
-//TODO lorsque le site sera héberger, ajouter le lien sur google et ici
+//TODO lorsque le site sera hébergé, ajouter le lien sur google et ici
 var prodGoogleAuth = {
     'clientID'      : '56140469261-h17r00bo0kc29sen21mi4kghlu1kmcf9.apps.googleusercontent.com',
     'clientSecret'  : 'b7CTlPWTacsbV_CKNulRDjiK',

@@ -1,21 +1,27 @@
 /**
- * Created by dave on 09/11/15.
+ * file for the creation of an object equivalent to the table travel
  */
+// contains various reusable functions
 var utils = require('../controllers/utils.js');
+// allows logging of errors
 var log = require('../config/logger').log;
-var DB = require('../config/database');
+// to handle promises
 var Promise = require('bluebird');
+//to handle the change of format of a date
 var moment = require('moment');
-var modelUsers = require('./user');
+// the value within parenthesis of locale can be changed to obtain
+// the standard format of another location
 moment.locale("fr");
 moment().format('LLL');
-
+// for the creation of the connection with the table and for the access to other tables of the db
+var DB = require('../config/database');
 var Comments = require('./comments').Comments;
-
+var modelUsers = require('./user');
+// contains the possibly changing values of strings used in the rendering of pages
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var profile = require('../views/fr/profile.js');
-
+//creation of the link between the table travel of the db and the object Travel
 var Travel = DB.Model.extend({
     tableName: 'travel',
     idAttribute: 'idAddTravel'
@@ -27,7 +33,11 @@ module.exports = {
     displayPageOfATravelwComments:displayPageOfATravelwComments,
     displayPageOfAllTravelsOfUser: displayPageOfAllTravelsOfUser
 };
-
+/**
+ * finds a Travel and call the rendering function
+ * @param req
+ * @param res
+ */
 function displayPageOfATravelwComments (req, res) {
     var travelId = req.params.travelId;
 
@@ -40,7 +50,7 @@ function displayPageOfATravelwComments (req, res) {
             if (result) {
                 var resultat = result.toJSON();
                 resultat['departureDate'] = moment(resultat['departureDate']).format("dddd, Do MMMM YYYY");
-                displayPageAndComments(req, res, resultat, travelId);
+                renderingAndPromisesResolution(req, res, resultat, travelId);
             }
             else {
                 res.redirect('/login');
@@ -48,12 +58,16 @@ function displayPageOfATravelwComments (req, res) {
         });
 
 }
-
+/**
+ * finds all travels of user and renders the page all-travels with it
+ * @param req
+ * @param res
+ */
 function displayPageOfAllTravelsOfUser (req, res) {
     var ProfileModel = require('./profile');
     var profil = new ProfileModel();
     Promise.join(profil.getTravelsAsDriver(req),
-        function (travelsD, travelsP) {
+        function (travelsD) {
 
             res.render('pages/all-travels.ejs',
                 {
@@ -68,8 +82,14 @@ function displayPageOfAllTravelsOfUser (req, res) {
                 });
         });
 }
-
-function displayPageAndComments (req, res, travel, travelId) {
+/**
+ * renders pages after resolving all async calls
+ * @param req
+ * @param res
+ * @param travel
+ * @param travelId
+ */
+function renderingAndPromisesResolution (req, res, travel, travelId) {
     var commentsDatePromise = [];
     var commentariesTextsPromise = [];
     var commentsUsernamesPromise = [];
@@ -130,7 +150,12 @@ function displayPageAndComments (req, res, travel, travelId) {
 }
 
 
-
+/**
+ * update the number of taken/available seats
+ * @param travelId
+ * @param takenSeats
+ * @param availableSeats
+ */
 function updateSeats(travelId, takenSeats, availableSeats){
 
     new Travel().where({

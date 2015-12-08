@@ -1,7 +1,0 @@
-//forever
-{
-  "uid": "tiggidou",
-  "append": true,
-  "watch": true,
-  "script": "server.js"
-}

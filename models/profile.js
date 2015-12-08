@@ -305,7 +305,7 @@ function getTravelsAsPassenger (req) {
         })
 
 }
-
+//ToDo put this function in utils
 function roundingCeilOrFloor (score) {
     if (score % 1 != 0 && score % 1 >= 0.5) {
         score = Math.ceil(score);

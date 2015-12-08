@@ -1,9 +1,13 @@
 /**
- * Created by dave on 28/09/15.
+ * File for interaction with the table users in the database
+ *
  */
 var log = require('../config/logger').log;
 var DB = require('../config/database');
 
+/**
+ * a model for users
+ */
 var Users = DB.Model.extend({
     tableName: 'users',
     idAttribute: 'idUser',
@@ -42,6 +46,10 @@ module.exports = {
     getUsernameFromDBAsync: getUsernameFromDBAsync
 };
 
+/**
+ * Seeks in the db the user corresponding to userId and returns its username asynchronously
+ * @param userId
+ */
 function getUsernameFromDBAsync(userId) {
 
     return new Users({

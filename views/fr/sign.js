@@ -17,6 +17,8 @@ module.exports =
     "incorrectName": "La valeur entr\u00E9e est incorrect",
     "differentPwd": "Les mots de passe sont diff\u00E9rents!",
     "errorDateEmpty": "La date de naissance doit \u00EAtre s\u00E9lectionn\u00E9e!",
+    "errEmailInvalid": "Le courriel est invalide",
+    "errPwdInvalid": "Le mot de passe est invalide",
     "day": "Jour",
     "month": "Mois",
     "year": "Ann\u00E9e",

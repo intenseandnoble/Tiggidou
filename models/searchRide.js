@@ -1,17 +1,22 @@
 /**
- * Created by dave on 09/11/15.
+ * class file of Ride
  */
+// for the creation of the connection with the table and for the access to other tables of the db
 var Travel = require('./travel').Travel;
 var TravelRequest = require('./travelRequest').TravelRequest;
-//View en français
+var modelUsers = require('./user');
+// contains various reusable functions
+var utils = require('../controllers/utils.js');
+//to handle the change of format of a date
+var moment = require('moment');
+// to handle promises
+var Promise = require('bluebird');
+// allows logging of errors
+var log = require('../config/logger').log;
+//View en français, contains the possibly changing values of strings used in the rendering of pages
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var variousLilStrings = require('../views/fr/variousLilStrings.js');
-var utils = require('../controllers/utils.js');
-var modelUsers = require('./user');
-var moment = require('moment');
-var Promise = require('bluebird');
-var log = require('../config/logger').log;
 
 module.exports = Ride;
 
@@ -23,7 +28,8 @@ var dest;
 var currLocation;
 var dateRequest;
 
-/*
+/**
+ * constructor function
  * @param {string} temp_dest Valid address
  * @param {string} temp_currlocation Valid address
  * @error
@@ -46,9 +52,9 @@ function Ride(temp_dest, temp_currlocation, temp_date) {
 }
 
 
-/*
-
-@param {date} newdate must be a date format
+/**
+ * function of class: seeks among the travel offers those corresponding to rechercheOption
+ * @param {date} newdate must be a date format
  */
 Ride.prototype.searchDriver = function (req, res) {
     var rechercheOption = getTravelOption();
@@ -77,7 +83,11 @@ Ride.prototype.searchDriver = function (req, res) {
         renderRide(req, res, null);
     }
 };
-
+/**
+ * function of class: seeks among the travel requests those corresponding to rechercheOption
+ * @param req
+ * @param res
+ */
 Ride.prototype.searchPassengers = function (req, res) {
     var rechercheOption = getTravelOption();
 
@@ -131,8 +141,12 @@ function setSearchRide(resultJSON,driver_bool ) {
 
     }
 }
-
-
+/**
+ * renders the results of one of the research functions above
+ * @param req
+ * @param res
+ * @param ps
+ */
 function renderRide(req, res, ps) {
 
     for(var i =0; i< jsonObject.length;i++)
@@ -150,7 +164,10 @@ function renderRide(req, res, ps) {
         strings: variousLilStrings
     });
 }
-
+/**
+ * seeks options of search from global variables and returns it as a JSON object
+ * @returns {*}
+ */
 function getTravelOption() {
     var rech = null;
     if(dest && currLocation){
@@ -173,7 +190,12 @@ function getTravelOption() {
 
     return rech;
 }
-
+//TODO put the function below in utils
+/**
+ * puts a capitalize first letter for each word
+ * @param str
+ * @returns {string}
+ */
 function capitalize(str)
 {
     var pieces = str.split(" ");

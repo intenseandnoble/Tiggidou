@@ -5,7 +5,7 @@
     <% include ../partials/head %>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
-<body class="left-sidebar" onload="initialize_resultMap();displayResults();">
+<body class="left-sidebar" onload="initialize_resultMap();displayResults();google_maps();">
 <div id="page-wrapper">
 
     <!-- Header -->
@@ -14,6 +14,7 @@
     <!-- Main -->
     <div id="main-wrapper">
         <div class="container">
+           <h1 align="center"> <%=jsonObject[0]['startAddress']%> → <%=jsonObject[0]['destinationAddress']%><br></h1><br>
             <div id="googleMap-results" class="googleMap-results"></div><br><br>
             <div class="btn-toolbar">
 
@@ -21,51 +22,37 @@
             <div class="row 200%">
                 <div class="4u 12u$(medium)">
                     <div id="sidebar">
-
-                        <div class="row">
-
-                            <div >
-                                <form method="get" action="/search">
-                                    <input type="text" class="search-panel" id="currentLocation" name = "currentLocation" placeholder="De"><br>
-                                    <input type="text" class="search-panel" id="destination" name = "destination"  placeholder="À"><br>
-                                    <input type="text" class="search-panel" id="datepicker" name="datepicker" placeholder="Date"/><br>
-
-                                    <div align="center">
-
-                                        <button class="button  icon fa-arrow-circle-right result-btn" type="submit" name="search" value="driver">
-                                            <%= strings.findDriver %>
-                                        </button>
-                                        <br><br>
-                                        <button class="button  icon fa-arrow-circle-right result-btn" type="submit" name="search" value="passenger">
-                                            <%= strings.findPassenger %>
-                                        </button>
-
-                                    </div>
-                                </form>
-
-
-
-                            </div>
-
-
-
-
-
-
-
-                        </div>
                         <!-- Sidebar -->
                         <section>
                             <div><br>
+                                <form method="get" action="/search" >
+                                    <div class ="searchResult">
+                                        <input type="text" class="search-panel" id="currentLocation" name = "currentLocation" placeholder="De">
+                                        <input type="text" class="search-panel" id="destination" name = "destination"  placeholder="À">
+                                        <input type="text" class="search-panel" id="datepicker" name="datepicker" placeholder="Date"/>
 
-                                <h1><%= strings.exp %></h1><input type="radio" name="smoker-radio" value="Super">Super-Experience<br>
+                                        <div align="center">
+
+                                            <button class="button icon fa-arrow-circle-right result-btn" type="submit" name="search" value="driver">
+                                                <%= strings.findDriver %>
+                                            </button>
+                                            <br>
+                                            <button class="button icon fa-arrow-circle-right result-btn" type="submit" name="search" value="passenger">
+                                                <%= strings.findPassenger %>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div>&nbsp;</div>
+
+                                <div>&nbsp;</div> <h1><%= strings.exp %></h1><input type="radio" name="smoker-radio" value="Super">Super-Experience<br>
                                 <input type="radio" name="smoker-radio" value="Moyen" checked>Moyen-Experience <br>
                                 <input type="radio" name="smoker-radio" value="Ex" checked>Experience <br>
-                                <input type="radio" name="smoker-radio" value="Low" checked>Low-Experience <br>
+                                <input type="radio" name="smoker-radio" value="Low" checked>Low-Experience
 
                                 <h1>Avec photo?</h1><input type="radio" name="smoker-radio" value="Yes">Oui<br>
                                 <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
-                                <h1>Avec photo?</h1><input type="radio" name="smoker-radio" value="Yes">Oui<br>
+                                <h1>Animaux acceptés?</h1><input type="radio" name="smoker-radio" value="Yes">Oui<br>
                                 <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
                                 <h1>Avec photo?</h1><input type="radio" name="smoker-radio" value="Yes">Oui<br>
                                 <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
@@ -132,7 +119,7 @@
 
                                             <%=jsonObject[i]['departureDate']%><br>
                                             <%=jsonObject[i]['departureTime']%><br>
-                                            <%=jsonObject[i]['startAddress']%> → <%=jsonObject[i]['destinationAddress']%><br>
+
 
                                             <%= strings.seatsTaken %> <%=jsonObject[i]['takenSeat']%><br>
 

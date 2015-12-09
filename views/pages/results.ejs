@@ -45,6 +45,7 @@
                                 </form>
                                 <div>&nbsp;</div>
 
+                                <!--
                                 <div>&nbsp;</div> <h1><%= strings.exp %></h1><input type="radio" name="smoker-radio" value="Super">Super-Experience<br>
                                 <input type="radio" name="smoker-radio" value="Moyen" checked>Moyen-Experience <br>
                                 <input type="radio" name="smoker-radio" value="Ex" checked>Experience <br>
@@ -57,7 +58,7 @@
                                 <h1>Avec photo?</h1><input type="radio" name="smoker-radio" value="Yes">Oui<br>
                                 <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
                                 <h1>Avec photo?</h1><input type="radio" name="smoker-radio" value="Yes">Oui<br>
-                                <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>
+                                <input type="radio" name="smoker-radio" value="No" checked>Non <br><br>-->
 
 
                             </div>
@@ -65,7 +66,7 @@
 
                     </div>
                 </div>
-
+<!--
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Date
                         <span class="caret"></span></button>
@@ -83,7 +84,7 @@
                         <li><a href="#"><%= strings.desc %></a></li>
                     </ul>
                 </div>
-
+-->
 
                 <div class="8u 12u$(medium) important(medium)">
 
@@ -101,8 +102,12 @@
                                 <a href="javascript:;" onclick="parentNode.submit();">
 
                                     <article class="row">
+                                        <div class="image avatarResult">
+                                            <img src="/images/avatar/<%= avatar[i] %>" alt="avatar"/>
+                                        </div>
+
                                         <div class=" nameResult">
-                                            <p name="idTravel" hidden><%= jsonObject[i]['driver'] %> </p>
+                                            <p name="idTravel" id="<%= jsonObject[i]['driver'] %>" hidden><%= jsonObject[i]['driver'] %> </p>
 
                                             <input type="hidden" name="idTravel" value =<%= jsonObject[i]['idAddTravel']%>>
 
@@ -112,7 +117,7 @@
 
                                             <!--logos here and goodies. -->
 
-                                            <div class = "vertical-line"></div>
+
                                         </div>
 
                                         <div class = "infoResult">
@@ -144,33 +149,38 @@
                             <%}else{ %>
                             <%for ( i= 0;i<name.length;i++) { %>
                             <form method="get" action="/select-passenger">
+                                <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(jsonObject[i])%>">
                                 <a href="javascript:;" onclick="parentNode.submit();" >
-                                    <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(jsonObject[i])%>">
-                                    <article class="row">
-                                        <div class=" nameResult">
 
-                                    <div>
+                                    <article class="row">
+                                        <div class="image avatarResult">
+                                            <img src="/images/avatar/<%= avatar[i] %>" alt="avatar"/>
+                                        </div>
+
+                                        <div class=" nameResult">
+                                            <p name="idTravel" id="<%= jsonObject[i]['passenger'] %>" hidden><%= jsonObject[i]['passenger'] %> </p>
+
+
                                         <% var pieces = name[i].split(".");%>
                                         <h1><%= pieces[0]+"."+pieces[1].substring(0,1) %></h1>
+
                                         <!--logos here and goodies. -->
 
-                                            </div>
 
-                                            <div class = "vertical-line"></div>
+
                                         </div>
 
                                         <div class = "infoResult">
 
-                                            <div>
 
                                                 <%=jsonObject[i]['departureDate']%><br>
                                                 <%=jsonObject[i]['departureTime']%><br>
-                                                <%=jsonObject[i]['startAddress']%> → <%=jsonObject[i]['destinationAddress']%><br>
+                                              
 
                                                <% if (jsonObject[i]['luggagesSize'] == 1) { %>
-                                                <%= strings.luggages %> <%= strings.no %><br>
+                                                <%= strings.luggage %> <%= strings.no %><br>
                                                 <%}else{ %>
-                                                <%= strings.luggages %> <%= strings.yes %> <br>
+                                                <%= strings.luggage %> <%= strings.yes %> <br>
                                                 <% } %>
 
                                                 <% if (jsonObject[i]['pets'] == 1){ %>
@@ -180,7 +190,7 @@
                                                 <% } %>
 
 
-                                            </div>
+
                                         </div>
                                     </article>
 

@@ -15,8 +15,8 @@ module.exports =
     "desc":"Descendant",
     "seatsTaken": "Sièges pris: ",
     "availableSeats":"Sièges disponible: ",
-    "petsAllowed": "Animaux permis?: ",
-    "luggage": "Valises permises? :",
+    "petsAllowed": "Animaux permis? ",
+    "luggage": "Valises permises? ",
     "yes": "Oui",
     "no": "Non",
 

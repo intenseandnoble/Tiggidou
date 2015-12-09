@@ -50,6 +50,10 @@ TripSearchOffer.prototype.display = function(req, res){
 
 function getOfferTransportInformation(listToSearch, done) {
     var resultsProposition = [];
+    if(listToSearch.length ==0){
+        return done(null,resultsProposition);
+    }
+
     listToSearch.forEach(function (travel, indice, array) {
         var idSearchTransport = travel.attributes.idSearchTravel;
 

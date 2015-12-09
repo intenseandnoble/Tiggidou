@@ -17,10 +17,12 @@ var log = require('../config/logger').log;
 var header = require('../views/fr/header.js');
 var foot = require('../views/fr/footer.js');
 var variousLilStrings = require('../views/fr/variousLilStrings.js');
+var avatar = require('./avatar').avatar;
 
 module.exports = Ride;
-
+var ageArray;
 var promiseArr;
+var avatarArray;
 var date;
 var time;
 var jsonObject;
@@ -43,7 +45,9 @@ function Ride(temp_dest, temp_currlocation, temp_date) {
         dateRequest = moment().format("YYYY-MM-DD");
     }
 
+    ageArray=[];
     promiseArr = [];
+    avatarArray=[];
     date = null;
     time = null;
 
@@ -134,10 +138,18 @@ function setSearchRide(resultJSON,driver_bool ) {
         time = moment(time, ["HH:mm"]).format("h:mm");
         jsonObject[indiceElement]['departureTime'] =time;
 
-        if(driver_bool)
+        if(driver_bool){
+
+            avatarArray.push(getAvatar(jsonTrip['driver']));
             promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['driver']));
-        else
+
+        }
+
+        else{
+            avatarArray.push(getAvatar(jsonTrip['passenger']))
             promiseArr.push(modelUsers.getUsernameFromDBAsync(jsonTrip['passenger']));
+        }
+
 
     }
 }
@@ -151,17 +163,25 @@ function renderRide(req, res, ps) {
 
     for(var i =0; i< jsonObject.length;i++)
     {
-        jsonObject[i].name = ps[i];
+        var name = ps[i];
+        var pieces = name.split(".");
+
+        jsonObject[i].name =pieces[0]+"."+pieces[1].substring(0,1);
     }
+
+    Promise.all(avatarArray).then(function (av){
 
     res.render('pages/results.ejs', {
         name : ps,
+        avatar:av,
         driverBool : req.query.search,
         jsonObject: jsonObject,
         logged: utils.authentificated(req),
         header: header,
         foot: foot,
         strings: variousLilStrings
+    });
+
     });
 }
 /**
@@ -205,4 +225,14 @@ function capitalize(str)
         pieces[i] = j + pieces[i].substr(1);
     }
     return pieces.join(" ");
+}
+
+function getAvatar (userId) {
+
+    return new avatar().where({
+        idUser: userId
+    }).fetch()
+        .then(function (result) {
+            return result.get('avatar');
+        })
 }

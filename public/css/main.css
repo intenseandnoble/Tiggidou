@@ -3324,3 +3324,10 @@ button.button.icon.fa-arrow-circle-right.result-btn {
 .search-panel{
 	margin-bottom: 10px;
 }
+
+.avatarResult{
+	width: 150px;
+	height: 150px;
+	margin-top: 30px;
+
+}

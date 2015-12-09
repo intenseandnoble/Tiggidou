@@ -43,7 +43,8 @@ var Users = DB.Model.extend({
 
 module.exports = {
     Users: Users,
-    getUsernameFromDBAsync: getUsernameFromDBAsync
+    getUsernameFromDBAsync: getUsernameFromDBAsync,
+
 };
 
 /**
@@ -68,5 +69,3 @@ function getUsernameFromDBAsync(userId) {
             log.error(err);
         });
 }
-
-

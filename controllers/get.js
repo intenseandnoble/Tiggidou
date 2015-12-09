@@ -177,9 +177,11 @@ function getCreateFastTravel(req,res){
 
     res.render('pages/fastRideOffer.ejs',
         {
+
             logged: utils.authentificated(req),
             header: headerFR,
             foot : footFR,
+            strings: variousLilStrings,
             travelResearch: travelPassengerJson
         });
 

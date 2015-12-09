@@ -241,7 +241,7 @@ function infoWindowContent(jsonObject){
     var content ='';
 
     if(jsonObject.cost == undefined){
-        content = '<a onmouseover=\"\" style=\"cursor: pointer;\" onclick=\'document.getElementById(\"'+jsonObject.driver+'\").click();\'>' +
+        content = '<a onmouseover=\"\" style=\"cursor: pointer;\" onclick=\'document.getElementById(\"'+jsonObject.passenger+'\").click();\'>' +
             jsonObject.name+'</a></br>';
     }
     else{

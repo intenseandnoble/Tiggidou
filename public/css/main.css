@@ -3326,8 +3326,18 @@ button.button.icon.fa-arrow-circle-right.result-btn {
 }
 
 .avatarResult{
-	width: 150px;
-	height: 150px;
+	 width: 150px;
+	 height: 150px;
+	 margin-top: 30px;
+
+ }
+
+.avatarResult2{
+	width: 200px;
+	height: 200px;
 	margin-top: 30px;
+	clear: both;
+
+
 
 }

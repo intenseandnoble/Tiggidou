@@ -99,10 +99,14 @@
                             <form method="get" action="/select-driver">
                                 <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(jsonObject[i])%>">
 
+
+                                <%jsonObject[i].avatar = avatar[i];%>
+
                                 <a href="javascript:;" onclick="parentNode.submit();">
 
                                     <article class="row">
                                         <div class="image avatarResult">
+                                            <input type="hidden" id="avatar" name="avatar" value="<%=avatar[i]%>">
                                             <img src="/images/avatar/<%= avatar[i] %>" alt="avatar"/>
                                         </div>
 
@@ -116,6 +120,8 @@
                                             <span><h3><%= jsonObject[i]['cost'] %>$</h3></span>
 
                                             <!--logos here and goodies. -->
+
+
 
 
                                         </div>
@@ -137,7 +143,9 @@
 
                                         </div>
 
-                                    </article>
+                                    </article><br>
+                                    <span><h7><%= jsonObject[i]['locationPick'] %></h7></span><br>
+                                    <span><h7><%= jsonObject[i]['locationDrop'] %></h7></span>
                                 </a>
                             </form>
 

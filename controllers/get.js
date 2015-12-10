@@ -144,6 +144,9 @@ function getSelectedDriver(req, res) {
 
     var idUser = req.session.req.user.attributes.idUser;
     var travelPassengerJson = JSON.parse(req.query.jsonObject);
+    var av = req.query.avatar;
+
+
     var date = moment(travelPassengerJson['departureDate'], "dddd, Do MMMM YYYY").format('YYYY-MM-DD');
     var search = {
         driver: idUser,
@@ -162,8 +165,11 @@ function getSelectedDriver(req, res) {
                     header: headerFR,
                     foot : footFR,
                     passengerSearch: travelPassengerJson,
+                    avatar:av,
                     driverOffer: travelOffer,
                     strings: variousLilStrings
+
+
                 });
         })
         .catch(function(err){
@@ -177,11 +183,9 @@ function getCreateFastTravel(req,res){
 
     res.render('pages/fastRideOffer.ejs',
         {
-
             logged: utils.authentificated(req),
             header: headerFR,
             foot : footFR,
-            strings: variousLilStrings,
             travelResearch: travelPassengerJson
         });
 

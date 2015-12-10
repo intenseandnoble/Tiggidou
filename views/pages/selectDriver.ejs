@@ -24,11 +24,17 @@
                     <div class = "infoResult">
                         <div>
 
+                            <div class="image avatarResult addMargin">
+                                <img src="/images/avatar/<%= avatar %>" alt="avatar"/>
+                            </div>
+
                            <h2> <%=passengerSearch['name']%><br></h2>
                             <h2> <%=passengerSearch['cost']%>$<br></h2>
                             <%=passengerSearch['departureDate']%><br>
                             <%=passengerSearch['departureTime']%><br>
-                            <%=passengerSearch['startAddress']%> → <%=passengerSearch['destinationAddress']%><br>
+
+                           <u> <%=passengerSearch['locationPick']%></u><br>
+                            <u><%=passengerSearch['locationDrop']%></u><br>
                             <%= strings.luggage %> <%=passengerSearch['luggagesSize']%><br>
 
                             <% if (passengerSearch['petsAllowed'] == 0){ %>
@@ -40,10 +46,11 @@
 
                         </div>
                     </div>
-                </article>
+                </article><br>
             </div>
 
-            <div>
+
+            <div align="center">
                 <form action="/add-passenger" method="post">
                     <input type="hidden" id="jsonObject" name="jsonObject" value="<%= JSON.stringify(passengerSearch)%>">
                     <button class="button small icon fa-arrow-circle-right"><%= strings.addPassenger %></button>

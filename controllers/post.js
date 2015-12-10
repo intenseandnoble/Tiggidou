@@ -262,6 +262,8 @@ function postRide(req, res) {
                 longitudePickUp:curr_arr[1],
                 latitudeDropOff:dest_arr[0],
                 longitudeDropOff:dest_arr[1],
+                locationPick:req.body.selectedPickupPoint,
+                locationDrop:req.body.selectedDropOffPoint,
                 comments: req.body.commentsRide_d,
                 desiredAvgPassengerScore: utils.arrayOrNot(req.body.avgScorePassenger),
                 cost:req.body.cost_d
